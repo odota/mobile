@@ -1,0 +1,3 @@
+rootProject.name = 'dotaKeep'
+
+include ':app'
