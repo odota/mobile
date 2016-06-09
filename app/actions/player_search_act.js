@@ -1,4 +1,4 @@
-import { fetchAPi } from '../utils/fetch';
+import { fetchAPI } from '../utils/fetch';
 
 export const types = {
     REQUEST_PLAYERS: 'REQUEST_PLAYERS',
@@ -26,10 +26,7 @@ function receiveEmptyPlayers() {
 }
 
 export function fetchPlayers(playerName) {
-    var endpoint = "search";
-    var formData = new FormData();
-    formData.append('q', playerName);
-
+    var endpoint = "search/?q=" + playerName;
     return dispatch => {
         dispatch(requestPlayers())
 

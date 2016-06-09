@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 export function fetchAPI(endpoint, method = 'get', data) {
     let url = "https://yasp.co/api/" + endpoint;
-
     let options = {
         method: method,
         body: data

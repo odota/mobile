@@ -3,8 +3,8 @@
 import React from 'react';
 import App from './app/containers/App';
 
-var {
+import {
     AppRegistry
-} = React;
+} from 'react-native';
 
-AppRegistry.registerComponent('DotaKeep', () => App)
+AppRegistry.registerComponent('dotaKeep', () => App)
