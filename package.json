@@ -17,6 +17,7 @@
     "redux": "^3.5.2"
   },
   "devDependencies": {
-    "redux-logger": "^2.6.1"
+    "redux-logger": "^2.6.1",
+    "request": "^2.72.0"
   }
 }
