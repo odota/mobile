@@ -2,7 +2,7 @@
   "itemdata": {
     "blink": {
       "id": 1,
-      "img": "blink_lg.png?3",
+      "img": "../assets/items/blink_lg.png",
       "dname": "Blink Dagger",
       "qual": "component",
       "cost": 2250,
@@ -17,7 +17,7 @@
     },
     "blades_of_attack": {
       "id": 2,
-      "img": "blades_of_attack_lg.png?3",
+      "img": "../assets/items/blades_of_attack_lg.png",
       "dname": "Blades of Attack",
       "qual": "component",
       "cost": 420,
@@ -32,7 +32,7 @@
     },
     "broadsword": {
       "id": 3,
-      "img": "broadsword_lg.png?3",
+      "img": "../assets/items/broadsword_lg.png",
       "dname": "Broadsword",
       "qual": "component",
       "cost": 1200,
@@ -47,7 +47,7 @@
     },
     "chainmail": {
       "id": 4,
-      "img": "chainmail_lg.png?3",
+      "img": "../assets/items/chainmail_lg.png",
       "dname": "Chainmail",
       "qual": "component",
       "cost": 550,
@@ -62,7 +62,7 @@
     },
     "claymore": {
       "id": 5,
-      "img": "claymore_lg.png?3",
+      "img": "../assets/items/claymore_lg.png",
       "dname": "Claymore",
       "qual": "component",
       "cost": 1400,
@@ -77,7 +77,7 @@
     },
     "helm_of_iron_will": {
       "id": 6,
-      "img": "helm_of_iron_will_lg.png?3",
+      "img": "../assets/items/helm_of_iron_will_lg.png",
       "dname": "Helm of Iron Will",
       "qual": "component",
       "cost": 900,
@@ -92,7 +92,7 @@
     },
     "javelin": {
       "id": 7,
-      "img": "javelin_lg.png?3",
+      "img": "../assets/items/javelin_lg.png",
       "dname": "Javelin",
       "qual": "component",
       "cost": 1500,
@@ -107,7 +107,7 @@
     },
     "mithril_hammer": {
       "id": 8,
-      "img": "mithril_hammer_lg.png?3",
+      "img": "../assets/items/mithril_hammer_lg.png",
       "dname": "Mithril Hammer",
       "qual": "component",
       "cost": 1600,
@@ -122,7 +122,7 @@
     },
     "platemail": {
       "id": 9,
-      "img": "platemail_lg.png?3",
+      "img": "../assets/items/platemail_lg.png",
       "dname": "Platemail",
       "qual": "secret_shop",
       "cost": 1400,
@@ -137,7 +137,7 @@
     },
     "quarterstaff": {
       "id": 10,
-      "img": "quarterstaff_lg.png?3",
+      "img": "../assets/items/quarterstaff_lg.png",
       "dname": "Quarterstaff",
       "qual": "component",
       "cost": 875,
@@ -152,7 +152,7 @@
     },
     "quelling_blade": {
       "id": 11,
-      "img": "quelling_blade_lg.png?3",
+      "img": "../assets/items/quelling_blade_lg.png",
       "dname": "Quelling Blade",
       "qual": "component",
       "cost": 200,
@@ -167,7 +167,7 @@
     },
     "faerie_fire": {
       "id": 237,
-      "img": "faerie_fire_lg.png?3",
+      "img": "../assets/items/faerie_fire_lg.png",
       "dname": "Faerie Fire",
       "qual": "component",
       "cost": 75,
@@ -182,7 +182,7 @@
     },
     "infused_raindrop": {
       "id": 265,
-      "img": "infused_raindrop_lg.png?3",
+      "img": "../assets/items/infused_raindrop_lg.png",
       "dname": "Infused Raindrop",
       "qual": "component",
       "cost": 225,
@@ -197,7 +197,7 @@
     },
     "wind_lace": {
       "id": 244,
-      "img": "wind_lace_lg.png?3",
+      "img": "../assets/items/wind_lace_lg.png",
       "dname": "Wind Lace",
       "qual": "component",
       "cost": 225,
@@ -212,7 +212,7 @@
     },
     "ring_of_protection": {
       "id": 12,
-      "img": "ring_of_protection_lg.png?3",
+      "img": "../assets/items/ring_of_protection_lg.png",
       "dname": "Ring of Protection",
       "qual": "component",
       "cost": 175,
@@ -227,7 +227,7 @@
     },
     "stout_shield": {
       "id": 182,
-      "img": "stout_shield_lg.png?3",
+      "img": "../assets/items/stout_shield_lg.png",
       "dname": "Stout Shield",
       "qual": "component",
       "cost": 200,
@@ -242,7 +242,7 @@
     },
     "moon_shard": {
       "id": 247,
-      "img": "moon_shard_lg.png?3",
+      "img": "../assets/items/moon_shard_lg.png",
       "dname": "Moon Shard",
       "qual": "common",
       "cost": 4000,
@@ -260,7 +260,7 @@
     },
     "gauntlets": {
       "id": 13,
-      "img": "gauntlets_lg.png?3",
+      "img": "../assets/items/gauntlets_lg.png",
       "dname": "Gauntlets of Strength",
       "qual": "component",
       "cost": 150,
@@ -275,7 +275,7 @@
     },
     "slippers": {
       "id": 14,
-      "img": "slippers_lg.png?3",
+      "img": "../assets/items/slippers_lg.png",
       "dname": "Slippers of Agility",
       "qual": "component",
       "cost": 150,
@@ -290,7 +290,7 @@
     },
     "mantle": {
       "id": 15,
-      "img": "mantle_lg.png?3",
+      "img": "../assets/items/mantle_lg.png",
       "dname": "Mantle of Intelligence",
       "qual": "component",
       "cost": 150,
@@ -305,7 +305,7 @@
     },
     "branches": {
       "id": 16,
-      "img": "branches_lg.png?3",
+      "img": "../assets/items/branches_lg.png",
       "dname": "Iron Branch",
       "qual": "component",
       "cost": 50,
@@ -320,7 +320,7 @@
     },
     "belt_of_strength": {
       "id": 17,
-      "img": "belt_of_strength_lg.png?3",
+      "img": "../assets/items/belt_of_strength_lg.png",
       "dname": "Belt of Strength",
       "qual": "component",
       "cost": 450,
@@ -335,7 +335,7 @@
     },
     "boots_of_elves": {
       "id": 18,
-      "img": "boots_of_elves_lg.png?3",
+      "img": "../assets/items/boots_of_elves_lg.png",
       "dname": "Band of Elvenskin",
       "qual": "component",
       "cost": 450,
@@ -350,7 +350,7 @@
     },
     "robe": {
       "id": 19,
-      "img": "robe_lg.png?3",
+      "img": "../assets/items/robe_lg.png",
       "dname": "Robe of the Magi",
       "qual": "component",
       "cost": 450,
@@ -365,7 +365,7 @@
     },
     "circlet": {
       "id": 20,
-      "img": "circlet_lg.png?3",
+      "img": "../assets/items/circlet_lg.png",
       "dname": "Circlet",
       "qual": "component",
       "cost": 165,
@@ -380,7 +380,7 @@
     },
     "ogre_axe": {
       "id": 21,
-      "img": "ogre_axe_lg.png?3",
+      "img": "../assets/items/ogre_axe_lg.png",
       "dname": "Ogre Club",
       "qual": "component",
       "cost": 1000,
@@ -395,7 +395,7 @@
     },
     "blade_of_alacrity": {
       "id": 22,
-      "img": "blade_of_alacrity_lg.png?3",
+      "img": "../assets/items/blade_of_alacrity_lg.png",
       "dname": "Blade of Alacrity",
       "qual": "component",
       "cost": 1000,
@@ -410,7 +410,7 @@
     },
     "staff_of_wizardry": {
       "id": 23,
-      "img": "staff_of_wizardry_lg.png?3",
+      "img": "../assets/items/staff_of_wizardry_lg.png",
       "dname": "Staff of Wizardry",
       "qual": "component",
       "cost": 1000,
@@ -425,7 +425,7 @@
     },
     "ultimate_orb": {
       "id": 24,
-      "img": "ultimate_orb_lg.png?3",
+      "img": "../assets/items/ultimate_orb_lg.png",
       "dname": "Ultimate Orb",
       "qual": "secret_shop",
       "cost": 2100,
@@ -440,7 +440,7 @@
     },
     "gloves": {
       "id": 25,
-      "img": "gloves_lg.png?3",
+      "img": "../assets/items/gloves_lg.png",
       "dname": "Gloves of Haste",
       "qual": "component",
       "cost": 500,
@@ -455,7 +455,7 @@
     },
     "lifesteal": {
       "id": 26,
-      "img": "lifesteal_lg.png?3",
+      "img": "../assets/items/lifesteal_lg.png",
       "dname": "Morbid Mask",
       "qual": "component",
       "cost": 900,
@@ -470,7 +470,7 @@
     },
     "ring_of_regen": {
       "id": 27,
-      "img": "ring_of_regen_lg.png?3",
+      "img": "../assets/items/ring_of_regen_lg.png",
       "dname": "Ring of Regen",
       "qual": "component",
       "cost": 325,
@@ -485,7 +485,7 @@
     },
     "sobi_mask": {
       "id": 28,
-      "img": "sobi_mask_lg.png?3",
+      "img": "../assets/items/sobi_mask_lg.png",
       "dname": "Sage's Mask",
       "qual": "component",
       "cost": 325,
@@ -500,7 +500,7 @@
     },
     "boots": {
       "id": 29,
-      "img": "boots_lg.png?3",
+      "img": "../assets/items/boots_lg.png",
       "dname": "Boots of Speed",
       "qual": "component",
       "cost": 400,
@@ -515,7 +515,7 @@
     },
     "gem": {
       "id": 30,
-      "img": "gem_lg.png?3",
+      "img": "../assets/items/gem_lg.png",
       "dname": "Gem of True Sight",
       "qual": "component",
       "cost": 900,
@@ -530,7 +530,7 @@
     },
     "cloak": {
       "id": 31,
-      "img": "cloak_lg.png?3",
+      "img": "../assets/items/cloak_lg.png",
       "dname": "Cloak",
       "qual": "component",
       "cost": 550,
@@ -545,7 +545,7 @@
     },
     "talisman_of_evasion": {
       "id": 32,
-      "img": "talisman_of_evasion_lg.png?3",
+      "img": "../assets/items/talisman_of_evasion_lg.png",
       "dname": "Talisman of Evasion",
       "qual": "secret_shop",
       "cost": 1700,
@@ -560,7 +560,7 @@
     },
     "cheese": {
       "id": 33,
-      "img": "cheese_lg.png?3",
+      "img": "../assets/items/cheese_lg.png",
       "dname": "Cheese",
       "qual": "epic",
       "cost": 1000,
@@ -575,7 +575,7 @@
     },
     "magic_stick": {
       "id": 34,
-      "img": "magic_stick_lg.png?3",
+      "img": "../assets/items/magic_stick_lg.png",
       "dname": "Magic Stick",
       "qual": "component",
       "cost": 200,
@@ -590,7 +590,7 @@
     },
     "magic_wand": {
       "id": 36,
-      "img": "magic_wand_lg.png?3",
+      "img": "../assets/items/magic_wand_lg.png",
       "dname": "Magic Wand",
       "qual": "common",
       "cost": 465,
@@ -610,7 +610,7 @@
     },
     "ghost": {
       "id": 37,
-      "img": "ghost_lg.png?3",
+      "img": "../assets/items/ghost_lg.png",
       "dname": "Ghost Scepter",
       "qual": "component",
       "cost": 1500,
@@ -625,7 +625,7 @@
     },
     "clarity": {
       "id": 38,
-      "img": "clarity_lg.png?3",
+      "img": "../assets/items/clarity_lg.png",
       "dname": "Clarity",
       "qual": "consumable",
       "cost": 50,
@@ -640,7 +640,7 @@
     },
     "enchanted_mango": {
       "id": 216,
-      "img": "enchanted_mango_lg.png?3",
+      "img": "../assets/items/enchanted_mango_lg.png",
       "dname": "Enchanted Mango",
       "qual": "consumable",
       "cost": 125,
@@ -655,7 +655,7 @@
     },
     "flask": {
       "id": 39,
-      "img": "flask_lg.png?3",
+      "img": "../assets/items/flask_lg.png",
       "dname": "Healing Salve",
       "qual": "consumable",
       "cost": 110,
@@ -670,7 +670,7 @@
     },
     "dust": {
       "id": 40,
-      "img": "dust_lg.png?3",
+      "img": "../assets/items/dust_lg.png",
       "dname": "Dust of Appearance",
       "qual": "consumable",
       "cost": 180,
@@ -685,7 +685,7 @@
     },
     "bottle": {
       "id": 41,
-      "img": "bottle_lg.png?3",
+      "img": "../assets/items/bottle_lg.png",
       "dname": "Bottle",
       "qual": "consumable",
       "cost": 660,
@@ -700,7 +700,7 @@
     },
     "ward_observer": {
       "id": 42,
-      "img": "ward_observer_lg.png?3",
+      "img": "../assets/items/ward_observer_lg.png",
       "dname": "Observer Ward",
       "qual": "consumable",
       "cost": 65,
@@ -715,7 +715,7 @@
     },
     "ward_sentry": {
       "id": 43,
-      "img": "ward_sentry_lg.png?3",
+      "img": "../assets/items/ward_sentry_lg.png",
       "dname": "Sentry Ward",
       "qual": "consumable",
       "cost": 200,
@@ -730,7 +730,7 @@
     },
     "ward_dispenser": {
       "id": 218,
-      "img": "ward_dispenser_lg.png?3",
+      "img": "../assets/items/ward_dispenser_lg.png",
       "dname": "Observer and Sentry Wards",
       "qual": "common",
       "cost": 265,
@@ -748,7 +748,7 @@
     },
     "tango": {
       "id": 44,
-      "img": "tango_lg.png?3",
+      "img": "../assets/items/tango_lg.png",
       "dname": "Tango",
       "qual": "consumable",
       "cost": 125,
@@ -763,7 +763,7 @@
     },
     "tango_single": {
       "id": 241,
-      "img": "tango_single_lg.png?3",
+      "img": "../assets/items/tango_single_lg.png",
       "dname": "Tango (Shared)",
       "qual": "consumable",
       "cost": 30,
@@ -778,7 +778,7 @@
     },
     "courier": {
       "id": 45,
-      "img": "courier_lg.png?3",
+      "img": "../assets/items/courier_lg.png",
       "dname": "Animal Courier",
       "qual": "consumable",
       "cost": 100,
@@ -793,7 +793,7 @@
     },
     "tpscroll": {
       "id": 46,
-      "img": "tpscroll_lg.png?3",
+      "img": "../assets/items/tpscroll_lg.png",
       "dname": "Town Portal Scroll",
       "qual": "consumable",
       "cost": 50,
@@ -808,7 +808,7 @@
     },
     "travel_boots": {
       "id": 48,
-      "img": "travel_boots_lg.png?3",
+      "img": "../assets/items/travel_boots_lg.png",
       "dname": "Boots of Travel",
       "qual": "common",
       "cost": 2400,
@@ -825,7 +825,7 @@
     },
     "travel_boots_2": {
       "id": 220,
-      "img": "travel_boots_2_lg.png?3",
+      "img": "../assets/items/travel_boots_2_lg.png",
       "dname": "Boots of Travel",
       "qual": "common",
       "cost": 4400,
@@ -843,7 +843,7 @@
     },
     "phase_boots": {
       "id": 50,
-      "img": "phase_boots_lg.png?3",
+      "img": "../assets/items/phase_boots_lg.png",
       "dname": "Phase Boots",
       "qual": "common",
       "cost": 1240,
@@ -862,7 +862,7 @@
     },
     "demon_edge": {
       "id": 51,
-      "img": "demon_edge_lg.png?3",
+      "img": "../assets/items/demon_edge_lg.png",
       "dname": "Demon Edge",
       "qual": "secret_shop",
       "cost": 2400,
@@ -877,7 +877,7 @@
     },
     "eagle": {
       "id": 52,
-      "img": "eagle_lg.png?3",
+      "img": "../assets/items/eagle_lg.png",
       "dname": "Eaglesong",
       "qual": "secret_shop",
       "cost": 3200,
@@ -892,7 +892,7 @@
     },
     "reaver": {
       "id": 53,
-      "img": "reaver_lg.png?3",
+      "img": "../assets/items/reaver_lg.png",
       "dname": "Reaver",
       "qual": "secret_shop",
       "cost": 3000,
@@ -907,7 +907,7 @@
     },
     "relic": {
       "id": 54,
-      "img": "relic_lg.png?3",
+      "img": "../assets/items/relic_lg.png",
       "dname": "Sacred Relic",
       "qual": "secret_shop",
       "cost": 3800,
@@ -922,7 +922,7 @@
     },
     "hyperstone": {
       "id": 55,
-      "img": "hyperstone_lg.png?3",
+      "img": "../assets/items/hyperstone_lg.png",
       "dname": "Hyperstone",
       "qual": "secret_shop",
       "cost": 2000,
@@ -937,7 +937,7 @@
     },
     "ring_of_health": {
       "id": 56,
-      "img": "ring_of_health_lg.png?3",
+      "img": "../assets/items/ring_of_health_lg.png",
       "dname": "Ring of Health",
       "qual": "component",
       "cost": 850,
@@ -952,7 +952,7 @@
     },
     "void_stone": {
       "id": 57,
-      "img": "void_stone_lg.png?3",
+      "img": "../assets/items/void_stone_lg.png",
       "dname": "Void Stone",
       "qual": "component",
       "cost": 850,
@@ -967,7 +967,7 @@
     },
     "mystic_staff": {
       "id": 58,
-      "img": "mystic_staff_lg.png?3",
+      "img": "../assets/items/mystic_staff_lg.png",
       "dname": "Mystic Staff",
       "qual": "secret_shop",
       "cost": 2700,
@@ -982,7 +982,7 @@
     },
     "energy_booster": {
       "id": 59,
-      "img": "energy_booster_lg.png?3",
+      "img": "../assets/items/energy_booster_lg.png",
       "dname": "Energy Booster",
       "qual": "secret_shop",
       "cost": 900,
@@ -997,7 +997,7 @@
     },
     "point_booster": {
       "id": 60,
-      "img": "point_booster_lg.png?3",
+      "img": "../assets/items/point_booster_lg.png",
       "dname": "Point Booster",
       "qual": "secret_shop",
       "cost": 1200,
@@ -1012,7 +1012,7 @@
     },
     "vitality_booster": {
       "id": 61,
-      "img": "vitality_booster_lg.png?3",
+      "img": "../assets/items/vitality_booster_lg.png",
       "dname": "Vitality Booster",
       "qual": "secret_shop",
       "cost": 1100,
@@ -1027,7 +1027,7 @@
     },
     "power_treads": {
       "id": 63,
-      "img": "power_treads_lg.png?3",
+      "img": "../assets/items/power_treads_lg.png",
       "dname": "Power Treads",
       "qual": "common",
       "cost": 1350,
@@ -1046,7 +1046,7 @@
     },
     "hand_of_midas": {
       "id": 65,
-      "img": "hand_of_midas_lg.png?3",
+      "img": "../assets/items/hand_of_midas_lg.png",
       "dname": "Hand of Midas",
       "qual": "common",
       "cost": 2050,
@@ -1063,7 +1063,7 @@
     },
     "oblivion_staff": {
       "id": 67,
-      "img": "oblivion_staff_lg.png?3",
+      "img": "../assets/items/oblivion_staff_lg.png",
       "dname": "Oblivion Staff",
       "qual": "common",
       "cost": 1650,
@@ -1082,7 +1082,7 @@
     },
     "pers": {
       "id": 69,
-      "img": "pers_lg.png?3",
+      "img": "../assets/items/pers_lg.png",
       "dname": "Perseverance",
       "qual": "common",
       "cost": 1700,
@@ -1100,7 +1100,7 @@
     },
     "poor_mans_shield": {
       "id": 71,
-      "img": "poor_mans_shield_lg.png?3",
+      "img": "../assets/items/poor_mans_shield_lg.png",
       "dname": "Poor Man's Shield",
       "qual": "common",
       "cost": 500,
@@ -1119,7 +1119,7 @@
     },
     "bracer": {
       "id": 73,
-      "img": "bracer_lg.png?3",
+      "img": "../assets/items/bracer_lg.png",
       "dname": "Bracer",
       "qual": "common",
       "cost": 525,
@@ -1137,7 +1137,7 @@
     },
     "banana": {
       "id": 264,
-      "img": "banana_lg.png?3",
+      "img": "../assets/items/banana_lg.png",
       "dname": "Banana",
       "qual": "component",
       "cost": 0,
@@ -1152,7 +1152,7 @@
     },
     "wraith_band": {
       "id": 75,
-      "img": "wraith_band_lg.png?3",
+      "img": "../assets/items/wraith_band_lg.png",
       "dname": "Wraith Band",
       "qual": "common",
       "cost": 485,
@@ -1170,7 +1170,7 @@
     },
     "null_talisman": {
       "id": 77,
-      "img": "null_talisman_lg.png?3",
+      "img": "../assets/items/null_talisman_lg.png",
       "dname": "Null Talisman",
       "qual": "common",
       "cost": 470,
@@ -1188,7 +1188,7 @@
     },
     "mekansm": {
       "id": 79,
-      "img": "mekansm_lg.png?3",
+      "img": "../assets/items/mekansm_lg.png",
       "dname": "Mekansm",
       "qual": "rare",
       "cost": 2275,
@@ -1206,7 +1206,7 @@
     },
     "vladmir": {
       "id": 81,
-      "img": "vladmir_lg.png?3",
+      "img": "../assets/items/vladmir_lg.png",
       "dname": "Vladmir's Offering",
       "qual": "rare",
       "cost": 2275,
@@ -1225,7 +1225,7 @@
     },
     "flying_courier": {
       "id": 84,
-      "img": "flying_courier_lg.png?3",
+      "img": "../assets/items/flying_courier_lg.png",
       "dname": "Flying Courier",
       "qual": "consumable",
       "cost": 150,
@@ -1240,7 +1240,7 @@
     },
     "buckler": {
       "id": 86,
-      "img": "buckler_lg.png?3",
+      "img": "../assets/items/buckler_lg.png",
       "dname": "Buckler",
       "qual": "rare",
       "cost": 800,
@@ -1258,7 +1258,7 @@
     },
     "ring_of_basilius": {
       "id": 88,
-      "img": "ring_of_basilius_lg.png?3",
+      "img": "../assets/items/ring_of_basilius_lg.png",
       "dname": "Ring of Basilius",
       "qual": "rare",
       "cost": 500,
@@ -1276,7 +1276,7 @@
     },
     "pipe": {
       "id": 90,
-      "img": "pipe_lg.png?3",
+      "img": "../assets/items/pipe_lg.png",
       "dname": "Pipe of Insight",
       "qual": "rare",
       "cost": 3100,
@@ -1294,7 +1294,7 @@
     },
     "urn_of_shadows": {
       "id": 92,
-      "img": "urn_of_shadows_lg.png?3",
+      "img": "../assets/items/urn_of_shadows_lg.png",
       "dname": "Urn of Shadows",
       "qual": "rare",
       "cost": 875,
@@ -1313,7 +1313,7 @@
     },
     "headdress": {
       "id": 94,
-      "img": "headdress_lg.png?3",
+      "img": "../assets/items/headdress_lg.png",
       "dname": "Headdress",
       "qual": "rare",
       "cost": 575,
@@ -1331,7 +1331,7 @@
     },
     "sheepstick": {
       "id": 96,
-      "img": "sheepstick_lg.png?3",
+      "img": "../assets/items/sheepstick_lg.png",
       "dname": "Scythe of Vyse",
       "qual": "rare",
       "cost": 5650,
@@ -1350,7 +1350,7 @@
     },
     "orchid": {
       "id": 98,
-      "img": "orchid_lg.png?3",
+      "img": "../assets/items/orchid_lg.png",
       "dname": "Orchid Malevolence",
       "qual": "rare",
       "cost": 4075,
@@ -1368,7 +1368,7 @@
     },
     "bloodthorn": {
       "id": 250,
-      "img": "bloodthorn_lg.png?3",
+      "img": "../assets/items/bloodthorn_lg.png",
       "dname": "Bloodthorn",
       "qual": "rare",
       "cost": 7195,
@@ -1386,7 +1386,7 @@
     },
     "echo_sabre": {
       "id": 252,
-      "img": "echo_sabre_lg.png?3",
+      "img": "../assets/items/echo_sabre_lg.png",
       "dname": "Echo Sabre",
       "qual": "rare",
       "cost": 2650,
@@ -1404,7 +1404,7 @@
     },
     "cyclone": {
       "id": 100,
-      "img": "cyclone_lg.png?3",
+      "img": "../assets/items/cyclone_lg.png",
       "dname": "Eul's Scepter of Divinity",
       "qual": "rare",
       "cost": 2725,
@@ -1423,7 +1423,7 @@
     },
     "aether_lens": {
       "id": 232,
-      "img": "aether_lens_lg.png?3",
+      "img": "../assets/items/aether_lens_lg.png",
       "dname": "Aether Lens",
       "qual": "rare",
       "cost": 2300,
@@ -1441,7 +1441,7 @@
     },
     "force_staff": {
       "id": 102,
-      "img": "force_staff_lg.png?3",
+      "img": "../assets/items/force_staff_lg.png",
       "dname": "Force Staff",
       "qual": "rare",
       "cost": 2225,
@@ -1459,7 +1459,7 @@
     },
     "hurricane_pike": {
       "id": 263,
-      "img": "hurricane_pike_lg.png?3",
+      "img": "../assets/items/hurricane_pike_lg.png",
       "dname": "Hurricane Pike",
       "qual": "rare",
       "cost": 4375,
@@ -1477,7 +1477,7 @@
     },
     "dagon": {
       "id": 104,
-      "img": "dagon_lg.png?3",
+      "img": "../assets/items/dagon_lg.png",
       "dname": "Dagon",
       "qual": "rare",
       "cost": 2720,
@@ -1495,7 +1495,7 @@
     },
     "dagon_2": {
       "id": 201,
-      "img": "dagon_2_lg.png?3",
+      "img": "../assets/items/dagon_2_lg.png",
       "dname": "Dagon",
       "qual": "rare",
       "cost": 3970,
@@ -1513,7 +1513,7 @@
     },
     "dagon_3": {
       "id": 202,
-      "img": "dagon_3_lg.png?3",
+      "img": "../assets/items/dagon_3_lg.png",
       "dname": "Dagon",
       "qual": "rare",
       "cost": 5220,
@@ -1531,7 +1531,7 @@
     },
     "dagon_4": {
       "id": 203,
-      "img": "dagon_4_lg.png?3",
+      "img": "../assets/items/dagon_4_lg.png",
       "dname": "Dagon",
       "qual": "rare",
       "cost": 6470,
@@ -1549,7 +1549,7 @@
     },
     "dagon_5": {
       "id": 204,
-      "img": "dagon_5_lg.png?3",
+      "img": "../assets/items/dagon_5_lg.png",
       "dname": "Dagon",
       "qual": "rare",
       "cost": 7720,
@@ -1567,7 +1567,7 @@
     },
     "necronomicon": {
       "id": 106,
-      "img": "necronomicon_lg.png?3",
+      "img": "../assets/items/necronomicon_lg.png",
       "dname": "Necronomicon",
       "qual": "rare",
       "cost": 2650,
@@ -1585,7 +1585,7 @@
     },
     "necronomicon_2": {
       "id": 193,
-      "img": "necronomicon_2_lg.png?3",
+      "img": "../assets/items/necronomicon_2_lg.png",
       "dname": "Necronomicon",
       "qual": "rare",
       "cost": 3850,
@@ -1603,7 +1603,7 @@
     },
     "necronomicon_3": {
       "id": 194,
-      "img": "necronomicon_3_lg.png?3",
+      "img": "../assets/items/necronomicon_3_lg.png",
       "dname": "Necronomicon",
       "qual": "rare",
       "cost": 5050,
@@ -1621,7 +1621,7 @@
     },
     "ultimate_scepter": {
       "id": 108,
-      "img": "ultimate_scepter_lg.png?3",
+      "img": "../assets/items/ultimate_scepter_lg.png",
       "dname": "Aghanim's Scepter",
       "qual": "rare",
       "cost": 4200,
@@ -1641,7 +1641,7 @@
     },
     "refresher": {
       "id": 110,
-      "img": "refresher_lg.png?3",
+      "img": "../assets/items/refresher_lg.png",
       "dname": "Refresher Orb",
       "qual": "rare",
       "cost": 5200,
@@ -1659,7 +1659,7 @@
     },
     "assault": {
       "id": 112,
-      "img": "assault_lg.png?3",
+      "img": "../assets/items/assault_lg.png",
       "dname": "Assault Cuirass",
       "qual": "epic",
       "cost": 5250,
@@ -1678,7 +1678,7 @@
     },
     "heart": {
       "id": 114,
-      "img": "heart_lg.png?3",
+      "img": "../assets/items/heart_lg.png",
       "dname": "Heart of Tarrasque",
       "qual": "epic",
       "cost": 5500,
@@ -1696,7 +1696,7 @@
     },
     "black_king_bar": {
       "id": 116,
-      "img": "black_king_bar_lg.png?3",
+      "img": "../assets/items/black_king_bar_lg.png",
       "dname": "Black King Bar",
       "qual": "epic",
       "cost": 3975,
@@ -1714,7 +1714,7 @@
     },
     "aegis": {
       "id": 117,
-      "img": "aegis_lg.png?3",
+      "img": "../assets/items/aegis_lg.png",
       "dname": "Aegis of the Immortal",
       "qual": "artifact",
       "cost": 0,
@@ -1729,7 +1729,7 @@
     },
     "shivas_guard": {
       "id": 119,
-      "img": "shivas_guard_lg.png?3",
+      "img": "../assets/items/shivas_guard_lg.png",
       "dname": "Shiva's Guard",
       "qual": "epic",
       "cost": 4700,
@@ -1747,7 +1747,7 @@
     },
     "bloodstone": {
       "id": 121,
-      "img": "bloodstone_lg.png?3",
+      "img": "../assets/items/bloodstone_lg.png",
       "dname": "Bloodstone",
       "qual": "epic",
       "cost": 4875,
@@ -1765,7 +1765,7 @@
     },
     "sphere": {
       "id": 123,
-      "img": "sphere_lg.png?3",
+      "img": "../assets/items/sphere_lg.png",
       "dname": "Linken's Sphere",
       "qual": "epic",
       "cost": 4800,
@@ -1783,7 +1783,7 @@
     },
     "lotus_orb": {
       "id": 226,
-      "img": "lotus_orb_lg.png?3",
+      "img": "../assets/items/lotus_orb_lg.png",
       "dname": "Lotus Orb",
       "qual": "epic",
       "cost": 4000,
@@ -1802,7 +1802,7 @@
     },
     "vanguard": {
       "id": 125,
-      "img": "vanguard_lg.png?3",
+      "img": "../assets/items/vanguard_lg.png",
       "dname": "Vanguard",
       "qual": "epic",
       "cost": 2150,
@@ -1821,7 +1821,7 @@
     },
     "crimson_guard": {
       "id": 242,
-      "img": "crimson_guard_lg.png?3",
+      "img": "../assets/items/crimson_guard_lg.png",
       "dname": "Crimson Guard",
       "qual": "epic",
       "cost": 3550,
@@ -1839,7 +1839,7 @@
     },
     "blade_mail": {
       "id": 127,
-      "img": "blade_mail_lg.png?3",
+      "img": "../assets/items/blade_mail_lg.png",
       "dname": "Blade Mail",
       "qual": "epic",
       "cost": 2200,
@@ -1858,7 +1858,7 @@
     },
     "soul_booster": {
       "id": 129,
-      "img": "soul_booster_lg.png?3",
+      "img": "../assets/items/soul_booster_lg.png",
       "dname": "Soul Booster",
       "qual": "epic",
       "cost": 3200,
@@ -1877,7 +1877,7 @@
     },
     "hood_of_defiance": {
       "id": 131,
-      "img": "hood_of_defiance_lg.png?3",
+      "img": "../assets/items/hood_of_defiance_lg.png",
       "dname": "Hood of Defiance",
       "qual": "epic",
       "cost": 1725,
@@ -1896,7 +1896,7 @@
     },
     "rapier": {
       "id": 133,
-      "img": "rapier_lg.png?3",
+      "img": "../assets/items/rapier_lg.png",
       "dname": "Divine Rapier",
       "qual": "epic",
       "cost": 6200,
@@ -1914,7 +1914,7 @@
     },
     "monkey_king_bar": {
       "id": 135,
-      "img": "monkey_king_bar_lg.png?3",
+      "img": "../assets/items/monkey_king_bar_lg.png",
       "dname": "Monkey King Bar",
       "qual": "epic",
       "cost": 5400,
@@ -1933,7 +1933,7 @@
     },
     "radiance": {
       "id": 137,
-      "img": "radiance_lg.png?3",
+      "img": "../assets/items/radiance_lg.png",
       "dname": "Radiance",
       "qual": "epic",
       "cost": 5150,
@@ -1950,7 +1950,7 @@
     },
     "butterfly": {
       "id": 139,
-      "img": "butterfly_lg.png?3",
+      "img": "../assets/items/butterfly_lg.png",
       "dname": "Butterfly",
       "qual": "epic",
       "cost": 5775,
@@ -1969,7 +1969,7 @@
     },
     "greater_crit": {
       "id": 141,
-      "img": "greater_crit_lg.png?3",
+      "img": "../assets/items/greater_crit_lg.png",
       "dname": "Daedalus",
       "qual": "epic",
       "cost": 5520,
@@ -1987,7 +1987,7 @@
     },
     "basher": {
       "id": 143,
-      "img": "basher_lg.png?3",
+      "img": "../assets/items/basher_lg.png",
       "dname": "Skull Basher",
       "qual": "epic",
       "cost": 2700,
@@ -2005,7 +2005,7 @@
     },
     "bfury": {
       "id": 145,
-      "img": "bfury_lg.png?3",
+      "img": "../assets/items/bfury_lg.png",
       "dname": "Battle Fury",
       "qual": "epic",
       "cost": 4500,
@@ -2025,7 +2025,7 @@
     },
     "manta": {
       "id": 147,
-      "img": "manta_lg.png?3",
+      "img": "../assets/items/manta_lg.png",
       "dname": "Manta Style",
       "qual": "epic",
       "cost": 4950,
@@ -2043,7 +2043,7 @@
     },
     "lesser_crit": {
       "id": 149,
-      "img": "lesser_crit_lg.png?3",
+      "img": "../assets/items/lesser_crit_lg.png",
       "dname": "Crystalys",
       "qual": "epic",
       "cost": 2120,
@@ -2061,7 +2061,7 @@
     },
     "dragon_lance": {
       "id": 236,
-      "img": "dragon_lance_lg.png?3",
+      "img": "../assets/items/dragon_lance_lg.png",
       "dname": "Dragon Lance",
       "qual": "epic",
       "cost": 1900,
@@ -2080,7 +2080,7 @@
     },
     "armlet": {
       "id": 151,
-      "img": "armlet_lg.png?3",
+      "img": "../assets/items/armlet_lg.png",
       "dname": "Armlet of Mordiggian",
       "qual": "epic",
       "cost": 2320,
@@ -2099,7 +2099,7 @@
     },
     "invis_sword": {
       "id": 152,
-      "img": "invis_sword_lg.png?3",
+      "img": "../assets/items/invis_sword_lg.png",
       "dname": "Shadow Blade",
       "qual": "epic",
       "cost": 2700,
@@ -2117,7 +2117,7 @@
     },
     "silver_edge": {
       "id": 249,
-      "img": "silver_edge_lg.png?3",
+      "img": "../assets/items/silver_edge_lg.png",
       "dname": "Silver Edge",
       "qual": "epic",
       "cost": 4800,
@@ -2135,7 +2135,7 @@
     },
     "sange_and_yasha": {
       "id": 154,
-      "img": "sange_and_yasha_lg.png?3",
+      "img": "../assets/items/sange_and_yasha_lg.png",
       "dname": "Sange and Yasha",
       "qual": "artifact",
       "cost": 4100,
@@ -2153,7 +2153,7 @@
     },
     "satanic": {
       "id": 156,
-      "img": "satanic_lg.png?3",
+      "img": "../assets/items/satanic_lg.png",
       "dname": "Satanic",
       "qual": "artifact",
       "cost": 5900,
@@ -2171,7 +2171,7 @@
     },
     "mjollnir": {
       "id": 158,
-      "img": "mjollnir_lg.png?3",
+      "img": "../assets/items/mjollnir_lg.png",
       "dname": "Mjollnir",
       "qual": "artifact",
       "cost": 5700,
@@ -2189,7 +2189,7 @@
     },
     "skadi": {
       "id": 160,
-      "img": "skadi_lg.png?3",
+      "img": "../assets/items/skadi_lg.png",
       "dname": "Eye of Skadi",
       "qual": "artifact",
       "cost": 5675,
@@ -2209,7 +2209,7 @@
     },
     "sange": {
       "id": 162,
-      "img": "sange_lg.png?3",
+      "img": "../assets/items/sange_lg.png",
       "dname": "Sange",
       "qual": "artifact",
       "cost": 2050,
@@ -2227,7 +2227,7 @@
     },
     "helm_of_the_dominator": {
       "id": 164,
-      "img": "helm_of_the_dominator_lg.png?3",
+      "img": "../assets/items/helm_of_the_dominator_lg.png",
       "dname": "Helm of the Dominator",
       "qual": "artifact",
       "cost": 1800,
@@ -2245,7 +2245,7 @@
     },
     "maelstrom": {
       "id": 166,
-      "img": "maelstrom_lg.png?3",
+      "img": "../assets/items/maelstrom_lg.png",
       "dname": "Maelstrom",
       "qual": "artifact",
       "cost": 2800,
@@ -2263,7 +2263,7 @@
     },
     "desolator": {
       "id": 168,
-      "img": "desolator_lg.png?3",
+      "img": "../assets/items/desolator_lg.png",
       "dname": "Desolator",
       "qual": "artifact",
       "cost": 3500,
@@ -2282,7 +2282,7 @@
     },
     "yasha": {
       "id": 170,
-      "img": "yasha_lg.png?3",
+      "img": "../assets/items/yasha_lg.png",
       "dname": "Yasha",
       "qual": "artifact",
       "cost": 2050,
@@ -2300,7 +2300,7 @@
     },
     "mask_of_madness": {
       "id": 172,
-      "img": "mask_of_madness_lg.png?3",
+      "img": "../assets/items/mask_of_madness_lg.png",
       "dname": "Mask of Madness",
       "qual": "artifact",
       "cost": 1800,
@@ -2317,7 +2317,7 @@
     },
     "diffusal_blade": {
       "id": 174,
-      "img": "diffusal_blade_lg.png?3",
+      "img": "../assets/items/diffusal_blade_lg.png",
       "dname": "Diffusal Blade",
       "qual": "artifact",
       "cost": 3150,
@@ -2336,7 +2336,7 @@
     },
     "diffusal_blade_2": {
       "id": 196,
-      "img": "diffusal_blade_2_lg.png?3",
+      "img": "../assets/items/diffusal_blade_2_lg.png",
       "dname": "Diffusal Blade",
       "qual": "artifact",
       "cost": 3850,
@@ -2354,7 +2354,7 @@
     },
     "ethereal_blade": {
       "id": 176,
-      "img": "ethereal_blade_lg.png?3",
+      "img": "../assets/items/ethereal_blade_lg.png",
       "dname": "Ethereal Blade",
       "qual": "epic",
       "cost": 4700,
@@ -2372,7 +2372,7 @@
     },
     "soul_ring": {
       "id": 178,
-      "img": "soul_ring_lg.png?3",
+      "img": "../assets/items/soul_ring_lg.png",
       "dname": "Soul Ring",
       "qual": "common",
       "cost": 775,
@@ -2390,7 +2390,7 @@
     },
     "arcane_boots": {
       "id": 180,
-      "img": "arcane_boots_lg.png?3",
+      "img": "../assets/items/arcane_boots_lg.png",
       "dname": "Arcane Boots",
       "qual": "rare",
       "cost": 1300,
@@ -2408,7 +2408,7 @@
     },
     "octarine_core": {
       "id": 235,
-      "img": "octarine_core_lg.png?3",
+      "img": "../assets/items/octarine_core_lg.png",
       "dname": "Octarine Core",
       "qual": "rare",
       "cost": 5900,
@@ -2426,7 +2426,7 @@
     },
     "orb_of_venom": {
       "id": 181,
-      "img": "orb_of_venom_lg.png?3",
+      "img": "../assets/items/orb_of_venom_lg.png",
       "dname": "Orb of Venom",
       "qual": "component",
       "cost": 275,
@@ -2441,7 +2441,7 @@
     },
     "blight_stone": {
       "id": 240,
-      "img": "blight_stone_lg.png?3",
+      "img": "../assets/items/blight_stone_lg.png",
       "dname": "Blight Stone",
       "qual": "component",
       "cost": 300,
@@ -2456,7 +2456,7 @@
     },
     "ancient_janggo": {
       "id": 185,
-      "img": "ancient_janggo_lg.png?3",
+      "img": "../assets/items/ancient_janggo_lg.png",
       "dname": "Drum of Endurance",
       "qual": "rare",
       "cost": 1775,
@@ -2475,7 +2475,7 @@
     },
     "medallion_of_courage": {
       "id": 187,
-      "img": "medallion_of_courage_lg.png?3",
+      "img": "../assets/items/medallion_of_courage_lg.png",
       "dname": "Medallion of Courage",
       "qual": "rare",
       "cost": 1175,
@@ -2494,7 +2494,7 @@
     },
     "solar_crest": {
       "id": 229,
-      "img": "solar_crest_lg.png?3",
+      "img": "../assets/items/solar_crest_lg.png",
       "dname": "Solar Crest",
       "qual": "rare",
       "cost": 2875,
@@ -2512,7 +2512,7 @@
     },
     "smoke_of_deceit": {
       "id": 188,
-      "img": "smoke_of_deceit_lg.png?3",
+      "img": "../assets/items/smoke_of_deceit_lg.png",
       "dname": "Smoke of Deceit",
       "qual": "consumable",
       "cost": 50,
@@ -2527,7 +2527,7 @@
     },
     "tome_of_knowledge": {
       "id": 257,
-      "img": "tome_of_knowledge_lg.png?3",
+      "img": "../assets/items/tome_of_knowledge_lg.png",
       "dname": "Tome of Knowledge",
       "qual": "consumable",
       "cost": 150,
@@ -2542,7 +2542,7 @@
     },
     "veil_of_discord": {
       "id": 190,
-      "img": "veil_of_discord_lg.png?3",
+      "img": "../assets/items/veil_of_discord_lg.png",
       "dname": "Veil of Discord",
       "qual": "rare",
       "cost": 2240,
@@ -2561,7 +2561,7 @@
     },
     "guardian_greaves": {
       "id": 231,
-      "img": "guardian_greaves_lg.png?3",
+      "img": "../assets/items/guardian_greaves_lg.png",
       "dname": "Guardian Greaves",
       "qual": "rare",
       "cost": 5275,
@@ -2579,7 +2579,7 @@
     },
     "rod_of_atos": {
       "id": 206,
-      "img": "rod_of_atos_lg.png?3",
+      "img": "../assets/items/rod_of_atos_lg.png",
       "dname": "Rod of Atos",
       "qual": "rare",
       "cost": 3100,
@@ -2598,7 +2598,7 @@
     },
     "iron_talon": {
       "id": 239,
-      "img": "iron_talon_lg.png?3",
+      "img": "../assets/items/iron_talon_lg.png",
       "dname": "Iron Talon",
       "qual": "common",
       "cost": 500,
@@ -2616,7 +2616,7 @@
     },
     "abyssal_blade": {
       "id": 208,
-      "img": "abyssal_blade_lg.png?3",
+      "img": "../assets/items/abyssal_blade_lg.png",
       "dname": "Abyssal Blade",
       "qual": "epic",
       "cost": 6400,
@@ -2634,7 +2634,7 @@
     },
     "heavens_halberd": {
       "id": 210,
-      "img": "heavens_halberd_lg.png?3",
+      "img": "../assets/items/heavens_halberd_lg.png",
       "dname": "Heaven's Halberd",
       "qual": "artifact",
       "cost": 3750,
@@ -2652,7 +2652,7 @@
     },
     "ring_of_aquila": {
       "id": 212,
-      "img": "ring_of_aquila_lg.png?3",
+      "img": "../assets/items/ring_of_aquila_lg.png",
       "dname": "Ring of Aquila",
       "qual": "rare",
       "cost": 985,
@@ -2670,7 +2670,7 @@
     },
     "tranquil_boots": {
       "id": 214,
-      "img": "tranquil_boots_lg.png?3",
+      "img": "../assets/items/tranquil_boots_lg.png",
       "dname": "Tranquil Boots",
       "qual": "rare",
       "cost": 900,
@@ -2689,7 +2689,7 @@
     },
     "shadow_amulet": {
       "id": 215,
-      "img": "shadow_amulet_lg.png?3",
+      "img": "../assets/items/shadow_amulet_lg.png",
       "dname": "Shadow Amulet",
       "qual": false,
       "cost": 1300,
@@ -2704,7 +2704,7 @@
     },
     "glimmer_cape": {
       "id": 254,
-      "img": "glimmer_cape_lg.png?3",
+      "img": "../assets/items/glimmer_cape_lg.png",
       "dname": "Glimmer Cape",
       "qual": "rare",
       "cost": 1850,
@@ -2722,7 +2722,7 @@
     },
     "halloween_candy_corn": {
       "id": 1000,
-      "img": "halloween_candy_corn_lg.png?3",
+      "img": "../assets/items/halloween_candy_corn_lg.png",
       "dname": "Greevil Taffy",
       "qual": "consumable",
       "cost": 0,
@@ -2737,7 +2737,7 @@
     },
     "mystery_hook": {
       "id": 1001,
-      "img": "mystery_hook_lg.png?3",
+      "img": "../assets/items/mystery_hook_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_mystery_hook",
       "qual": "consumable",
       "cost": 0,
@@ -2752,7 +2752,7 @@
     },
     "mystery_arrow": {
       "id": 1002,
-      "img": "mystery_arrow_lg.png?3",
+      "img": "../assets/items/mystery_arrow_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_mystery_arrow",
       "qual": "consumable",
       "cost": 0,
@@ -2767,7 +2767,7 @@
     },
     "mystery_missile": {
       "id": 1003,
-      "img": "mystery_missile_lg.png?3",
+      "img": "../assets/items/mystery_missile_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_mystery_missile",
       "qual": "consumable",
       "cost": 0,
@@ -2782,7 +2782,7 @@
     },
     "mystery_toss": {
       "id": 1004,
-      "img": "mystery_toss_lg.png?3",
+      "img": "../assets/items/mystery_toss_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_mystery_toss",
       "qual": "consumable",
       "cost": 0,
@@ -2797,7 +2797,7 @@
     },
     "mystery_vacuum": {
       "id": 1005,
-      "img": "mystery_vacuum_lg.png?3",
+      "img": "../assets/items/mystery_vacuum_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_mystery_vacuum",
       "qual": "consumable",
       "cost": 0,
@@ -2812,7 +2812,7 @@
     },
     "halloween_rapier": {
       "id": 1006,
-      "img": "halloween_rapier_lg.png?3",
+      "img": "../assets/items/halloween_rapier_lg.png",
       "dname": "DOTA_Tooltip_Ability_item_halloween_rapier",
       "qual": "epic",
       "cost": 6200,
@@ -2827,7 +2827,7 @@
     },
     "greevil_whistle": {
       "id": 1007,
-      "img": "greevil_whistle_lg.png?3",
+      "img": "../assets/items/greevil_whistle_lg.png",
       "dname": "Greevil Whistle",
       "qual": "consumable",
       "cost": 0,
@@ -2842,7 +2842,7 @@
     },
     "greevil_whistle_toggle": {
       "id": 1008,
-      "img": "greevil_whistle_toggle_lg.png?3",
+      "img": "../assets/items/greevil_whistle_toggle_lg.png",
       "dname": "Greevil Whistle",
       "qual": "consumable",
       "cost": 0,
@@ -2857,7 +2857,7 @@
     },
     "present": {
       "id": 1009,
-      "img": "present_lg.png?3",
+      "img": "../assets/items/present_lg.png",
       "dname": "A Gift!",
       "qual": "consumable",
       "cost": 0,
@@ -2872,7 +2872,7 @@
     },
     "winter_stocking": {
       "id": 1010,
-      "img": "winter_stocking_lg.png?3",
+      "img": "../assets/items/winter_stocking_lg.png",
       "dname": "Xmas Stocking",
       "qual": "consumable",
       "cost": 0,
@@ -2887,7 +2887,7 @@
     },
     "winter_skates": {
       "id": 1011,
-      "img": "winter_skates_lg.png?3",
+      "img": "../assets/items/winter_skates_lg.png",
       "dname": "Speed Skates",
       "qual": "component",
       "cost": 0,
@@ -2902,7 +2902,7 @@
     },
     "winter_cake": {
       "id": 1012,
-      "img": "winter_cake_lg.png?3",
+      "img": "../assets/items/winter_cake_lg.png",
       "dname": "Fruit-bit Cake",
       "qual": "consumable",
       "cost": 0,
@@ -2917,7 +2917,7 @@
     },
     "winter_cookie": {
       "id": 1013,
-      "img": "winter_cookie_lg.png?3",
+      "img": "../assets/items/winter_cookie_lg.png",
       "dname": "Wizard Cookie",
       "qual": "consumable",
       "cost": 0,
@@ -2932,7 +2932,7 @@
     },
     "winter_coco": {
       "id": 1014,
-      "img": "winter_coco_lg.png?3",
+      "img": "../assets/items/winter_coco_lg.png",
       "dname": "Cocoa with Marshmallows",
       "qual": "consumable",
       "cost": 0,
@@ -2947,7 +2947,7 @@
     },
     "winter_ham": {
       "id": 1015,
-      "img": "winter_ham_lg.png?3",
+      "img": "../assets/items/winter_ham_lg.png",
       "dname": "Clove Studded Ham",
       "qual": "consumable",
       "cost": 0,
@@ -2962,7 +2962,7 @@
     },
     "winter_kringle": {
       "id": 1016,
-      "img": "winter_kringle_lg.png?3",
+      "img": "../assets/items/winter_kringle_lg.png",
       "dname": "Kringle",
       "qual": "consumable",
       "cost": 0,
@@ -2977,7 +2977,7 @@
     },
     "winter_mushroom": {
       "id": 1017,
-      "img": "winter_mushroom_lg.png?3",
+      "img": "../assets/items/winter_mushroom_lg.png",
       "dname": "Snow Mushroom",
       "qual": "consumable",
       "cost": 0,
@@ -2992,7 +2992,7 @@
     },
     "winter_greevil_treat": {
       "id": 1018,
-      "img": "winter_greevil_treat_lg.png?3",
+      "img": "../assets/items/winter_greevil_treat_lg.png",
       "dname": "Greevil Treat",
       "qual": "consumable",
       "cost": 0,
@@ -3007,7 +3007,7 @@
     },
     "winter_greevil_garbage": {
       "id": 1019,
-      "img": "winter_greevil_garbage_lg.png?3",
+      "img": "../assets/items/winter_greevil_garbage_lg.png",
       "dname": "Greevil Chow",
       "qual": "consumable",
       "cost": 0,
@@ -3022,7 +3022,7 @@
     },
     "winter_greevil_chewy": {
       "id": 1020,
-      "img": "winter_greevil_chewy_lg.png?3",
+      "img": "../assets/items/winter_greevil_chewy_lg.png",
       "dname": "Greevil Blink Bone",
       "qual": "consumable",
       "cost": 0,
