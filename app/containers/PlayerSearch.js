@@ -118,7 +118,7 @@ const baseStyles = _.extend(base.general, {
             borderRadius: 3,
             paddingHorizontal: 20,
             paddingVertical: 3,
-            backgroundColor: Colors.skyDolchMod,
+            backgroundColor: Colors.skyDolchAlpha,
             color: Colors.skyDolchLegend,
             fontFamily: Fonts.base
         },

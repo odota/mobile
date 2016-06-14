@@ -72,7 +72,7 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchAlpha,
+        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3
     },
     titleText: {

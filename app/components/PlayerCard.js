@@ -70,7 +70,7 @@ const baseStyles = _.extend(base.general, {
         marginRight: 15,
         marginTop: 10,
         marginBottom: 5,
-        backgroundColor: Colors.skyDolchAlpha,
+        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3,
         flexDirection: 'row'
     },

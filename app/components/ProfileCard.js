@@ -96,7 +96,7 @@ class ProfileCard extends Component {
                             maximumTrackTintColor = {Colors.lose}
                             thumbStyle = {styles.hiddenThumb}/>
                     <View style = {styles.winRateContainer}>
-                        <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {Colors.skyDolchMod}/>
+                        <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
                         <View style = {styles.winRateTextContainer}>
                             <Text style = {{color: Colors.win, fontFamily: Fonts.base, fontSize: 14}}>{info.win} </Text>
                             <Text style = {{color: Colors.skyDolchSecondLegend, fontFamily: Fonts.base, fontSize: 14}}>-</Text>
@@ -106,15 +106,15 @@ class ProfileCard extends Component {
                     </View>
                     <View style = {styles.mmrContainer}>
                         <View style = {styles.soloContainer}>
-                            <FontAwesome name = "user" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchMod}/>
+                            <FontAwesome name = "user" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
                             <Text style = {styles.mmrText}>{soloMMR}</Text>
                         </View>
                         <View style = {styles.estimateContainer}>
-                            <FontAwesome name = "question" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchMod}/>
+                            <FontAwesome name = "question" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
                             <Text style = {styles.mmrText}>{estimateMMR}</Text>
                         </View>
                         <View style = {styles.teamContainer}>
-                            <FontAwesome name = "users" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchMod}/>
+                            <FontAwesome name = "users" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
                             <Text style = {styles.mmrText}>{teamMMR}</Text>
                         </View>
                     </View>
@@ -140,7 +140,7 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchAlpha,
+        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3
     },
     topContainer: {
