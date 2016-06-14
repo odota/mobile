@@ -17,6 +17,7 @@ import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
 import ProfileCard from '../components/ProfileCard';
+import HeroesCard from '../components/HeroesCard';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -37,7 +38,6 @@ class PlayerOverview extends Component {
 
     constructor(props) {
         super(props);
-        this.heroesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     }
 
@@ -46,7 +46,6 @@ class PlayerOverview extends Component {
     }
 
     render() {
-        console.log(this.props);
         var content;
         if(this.props.isLoadingOverview) {
             content = (
@@ -63,7 +62,8 @@ class PlayerOverview extends Component {
         } else {
             content = (
                 <ScrollView>
-                    <ProfileCard info = {this.props.overview}/>
+                    <ProfileCard info = {this.props.overview} />
+                    <HeroesCard heroes = {this.props.overview.heroes_list} />
                 </ScrollView>
             )
         }

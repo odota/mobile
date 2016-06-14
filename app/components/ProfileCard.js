@@ -27,7 +27,6 @@ class ProfileCard extends Component {
     }
 
     onURLPressed(url) {
-        console.log(url);
         Linking.canOpenURL(url).then(supported => {
             if(!supported) {
                 console.log('Can\'t handle url: ' + url);
@@ -39,8 +38,6 @@ class ProfileCard extends Component {
 
     render() {
         var info = this.props.info;
-        console.log(info);
-
 
         if(info.profile) {
             var soloMMR;
@@ -164,7 +161,7 @@ const baseStyles = _.extend(base.general, {
     name: {
         fontFamily: Fonts.base,
         fontSize: 20,
-        color: Colors.skyDolchLegend,
+        color: Colors.skyDolchSecondLegend,
         flex: 7
     },
     country: {
