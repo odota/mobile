@@ -1,6 +1,7 @@
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import PlayerSearch from './PlayerSearch';
+import PlayerOverview from './PlayerOverview';
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
@@ -25,6 +26,7 @@ class DotaKeepApp extends Component {
             <Router sceneStyle = {{backgroundColor: 'white'}}>
                 <Scene key = "root" hideNavBar = {true}>
                     <Scene key = "playerSearch" component = {PlayerSearch} initial = {true} />
+                    <Scene key = "playerOverview" component = {PlayerOverview} />
                 </Scene>
             </Router>
         )

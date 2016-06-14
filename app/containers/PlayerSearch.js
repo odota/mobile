@@ -66,7 +66,7 @@ class PlayerSearch extends Component {
         } else if(this.props.isEmptyPlayers) {
             contentBottom = (
                 <View style = {styles.contentContainer}>
-                    <Text>No data found</Text>
+                    <Text style = {styles.noDataText}>No data found</Text>
                 </View>
             )
         } else if(this.props.players.length > 0){

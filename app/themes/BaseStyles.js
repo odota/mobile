@@ -101,6 +101,11 @@ const base = {
             marginTop: Metrics.navBarHeight,
             flex: 1,
             backgroundColor: Colors.mainBackground
+        },
+        noDataText: {
+            fontFamily: Fonts.base,
+            fontSize: 20,
+            color: Colors.skyDolchMod
         }
     }
 }

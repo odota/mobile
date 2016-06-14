@@ -8,7 +8,9 @@ const colors = {
     cyanLegend: 'rgb(255, 255, 255)',
     cyanMod: 'rgb(159, 128, 192)',
     skyDolchLegendHex: '#2BD0EF',
-    skyDolchLegendTranslucent: 'rgba(43, 208, 239, 0.3)'
+    skyDolchLegendTranslucent: 'rgba(43, 208, 239, 0.3)',
+    win: 'rgb(0, 188, 140)',
+    lose: 'rgb(231, 76, 60)'
 }
 
 export default colors

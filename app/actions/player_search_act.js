@@ -22,13 +22,13 @@ function receivePlayers(players) {
 function receiveEmptyPlayers() {
     return {
         type: types.RECEIVE_EMPTY_PLAYERS
-    }
+    };
 }
 
 export function fetchPlayers(playerName) {
     var endpoint = "search/?q=" + playerName;
     return dispatch => {
-        dispatch(requestPlayers())
+        dispatch(requestPlayers());
 
         var jsonData;
         return fetchAPI(endpoint)

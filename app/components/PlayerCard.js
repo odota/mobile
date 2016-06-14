@@ -9,6 +9,8 @@ import {
 
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+import * as navigationActions from '../actions/navigation_act';
 
 import { Avatar } from 'react-native-material-design';
 
@@ -18,16 +20,31 @@ import Fonts from '../themes/Fonts';
 
 import _ from 'lodash';
 
+export const mapStateToProps = state => ({
+
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    navigationActions: bindActionCreators(navigationActions, dispatch)
+});
+
 class PlayerCard extends Component {
 
     constructor(props) {
         super(props);
+        this.onPlayerPressed = this.onPlayerPressed.bind(this);
+    }
+
+    onPlayerPressed() {
+        this.props.navigationActions.changeContextId(this.props.info.account_id);
+        // Navigate to user home
+        Actions.playerOverview();
     }
 
     render() {
         var info = this.props.info;
         return (
-            <TouchableOpacity>
+            <TouchableOpacity onPress = {this.onPlayerPressed}>
                 <View style = {styles.playerCardContainer}>
                     <View style = {styles.avatarContainer}>
                         <Avatar image = {<Image source = {{uri: info.avatarfull}} />} size = {60} borderRadius = {30}/>
@@ -86,4 +103,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect()(PlayerCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerCard);
