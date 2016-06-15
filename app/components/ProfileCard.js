@@ -211,10 +211,6 @@ const baseStyles = _.extend(base.general, {
         fontSize: 14,
         color: Colors.skyDolchSecondLegend
     },
-    hiddenThumb: {
-        width: 0,
-        height: 0
-    },
     urlContainer: {
         marginLeft: 10,
         marginRight: 10,

@@ -17,6 +17,9 @@ import Fonts from '../themes/Fonts';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 
+import heroes from '../json/heroes.json';
+import { getHeroImage } from '../utils/getHeroImage';
+
 import _ from 'lodash';
 
 class HeroesCard extends Component {
@@ -25,13 +28,59 @@ class HeroesCard extends Component {
         super(props);
         this.heroesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
+        this.getIndex = this.getIndex.bind(this);
+    }
+
+    getIndex(heroId, heroesArray) {
+        for(i = 0; i < heroesArray.length; i++) {
+            if(heroId == heroesArray[i].id) {
+                return i;
+            }
+        }
     }
 
     renderRow(rowData, i, j) {
-        console.log(rowData);
+        var rowContainer;
+        if((parseInt(j)+1) % 2 == 0) {
+            rowContainer = styles.rowContainerEven;
+        } else {
+            rowContainer = styles.rowContainerOdd;
+        }
+        winrate = rowData.win / rowData.games;
+        winPercentage = Math.round(winrate * 10000)/100;
+        maxPlayed = this.props.heroes[0].games;
+        playedRate = rowData.games / maxPlayed
+        index = this.getIndex(rowData.hero_id, heroes.result.heroes);
+        var staticUri = getHeroImage(rowData.hero_id);
         return (
-            <View style = {styles.rowContainer}>
-                <Text>A hero</Text>
+            <View style = {rowContainer}>
+                <View style = {styles.heroCell}>
+                    <View style = {styles.heroValueTextWrapper}>
+                        <View style = {styles.avatarContainer}>
+                            <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} style = {styles.heroIcon}/>
+                        </View>
+                        <Text style = {styles.heroValueText} numberOfLines = {1}>{heroes.result.heroes[index].localized_name}</Text>
+                    </View>
+                </View>
+                <View style = {styles.playedCell}>
+                    <Text style = {styles.tableValueText}>{rowData.games}</Text>
+                    <Slider disabled = {true}
+                            value = {playedRate}
+                            minimumTrackTintColor = {Colors.lose}
+                            maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
+                            style = {styles.sliderContainer}
+                            thumbStyle = {styles.hiddenThumb}/>
+                </View>
+                <View style = {styles.winCell}>
+                    <Text style = {styles.tableValueText}>{winPercentage}%</Text>
+                    <Slider disabled = {true}
+                            value = {winrate}
+                            minimumTrackTintColor = {Colors.win}
+                            maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
+                            style = {styles.sliderContainer}
+                            thumbStyle = {styles.hiddenThumb}/>
+                </View>
+
             </View>
         )
     }
@@ -45,9 +94,15 @@ class HeroesCard extends Component {
                     </View>
                     <View style = {styles.separator} />
                     <View style = {styles.tableHeaderContainer}>
-                        <Text>Hero</Text>
-                        <Text>Played</Text>
-                        <Text>Win</Text>
+                        <View style = {styles.tableHeaderCell}>
+                            <Text style = {styles.tableHeaderText}>Hero</Text>
+                        </View>
+                        <View style = {styles.tableHeaderCell}>
+                            <Text style = {styles.tableHeaderText}>Played</Text>
+                        </View>
+                        <View style = {styles.tableHeaderCell}>
+                            <Text style = {styles.tableHeaderText}>Win</Text>
+                        </View>
                     </View>
                     <ListView style = {styles.heroesListView}
                         dataSource = {this.heroesDS.cloneWithRows(this.props.heroes)}
@@ -82,22 +137,80 @@ const baseStyles = _.extend(base.general, {
     },
     titleContainer: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginBottom: 10
     },
     heroesListView: {
-        marginLeft: 5,
-        marginRight: 5
     },
     separator: {
         height: 2,
         backgroundColor: Colors.skyDolchLegend
     },
-    rowContainer: {
-        marginTop: 5,
-        marginBottom: 5
+    rowContainerEven: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: Colors.skyDolchMod,
+        flexDirection: 'row'
+    },
+    rowContainerOdd: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: Colors.skyDolchAlpha,
+        flexDirection: 'row'
     },
     tableHeaderContainer: {
         flexDirection: 'row'
+    },
+    tableHeaderCell: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+        marginBottom: 10
+    },
+    tableHeaderText: {
+        fontFamily: Fonts.base,
+        fontSize: 14,
+        color: Colors.skyDolchSecondLegend,
+        fontWeight: 'bold'
+    },
+    tableValueText: {
+        fontFamily: Fonts.base,
+        fontSize: 14,
+        color: Colors.skyDolchSecondLegend,
+        alignSelf: 'center'
+    },
+    heroValueText: {
+        fontFamily: Fonts.base,
+        fontSize: 14,
+        color: Colors.skyDolchSecondLegend,
+        alignSelf: 'center'
+    },
+    avatarContainer: {
+        alignSelf: 'center'
+    },
+    heroCell: {
+        flex: 1,
+    },
+    playedCell: {
+        flex: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'center'
+    },
+    winCell: {
+        flex: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        justifyContent: 'center'
+    },
+    sliderContainer: {
+        marginTop: -10,
+        marginBottom: -10
+    },
+    heroValueTextWrapper: {
+        marginLeft: 5,
+        marginRight: 5
     }
 });
 

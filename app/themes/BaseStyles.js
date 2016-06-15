@@ -106,6 +106,10 @@ const base = {
             fontFamily: Fonts.base,
             fontSize: 20,
             color: Colors.skyDolchMod
+        },
+        hiddenThumb: {
+            width: 0,
+            height: 0
         }
     }
 }
