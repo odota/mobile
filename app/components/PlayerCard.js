@@ -38,7 +38,7 @@ class PlayerCard extends Component {
     onPlayerPressed() {
         this.props.navigationActions.changeContextId(this.props.info.account_id);
         // Navigate to user home
-        Actions.playerOverview();
+        Actions.playerProfile();
     }
 
     render() {

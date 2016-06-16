@@ -1,7 +1,7 @@
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import PlayerSearch from './PlayerSearch';
-import PlayerOverview from './PlayerOverview';
+import PlayerProfile from './PlayerProfile';
 import Drawers from './Drawer';
 import customNavBar from '../components/NavBar';
 import deepNavBar from '../components/DeepNavBar';
@@ -32,7 +32,7 @@ class DotaKeepApp extends Component {
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandler = {null} navBar = {customNavBar}>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
                                 <Scene key = "playerSearch" component = {PlayerSearch} initial = {true} />
-                                <Scene key = "playerOverview" component = {PlayerOverview} panHandler = {null} navBar = {deepNavBar} />
+                                <Scene key = "playerProfile" component = {PlayerProfile} panHandler = {null} navBar = {deepNavBar} />
                             </Scene>
                         </Scene>
                     </Scene>
