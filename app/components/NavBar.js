@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -49,6 +50,10 @@ class NavBar extends Component {
 
         return (
             <View style = {styles.navBarContainer}>
+                <StatusBar
+                    barStyle = 'light-content'
+                    backgroundColor = {Colors.skyDolchAlpha}
+                    />
                 <NavigationBar
                     style = {styles.navBar}
                     leftButton = {leftElements}
@@ -78,7 +83,6 @@ const baseStyles = _.extend(base.general, {
     title: {
         flex: 1,
         fontSize: 20,
-        fontWeight: 'bold',
         fontFamily: Fonts.base,
         color: Colors.skyDolchSecondLegend,
         marginLeft: 10,
