@@ -112,7 +112,7 @@ class HeroesCard extends Component {
                 </View>
             )
         } else {
-            return (<View />)
+            return (<View />);
         }
 
     }
@@ -139,8 +139,6 @@ const baseStyles = _.extend(base.general, {
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10
-    },
-    heroesListView: {
     },
     separator: {
         height: 2,

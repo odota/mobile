@@ -10,7 +10,9 @@ const colors = {
     skyDolchLegendHex: '#2BD0EF',
     skyDolchLegendTranslucent: 'rgba(43, 208, 239, 0.3)',
     win: 'rgb(0, 188, 140)',
-    lose: 'rgb(231, 76, 60)'
+    lose: 'rgb(231, 76, 60)',
+    winBackground: 'rgb(0, 170, 120)',
+    loseBackground: 'rgb(200, 50, 30)'
 }
 
 export default colors

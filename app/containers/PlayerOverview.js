@@ -18,6 +18,7 @@ import _ from 'lodash';
 
 import ProfileCard from '../components/ProfileCard';
 import HeroesCard from '../components/HeroesCard';
+import MatchesCard from '../components/MatchesCard';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -64,6 +65,7 @@ class PlayerOverview extends Component {
                 <ScrollView>
                     <ProfileCard info = {this.props.overview} />
                     <HeroesCard heroes = {this.props.overview.heroes_list} />
+                    <MatchesCard matches = {this.props.overview.matches} />
                 </ScrollView>
             )
         }
