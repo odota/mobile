@@ -3,7 +3,9 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar,
+    Platform
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -47,15 +49,29 @@ class DeepNavBar extends Component {
             <View />
         )
 
+        var statusBarPadding;
+        var navBarMargin;
+        if(Platform.OS == "ios") {
+            statusBarPadding = <View style = {styles.statusBarPadding} />;
+            navBarMargin = -20;
+        } else {
+            statusBarPadding = <View />;
+            navBarMargin = 0;
+        }
+
         return (
             <View style = {styles.navBarContainer}>
                 <StatusBar
                     backgroundColor = {Colors.skyDolchMod}
                     barStyle = "light-content"
                     />
-                <View style = {styles.statusBarPadding} />
+                {statusBarPadding}
                 <NavigationBar
-                    style = {styles.navBar}
+                    style = {{
+                        marginTop: navBarMargin,
+                        backgroundColor: Colors.skyDolchMod,
+                        borderBottomWidth: 1,
+                        borderBottomColor: '#A5A5A5'}}
                     leftButton = {leftElements}
                     rightButton = {rightElements}
                     />
