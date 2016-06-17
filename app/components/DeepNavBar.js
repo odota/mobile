@@ -49,6 +49,11 @@ class DeepNavBar extends Component {
 
         return (
             <View style = {styles.navBarContainer}>
+                <StatusBar
+                    backgroundColor = {Colors.skyDolchMod}
+                    barStyle = "light-content"
+                    />
+                <View style = {styles.statusBarPadding} />
                 <NavigationBar
                     style = {styles.navBar}
                     leftButton = {leftElements}
@@ -61,6 +66,10 @@ class DeepNavBar extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
+    statusBarPadding: {
+        backgroundColor: Colors.skyDolchMod,
+        height: 16
+    },
     navBarContainer: {
         position: 'absolute',
         top: 0,
@@ -73,7 +82,8 @@ const baseStyles = _.extend(base.general, {
     navBar: {
         backgroundColor: Colors.skyDolchMod,
         borderBottomWidth: 1,
-        borderBottomColor: '#A5A5A5'
+        borderBottomColor: '#A5A5A5',
+        marginTop: -20
     },
     title: {
         flex: 1,

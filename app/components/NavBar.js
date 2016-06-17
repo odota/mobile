@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    StatusBar
+    StatusBar,
+    Platform
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -48,14 +49,29 @@ class NavBar extends Component {
             <View />
         )
 
+        var statusBarPadding;
+        var navBarMargin;
+        if(Platform.OS == "ios") {
+            statusBarPadding = <View style = {styles.statusBarPadding} />;
+            navBarMargin = -20;
+        } else {
+            statusBarPadding = <View />;
+            navBarMargin = 0;
+        }
+
         return (
             <View style = {styles.navBarContainer}>
                 <StatusBar
-                    barStyle = 'light-content'
-                    backgroundColor = {Colors.skyDolchAlpha}
+                    backgroundColor = {Colors.skyDolchMod}
+                    barStyle = "light-content"
                     />
+                {statusBarPadding}
                 <NavigationBar
-                    style = {styles.navBar}
+                    style = {{
+                        marginTop: navBarMargin,
+                        backgroundColor: Colors.skyDolchMod,
+                        borderBottomWidth: 1,
+                        borderBottomColor: '#A5A5A5'}}
                     leftButton = {leftElements}
                     rightButton = {rightElements}
                     />
@@ -66,6 +82,10 @@ class NavBar extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
+    statusBarPadding: {
+        backgroundColor: Colors.skyDolchMod,
+        height: 16
+    },
     navBarContainer: {
         position: 'absolute',
         top: 0,
@@ -78,7 +98,8 @@ const baseStyles = _.extend(base.general, {
     navBar: {
         backgroundColor: Colors.skyDolchMod,
         borderBottomWidth: 1,
-        borderBottomColor: '#A5A5A5'
+        borderBottomColor: '#A5A5A5',
+        marginTop: -20
     },
     title: {
         flex: 1,
