@@ -50,9 +50,14 @@ class MatchesCard extends Component {
             result = 'L';
         }
         if(result == 'W') {
-            rowContainer = styles.rowContainerWin;
+            indicatorColor = Colors.win;
         } else {
-            rowContainer = styles.rowContainerLose;
+            indicatorColor = Colors.lose;
+        }
+        if((parseInt(j)+1) % 2 == 0) {
+            rowContainer = styles.rowContainerEven;
+        } else {
+            rowContainer = styles.rowContainerOdd;
         }
         var staticUri = getHeroImage(rowData.hero_id);
         var minutes = Math.floor(rowData.duration/60);
@@ -65,16 +70,19 @@ class MatchesCard extends Component {
         var now = moment();
         var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
         return (
-            <TouchableOpacity>
+            <TouchableOpacity style = {{flexDirection: 'row', flex: 1}}>
                 <View style = {rowContainer}>
-                    <View style = {styles.cell}>
+                    <View style = {{flex: 2,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginLeft: -5}}>
                         <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {styles.tableValueText}>{gameMode[rowData.game_mode].name}</Text>
                     </View>
                     <View style = {styles.cell}>
-                        <Text style = {styles.tableValueText}>{friendlyEndTime} ago</Text>
+                        <Text style = {styles.tableValueText}>{friendlyEndTime}</Text>
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {styles.tableValueText}>{minutes}:{seconds}</Text>
@@ -82,7 +90,9 @@ class MatchesCard extends Component {
                     <View style = {styles.doubleCell}>
                         <Text style = {styles.tableValueText}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
                     </View>
+
                 </View>
+                <View style = {{width: 5, backgroundColor: indicatorColor}} />
             </TouchableOpacity>
         )
     }
@@ -96,7 +106,12 @@ class MatchesCard extends Component {
                     </View>
                     <View style = {styles.separator} />
                     <View style = {styles.tableHeaderContainer}>
-                        <View style = {styles.tableHeaderCell}>
+                        <View style = {{flex: 2,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginTop: 10,
+                            marginBottom: 10,
+                            marginLeft: -5}}>
                             <Text style = {styles.tableHeaderText}>Hero</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
@@ -111,6 +126,7 @@ class MatchesCard extends Component {
                         <View style = {styles.doubleTableHeaderCell}>
                             <Text style = {styles.tableHeaderText}>K/D/A</Text>
                         </View>
+                        <View style = {{width: 5}} />
                     </View>
                     <ListView style = {styles.matchesListView}
                         dataSource = {this.matchesDS.cloneWithRows(this.props.matches)}
@@ -149,17 +165,19 @@ const baseStyles = _.extend(base.general, {
         height: 2,
         backgroundColor: Colors.skyDolchLegend
     },
-    rowContainerWin: {
+    rowContainerEven: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.winBackground,
-        flexDirection: 'row'
+        backgroundColor: Colors.skyDolchMod,
+        flexDirection: 'row',
+        flex: 1
     },
-    rowContainerLose: {
+    rowContainerOdd: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.loseBackground,
-        flexDirection: 'row'
+        backgroundColor: Colors.skyDolchAlpha,
+        flexDirection: 'row',
+        flex: 1
     },
     tableHeaderContainer: {
         flexDirection: 'row'
