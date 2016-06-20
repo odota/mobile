@@ -18,6 +18,7 @@ import Fonts from '../themes/Fonts';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
+import SGListView from 'react-native-sglistview';
 
 import heroes from '../json/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
@@ -113,7 +114,7 @@ class HeroesCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win</Text>
                         </View>
                     </View>
-                    <ListView style = {styles.heroesListView}
+                    <SGListView style = {styles.heroesListView}
                         dataSource = {this.heroesDS.cloneWithRows(this.props.heroes)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}

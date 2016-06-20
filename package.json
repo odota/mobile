@@ -16,6 +16,7 @@
     "react-native-navbar": "^1.5.0",
     "react-native-router-flux": "^3.26.16",
     "react-native-scrollable-tab-view": "^0.4.4",
+    "react-native-sglistview": "^0.3.2",
     "react-native-slider": "^0.9.0",
     "react-native-spinkit": "^0.1.2",
     "react-native-vector-icons": "^2.0.3",

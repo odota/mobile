@@ -14,6 +14,7 @@ import * as playerSearchActions from '../actions/player_search_act';
 import { Actions } from 'react-native-router-flux';
 
 import Spinner from 'react-native-spinkit';
+import SGListView from 'react-native-sglistview';
 
 import _ from 'lodash';
 
@@ -78,7 +79,7 @@ class PlayerSearch extends Component {
         } else if(this.props.players.length > 0){
             contentBottom = (
                 <ScrollView>
-                    <ListView
+                    <SGListView
                         dataSource = {this.ds.cloneWithRows(this.props.players)}
                         renderRow = {this.renderRow}
                         style = {styles.listView}

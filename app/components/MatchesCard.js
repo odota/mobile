@@ -18,6 +18,8 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
+import SGListView from 'react-native-sglistview';
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import heroes from '../json/heroes.json';
 import gameMode from '../json/game_mode.json';
@@ -137,7 +139,7 @@ class MatchesCard extends Component {
                         </View>
                         <View style = {{width: 5}} />
                     </View>
-                    <ListView style = {styles.matchesListView}
+                    <SGListView style = {styles.matchesListView}
                         dataSource = {this.matchesDS.cloneWithRows(this.props.matches)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}

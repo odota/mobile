@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import PlayerOverview from './PlayerOverview';
 import MatchesPage from './MatchesPage';
+import HeroesPage from './HeroesPage';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -37,6 +38,7 @@ class PlayerProfile extends Component {
             <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineColor = {this.props.legend}>
                 <PlayerOverview tabLabel = "Overview" />
                 <MatchesPage tabLabel = "Matches" />
+                <HeroesPage tabLabel = "Heroes" />
             </ScrollableTabView>
         )
     }
