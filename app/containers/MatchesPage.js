@@ -25,7 +25,8 @@ export const mapStateToProps = state => ({
     matches: state.playerMatchesState.matches,
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
-    contextId: state.navigationState.contextId
+    contextId: state.navigationState.contextId,
+    legendHex: state.settingsState.legendHex
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -48,7 +49,7 @@ class MatchesPage extends Component {
         if(this.props.isLoadingMatches) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {Colors.skyDolchLegendHex} />
+                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
                 </View>
             )
         } else if (this.props.isEmptyMatches) {
