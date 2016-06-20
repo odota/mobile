@@ -8,15 +8,25 @@ import {
     Platform
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
+import { bindActionCreators } from 'redux';
 import { Actions } from 'react-native-router-flux';
 
 import _ from 'lodash';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class NavDrawer extends Component {
 
@@ -35,6 +45,8 @@ class NavDrawer extends Component {
 
         } else if(route == 'search') {
             Actions.searchTab();
+        } else if(route == 'settings') {
+            Actions.settingsTab();
         } else {
             console.log('UNDEFINED');
         }
@@ -48,32 +60,44 @@ class NavDrawer extends Component {
             paddingView = <View />
         }
         return (
-            <View style = {styles.drawerContainer}>
+            <View style = {[styles.drawerContainer, {backgroundColor: this.props.mod}]}>
                 {paddingView}
                 <ScrollView style = {styles.navScroll}>
                     <TouchableOpacity onPress = {() => {this.goto('home')}}>
-                        <View style = {styles.navItem}>
+                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "home" size = {26} allowFontScaling = {false} color = {Colors.skyDolchLegend}/>
+                                <FontAwesome name = "home" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                             </View>
                             <View style = {styles.navTextContainer}>
-                                <Text style = {styles.navText}>Home</Text>
+                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Home</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style = {styles.separator} />
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
                     <TouchableOpacity onPress = {() => {this.goto('search')}}>
-                        <View style = {styles.navItem}>
+                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "search" size = {26} allowFontScaling = {false} color = {Colors.skyDolchLegend}/>
+                                <FontAwesome name = "search" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                             </View>
                             <View style = {styles.navTextContainer}>
-                                <Text style = {styles.navText}>Search</Text>
+                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Search</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style = {styles.separator} />
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+
+                    <TouchableOpacity onPress = {() => {this.goto('settings')}}>
+                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
+                            <View style = {styles.navIconContainer}>
+                                <FontAwesome name = "cog" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                            </View>
+                            <View style = {styles.navTextContainer}>
+                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Settings</Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
                 </ScrollView>
             </View>
@@ -88,36 +112,33 @@ const baseStyles = _.extend(base.general, {
     },
     navItem: {
         flexDirection: 'row',
-        backgroundColor: Colors.skyDolchMod,
-        paddingTop: 10,
-        paddingBottom: 10
+        paddingTop: 20,
+        paddingBottom: 20
     },
     navIconContainer: {
-        marginLeft: 10,
-        marginRight: 10
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     navTextContainer: {
         justifyContent: 'center',
-        marginLeft: 5,
-        marginRight: 10
+        marginRight: 10,
+        flex: 3
     },
     navText: {
         fontFamily: Fonts.base,
         fontSize: 16,
-        color: Colors.skyDolchSecondLegend
     },
     separator: {
         height: 2,
-        backgroundColor: Colors.skyDolchLegend
     },
     drawerContainer: {
         alignSelf: 'stretch',
         alignItems: 'stretch',
         flex: 1,
-        backgroundColor: Colors.skyDolchMod
     }
 });
 
 const styles = StyleSheet.create(baseStyles);
 
-export default NavDrawer;
+export default connect(mapStateToProps)(NavDrawer);

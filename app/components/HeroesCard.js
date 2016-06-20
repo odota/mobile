@@ -10,6 +10,8 @@ import {
 
 import { Avatar } from 'react-native-material-design';
 
+import { connect } from 'react-redux';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -21,6 +23,13 @@ import heroes from '../json/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
 import _ from 'lodash';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class HeroesCard extends Component {
 
@@ -42,9 +51,9 @@ class HeroesCard extends Component {
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = styles.rowContainerEven;
+            rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
         } else {
-            rowContainer = styles.rowContainerOdd;
+            rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
         }
         winrate = rowData.win / rowData.games;
         winPercentage = Math.round(winrate * 10000)/100;
@@ -59,11 +68,11 @@ class HeroesCard extends Component {
                         <View style = {styles.avatarContainer}>
                             <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} style = {styles.heroIcon}/>
                         </View>
-                        <Text style = {styles.heroValueText} numberOfLines = {1}>{heroes.result.heroes[index].localized_name}</Text>
+                        <Text style = {[styles.heroValueText, {color: this.props.secondLegend}]} numberOfLines = {1}>{heroes.result.heroes[index].localized_name}</Text>
                     </View>
                 </View>
                 <View style = {styles.playedCell}>
-                    <Text style = {styles.tableValueText}>{rowData.games}</Text>
+                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.games}</Text>
                     <Slider disabled = {true}
                             value = {playedRate}
                             minimumTrackTintColor = {Colors.lose}
@@ -72,7 +81,7 @@ class HeroesCard extends Component {
                             thumbStyle = {styles.hiddenThumb}/>
                 </View>
                 <View style = {styles.winCell}>
-                    <Text style = {styles.tableValueText}>{winPercentage}%</Text>
+                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{winPercentage}%</Text>
                     <Slider disabled = {true}
                             value = {winrate}
                             minimumTrackTintColor = {Colors.win}
@@ -88,20 +97,20 @@ class HeroesCard extends Component {
     render() {
         if(this.props.heroes) {
             return (
-                <View style = {styles.heroesCardContainer}>
+                <View style = {[styles.heroesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
-                        <Text style = {styles.titleText}>HEROES</Text>
+                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>HEROES</Text>
                     </View>
-                    <View style = {styles.separator} />
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                     <View style = {styles.tableHeaderContainer}>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Hero</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Played</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Played</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Win</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win</Text>
                         </View>
                     </View>
                     <ListView style = {styles.heroesListView}
@@ -127,13 +136,11 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3
     },
     titleText: {
         fontFamily: Fonts.base,
-        fontSize: 28,
-        color: Colors.skyDolchSecondLegend
+        fontSize: 28
     },
     titleContainer: {
         justifyContent: 'center',
@@ -141,19 +148,16 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10
     },
     separator: {
-        height: 2,
-        backgroundColor: Colors.skyDolchLegend
+        height: 2
     },
     rowContainerEven: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchMod,
         flexDirection: 'row'
     },
     rowContainerOdd: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchAlpha,
         flexDirection: 'row'
     },
     tableHeaderContainer: {
@@ -169,19 +173,16 @@ const baseStyles = _.extend(base.general, {
     tableHeaderText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         fontWeight: 'bold'
     },
     tableValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         alignSelf: 'center'
     },
     heroValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         alignSelf: 'center'
     },
     avatarContainer: {
@@ -214,4 +215,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default HeroesCard
+export default connect(mapStateToProps)(HeroesCard);

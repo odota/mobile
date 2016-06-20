@@ -26,7 +26,13 @@ import PlayerCard from '../components/PlayerCard';
 export const mapStateToProps = state => ({
     players: state.playerListState.players,
     isLoadingPlayers: state.playerListState.isLoadingPlayers,
-    isEmptyPlayers: state.playerListState.isEmptyPlayers
+    isEmptyPlayers: state.playerListState.isEmptyPlayers,
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend,
+    legendHex: state.settingsState.legendHex,
+    legendTranslucent: state.settingsState.legendTranslucent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -60,7 +66,7 @@ class PlayerSearch extends Component {
         if(this.props.isLoadingPlayers) {
             contentBottom = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {Colors.skyDolchLegendHex} />
+                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
                 </View>
             )
         } else if(this.props.isEmptyPlayers) {
@@ -87,9 +93,9 @@ class PlayerSearch extends Component {
                     <TextInput
                         placeholder = 'Search player'
                         value = {this.state.searchInput}
-                        style = {styles.searchInput}
+                        style = {[styles.searchInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
                         autoCorrect = {false}
-                        placeholderTextColor = {Colors.skyDolchLegendTranslucent}
+                        placeholderTextColor = {this.props.legendTranslucent}
                         autoCapitalize = 'none'
                         returnKeyType = 'search'
                         selectionColor = 'white'
@@ -118,8 +124,6 @@ const baseStyles = _.extend(base.general, {
             borderRadius: 3,
             paddingHorizontal: 20,
             paddingVertical: 3,
-            backgroundColor: Colors.skyDolchAlpha,
-            color: Colors.skyDolchLegend,
             fontFamily: Fonts.base
         },
         contentContainer: {

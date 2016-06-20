@@ -21,7 +21,10 @@ import Fonts from '../themes/Fonts';
 import _ from 'lodash';
 
 export const mapStateToProps = state => ({
-
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -45,17 +48,17 @@ class PlayerCard extends Component {
         var info = this.props.info;
         return (
             <TouchableOpacity onPress = {this.onPlayerPressed}>
-                <View style = {styles.playerCardContainer}>
+                <View style = {[styles.playerCardContainer, { backgroundColor: this.props.mod }]}>
                     <View style = {styles.avatarContainer}>
                         <Avatar image = {<Image source = {{uri: info.avatarfull}} />} size = {60} borderRadius = {30}/>
                     </View>
                     <View style = {styles.dataContainer}>
                         <View style = {styles.nameContainer}>
-                            <Text style = {styles.data}>{info.personaname}</Text>
+                            <Text style = {[styles.data, {color: this.props.secondLegend}]}>{info.personaname}</Text>
                         </View>
-                        <View style = {styles.separator}/>
+                        <View style = {[styles.separator, {backgroundColor: this.props.legend}]}/>
                         <View style = {styles.nameContainer}>
-                            <Text style = {styles.data}>ID: {info.account_id}</Text>
+                            <Text style = {[styles.data, {color: this.props.secondLegend}]}>ID: {info.account_id}</Text>
                         </View>
                     </View>
                 </View>
@@ -70,7 +73,6 @@ const baseStyles = _.extend(base.general, {
         marginRight: 15,
         marginTop: 10,
         marginBottom: 5,
-        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3,
         flexDirection: 'row'
     },
@@ -89,11 +91,9 @@ const baseStyles = _.extend(base.general, {
     data: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend
     },
     separator: {
         height: 2,
-        backgroundColor: Colors.skyDolchLegend
     },
     nameContainer: {
         marginBottom: 5,

@@ -9,6 +9,8 @@ import {
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 
+import { connect } from 'react-redux';
+
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import PlayerOverview from './PlayerOverview';
 import MatchesPage from './MatchesPage';
@@ -16,6 +18,13 @@ import MatchesPage from './MatchesPage';
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class PlayerProfile extends Component {
 
@@ -25,7 +34,7 @@ class PlayerProfile extends Component {
 
     render() {
         return(
-            <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {Colors.skyDolchAlpha} tabBarActiveTextColor = {Colors.skyDolchLegend} tabBarInactiveTextColor = {Colors.skyDolchSecondLegend} tabBarUnderlineColor = {Colors.skyDolchLegend}>
+            <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineColor = {this.props.legend}>
                 <PlayerOverview tabLabel = "Overview" />
                 <MatchesPage tabLabel = "Matches" />
             </ScrollableTabView>
@@ -43,4 +52,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default PlayerProfile
+export default connect(mapStateToProps)(PlayerProfile);

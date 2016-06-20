@@ -28,7 +28,8 @@ export const mapStateToProps = state => ({
     overview: state.playerOverviewState.overview,
     isLoadingOverview: state.playerOverviewState.isLoadingOverview,
     isEmptyOverview: state.playerOverviewState.isEmptyOverview,
-    contextId: state.navigationState.contextId
+    contextId: state.navigationState.contextId,
+    legendHex: state.settingsState.legendHex
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -51,7 +52,7 @@ class PlayerOverview extends Component {
         if(this.props.isLoadingOverview) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {Colors.skyDolchLegendHex} />
+                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
                 </View>
             )
         } else if(this.props.isEmptyOverview) {

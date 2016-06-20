@@ -12,6 +12,8 @@ import { Avatar } from 'react-native-material-design';
 
 import { Actions } from 'react-native-router-flux';
 
+import { connect } from 'react-redux';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -24,6 +26,13 @@ import { getHeroImage } from '../utils/getHeroImage';
 
 import _ from 'lodash';
 import moment from 'moment';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class MatchesCard extends Component {
 
@@ -55,9 +64,9 @@ class MatchesCard extends Component {
             indicatorColor = Colors.lose;
         }
         if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = styles.rowContainerEven;
+            rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
         } else {
-            rowContainer = styles.rowContainerOdd;
+            rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
         }
         var staticUri = getHeroImage(rowData.hero_id);
         var minutes = Math.floor(rowData.duration/60);
@@ -79,16 +88,16 @@ class MatchesCard extends Component {
                         <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
                     </View>
                     <View style = {styles.cell}>
-                        <Text style = {styles.tableValueText}>{gameMode[rowData.game_mode].name}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{gameMode[rowData.game_mode].name}</Text>
                     </View>
                     <View style = {styles.cell}>
-                        <Text style = {styles.tableValueText}>{friendlyEndTime}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
                     </View>
                     <View style = {styles.cell}>
-                        <Text style = {styles.tableValueText}>{minutes}:{seconds}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{minutes}:{seconds}</Text>
                     </View>
                     <View style = {styles.doubleCell}>
-                        <Text style = {styles.tableValueText}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
                     </View>
 
                 </View>
@@ -100,11 +109,11 @@ class MatchesCard extends Component {
     render() {
         if(this.props.matches) {
             return (
-                <View style = {styles.matchesCardContainer}>
+                <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
-                        <Text style = {styles.titleText}>MATCHES</Text>
+                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>MATCHES</Text>
                     </View>
-                    <View style = {styles.separator} />
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                     <View style = {styles.tableHeaderContainer}>
                         <View style = {{flex: 2,
                             justifyContent: 'center',
@@ -112,19 +121,19 @@ class MatchesCard extends Component {
                             marginTop: 10,
                             marginBottom: 10,
                             marginLeft: -5}}>
-                            <Text style = {styles.tableHeaderText}>Hero</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Mode</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Mode</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Ended</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Ended</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>Length</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Length</Text>
                         </View>
                         <View style = {styles.doubleTableHeaderCell}>
-                            <Text style = {styles.tableHeaderText}>K/D/A</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
                         </View>
                         <View style = {{width: 5}} />
                     </View>
@@ -148,13 +157,11 @@ const baseStyles = _.extend(base.general, {
         marginTop: 5,
         marginBottom: 10,
         paddingTop: 10,
-        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3
     },
     titleText: {
         fontFamily: Fonts.base,
-        fontSize: 28,
-        color: Colors.skyDolchSecondLegend
+        fontSize: 28
     },
     titleContainer: {
         justifyContent: 'center',
@@ -162,20 +169,17 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10
     },
     separator: {
-        height: 2,
-        backgroundColor: Colors.skyDolchLegend
+        height: 2
     },
     rowContainerEven: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchMod,
         flexDirection: 'row',
         flex: 1
     },
     rowContainerOdd: {
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchAlpha,
         flexDirection: 'row',
         flex: 1
     },
@@ -206,19 +210,16 @@ const baseStyles = _.extend(base.general, {
     tableHeaderText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         fontWeight: 'bold'
     },
     tableValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         alignSelf: 'center'
     },
     heroValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchSecondLegend,
         alignSelf: 'center'
     },
     cell: {
@@ -241,4 +242,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default MatchesCard;
+export default connect(mapStateToProps)(MatchesCard);

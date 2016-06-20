@@ -10,6 +10,8 @@ import {
 
 import { Avatar } from 'react-native-material-design';
 
+import { connect } from 'react-redux';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -18,6 +20,13 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 
 import _ from 'lodash';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class ProfileCard extends Component {
 
@@ -57,9 +66,9 @@ class ProfileCard extends Component {
                 teamMMR = "N/A"
             }
             if(info.profile.loccountrycode) {
-                name = <Text style = {styles.name}>{info.profile.personaname} ({info.profile.loccountrycode})</Text>;
+                name = <Text style = {[styles.name, {color: this.props.secondLegend}]}>{info.profile.personaname} ({info.profile.loccountrycode})</Text>;
             } else {
-                name = <Text style = {styles.name}>{info.profile.personaname}</Text>;
+                name = <Text style = {[styles.name, {color: this.props.secondLegend}]}>{info.profile.personaname}</Text>;
             }
             if(info.win && info.lose) {
                 winrate = info.win / (info.win+info.lose);
@@ -75,7 +84,7 @@ class ProfileCard extends Component {
             if(info.profile.profileurl) {
                 url = (
                     <TouchableOpacity style = {styles.urlContainer} onPress = {() => this.onURLPressed(info.profile.profileurl)}>
-                        <Text style = {{color: Colors.skyDolchSecondLegend, textDecorationLine: 'underline'}}>{info.profile.profileurl}</Text>
+                        <Text style = {{color: this.props.secondLegend, textDecorationLine: 'underline'}}>{info.profile.profileurl}</Text>
                     </TouchableOpacity>
                 )
             } else {
@@ -83,7 +92,7 @@ class ProfileCard extends Component {
             }
 
             return (
-                <View style = {styles.profileCardContainer}>
+                <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.nameContainer}>
                         {name}
                     </View>
@@ -96,29 +105,29 @@ class ProfileCard extends Component {
                             maximumTrackTintColor = {Colors.lose}
                             thumbStyle = {styles.hiddenThumb}/>
                     <View style = {styles.winRateContainer}>
-                        <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
+                        <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {this.props.legend}/>
                         <View style = {styles.winRateTextContainer}>
                             <Text style = {{color: Colors.win, fontFamily: Fonts.base, fontSize: 14}}>{info.win} </Text>
-                            <Text style = {{color: Colors.skyDolchSecondLegend, fontFamily: Fonts.base, fontSize: 14}}>-</Text>
+                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>-</Text>
                             <Text style = {{color: Colors.lose, fontFamily: Fonts.base, fontSize: 14}}> {info.lose}</Text>
                         </View>
-                        <Text style = {{color: Colors.skyDolchSecondLegend, fontFamily: Fonts.base, fontSize: 14}}>({winPercentage}%)</Text>
+                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>({winPercentage}%)</Text>
                     </View>
                     <View style = {styles.mmrContainer}>
                         <View style = {styles.soloContainer}>
-                            <FontAwesome name = "user" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
-                            <Text style = {styles.mmrText}>{soloMMR}</Text>
+                            <FontAwesome name = "user" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
+                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{soloMMR}</Text>
                         </View>
                         <View style = {styles.estimateContainer}>
-                            <FontAwesome name = "question" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
-                            <Text style = {styles.mmrText}>{estimateMMR}</Text>
+                            <FontAwesome name = "question" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
+                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{estimateMMR}</Text>
                         </View>
                         <View style = {styles.teamContainer}>
-                            <FontAwesome name = "users" size = {20} allowFontAcaling = {false} color = {Colors.skyDolchLegend}/>
-                            <Text style = {styles.mmrText}>{teamMMR}</Text>
+                            <FontAwesome name = "users" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
+                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{teamMMR}</Text>
                         </View>
                     </View>
-                    <View style = {styles.separator} />
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                     {url}
 
                 </View>
@@ -140,7 +149,6 @@ const baseStyles = _.extend(base.general, {
         marginBottom: 10,
         paddingTop: 10,
         paddingBottom: 10,
-        backgroundColor: Colors.skyDolchMod,
         borderRadius: 3
     },
     topContainer: {
@@ -161,13 +169,11 @@ const baseStyles = _.extend(base.general, {
     name: {
         fontFamily: Fonts.base,
         fontSize: 20,
-        color: Colors.skyDolchSecondLegend,
         flex: 7
     },
     country: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        color: Colors.skyDolchLegend,
         flex: 1,
         alignSelf: 'center'
     },
@@ -208,8 +214,7 @@ const baseStyles = _.extend(base.general, {
     },
     mmrText: {
         fontFamily: Fonts.base,
-        fontSize: 14,
-        color: Colors.skyDolchSecondLegend
+        fontSize: 14
     },
     urlContainer: {
         marginLeft: 10,
@@ -218,10 +223,9 @@ const baseStyles = _.extend(base.general, {
     },
     separator: {
         height: 2,
-        backgroundColor: Colors.skyDolchLegend
     },
 });
 
 const styles = StyleSheet.create(baseStyles);
 
-export default ProfileCard
+export default connect(mapStateToProps)(ProfileCard);
