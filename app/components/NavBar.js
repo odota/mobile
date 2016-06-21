@@ -77,7 +77,7 @@ class NavBar extends Component {
                     />
                 {statusBarPadding}
                 <NavigationBar
-                    style = {[styles.navBar, {backgroundColor: this.props.mod}]}
+                    style = {[styles.navBar, {backgroundColor: this.props.mod, marginTop: navBarMargin}]}
                     leftButton = {leftElements}
                     rightButton = {rightElements}
                     />
@@ -102,8 +102,7 @@ const baseStyles = _.extend(base.general, {
     },
     navBar: {
         borderBottomWidth: 1,
-        borderBottomColor: '#A5A5A5',
-        marginTop: -20
+        borderBottomColor: '#A5A5A5'
     },
     title: {
         flex: 1,
