@@ -12,7 +12,11 @@ import { bindActionCreators } from 'redux';
 import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
+import heroes from '../json/heroes.json';
+
 import MatchesCard from '../components/MatchesCard';
+import PickerInput from '../components/PickerInput';
+import PickerText from '../components/PickerText';
 
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
@@ -37,6 +41,29 @@ class MatchesPage extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            'hero': false
+        }
+        this.togglePicker = this.togglePicker.bind(this);
+        this.valuePicked = this.valuePicked.bind(this);
+    }
+
+    togglePicker(name) {
+        var newState = _.cloneDeep(this.state);
+        newState[name] = !newState[name];
+        this.setState(newState);
+    }
+
+    valuePicked(pickerName, valueKey, labelKey, pickedValue, pickedLabel) {
+        var newState = _.cloneDeep(this.state);
+        if(pickedValue === 0) {
+            pickedValue = null;
+            pickedLabel = '';
+        }
+        newState[valueKey] = pickedValue;
+        newState[labelKey] = pickedLabel;
+        newState[pickerName] = false;
+        this.setState(newState);
     }
 
     componentWillMount() {
@@ -59,9 +86,31 @@ class MatchesPage extends Component {
                 </View>
             )
         } else {
+            var picker;
+            console.log(this.state);
+            var sortedHeroes = _.sortBy(heroes.result.heroes, ['localized_name']);
+            if(this.state['hero']) {
+                picker = <PickerInput
+                            selectedValue = {1}
+                            selectedLabel = {'Abbadon'}
+                            onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
+                            onPickerCancel = {() => this.togglePicker('hero')}
+                            items = {sortedHeroes}
+                            />
+            }
+
             content = (
                 <ScrollView style = {{marginTop: 5}}>
+                    <PickerText
+                        onPress = {() => this.togglePicker('hero')}
+                        selectedValue = {1}
+                        selectedLabel = {'Abbadon'}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('hero')}
+                        items = {sortedHeroes}
+                        />
                     <MatchesCard matches = {this.props.matches.matches} />
+                    {picker}
                 </ScrollView>
             )
         }
