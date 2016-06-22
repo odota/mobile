@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ScrollView,
     ListView,
-    TouchableOpacity
+    TouchableOpacity,
+    TextInput
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -30,7 +31,9 @@ export const mapStateToProps = state => ({
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     mod: state.settingsState.mod,
-    legend: state.settingsState.legend
+    legend: state.settingsState.legend,
+    alpha: state.settingsState.alpha,
+    secondLegend: state.settingsState.secondLegend
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -50,7 +53,8 @@ class MatchesSearch extends Component {
             'hero_name': 'None',
             'faction': false,
             'faction_id': -1,
-            'faction_name': "None"
+            'faction_name': "None",
+            'match_limit': "30"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
@@ -66,7 +70,7 @@ class MatchesSearch extends Component {
     }
 
     onFilterPressed() {
-        this.props.actions.fetchMatches(this.props.contextId, 30, this.state.hero_id, this.state.faction_id);
+        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.hero_id, this.state.faction_id);
         Actions.pop();
     }
 
@@ -117,6 +121,28 @@ class MatchesSearch extends Component {
             <ScrollView>
                 <View style = {styles.container}>
                     <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>
+
+                        <View style = {styles.pickerItem}>
+                            <View style = {styles.pickerTitleContainer}>
+                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Number of matches</Text>
+                            </View>
+                            <TextInput
+                                value = {this.state.match_limit}
+                                style = {[styles.limitInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
+                                autoCorrect = {false}
+                                keyboardType = 'numeric'
+                                selectionColor = 'white'
+                                onChange = {(event) => {
+                                    this.setState({
+                                        match_limit: event.nativeEvent.text
+                                    });
+                                }}
+                                onFocus = {() => {
+                                    this.setState({
+                                        match_limit: ""
+                                    });
+                                }}/>
+                        </View>
 
                         <View style = {styles.pickerItem}>
                             <View style = {styles.pickerTitleContainer}>
@@ -227,6 +253,14 @@ const baseStyles = _.extend(base.general, {
         fontFamily: Fonts.base,
         fontSize: 16
     },
+    limitInput: {
+        height: 40,
+        fontSize: 14,
+        fontFamily: Fonts.base,
+        paddingHorizontal: 20,
+        paddingVertical: 3,
+        borderRadius: 3
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);

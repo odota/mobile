@@ -46,7 +46,6 @@ class MatchesPage extends Component {
     }
 
     onSearchPressed() {
-        console.log("PRESSED");
         Actions.matchesSearch();
     }
 
