@@ -36,9 +36,9 @@ class DotaKeepApp extends Component {
                     <Scene key = "navDrawer" component = {Drawers} panHandler = {null}>
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandler = {null} navBar = {customNavBar}>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
-                                <Scene key = "playerSearch" component = {PlayerSearch} initial = {true} />
-                                <Scene key = "playerProfile" component = {PlayerProfile} panHandler = {null} navBar = {deepNavBar} />
-                                <Scene key = "matchesSearch" component = {MatchesSearch} panHandler = {null} direction = "vertical" navBar = {modalNavBar} />
+                                <Scene key = "playerSearch" component = {PlayerSearch} title = "Search Profile" initial = {true} />
+                                <Scene key = "playerProfile" component = {PlayerProfile} title = "Player Profile" panHandler = {null} navBar = {deepNavBar} />
+                                <Scene key = "matchesSearch" component = {MatchesSearch} title = "Search Matches" panHandler = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "settingsTab" title = "Settings" navBar = {customNavBar}>
                                 <Scene key = "settings" component = {Settings} />
