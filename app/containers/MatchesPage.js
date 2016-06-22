@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ListView
+    ListView,
+    TouchableOpacity
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -12,11 +13,8 @@ import { bindActionCreators } from 'redux';
 import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
-import heroes from '../json/heroes.json';
-
 import MatchesCard from '../components/MatchesCard';
-import PickerInput from '../components/PickerInput';
-import PickerText from '../components/PickerText';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
@@ -30,7 +28,11 @@ export const mapStateToProps = state => ({
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
     contextId: state.navigationState.contextId,
-    legendHex: state.settingsState.legendHex
+    legendHex: state.settingsState.legendHex,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend,
+    mod: state.settingsState.mod,
+    alpha: state.settingsState.alpha
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -41,29 +43,11 @@ class MatchesPage extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            'hero': false
-        }
-        this.togglePicker = this.togglePicker.bind(this);
-        this.valuePicked = this.valuePicked.bind(this);
     }
 
-    togglePicker(name) {
-        var newState = _.cloneDeep(this.state);
-        newState[name] = !newState[name];
-        this.setState(newState);
-    }
-
-    valuePicked(pickerName, valueKey, labelKey, pickedValue, pickedLabel) {
-        var newState = _.cloneDeep(this.state);
-        if(pickedValue === 0) {
-            pickedValue = null;
-            pickedLabel = '';
-        }
-        newState[valueKey] = pickedValue;
-        newState[labelKey] = pickedLabel;
-        newState[pickerName] = false;
-        this.setState(newState);
+    onSearchPressed() {
+        console.log("PRESSED");
+        Actions.matchesSearch();
     }
 
     componentWillMount() {
@@ -86,31 +70,19 @@ class MatchesPage extends Component {
                 </View>
             )
         } else {
-            var picker;
-            console.log(this.state);
-            var sortedHeroes = _.sortBy(heroes.result.heroes, ['localized_name']);
-            if(this.state['hero']) {
-                picker = <PickerInput
-                            selectedValue = {1}
-                            selectedLabel = {'Abbadon'}
-                            onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
-                            onPickerCancel = {() => this.togglePicker('hero')}
-                            items = {sortedHeroes}
-                            />
-            }
+
 
             content = (
                 <ScrollView style = {{marginTop: 5}}>
-                    <PickerText
-                        onPress = {() => this.togglePicker('hero')}
-                        selectedValue = {1}
-                        selectedLabel = {'Abbadon'}
-                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
-                        onPickerCancel = {() => this.togglePicker('hero')}
-                        items = {sortedHeroes}
-                        />
+                        <TouchableOpacity  onPress = {this.onSearchPressed} style = {styles.searchContainer}>
+                            <View style = {[styles.searchIconContainer, {backgroundColor: this.props.mod}]}>
+                                <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            </View>
+                            <View style = {[styles.searchButton, {backgroundColor: this.props.mod}]}>
+                                <Text style = {[styles.searchButtonText, {color: this.props.legend}]}>Search Matches</Text>
+                            </View>
+                        </TouchableOpacity>
                     <MatchesCard matches = {this.props.matches.matches} />
-                    {picker}
                 </ScrollView>
             )
         }
@@ -124,7 +96,41 @@ class MatchesPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-
+    searchButton: {
+        borderTopRightRadius: 3,
+        borderBottomRightRadius: 3,
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingRight: 10,
+        marginTop: 5,
+        marginBottom: 5,
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        flex: 2
+    },
+    searchIconContainer: {
+        borderTopLeftRadius: 3,
+        borderBottomLeftRadius: 3,
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 10,
+        paddingRight: 8,
+        marginTop: 5,
+        marginBottom: 5,
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        flex: 1
+    },
+    searchButtonText: {
+        fontFamily: Fonts.base,
+        fontSize: 16
+    },
+    searchContainer: {
+        flexDirection: 'row',
+        paddingLeft: 10,
+        paddingRight: 10,
+        flex: 1
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);

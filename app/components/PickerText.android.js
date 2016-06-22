@@ -11,10 +11,21 @@ import {
 
 import _ from 'lodash';
 
+import { connect } from 'react-redux';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+export const mapStateToProps = state => ({
+    contextId: state.navigationState.contextId,
+    legendHex: state.settingsState.legendHex,
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class PickerText extends React.Component {
 
@@ -24,8 +35,8 @@ class PickerText extends React.Component {
       this.onSelect = this.onSelect.bind(this);
 
       this.state = {
-        selectedValue: props.selectedValue.key,
-        selectedLabel: props.selectedValue.label
+        selectedValue: props.selectedValue,
+        selectedLabel: props.selectedLabel
       }
     }
 
@@ -47,9 +58,10 @@ class PickerText extends React.Component {
       } else {
         return (
           <Picker
-            style = {styles.pickerText}
+            style = {[styles.pickerText, {color: this.props.secondLegend, backgroundColor: this.props.alpha}]}
             selectedValue = {this.state.selectedValue}
             onValueChange={this.onSelect}
+            mode = {'dropdown'}
             >
             { this.props.items.map(function (item) { return <Picker.Item label={item.localized_name} value={item.id} key={item.id} /> }) }
             </Picker>
@@ -60,14 +72,12 @@ class PickerText extends React.Component {
 
 const styles = StyleSheet.create(_.extend(base.general, {
   pickerText: {
-    alignSelf: 'stretch',
-    color: Colors.bodyText,
+    borderRadius: 3,
+    height: 35,
+    paddingLeft: 10
   },
-  input: _.extend(base.general.input, {
-      padding: 0,
-      margin: 0
-  })
+
 } ));
 
 
-export default PickerText;
+export default connect(mapStateToProps)(PickerText);

@@ -8,6 +8,8 @@ import {
     Picker
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import _ from 'lodash';
 
 import Colors from '../themes/Colors';
@@ -15,6 +17,13 @@ import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+export const mapStateToProps = state => ({
+    alpha: state.settingsState.alpha,
+    mod: state.settingsState.mod,
+    legend: state.settingsState.legend,
+    secondLegend: state.settingsState.secondLegend
+});
 
 class PickerText extends Component {
 
@@ -24,10 +33,14 @@ class PickerText extends Component {
 
     render() {
         return (
-            <TouchableOpacity onPress={this.props.onPress} disabled={this.props.disabled} >
-                <View style={styles.pickerText}>
-                    <Text style={styles.input}>{this.props.title}</Text>
-                    { !this.props.disabled && <FontAwesome name="caret-down" size={18} color={Colors.win} style = {styles.pickerIcon} /> }
+            <TouchableOpacity onPress={this.props.onPress} disabled={this.props.disabled}>
+                <View style={[styles.pickerItem, {backgroundColor: this.props.alpha}]}>
+                    <View style = {styles.pickerTextContainer}>
+                        <Text style={[styles.pickerText, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+                    </View>
+                    <View style = {styles.pickerIconContainer}>
+                        { !this.props.disabled && <FontAwesome name="caret-down" size={18} color={this.props.legend} /> }
+                    </View>
                 </View>
             </TouchableOpacity>
         );
@@ -35,18 +48,30 @@ class PickerText extends Component {
 }
 
 const styles = StyleSheet.create(_.extend(base.general, {
-    pickerText: {
-        alignSelf: 'stretch',
-        paddingTop: 0,
-        paddingBottom: 0,
+    pickerItem: {
+        borderRadius: 3,
+        flexDirection: 'row',
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 5,
+        flex: 1
+    },
+    pickerIconContainer: {
+        alignItems: 'center',
+        flex: 1
+    },
+    pickerTextContainer: {
+        flex: 7
     },
     pickerIcon: {
-        position: 'absolute',
-        right: 25,
-        top: -2
     },
+    pickerText: {
+        fontFamily: Fonts.base,
+        fontSize: 14
+    }
 
 }));
 
 
-export default PickerText;
+export default connect(mapStateToProps)(PickerText);

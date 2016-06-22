@@ -25,8 +25,12 @@ function receiveEmptyMatches() {
     };
 }
 
-export function fetchMatches(playerId, limit) {
+export function fetchMatches(playerId, limit, heroId) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
+    if(heroId && heroId != 0) {
+        endpoint = endpoint + "&hero_id=" + heroId;
+    }
+    console.log(endpoint);
     return dispatch => {
         dispatch(requestMatches());
 

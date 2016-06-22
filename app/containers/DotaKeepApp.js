@@ -3,13 +3,17 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
 import Settings from './Settings';
+import MatchesSearch from './MatchesSearch';
 import Drawers from './Drawer';
 import customNavBar from '../components/NavBar';
 import deepNavBar from '../components/DeepNavBar';
+import modalNavBar from '../components/ModalNavBar';
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { BackAndroid, Text } from 'react-native';
+
+import Colors from '../themes/Colors';
 
 class DotaKeepApp extends Component {
 
@@ -27,13 +31,14 @@ class DotaKeepApp extends Component {
         });
 
         return (
-            <Router sceneStyle = {{backgroundColor: 'white'}}>
+            <Router sceneStyle = {{backgroundColor: Colors.mainBackground}}>
                 <Scene key = "root" hideNavBar = {true}>
                     <Scene key = "navDrawer" component = {Drawers} panHandler = {null}>
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandler = {null} navBar = {customNavBar}>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
                                 <Scene key = "playerSearch" component = {PlayerSearch} initial = {true} />
                                 <Scene key = "playerProfile" component = {PlayerProfile} panHandler = {null} navBar = {deepNavBar} />
+                                <Scene key = "matchesSearch" component = {MatchesSearch} panHandler = {null} direction = "vertical" navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "settingsTab" title = "Settings" navBar = {customNavBar}>
                                 <Scene key = "settings" component = {Settings} />

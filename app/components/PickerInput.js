@@ -30,10 +30,9 @@ class PickerInput extends Component {
         this.onSelect = this.onSelect.bind(this);
         this.onCancel = this.onCancel.bind(this);
         this.onPickerDone = this.onPickerDone.bind(this);
-
         this.state = {
-            selectedValue: props.selectedValue.key,
-            selectedLabel: props.selectedValue.label
+            selectedValue: props.selectedValue,
+            selectedLabel: props.selectedLabel
         }
     }
 
@@ -51,7 +50,6 @@ class PickerInput extends Component {
     }
 
     render() {
-        console.log(this.props);
         return (
             <View style = {styles.pickerWrapper}>
                 <View style = {styles.pickerContainer}>
@@ -70,9 +68,10 @@ class PickerInput extends Component {
                         showMask={true}
                         selectedValue = {this.state.selectedValue}
                         onValueChange={this.onPickerDone}
+                        itemStyle = {styles.item}
                         >
                     { this.props.items.map(function (item) {
-                        return <Picker.Item style={styles.item} label={item.localized_name} value={item.id} key={item.id} />
+                        return <Picker.Item label={item.localized_name} value={item.id} key={item.id} />
                     }) }
                   </Picker>
                 </View>
@@ -111,7 +110,7 @@ const baseStyles = _.extend(base.general, {
     },
     pickerContainer: {
         position: 'absolute',
-        bottom: 110,
+        bottom: 60,
         left: 0,
         right: 0,
         backgroundColor: '#fff',
@@ -122,10 +121,6 @@ const baseStyles = _.extend(base.general, {
         backgroundColor: '#aaa'
     },
     item: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#bbb',
-        backgroundColor: '#555',
-        color: '#fff'
     }
 
 });

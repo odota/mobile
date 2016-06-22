@@ -8,7 +8,7 @@ const colors = {
     skyDolchSecondLegend: 'rgb(255, 255, 255)',
     hyperfuseAlpha: 'rgb(160, 160, 160)',
     hyperfuseMod: 'rgb(79, 92, 97)',
-    hyperfuseLegend: 'rgb(146, 90, 160)',
+    hyperfuseLegend: 'rgb(166, 110, 180)',
     hyperfuseLegendHex: '#925AA0',
     hyperfuseLegendTranslucent: 'rgba(146, 90, 160, 0.8)',
     hyperfuseSecondLegend: 'rgb(255, 255, 255)',
