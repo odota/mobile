@@ -14,7 +14,7 @@ const colors = {
     hyperfuseSecondLegend: 'rgb(255, 255, 255)',
     doubleDamageAlpha: 'rgb(80, 110, 207)',
     doubleDamageMod: 'rgb(64, 99, 164)',
-    doubleDamageLegend: 'rgb(255, 255, 255)',
+    doubleDamageLegend: 'rgb(180, 180, 180)',
     doubleDamageLegendHex: '#ffffff',
     doubleDamageLegendTranslucent: 'rgba(255, 255, 255, 0.8)',
     doubleDamageSecondLegend: 'rgb(255, 255, 255)',
