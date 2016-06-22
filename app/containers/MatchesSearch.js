@@ -18,6 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
+import patches from '../json/patch.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -42,6 +43,7 @@ export const mapDispatchToProps = (dispatch) => ({
 
 var sortedHeroes;
 var sortedFactions;
+var sortedPatches;
 
 class MatchesSearch extends Component {
 
@@ -54,11 +56,15 @@ class MatchesSearch extends Component {
             'faction': false,
             'faction_id': -1,
             'faction_name': "None",
-            'match_limit': "30"
+            'match_limit': "30",
+            'patch': false,
+            'patch_id': -1,
+            'patch_name': "None"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
         this.onFilterPressed = this.onFilterPressed.bind(this);
+        this.constructPatchesArray = this.constructPatchesArray.bind(this);
     }
 
     componentWillMount() {
@@ -67,10 +73,13 @@ class MatchesSearch extends Component {
         sortedHeroes.unshift({"id": 0, "localized_name": "None"});
         sortedFactions = _.cloneDeep(factions);
         sortedFactions.unshift({"id": -1, "localized_name": "None"});
+        var patchesArray = _.cloneDeep(patches);
+        sortedPatches = this.constructPatchesArray(patchesArray);
+        sortedPatches.unshift({"id": -1, "localized_name": "None"});
     }
 
     onFilterPressed() {
-        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.hero_id, this.state.faction_id);
+        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.hero_id, this.state.faction_id, this.state.patch_id);
         Actions.pop();
     }
 
@@ -90,6 +99,14 @@ class MatchesSearch extends Component {
         newState[labelKey] = pickedLabel;
         newState[pickerName] = false;
         this.setState(newState);
+    }
+
+    constructPatchesArray(patchesArray) {
+        var constructedPatchesArray = [];
+        for(i = 0; i < patchesArray.length; i++) {
+            constructedPatchesArray.push({"id": i, "localized_name": patchesArray[i].name});
+        }
+        return constructedPatchesArray;
     }
 
     render() {
@@ -114,6 +131,16 @@ class MatchesSearch extends Component {
                         onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
                         onPickerCancel = {() => this.togglePicker('faction')}
                         items = {sortedFactions}
+                        />
+        }
+
+        if(this.state['patch']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.patch_id}
+                        selectedLabel = {this.state.patch_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('patch', 'patch_id', 'patch_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('patch')}
+                        items = {sortedPatches}
                         />
         }
 
@@ -174,6 +201,21 @@ class MatchesSearch extends Component {
                                 />
                         </View>
 
+                        <View style = {styles.pickerItem}>
+                            <View style = {styles.pickerTitleContainer}>
+                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Patch</Text>
+                            </View>
+                            <PickerText
+                                onPress = {() => this.togglePicker('patch')}
+                                title = {this.state.patch_name}
+                                selectedValue = {this.state.patch_id}
+                                selectedLabel = {this.state.patch_name}
+                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('patch', 'patch_id', 'patch_name', selectedValue, selectedLabel)}
+                                onPickerCancel = {() => this.togglePicker('patch')}
+                                items = {sortedPatches}
+                                />
+                        </View>
+
                     </View>
                     <TouchableOpacity  onPress = {this.onFilterPressed} style = {styles.filterContainer}>
                         <View style = {[styles.filterIconContainer, {backgroundColor: this.props.mod}]}>
@@ -227,8 +269,8 @@ const baseStyles = _.extend(base.general, {
     filterButton: {
         borderTopRightRadius: 3,
         borderBottomRightRadius: 3,
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingTop: 10,
+        paddingBottom: 10,
         paddingRight: 10,
         marginTop: 5,
         marginBottom: 5,

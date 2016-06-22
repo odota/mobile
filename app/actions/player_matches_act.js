@@ -25,8 +25,7 @@ function receiveEmptyMatches() {
     };
 }
 
-export function fetchMatches(playerId, limit, heroId, faction) {
-    console.log(faction);
+export function fetchMatches(playerId, limit, heroId, faction, patch) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
 
     if(heroId !== undefined && heroId !== 0) {
@@ -35,6 +34,10 @@ export function fetchMatches(playerId, limit, heroId, faction) {
 
     if(faction !== undefined && faction !== -1) {
         endpoint += ("&isRadiant=" + faction);
+    }
+
+    if(patch !== undefined && patch !== -1) {
+        endpoint += ("&patch=" + patch);
     }
     console.log(endpoint);
     return dispatch => {
