@@ -217,7 +217,8 @@ const baseStyles = _.extend(base.general, {
     tableValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     heroValueText: {
         fontFamily: Fonts.base,

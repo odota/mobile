@@ -25,10 +25,16 @@ function receiveEmptyMatches() {
     };
 }
 
-export function fetchMatches(playerId, limit, heroId) {
+export function fetchMatches(playerId, limit, heroId, faction) {
+    console.log(faction);
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
-    if(heroId && heroId != 0) {
-        endpoint = endpoint + "&hero_id=" + heroId;
+
+    if(heroId !== undefined && heroId !== 0) {
+        endpoint += ("&hero_id=" + heroId);
+    }
+
+    if(faction !== undefined && faction !== -1) {
+        endpoint += ("&isRadiant=" + faction);
     }
     console.log(endpoint);
     return dispatch => {

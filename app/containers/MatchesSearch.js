@@ -16,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import heroes from '../json/heroes.json';
+import factions from '../json/factions.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -36,6 +37,9 @@ export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(playerMatchesActions, dispatch)
 });
 
+var sortedHeroes;
+var sortedFactions;
+
 class MatchesSearch extends Component {
 
     constructor(props) {
@@ -43,15 +47,26 @@ class MatchesSearch extends Component {
         this.state = {
             'hero': false,
             'hero_id': 0,
-            'hero_name': 'None'
+            'hero_name': 'None',
+            'faction': false,
+            'faction_id': -1,
+            'faction_name': "None"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
         this.onFilterPressed = this.onFilterPressed.bind(this);
     }
 
+    componentWillMount() {
+        var heroesArray = _.cloneDeep(heroes.result.heroes);
+        sortedHeroes = _.sortBy(heroesArray, ['localized_name']);
+        sortedHeroes.unshift({"id": 0, "localized_name": "None"});
+        sortedFactions = _.cloneDeep(factions);
+        sortedFactions.unshift({"id": -1, "localized_name": "None"});
+    }
+
     onFilterPressed() {
-        this.props.actions.fetchMatches(this.props.contextId, 30, this.state.hero_id);
+        this.props.actions.fetchMatches(this.props.contextId, 30, this.state.hero_id, this.state.faction_id);
         Actions.pop();
     }
 
@@ -77,9 +92,7 @@ class MatchesSearch extends Component {
 
         var picker;
         console.log(this.state);
-        var heroesArray = heroes.result.heroes;
-        var sortedHeroes = _.sortBy(heroesArray, ['localized_name']);
-        sortedHeroes.unshift({"id": 0, "localized_name": "None"});
+
         if(this.state['hero']) {
             picker = <PickerInput
                         selectedValue = {this.state.hero_id}
@@ -90,10 +103,21 @@ class MatchesSearch extends Component {
                         />
         }
 
+        if(this.state['faction']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.faction_id}
+                        selectedLabel = {this.state.faction_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('faction')}
+                        items = {sortedFactions}
+                        />
+        }
+
         return (
             <ScrollView>
                 <View style = {styles.container}>
                     <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>
+
                         <View style = {styles.pickerItem}>
                             <View style = {styles.pickerTitleContainer}>
                                 <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Hero</Text>
@@ -108,6 +132,22 @@ class MatchesSearch extends Component {
                                 items = {sortedHeroes}
                                 />
                         </View>
+
+                        <View style = {styles.pickerItem}>
+                            <View style = {styles.pickerTitleContainer}>
+                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Faction</Text>
+                            </View>
+                            <PickerText
+                                onPress = {() => this.togglePicker('faction')}
+                                title = {this.state.faction_name}
+                                selectedValue = {this.state.faction_id}
+                                selectedLabel = {this.state.faction_name}
+                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
+                                onPickerCancel = {() => this.togglePicker('faction')}
+                                items = {sortedFactions}
+                                />
+                        </View>
+
                     </View>
                     <TouchableOpacity  onPress = {this.onFilterPressed} style = {styles.filterContainer}>
                         <View style = {[styles.filterIconContainer, {backgroundColor: this.props.mod}]}>
@@ -148,7 +188,9 @@ const baseStyles = _.extend(base.general, {
         fontWeight: 'bold'
     },
     pickerItem: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginTop: 10,
+        marginBottom: 10
     },
     filterContainer: {
         flexDirection: 'row',
