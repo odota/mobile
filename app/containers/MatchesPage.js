@@ -81,7 +81,7 @@ class MatchesPage extends Component {
                                 <Text style = {[styles.searchButtonText, {color: this.props.legend}]}>Search Matches</Text>
                             </View>
                         </TouchableOpacity>
-                    <MatchesCard matches = {this.props.matches.matches} />
+                    <MatchesCard matches = {this.props.matches.matches} default = {false} />
                 </ScrollView>
             )
         }

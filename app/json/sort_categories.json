@@ -1,0 +1,118 @@
+[
+    {
+        "id": "kills",
+        "localized_name": "Kills"
+    },
+    {
+        "id": "deaths",
+        "localized_name": "Deaths"
+    },
+    {
+        "id": "assists",
+        "localized_name": "Assists"
+    },
+    {
+        "id": "kda",
+        "localized_name": "KDA"
+    },
+    {
+        "id": "gold_per_min",
+        "localized_name": "Gold Per Minute"
+    },
+    {
+        "id": "xp_per_min",
+        "localized_name": "XP Per Minute"
+    },
+    {
+        "id": "last_hits",
+        "localized_name": "Last Hits"
+    },
+    {
+        "id": "denies",
+        "localized_name": "Denies"
+    },
+    {
+        "id": "lane_efficiency_pct",
+        "localized_name": "Lane Efficiency Percentage"
+    },
+    {
+        "id": "duration",
+        "localized_name": "Duration"
+    },
+    {
+        "id": "level",
+        "localized_name": "Level"
+    },
+    {
+        "id": "hero_damage",
+        "localized_name": "Hero Damage"
+    },
+    {
+        "id": "tower_damage",
+        "localized_name": "Tower Damage"
+    },
+    {
+        "id": "hero_healing",
+        "localized_name": "Hero Healing"
+    },
+    {
+        "id": "stuns",
+        "localized_name": "Stuns"
+    },
+    {
+        "id": "tower_kills",
+        "localized_name": "Tower Kills"
+    },
+    {
+        "id": "neutral_kills",
+        "localized_name": "Neutral Kills"
+    },
+    {
+        "id": "courier_kills",
+        "localized_name": "Courier Kills"
+    },
+    {
+        "id": "purchase_tpscroll",
+        "localized_name": "Purchase TP Scroll"
+    },
+    {
+        "id": "purchase_ward_observer",
+        "localized_name": "Purchase Observer Ward"
+    },
+    {
+        "id": "purchase_ward_sentry",
+        "localized_name": "Purchase Sentry Ward"
+    },
+    {
+        "id": "purchase_gem",
+        "localized_name": "Purchase Gem"
+    },
+    {
+        "id": "purchase_rapier",
+        "localized_name": "Purchase Rapier"
+    },
+    {
+        "id": "pings",
+        "localized_name": "Pings"
+    },
+    {
+        "id": "throw",
+        "localized_name": "Throw"
+    },
+    {
+        "id": "comeback",
+        "localized_name": "Comeback"
+    },
+    {
+        "id": "stomp",
+        "localized_name": "Stomp"
+    },
+    {
+        "id": "loss",
+        "localized_name": "Loss"
+    },
+    {
+        "id": "actions_per_min",
+        "localized_name": "Actions Per Min"
+    },
+]

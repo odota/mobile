@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    sortedBy: state.playerMatchesState.sortedBy
 });
 
 class MatchesCard extends Component {
@@ -42,6 +43,159 @@ class MatchesCard extends Component {
         super(props);
         this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
+        this.getHeader = this.getHeader.bind(this);
+        this.getValue = this.getValue.bind(this);
+        this.getFriendlyDuration = this.getFriendlyDuration.bind(this);
+    }
+
+    getHeader() {
+        var dynamicHeader;
+        if(this.props.default) {
+            dynamicHeader = "K/D/A"
+        } else {
+            if(this.props.sortedBy == "match_id") {
+                dynamicHeader = "K/D/A";
+            } else if (this.props.sortedBy == "kills") {
+                dynamicHeader = "Kills";
+            } else if (this.props.sortedBy == "deaths") {
+                dynamicHeader = "Deaths";
+            } else if (this.props.sortedBy == "assists") {
+                dynamicHeader = "Assits";
+            } else if (this.props.sortedBy == "kda") {
+                dynamicHeader = "K/D/A";
+            } else if (this.props.sortedBy == "gold_per_min") {
+                dynamicHeader = "GPM";
+            } else if (this.props.sortedBy == "xp_per_min") {
+                dynamicHeader = "XPM";
+            } else if (this.props.sortedBy == "last_hits") {
+                dynamicHeader = "LH";
+            } else if (this.props.sortedBy == "denies") {
+                dynamicHeader = "Denies";
+            } else if (this.props.sortedBy == "lane_efficiency_pct") {
+                dynamicHeader = "Lane Efficiency Percentage";
+            } else if (this.props.sortedBy == "duration") {
+                dynamicHeader = "Duration";
+            } else if (this.props.sortedBy == "level") {
+                dynamicHeader = "Level";
+            } else if (this.props.sortedBy == "hero_damage") {
+                dynamicHeader = "HD";
+            } else if (this.props.sortedBy == "tower_damage") {
+                dynamicHeader = "TD";
+            } else if (this.props.sortedBy == "hero_healing") {
+                dynamicHeader = "HH";
+            } else if (this.props.sortedBy == "stuns") {
+                dynamicHeader = "Stuns";
+            } else if (this.props.sortedBy == "tower_kills") {
+                dynamicHeader = "Tower Kills";
+            } else if (this.props.sortedBy == "neutral_kills") {
+                dynamicHeader = "Neutral Kills";
+            } else if (this.props.sortedBy == "courier_kills") {
+                dynamicHeader = "Courier Kills";
+            } else if (this.props.sortedBy == "purchase_tpscroll") {
+                dynamicHeader = "TP Scroll Purchased";
+            } else if (this.props.sortedBy == "purchase_ward_observer") {
+                dynamicHeader = "Observer Purchased";
+            } else if (this.props.sortedBy == "purchase_ward_sentry") {
+                dynamicHeader = "Sentry Purchased";
+            } else if (this.props.sortedBy == "purchase_gem") {
+                dynamicHeader = "Gem Purchased";
+            } else if (this.props.sortedBy == "purchase_rapier") {
+                dynamicHeader = "Rapier Purchased";
+            } else if (this.props.sortedBy == "pings") {
+                dynamicHeader = "Pings";
+            } else if (this.props.sortedBy == "throw") {
+                dynamicHeader = "Throw";
+            } else if (this.props.sortedBy == "comeback") {
+                dynamicHeader = "Comeback";
+            } else if (this.props.sortedBy == "stomp") {
+                dynamicHeader = "Stomp";
+            } else if (this.props.sortedBy == "loss") {
+                dynamicHeader = "Loss";
+            } else if (this.props.sortedBy == "actions_per_min") {
+                dynamicHeader = "APM";
+            }
+        }
+        return dynamicHeader;
+    }
+
+    getValue(rowData) {
+        var dynamicValue;
+        if(this.props.default) {
+            dynamicValue = rowData.kills + "/" + rowData.deaths + "/" + rowData.assists;
+         } else {
+            if(this.props.sortedBy == "match_id") {
+                dynamicValue = rowData.kills + "/" + rowData.deaths + "/" + rowData.assists;
+            } else if (this.props.sortedBy == "kills") {
+                dynamicValue = rowData.kills;
+            } else if (this.props.sortedBy == "deaths") {
+                dynamicValue = rowData.deaths;
+            } else if (this.props.sortedBy == "assists") {
+                dynamicValue = rowData.assists;
+            } else if (this.props.sortedBy == "kda") {
+                dynamicValue = rowData.kills + "/" + rowData.deaths + "/" + rowData.assists
+            } else if (this.props.sortedBy == "gold_per_min") {
+                dynamicValue = rowData.gold_per_min;
+            } else if (this.props.sortedBy == "xp_per_min") {
+                dynamicValue = rowData.xp_per_min;
+            } else if (this.props.sortedBy == "last_hits") {
+                dynamicValue = rowData.last_hits;
+            } else if (this.props.sortedBy == "denies") {
+                dynamicValue = rowData.denies;
+            } else if (this.props.sortedBy == "lane_efficiency_pct") {
+                dynamicValue = rowData.lane_efficiency_pct;
+            } else if (this.props.sortedBy == "duration") {
+                dynamicValue = this.getFriendlyDuration(rowData.duration);
+            } else if (this.props.sortedBy == "level") {
+                dynamicValue = rowData.level;
+            } else if (this.props.sortedBy == "hero_damage") {
+                dynamicValue = rowData.hero_damage;
+            } else if (this.props.sortedBy == "tower_damage") {
+                dynamicValue = rowData.tower_damage;
+            } else if (this.props.sortedBy == "hero_healing") {
+                dynamicValue = rowData.hero_healing;
+            } else if (this.props.sortedBy == "stuns") {
+                dynamicValue = rowData.stuns;
+            } else if (this.props.sortedBy == "tower_kills") {
+                dynamicValue = rowData.tower_kills;
+            } else if (this.props.sortedBy == "neutral_kills") {
+                dynamicValue = rowData.neutral_kills;
+            } else if (this.props.sortedBy == "courier_kills") {
+                dynamicValue = rowData.courier_kills;
+            } else if (this.props.sortedBy == "purchase_tpscroll") {
+                dynamicValue = rowData.purchase_tpscroll;
+            } else if (this.props.sortedBy == "purchase_ward_observer") {
+                dynamicValue = rowData.purchase_ward_observer;
+            } else if (this.props.sortedBy == "purchase_ward_sentry") {
+                dynamicValue = rowData.purchase_ward_sentry;
+            } else if (this.props.sortedBy == "purchase_gem") {
+                dynamicValue = rowData.purchase_gem;
+            } else if (this.props.sortedBy == "purchase_rapier") {
+                dynamicValue = rowData.purchase_rapier;
+            } else if (this.props.sortedBy == "pings") {
+                dynamicValue = rowData.pings;
+            } else if (this.props.sortedBy == "throw") {
+                dynamicValue = rowData.throw;
+            } else if (this.props.sortedBy == "comeback") {
+                dynamicValue = rowData.comeback;
+            } else if (this.props.sortedBy == "stomp") {
+                dynamicValue = rowData.stomp;
+            } else if (this.props.sortedBy == "loss") {
+                dynamicValue = rowData.loss;
+            } else if (this.props.sortedBy == "actions_per_min") {
+                dynamicValue = rowData.actions_per_min;
+            }
+        }
+        return dynamicValue;
+    }
+
+    getFriendlyDuration(duration) {
+        var minutes = Math.floor(duration/60);
+        var seconds = duration - (minutes * 60);
+        if(seconds < 10) {
+            seconds = '0' + seconds;
+        }
+        var friendlyDuration = minutes + ":" + seconds;
+        return friendlyDuration;
     }
 
     renderRow(rowData, i , j) {
@@ -71,15 +225,12 @@ class MatchesCard extends Component {
             rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
         }
         var staticUri = getHeroImage(rowData.hero_id);
-        var minutes = Math.floor(rowData.duration/60);
-        var seconds = rowData.duration - (minutes * 60);
-        if(seconds < 10) {
-            seconds = '0' + seconds;
-        }
+        var friendlyDuration = this.getFriendlyDuration(rowData.duration);
         var endTime = rowData.start_time + rowData.duration;
         var unixEndTime = endTime * 1000;
         var now = moment();
         var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
+        var dynamicValue = this.getValue(rowData);
         return (
             <TouchableOpacity style = {{flexDirection: 'row', flex: 1}}>
                 <View style = {rowContainer}>
@@ -96,10 +247,10 @@ class MatchesCard extends Component {
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
                     </View>
                     <View style = {styles.cell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{minutes}:{seconds}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyDuration}</Text>
                     </View>
                     <View style = {styles.doubleCell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{dynamicValue}</Text>
                     </View>
 
                 </View>
@@ -110,6 +261,10 @@ class MatchesCard extends Component {
 
     render() {
         if(this.props.matches) {
+            console.log(this.props.sortedBy);
+            console.log(this.props.default);
+            var dynamicHeader = this.getHeader();
+
             return (
                 <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
@@ -135,7 +290,7 @@ class MatchesCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Length</Text>
                         </View>
                         <View style = {styles.doubleTableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
+                            <Text numberOfLines = {1} style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>{dynamicHeader}</Text>
                         </View>
                         <View style = {{width: 5}} />
                     </View>
@@ -212,7 +367,8 @@ const baseStyles = _.extend(base.general, {
     tableHeaderText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     tableValueText: {
         fontFamily: Fonts.base,

@@ -19,6 +19,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
 import patches from '../json/patch.json';
+import sortCategories from '../json/sort_categories.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -44,6 +45,7 @@ export const mapDispatchToProps = (dispatch) => ({
 var sortedHeroes;
 var sortedFactions;
 var sortedPatches;
+var sortedCategories;
 
 class MatchesSearch extends Component {
 
@@ -59,7 +61,10 @@ class MatchesSearch extends Component {
             'match_limit': "30",
             'patch': false,
             'patch_id': -1,
-            'patch_name': "None"
+            'patch_name': "None",
+            'sort_category': false,
+            'sort_category_id': "match_id",
+            'sort_category_name': "Match ID (default)"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
@@ -76,10 +81,13 @@ class MatchesSearch extends Component {
         var patchesArray = _.cloneDeep(patches);
         sortedPatches = this.constructPatchesArray(patchesArray);
         sortedPatches.unshift({"id": -1, "localized_name": "None"});
+        sortedCategories = _.cloneDeep(sortCategories);
+        sortedCategories.unshift({"id": "match_id", localized_name: "Match ID (default)"});
     }
 
     onFilterPressed() {
-        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.hero_id, this.state.faction_id, this.state.patch_id);
+        this.props.actions.changeSortedby(this.state.sort_category_id);
+        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.sort_category_id, this.state.hero_id, this.state.faction_id, this.state.patch_id);
         Actions.pop();
     }
 
@@ -144,6 +152,16 @@ class MatchesSearch extends Component {
                         />
         }
 
+        if(this.state['sort_category']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.sort_category_id}
+                        selectedLabel = {this.state.sort_category_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('sort_category', 'sort_category_id', 'sort_category_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('sort_category')}
+                        items = {sortedCategories}
+                        />
+        }
+
         return (
             <ScrollView>
                 <View style = {styles.container}>
@@ -169,6 +187,21 @@ class MatchesSearch extends Component {
                                         match_limit: ""
                                     });
                                 }}/>
+                        </View>
+
+                        <View style = {styles.pickerItem}>
+                            <View style = {styles.pickerTitleContainer}>
+                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Sort By</Text>
+                            </View>
+                            <PickerText
+                                onPress = {() => this.togglePicker('sort_category')}
+                                title = {this.state.sort_category_name}
+                                selectedValue = {this.state.sort_category_id}
+                                selectedLabel = {this.state.sort_category_name}
+                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('sort_category', 'sort_category_id', 'sort_category_name', selectedValue, selectedLabel)}
+                                onPickerCancel = {() => this.togglePicker('sort_category')}
+                                items = {sortedCategories}
+                                />
                         </View>
 
                         <View style = {styles.pickerItem}>

@@ -3,7 +3,8 @@ import { fetchAPI } from '../utils/fetch';
 export const types = {
     REQUEST_MATCHES: 'REQUEST_MATCHES',
     RECEIVE_MATCHES: 'RECEIVE_MATCHES',
-    RECEIVE_EMPTY_MATCHES: 'RECEIVE_EMPTY_MATCHES'
+    RECEIVE_EMPTY_MATCHES: 'RECEIVE_EMPTY_MATCHES',
+    CHANGE_SORTED_BY: 'CHANGE_SORTED_BY'
 }
 
 function requestMatches() {
@@ -25,8 +26,19 @@ function receiveEmptyMatches() {
     };
 }
 
-export function fetchMatches(playerId, limit, heroId, faction, patch) {
+export function changeSortedby(sortedBy) {
+    return {
+        type: types.CHANGE_SORTED_BY,
+        sortedBy
+    };
+}
+
+export function fetchMatches(playerId, limit, sortCategory, heroId, faction, patch) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
+
+    if(sortCategory !== undefined && sortCategory !== "match_id") {
+        endpoint += ("&desc=" + sortCategory);
+    }
 
     if(heroId !== undefined && heroId !== 0) {
         endpoint += ("&hero_id=" + heroId);

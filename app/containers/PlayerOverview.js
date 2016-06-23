@@ -66,7 +66,7 @@ class PlayerOverview extends Component {
                 <ScrollView>
                     <ProfileCard info = {this.props.overview} />
                     <HeroesCard heroes = {this.props.overview.heroes_list} />
-                    <MatchesCard matches = {this.props.overview.matches} />
+                    <MatchesCard matches = {this.props.overview.matches} default = {true} />
                 </ScrollView>
             )
         }
