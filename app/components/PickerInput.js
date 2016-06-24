@@ -118,7 +118,8 @@ const baseStyles = _.extend(base.general, {
         borderTopColor: '#bbb'
     },
     picker: {
-        backgroundColor: '#aaa'
+        backgroundColor: '#aaa',
+        flex: 1
     },
     item: {
     }

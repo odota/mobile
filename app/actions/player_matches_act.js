@@ -33,7 +33,7 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function fetchMatches(playerId, limit, sortCategory, heroId, faction, patch) {
+export function fetchMatches(playerId, limit, sortCategory, heroId, faction, gameMode, patch) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
 
     if(sortCategory !== undefined && sortCategory !== "match_id") {
@@ -50,6 +50,10 @@ export function fetchMatches(playerId, limit, sortCategory, heroId, faction, pat
 
     if(patch !== undefined && patch !== -1) {
         endpoint += ("&patch=" + patch);
+    }
+
+    if(gameMode !== undefined && gameMode !== -1) {
+        endpoint += ("&game_mode=" + gameMode);
     }
     console.log(endpoint);
     return dispatch => {

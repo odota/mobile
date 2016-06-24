@@ -20,6 +20,7 @@ import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
 import patches from '../json/patch.json';
 import sortCategories from '../json/sort_categories.json';
+import gameModes from '../json/game_mode.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -46,6 +47,7 @@ var sortedHeroes;
 var sortedFactions;
 var sortedPatches;
 var sortedCategories;
+var sortedGameModes;
 
 class MatchesSearch extends Component {
 
@@ -64,12 +66,16 @@ class MatchesSearch extends Component {
             'patch_name': "None",
             'sort_category': false,
             'sort_category_id': "match_id",
-            'sort_category_name': "Match ID (default)"
+            'sort_category_name': "Match ID (default)",
+            'game_mode': false,
+            'game_mode_id': -1,
+            'game_mode_name': 'None'
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
         this.onFilterPressed = this.onFilterPressed.bind(this);
         this.constructPatchesArray = this.constructPatchesArray.bind(this);
+        this.constructGameModesArray = this.constructGameModesArray.bind(this);
     }
 
     componentWillMount() {
@@ -83,11 +89,17 @@ class MatchesSearch extends Component {
         sortedPatches.unshift({"id": -1, "localized_name": "None"});
         sortedCategories = _.cloneDeep(sortCategories);
         sortedCategories.unshift({"id": "match_id", localized_name: "Match ID (default)"});
+        var gameModesArray = _.cloneDeep(gameModes);
+        sortedGameModes = this.constructGameModesArray(gameModesArray);
+        sortedGameModes.unshift({"id": -1, "localized_name": "None"});
     }
 
     onFilterPressed() {
         this.props.actions.changeSortedby(this.state.sort_category_id);
-        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, this.state.sort_category_id, this.state.hero_id, this.state.faction_id, this.state.patch_id);
+        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit,
+                                        this.state.sort_category_id, this.state.hero_id,
+                                        this.state.faction_id, this.state.game_mode_id,
+                                        this.state.patch_id);
         Actions.pop();
     }
 
@@ -115,6 +127,14 @@ class MatchesSearch extends Component {
             constructedPatchesArray.push({"id": i, "localized_name": patchesArray[i].name});
         }
         return constructedPatchesArray;
+    }
+
+    constructGameModesArray(gameModesArray) {
+        var constructedGameModesArray = [];
+        for(var gameMode in gameModesArray) {
+            constructedGameModesArray.push({"id": gameModesArray[gameMode].id, "localized_name": gameModesArray[gameMode].name});
+        }
+        return constructedGameModesArray;
     }
 
     render() {
@@ -162,105 +182,135 @@ class MatchesSearch extends Component {
                         />
         }
 
+        if(this.state['game_mode']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.game_mode_id}
+                        selectedLabel = {this.state.game_mode_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('game_mode', 'game_mode_id', 'game_mode_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('game_mode')}
+                        items = {sortedGameModes}
+                        />
+        }
+
         return (
-            <ScrollView>
-                <View style = {styles.container}>
-                    <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>
+            <View style = {styles.container}>
+                <ScrollView>
 
-                        <View style = {styles.pickerItem}>
-                            <View style = {styles.pickerTitleContainer}>
-                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Number of matches</Text>
+                        <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>
+
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Number of matches</Text>
+                                </View>
+                                <TextInput
+                                    value = {this.state.match_limit}
+                                    style = {[styles.limitInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
+                                    autoCorrect = {false}
+                                    keyboardType = 'numeric'
+                                    selectionColor = 'white'
+                                    onChange = {(event) => {
+                                        this.setState({
+                                            match_limit: event.nativeEvent.text
+                                        });
+                                    }}
+                                    onFocus = {() => {
+                                        this.setState({
+                                            match_limit: ""
+                                        });
+                                    }}/>
                             </View>
-                            <TextInput
-                                value = {this.state.match_limit}
-                                style = {[styles.limitInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
-                                autoCorrect = {false}
-                                keyboardType = 'numeric'
-                                selectionColor = 'white'
-                                onChange = {(event) => {
-                                    this.setState({
-                                        match_limit: event.nativeEvent.text
-                                    });
-                                }}
-                                onFocus = {() => {
-                                    this.setState({
-                                        match_limit: ""
-                                    });
-                                }}/>
-                        </View>
 
-                        <View style = {styles.pickerItem}>
-                            <View style = {styles.pickerTitleContainer}>
-                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Sort By</Text>
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Sort By</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('sort_category')}
+                                    title = {this.state.sort_category_name}
+                                    selectedValue = {this.state.sort_category_id}
+                                    selectedLabel = {this.state.sort_category_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('sort_category', 'sort_category_id', 'sort_category_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('sort_category')}
+                                    items = {sortedCategories}
+                                    />
                             </View>
-                            <PickerText
-                                onPress = {() => this.togglePicker('sort_category')}
-                                title = {this.state.sort_category_name}
-                                selectedValue = {this.state.sort_category_id}
-                                selectedLabel = {this.state.sort_category_name}
-                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('sort_category', 'sort_category_id', 'sort_category_name', selectedValue, selectedLabel)}
-                                onPickerCancel = {() => this.togglePicker('sort_category')}
-                                items = {sortedCategories}
-                                />
-                        </View>
 
-                        <View style = {styles.pickerItem}>
-                            <View style = {styles.pickerTitleContainer}>
-                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Hero</Text>
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Hero</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('hero')}
+                                    title = {this.state.hero_name}
+                                    selectedValue = {this.state.hero_id}
+                                    selectedLabel = {this.state.hero_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('hero')}
+                                    items = {sortedHeroes}
+                                    />
                             </View>
-                            <PickerText
-                                onPress = {() => this.togglePicker('hero')}
-                                title = {this.state.hero_name}
-                                selectedValue = {this.state.hero_id}
-                                selectedLabel = {this.state.hero_name}
-                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('hero', 'hero_id', 'hero_name', selectedValue, selectedLabel)}
-                                onPickerCancel = {() => this.togglePicker('hero')}
-                                items = {sortedHeroes}
-                                />
-                        </View>
 
-                        <View style = {styles.pickerItem}>
-                            <View style = {styles.pickerTitleContainer}>
-                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Faction</Text>
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Faction</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('faction')}
+                                    title = {this.state.faction_name}
+                                    selectedValue = {this.state.faction_id}
+                                    selectedLabel = {this.state.faction_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('faction')}
+                                    items = {sortedFactions}
+                                    />
                             </View>
-                            <PickerText
-                                onPress = {() => this.togglePicker('faction')}
-                                title = {this.state.faction_name}
-                                selectedValue = {this.state.faction_id}
-                                selectedLabel = {this.state.faction_name}
-                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
-                                onPickerCancel = {() => this.togglePicker('faction')}
-                                items = {sortedFactions}
-                                />
-                        </View>
 
-                        <View style = {styles.pickerItem}>
-                            <View style = {styles.pickerTitleContainer}>
-                                <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Patch</Text>
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Game Mode</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('game_mode')}
+                                    title = {this.state.game_mode_name}
+                                    selectedValue = {this.state.game_mode_id}
+                                    selectedLabel = {this.state.game_mode_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('game_mode', 'game_mode_id', 'game_mode_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('game_mode')}
+                                    items = {sortedGameModes}
+                                    />
                             </View>
-                            <PickerText
-                                onPress = {() => this.togglePicker('patch')}
-                                title = {this.state.patch_name}
-                                selectedValue = {this.state.patch_id}
-                                selectedLabel = {this.state.patch_name}
-                                onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('patch', 'patch_id', 'patch_name', selectedValue, selectedLabel)}
-                                onPickerCancel = {() => this.togglePicker('patch')}
-                                items = {sortedPatches}
-                                />
-                        </View>
 
-                    </View>
-                    <TouchableOpacity  onPress = {this.onFilterPressed} style = {styles.filterContainer}>
-                        <View style = {[styles.filterIconContainer, {backgroundColor: this.props.mod}]}>
-                            <FontAwesome name = "filter" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Patch</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('patch')}
+                                    title = {this.state.patch_name}
+                                    selectedValue = {this.state.patch_id}
+                                    selectedLabel = {this.state.patch_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('patch', 'patch_id', 'patch_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('patch')}
+                                    items = {sortedPatches}
+                                    />
+                            </View>
+
+
+
                         </View>
-                        <View style = {[styles.filterButton, {backgroundColor: this.props.mod}]}>
-                            <Text style = {[styles.filterButtonText, {color: this.props.legend}]}>Filter Matches</Text>
-                        </View>
-                    </TouchableOpacity>
-                    {picker}
-                </View>
-            </ScrollView>
+                        <TouchableOpacity  onPress = {this.onFilterPressed} style = {styles.filterContainer}>
+                            <View style = {[styles.filterIconContainer, {backgroundColor: this.props.mod}]}>
+                                <FontAwesome name = "filter" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            </View>
+                            <View style = {[styles.filterButton, {backgroundColor: this.props.mod}]}>
+                                <Text style = {[styles.filterButtonText, {color: this.props.legend}]}>Filter Matches</Text>
+                            </View>
+                        </TouchableOpacity>
+
+
+                </ScrollView>
+                {picker}
+            </View>
 
         )
 
