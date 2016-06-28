@@ -95,6 +95,9 @@ class MatchesSearch extends Component {
     }
 
     onFilterPressed() {
+
+        // TODO: Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
+
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
         this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,

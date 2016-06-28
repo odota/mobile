@@ -58,6 +58,7 @@ class MatchesPage extends Component {
 
         var content;
 
+        // TODO: Remove this once limit is implemented on the API
         // Only load the top 30 matches. This is small patch before limit is implemented on the API
         var trimmedMatches = [];
         for(i = 0; i < 30; i++) {
