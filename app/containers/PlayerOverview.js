@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as playerOverviewActions from '../actions/player_overview_act';
+import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
 import Spinner from 'react-native-spinkit';
@@ -33,7 +34,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(playerOverviewActions, dispatch)
+    actions: bindActionCreators({...playerOverviewActions, ...playerMatchesActions}, dispatch)
 });
 
 class PlayerOverview extends Component {
@@ -65,8 +66,6 @@ class PlayerOverview extends Component {
             content = (
                 <ScrollView>
                     <ProfileCard info = {this.props.overview} />
-                    <HeroesCard heroes = {this.props.overview.heroes_list} />
-                    <MatchesCard matches = {this.props.overview.matches} default = {true} />
                 </ScrollView>
             )
         }

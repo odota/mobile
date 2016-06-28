@@ -199,70 +199,73 @@ class MatchesCard extends Component {
     }
 
     renderRow(rowData, i , j) {
-        var rowContainer;
-        var team;
-        var result;
-        if(rowData.player_slot > 127) {
-            team = 'Dire';
-        } else {
-            team = 'Radiant';
-        }
-        if(team == 'Radiant' && rowData.radiant_win == true) {
-            result = 'W';
-        } else if (team == 'Dire' && rowData.radiant_win == false){
-            result = 'W';
-        } else {
-            result = 'L';
-        }
-        if(result == 'W') {
-            indicatorColor = Colors.win;
-        } else {
-            indicatorColor = Colors.lose;
-        }
-        if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
-        } else {
-            rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
-        }
-        var staticUri = getHeroImage(rowData.hero_id);
-        var friendlyDuration = this.getFriendlyDuration(rowData.duration);
-        var endTime = rowData.start_time + rowData.duration;
-        var unixEndTime = endTime * 1000;
-        var now = moment();
-        var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
-        var dynamicValue = this.getValue(rowData);
-        return (
-            <TouchableOpacity style = {{flexDirection: 'row', flex: 1}}>
-                <View style = {rowContainer}>
-                    <View style = {{flex: 2,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        marginLeft: -5}}>
-                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
-                    </View>
-                    <View style = {styles.cell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{gameMode[rowData.game_mode].name}</Text>
-                    </View>
-                    <View style = {styles.cell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
-                    </View>
-                    <View style = {styles.cell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyDuration}</Text>
-                    </View>
-                    <View style = {styles.doubleCell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{dynamicValue}</Text>
-                    </View>
+        if(rowData) {
+            var rowContainer;
+            var team;
+            var result;
+            if(rowData.player_slot > 127) {
+                team = 'Dire';
+            } else {
+                team = 'Radiant';
+            }
+            if(team == 'Radiant' && rowData.radiant_win == true) {
+                result = 'W';
+            } else if (team == 'Dire' && rowData.radiant_win == false){
+                result = 'W';
+            } else {
+                result = 'L';
+            }
+            if(result == 'W') {
+                indicatorColor = Colors.win;
+            } else {
+                indicatorColor = Colors.lose;
+            }
+            if((parseInt(j)+1) % 2 == 0) {
+                rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
+            } else {
+                rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
+            }
+            var staticUri = getHeroImage(rowData.hero_id);
+            var friendlyDuration = this.getFriendlyDuration(rowData.duration);
+            var endTime = rowData.start_time + rowData.duration;
+            var unixEndTime = endTime * 1000;
+            var now = moment();
+            var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
+            var dynamicValue = this.getValue(rowData);
+            return (
+                <TouchableOpacity style = {{flexDirection: 'row', flex: 1}}>
+                    <View style = {rowContainer}>
+                        <View style = {{flex: 2,
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            marginLeft: -5}}>
+                            <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                        </View>
+                        <View style = {styles.cell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{gameMode[rowData.game_mode].name}</Text>
+                        </View>
+                        <View style = {styles.cell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
+                        </View>
+                        <View style = {styles.cell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyDuration}</Text>
+                        </View>
+                        <View style = {styles.doubleCell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{dynamicValue}</Text>
+                        </View>
 
-                </View>
-                <View style = {{width: 5, backgroundColor: indicatorColor}} />
-            </TouchableOpacity>
-        )
+                    </View>
+                    <View style = {{width: 5, backgroundColor: indicatorColor}} />
+                </TouchableOpacity>
+            )
+        } else {
+            return <View />;
+        }
+
     }
 
     render() {
         if(this.props.matches) {
-            console.log(this.props.sortedBy);
-            console.log(this.props.default);
             var dynamicHeader = this.getHeader();
 
             return (
