@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "localized_name": "Safe"
+    },
+    {
+        "id": 2,
+        "localized_name": "Mid"
+    },
+    {
+        "id": 3,
+        "localized_name": "Off"
+    },
+    {
+        "id": 4,
+        "localized_name": "Jungle"
+    }
+]
