@@ -23,6 +23,7 @@ import patches from '../json/patch.json';
 import lanes from '../json/lanes.json';
 import sortCategories from '../json/sort_categories.json';
 import gameModes from '../json/game_mode.json';
+import lobbyTypes from '../json/lobby_type.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -52,15 +53,16 @@ var sortedCategories;
 var sortedGameModes;
 var sortedResults;
 var sortedLanes;
+var sortedLobbyTypes;
 
 class MatchesSearch extends Component {
 
 
-    // #DONE:0 Filter by lane
-    // TODO:20 Filter by lobby type
+    // #DONE:10 Filter by lane
+    // DONE:0 Filter by lobby type
     // TODO:0 Filter by date
-    // TODO:30 Filter by region
-    // TODO:40 Filter by team Heroes
+    // TODO:20 Filter by region
+    // TODO:30 Filter by team Heroes
     // TODO:10 Filter by enemy Heroes
 
     constructor(props) {
@@ -87,13 +89,17 @@ class MatchesSearch extends Component {
             'result_name': 'None',
             'lane': false,
             'lane_id': -1,
-            'lane_name': 'None'
+            'lane_name': 'None',
+            'lobby_type': false,
+            'lobby_type_id': -2,
+            'lobby_type_name': 'None'
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
         this.onFilterPressed = this.onFilterPressed.bind(this);
         this.constructPatchesArray = this.constructPatchesArray.bind(this);
         this.constructGameModesArray = this.constructGameModesArray.bind(this);
+        this.constructLobbyTypesArray = this.constructLobbyTypesArray.bind(this);
     }
 
     componentWillMount() {
@@ -114,18 +120,21 @@ class MatchesSearch extends Component {
         sortedResults.unshift({"id": -1, "localized_name": "None"});
         sortedLanes = _.cloneDeep(lanes);
         sortedLanes.unshift({"id": -1, "localized_name": "None"});
+        var lobbyTypesArray = _.cloneDeep(lobbyTypes);
+        sortedLobbyTypes = this.constructLobbyTypesArray(lobbyTypesArray);
+        sortedLobbyTypes.unshift({"id": -2, "localized_name": "None"});
     }
 
     onFilterPressed() {
 
-        // TODO:50 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
+        // TODO:40 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
 
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
         this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
                                         this.state.sort_category_id, this.state.hero_id,
                                         this.state.result_id, this.state.faction_id, this.state.game_mode_id,
-                                        this.state.lane_id, this.state.patch_id);
+                                        this.state.lane_id, this.state.lobby_type_id, this.state.patch_id);
         Actions.pop();
     }
 
@@ -163,11 +172,18 @@ class MatchesSearch extends Component {
         return constructedGameModesArray;
     }
 
+    constructLobbyTypesArray(lobbyTypesArray) {
+        var constructedLobbyTypesArray = [];
+        for(var lobbyType in lobbyTypesArray) {
+            constructedLobbyTypesArray.push({"id": lobbyTypesArray[lobbyType].id, "localized_name": lobbyTypesArray[lobbyType].name});
+        }
+        return constructedLobbyTypesArray;
+    }
+
     render() {
 
         var picker;
         console.log(this.state);
-
         if(this.state['hero']) {
             picker = <PickerInput
                         selectedValue = {this.state.hero_id}
@@ -235,6 +251,16 @@ class MatchesSearch extends Component {
                         onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('lane', 'lane_id', 'lane_name', selectedValue, selectedLabel)}
                         onPickerCancel = {() => this.togglePicker('lane')}
                         items = {sortedLanes}
+                        />
+        }
+
+        if(this.state['lobby_type']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.lobby_type_id}
+                        selectedLabel = {this.state.lobby_type_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('lobby_type', 'lobby_type_id', 'lobby_type_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('lobby_type')}
+                        items = {sortedLobbyTypes}
                         />
         }
 
@@ -368,6 +394,21 @@ class MatchesSearch extends Component {
                                     onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('patch', 'patch_id', 'patch_name', selectedValue, selectedLabel)}
                                     onPickerCancel = {() => this.togglePicker('patch')}
                                     items = {sortedPatches}
+                                    />
+                            </View>
+
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Lobby Type</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('lobby_type')}
+                                    title = {this.state.lobby_type_name}
+                                    selectedValue = {this.state.lobby_type_id}
+                                    selectedLabel = {this.state.lobby_type_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('lobby_type', 'lobby_type_id', 'lobby_type_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('lobby_type')}
+                                    items = {sortedLobbyTypes}
                                     />
                             </View>
 
