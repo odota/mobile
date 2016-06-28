@@ -47,7 +47,7 @@ class ProfileCard extends Component {
 
     render() {
         var info = this.props.info;
-
+        var wl = this.props.wl;
         if(info.profile) {
             var soloMMR;
             var teamMMR;
@@ -70,8 +70,8 @@ class ProfileCard extends Component {
             } else {
                 name = <Text style = {[styles.name, {color: this.props.secondLegend}]}>{info.profile.personaname}</Text>;
             }
-            if(info.win && info.lose) {
-                winrate = info.win / (info.win+info.lose);
+            if(wl.win && wl.lose) {
+                winrate = wl.win / (wl.win+wl.lose);
             }
             winPercentage = Math.round(winrate * 10000)/100;
 
@@ -107,9 +107,9 @@ class ProfileCard extends Component {
                     <View style = {styles.winRateContainer}>
                         <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {this.props.legend}/>
                         <View style = {styles.winRateTextContainer}>
-                            <Text style = {{color: Colors.win, fontFamily: Fonts.base, fontSize: 14}}>{info.win} </Text>
+                            <Text style = {{color: Colors.win, fontFamily: Fonts.base, fontSize: 14}}>{wl.win} </Text>
                             <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>-</Text>
-                            <Text style = {{color: Colors.lose, fontFamily: Fonts.base, fontSize: 14}}> {info.lose}</Text>
+                            <Text style = {{color: Colors.lose, fontFamily: Fonts.base, fontSize: 14}}> {wl.lose}</Text>
                         </View>
                         <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>({winPercentage}%)</Text>
                     </View>

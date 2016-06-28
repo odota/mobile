@@ -63,7 +63,6 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, fa
         var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
-            console.log(json);
             dispatch(receiveMatches(json));
         })
         .catch((error) => {

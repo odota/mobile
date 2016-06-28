@@ -30,7 +30,8 @@ export const mapStateToProps = state => ({
     isLoadingOverview: state.playerOverviewState.isLoadingOverview,
     isEmptyOverview: state.playerOverviewState.isEmptyOverview,
     contextId: state.navigationState.contextId,
-    legendHex: state.settingsState.legendHex
+    legendHex: state.settingsState.legendHex,
+    wl: state.playerOverviewState.wl
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -46,6 +47,7 @@ class PlayerOverview extends Component {
 
     componentWillMount() {
         this.props.actions.fetchOverview(this.props.contextId);
+        this.props.actions.fetchWl(this.props.contextId);
     }
 
     render() {
@@ -65,7 +67,7 @@ class PlayerOverview extends Component {
         } else {
             content = (
                 <ScrollView>
-                    <ProfileCard info = {this.props.overview} />
+                    <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
                 </ScrollView>
             )
         }

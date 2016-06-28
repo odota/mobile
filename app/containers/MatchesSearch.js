@@ -95,7 +95,7 @@ class MatchesSearch extends Component {
     }
 
     onFilterPressed() {
-        //var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
+        var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
         this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
                                         this.state.sort_category_id, this.state.hero_id,
