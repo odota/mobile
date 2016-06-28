@@ -18,6 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
+import results from '../json/results.json';
 import patches from '../json/patch.json';
 import sortCategories from '../json/sort_categories.json';
 import gameModes from '../json/game_mode.json';
@@ -48,6 +49,7 @@ var sortedFactions;
 var sortedPatches;
 var sortedCategories;
 var sortedGameModes;
+var sortedResults;
 
 class MatchesSearch extends Component {
 
@@ -69,7 +71,10 @@ class MatchesSearch extends Component {
             'sort_category_name': "Match ID (default)",
             'game_mode': false,
             'game_mode_id': -1,
-            'game_mode_name': 'None'
+            'game_mode_name': 'None',
+            'result': false,
+            'result_id': -1,
+            'result_name': 'None'
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
@@ -92,6 +97,8 @@ class MatchesSearch extends Component {
         var gameModesArray = _.cloneDeep(gameModes);
         sortedGameModes = this.constructGameModesArray(gameModesArray);
         sortedGameModes.unshift({"id": -1, "localized_name": "None"});
+        sortedResults = _.cloneDeep(results);
+        sortedResults.unshift({"id": -1, "localized_name": "None"});
     }
 
     onFilterPressed() {
@@ -102,7 +109,7 @@ class MatchesSearch extends Component {
         this.props.actions.changeSortedby(this.state.sort_category_id);
         this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
                                         this.state.sort_category_id, this.state.hero_id,
-                                        this.state.faction_id, this.state.game_mode_id,
+                                        this.state.result_id, this.state.faction_id, this.state.game_mode_id,
                                         this.state.patch_id);
         Actions.pop();
     }
@@ -196,6 +203,16 @@ class MatchesSearch extends Component {
                         />
         }
 
+        if(this.state['result']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.result_id}
+                        selectedLabel = {this.state.result_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('result', 'result_id', 'result_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('result')}
+                        items = {sortedResults}
+                        />
+        }
+
         return (
             <View style = {styles.container}>
                 <ScrollView>
@@ -266,6 +283,21 @@ class MatchesSearch extends Component {
                                     onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('faction', 'faction_id', 'faction_name', selectedValue, selectedLabel)}
                                     onPickerCancel = {() => this.togglePicker('faction')}
                                     items = {sortedFactions}
+                                    />
+                            </View>
+
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Result</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('result')}
+                                    title = {this.state.result_name}
+                                    selectedValue = {this.state.result_id}
+                                    selectedLabel = {this.state.result_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('result', 'result_id', 'result_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('result')}
+                                    items = {sortedResults}
                                     />
                             </View>
 

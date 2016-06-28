@@ -33,7 +33,7 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function fetchMatches(playerId, limit, projects, sortCategory, heroId, faction, gameMode, patch) {
+export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result, faction, gameMode, patch) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
     for(i = 0; i < projects.length; i++) {
         endpoint += ("&project=" + projects[i]);
@@ -57,12 +57,19 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, fa
     if(gameMode !== undefined && gameMode !== -1) {
         endpoint += ("&game_mode=" + gameMode);
     }
+
+    if(result !== undefined && result !== -1) {
+        endpoint += ("&win=" + result)
+    }
+
+    console.log(endpoint);
     return dispatch => {
         dispatch(requestMatches());
 
         var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
+            console.log(json);
             dispatch(receiveMatches(json));
         })
         .catch((error) => {
