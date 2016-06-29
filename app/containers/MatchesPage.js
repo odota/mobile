@@ -50,20 +50,13 @@ class MatchesPage extends Component {
     }
 
     componentWillMount() {
-        var projects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
+        var projects = ['game_mode'];
         this.props.actions.fetchMatches(this.props.contextId, 30, projects);
     }
 
     render() {
 
         var content;
-
-        // TODO:50 Remove this once limit is implemented on the API
-        // Only load the top 30 matches. This is small patch before limit is implemented on the API
-        var trimmedMatches = [];
-        for(i = 0; i < 30; i++) {
-            trimmedMatches.push(this.props.matches[i]);
-        }
 
         if(this.props.isLoadingMatches) {
             content = (
@@ -88,7 +81,7 @@ class MatchesPage extends Component {
                                 <Text style = {[styles.searchButtonText, {color: this.props.legend}]}>Search Matches</Text>
                             </View>
                         </TouchableOpacity>
-                    <MatchesCard matches = {trimmedMatches} default = {false} />
+                    <MatchesCard matches = {this.props.matches} default = {false} />
                 </ScrollView>
             )
         }
