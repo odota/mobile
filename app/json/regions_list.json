@@ -1,0 +1,82 @@
+[
+    {
+        "id": 0,
+        "localized_name": "Automatic"
+    },
+    {
+        "id": 1,
+        "localized_name": "US West"
+    },
+    {
+        "id": 2,
+        "localized_name": "US East"
+    },
+    {
+        "id": 3,
+        "localized_name": "Europe"
+    },
+    {
+        "id": 5,
+        "localized_name": "Singapore"
+    },
+    {
+        "id": 6,
+        "localized_name": "Dubai"
+    },
+    {
+        "id": 12,
+        "localized_name": "PW Telecom Shanghai"
+    },
+    {
+        "id": 17,
+        "localized_name": "PW Telecom Guangdong"
+    },
+    {
+        "id": 18,
+        "localized_name": "PW Telecom Zhejiang"
+    },
+    {
+        "id": 20,
+        "localized_name": "PW Telecom Wuhan"
+    },
+    {
+        "id": 13,
+        "localized_name": "PW Unicom"
+    },
+    {
+        "id": 8,
+        "localized_name": "Stockholm"
+    },
+    {
+        "id": 10,
+        "localized_name": "Brazil"
+    },
+    {
+        "id": 9,
+        "localized_name": "Austria"
+    },
+    {
+        "id": 7,
+        "localized_name": "Australia"
+    },
+    {
+        "id": 11,
+        "localized_name": "South Africa"
+    },
+    {
+        "id": 14,
+        "localized_name": "Chile"
+    },
+    {
+        "id": 15,
+        "localized_name": "Peru"
+    },
+    {
+        "id": 16,
+        "localized_name": "India"
+    },
+    {
+        "id": 19,
+        "localized_name": "Japan"
+    }
+]

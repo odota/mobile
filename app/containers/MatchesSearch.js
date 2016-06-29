@@ -25,6 +25,7 @@ import dates from '../json/dates.json';
 import sortCategories from '../json/sort_categories.json';
 import gameModes from '../json/game_mode.json';
 import lobbyTypes from '../json/lobby_type.json';
+import regions from '../json/regions_list.json';
 import PickerInput from '../components/PickerInput';
 import PickerText from '../components/PickerText';
 
@@ -56,16 +57,17 @@ var sortedResults;
 var sortedLanes;
 var sortedLobbyTypes;
 var sortedDates;
+var sortedRegions;
 
 class MatchesSearch extends Component {
 
 
-    // #DONE:10 Filter by lane
+    // #DONE:20 Filter by lane
     // DONE:0 Filter by lobby type
-    // DONE:20 Filter by date
-    // TODO:10 Filter by region
-    // TODO:20 Filter by team Heroes
-    // TODO:0 Filter by enemy Heroes
+    // DONE:30 Filter by date
+    // DONE:10 Filter by region
+    // TODO:10 Filter by team Heroes. This is postponed until we can find good UI for this.
+    // TODO:0 Filter by enemy Heroes This is postponed until we can find good UI for this.
 
     constructor(props) {
         super(props);
@@ -97,7 +99,10 @@ class MatchesSearch extends Component {
             'lobby_type_name': 'None',
             'date': false,
             'date_id': -1,
-            'date_name': "None"
+            'date_name': "None",
+            'regions': false,
+            'region_id': -1,
+            'region_name': "None"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
@@ -130,11 +135,13 @@ class MatchesSearch extends Component {
         sortedLobbyTypes.unshift({"id": -2, "localized_name": "None"});
         sortedDates = _.cloneDeep(dates);
         sortedDates.unshift({"id": -1, "localized_name": "None"});
+        sortedRegions = _.cloneDeep(regions);
+        sortedRegions.unshift({"id": -1, "localized_name": "None"});
     }
 
     onFilterPressed() {
 
-        // TODO:30 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
+        // TODO:20 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
 
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
@@ -142,7 +149,7 @@ class MatchesSearch extends Component {
                                         this.state.sort_category_id, this.state.hero_id,
                                         this.state.result_id, this.state.faction_id, this.state.game_mode_id,
                                         this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
-                                        this.state.date_id);
+                                        this.state.date_id, this.state.region_id);
         Actions.pop();
     }
 
@@ -279,6 +286,16 @@ class MatchesSearch extends Component {
                         onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('date', 'date_id', 'date_name', selectedValue, selectedLabel)}
                         onPickerCancel = {() => this.togglePicker('date')}
                         items = {sortedDates}
+                        />
+        }
+
+        if(this.state['region']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.region_id}
+                        selectedLabel = {this.state.region_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('region', 'region_id', 'region_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('region')}
+                        items = {sortedRegions}
                         />
         }
 
@@ -445,7 +462,20 @@ class MatchesSearch extends Component {
                                     />
                             </View>
 
-
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Region</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('region')}
+                                    title = {this.state.region_name}
+                                    selectedValue = {this.state.region_id}
+                                    selectedLabel = {this.state.region_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('region', 'region_id', 'region_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('region')}
+                                    items = {sortedRegions}
+                                    />
+                            </View>
 
                         </View>
                         <TouchableOpacity  onPress = {this.onFilterPressed} style = {styles.filterContainer}>

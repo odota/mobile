@@ -33,7 +33,8 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result, faction, gameMode, lane, lobbyType, patch, date) {
+export function fetchMatches(   playerId, limit, projects, sortCategory, heroId, result,
+                                faction, gameMode, lane, lobbyType, patch, date, region) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
     for(i = 0; i < projects.length; i++) {
         endpoint += ("&project=" + projects[i]);
@@ -74,6 +75,10 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, re
         endpoint += ("&date=" + date);
     }
 
+    if(region !== undefined && region !== -1) {
+        endpoint += ("&region=" + region);
+    }
+
     console.log(endpoint);
     return dispatch => {
         dispatch(requestMatches());
@@ -81,7 +86,6 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, re
         var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
-            console.log(json);
             dispatch(receiveMatches(json));
         })
         .catch((error) => {
