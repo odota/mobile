@@ -33,7 +33,7 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result, faction, gameMode, lane, lobbyType, patch) {
+export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result, faction, gameMode, lane, lobbyType, patch, date) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
     for(i = 0; i < projects.length; i++) {
         endpoint += ("&project=" + projects[i]);
@@ -68,6 +68,10 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, re
 
     if(lobbyType !== undefined && lobbyType !== -2) {
         endpoint += ("&lobby_type=" + lobbyType);
+    }
+
+    if(date !== undefined && date !== -1) {
+        endpoint += ("&date=" + date);
     }
 
     console.log(endpoint);

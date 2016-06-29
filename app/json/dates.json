@@ -1,0 +1,30 @@
+[
+    {
+        "id": 7,
+        "localized_name": "1 Week"
+    },
+    {
+        "id": 14,
+        "localized_name": "2 Weeks"
+    },
+    {
+        "id": 30,
+        "localized_name": "1 Month"
+    },
+    {
+        "id": 60,
+        "localized_name": "2 Months"
+    },
+    {
+        "id": 90,
+        "localized_name": "3 Months"
+    },
+    {
+        "id": 180,
+        "localized_name": "6 Months"
+    },
+    {
+        "id": 365,
+        "localized_name": "1 Year"
+    }
+]

@@ -21,6 +21,7 @@ import factions from '../json/factions.json';
 import results from '../json/results.json';
 import patches from '../json/patch.json';
 import lanes from '../json/lanes.json';
+import dates from '../json/dates.json';
 import sortCategories from '../json/sort_categories.json';
 import gameModes from '../json/game_mode.json';
 import lobbyTypes from '../json/lobby_type.json';
@@ -54,16 +55,17 @@ var sortedGameModes;
 var sortedResults;
 var sortedLanes;
 var sortedLobbyTypes;
+var sortedDates;
 
 class MatchesSearch extends Component {
 
 
     // #DONE:10 Filter by lane
     // DONE:0 Filter by lobby type
-    // TODO:0 Filter by date
-    // TODO:20 Filter by region
-    // TODO:30 Filter by team Heroes
-    // TODO:10 Filter by enemy Heroes
+    // DONE:20 Filter by date
+    // TODO:10 Filter by region
+    // TODO:20 Filter by team Heroes
+    // TODO:0 Filter by enemy Heroes
 
     constructor(props) {
         super(props);
@@ -92,7 +94,10 @@ class MatchesSearch extends Component {
             'lane_name': 'None',
             'lobby_type': false,
             'lobby_type_id': -2,
-            'lobby_type_name': 'None'
+            'lobby_type_name': 'None',
+            'date': false,
+            'date_id': -1,
+            'date_name': "None"
         }
         this.togglePicker = this.togglePicker.bind(this);
         this.valuePicked = this.valuePicked.bind(this);
@@ -123,18 +128,21 @@ class MatchesSearch extends Component {
         var lobbyTypesArray = _.cloneDeep(lobbyTypes);
         sortedLobbyTypes = this.constructLobbyTypesArray(lobbyTypesArray);
         sortedLobbyTypes.unshift({"id": -2, "localized_name": "None"});
+        sortedDates = _.cloneDeep(dates);
+        sortedDates.unshift({"id": -1, "localized_name": "None"});
     }
 
     onFilterPressed() {
 
-        // TODO:40 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
+        // TODO:30 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
 
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
         this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
                                         this.state.sort_category_id, this.state.hero_id,
                                         this.state.result_id, this.state.faction_id, this.state.game_mode_id,
-                                        this.state.lane_id, this.state.lobby_type_id, this.state.patch_id);
+                                        this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
+                                        this.state.date_id);
         Actions.pop();
     }
 
@@ -261,6 +269,16 @@ class MatchesSearch extends Component {
                         onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('lobby_type', 'lobby_type_id', 'lobby_type_name', selectedValue, selectedLabel)}
                         onPickerCancel = {() => this.togglePicker('lobby_type')}
                         items = {sortedLobbyTypes}
+                        />
+        }
+
+        if(this.state['date']) {
+            picker = <PickerInput
+                        selectedValue = {this.state.date_id}
+                        selectedLabel = {this.state.date_name}
+                        onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('date', 'date_id', 'date_name', selectedValue, selectedLabel)}
+                        onPickerCancel = {() => this.togglePicker('date')}
+                        items = {sortedDates}
                         />
         }
 
@@ -409,6 +427,21 @@ class MatchesSearch extends Component {
                                     onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('lobby_type', 'lobby_type_id', 'lobby_type_name', selectedValue, selectedLabel)}
                                     onPickerCancel = {() => this.togglePicker('lobby_type')}
                                     items = {sortedLobbyTypes}
+                                    />
+                            </View>
+
+                            <View style = {styles.pickerItem}>
+                                <View style = {styles.pickerTitleContainer}>
+                                    <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Date</Text>
+                                </View>
+                                <PickerText
+                                    onPress = {() => this.togglePicker('date')}
+                                    title = {this.state.date_name}
+                                    selectedValue = {this.state.date_id}
+                                    selectedLabel = {this.state.date_name}
+                                    onPickerDone = {(selectedValue, selectedLabel) => this.valuePicked('date', 'date_id', 'date_name', selectedValue, selectedLabel)}
+                                    onPickerCancel = {() => this.togglePicker('date')}
+                                    items = {sortedDates}
                                     />
                             </View>
 
