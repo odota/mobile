@@ -66,8 +66,8 @@ class MatchesSearch extends Component {
     // DONE:0 Filter by lobby type
     // DONE:30 Filter by date
     // DONE:10 Filter by region
-    // TODO:10 Filter by team Heroes. This is postponed until we can find good UI for this.
-    // TODO:0 Filter by enemy Heroes This is postponed until we can find good UI for this.
+    // TODO:30 Filter by team Heroes. This is postponed until we can find good UI for this.
+    // TODO:10 Filter by enemy Heroes This is postponed until we can find good UI for this.
 
     constructor(props) {
         super(props);
@@ -141,7 +141,7 @@ class MatchesSearch extends Component {
 
     onFilterPressed() {
 
-        // TODO:20 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
+        // TODO:40 Modify projects based on sort_category_id. Need to wait until desc is implemented by YASP.
 
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);

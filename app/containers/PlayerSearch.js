@@ -5,12 +5,14 @@ import {
     StyleSheet,
     TextInput,
     ScrollView,
-    ListView
+    ListView,
+    AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as playerSearchActions from '../actions/player_search_act';
+import * as settingsActions from '../actions/settings_act';
 import { Actions } from 'react-native-router-flux';
 
 import Spinner from 'react-native-spinkit';
@@ -37,7 +39,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(playerSearchActions, dispatch)
+    actions: bindActionCreators(playerSearchActions, dispatch),
+    settingsActions: bindActionCreators(settingsActions, dispatch)
 });
 
 class PlayerSearch extends Component {
@@ -50,6 +53,13 @@ class PlayerSearch extends Component {
         };
         this.renderRow = this.renderRow.bind(this);
         this.searchPlayer = this.searchPlayer.bind(this);
+    }
+
+    componentWillMount() {
+        //TODO:20 Move this to splash screen
+        AsyncStorage.getItem("theme").then((value) => {
+            this.props.settingsActions.changeTheme(value);
+        }).done();
     }
 
     renderRow(rowData, i, j) {

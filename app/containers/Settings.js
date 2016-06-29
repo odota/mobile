@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView
+    ScrollView,
+    AsyncStorage
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -24,7 +25,8 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    theme: state.settingsState.theme
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -36,21 +38,25 @@ class Settings extends Component {
     constructor(props) {
         super(props);
         this.onThemeSelected = this.onThemeSelected.bind(this);
+        this.setTheme = this.setTheme.bind(this);
     }
 
     onThemeSelected(value) {
-        if(value == 1) {
-            this.props.actions.changeTheme(Colors.skyDolchAlpha, Colors.skyDolchMod, Colors.skyDolchLegend, Colors.skyDolchSecondLegend, Colors.skyDolchLegendHex, Colors.skyDolchLegendTranslucent);
-        } else if (value == 2) {
-            this.props.actions.changeTheme(Colors.hyperfuseAlpha, Colors.hyperfuseMod, Colors.hyperfuseLegend, Colors.hyperfuseSecondLegend, Colors.hyperfuseLegendHex, Colors.hyperfuseLegendTranslucent);
-        } else if (value == 5) {
-            this.props.actions.changeTheme(Colors.doubleDamageAlpha, Colors.doubleDamageMod, Colors.doubleDamageLegend, Colors.doubleDamageSecondLegend, Colors.doubleDamageLegendHex, Colors.doubleDamageLegendTranslucent);
-        } else {
-            console.log(value);
-        }
+        AsyncStorage.setItem("theme", value.toString());
+        this.setTheme(value);
+    }
+
+    setTheme(value) {
+        this.setState({theme: value});
+        this.props.actions.changeTheme(value);
+    }
+
+    componentWillMount() {
+
     }
 
     render() {
+        //BUG:0 Selected does not get rendered if it's a variable. Probably problem with library?
         return (
             <View style = {styles.container}>
                 <ScrollView>
@@ -58,7 +64,7 @@ class Settings extends Component {
                         <View style = {styles.settingsTitle}>
                             <Text style = {[styles.settingsTitleText, { color: this.props.legend}]}>Themes</Text>
                             <RadioButtonGroup
-                                selected = {1}
+                                selected = {this.props.theme}
                                 theme = 'dark'
                                 onSelect = {this.onThemeSelected}
                                 items = {[
@@ -75,9 +81,7 @@ class Settings extends Component {
                     </View>
                 </ScrollView>
             </View>
-
         )
-
     }
 }
 
