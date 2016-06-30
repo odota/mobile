@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ListView
+    ListView,
+    Platform
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import * as playerOverviewActions from '../actions/player_overview_act';
 import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
+import ProgressBar from 'ProgressBarAndroid'
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
@@ -31,7 +33,8 @@ export const mapStateToProps = state => ({
     isEmptyOverview: state.playerOverviewState.isEmptyOverview,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
-    wl: state.playerOverviewState.wl
+    wl: state.playerOverviewState.wl,
+    legend: state.settingsState.legend
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -52,10 +55,15 @@ class PlayerOverview extends Component {
 
     render() {
         var content;
+        if(Platform.OS == 'ios') {
+            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+        } else {
+            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
+        }
         if(this.props.isLoadingOverview) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+                    {spinner}
                 </View>
             )
         } else if(this.props.isEmptyOverview) {

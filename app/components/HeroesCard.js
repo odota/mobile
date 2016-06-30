@@ -96,7 +96,13 @@ class HeroesCard extends Component {
     }
 
     render() {
-        if(this.props.heroes) {
+        if(this.props.heroes && this.props.heroes.length > 0) {
+            var trimmedHeroes = [];
+            var heroesList = this.props.heroes;
+            for(i = 0; i < 50; i++) {
+                trimmedHeroes.push(heroesList[i]);
+            }
+            var heroesCardContainerStyle = [styles.heroesCardContainer, {backgroundColor: this.props.mod}];
             return (
                 <View style = {[styles.heroesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
@@ -111,13 +117,17 @@ class HeroesCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Played</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win</Text>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
+                        </View>
+                        <View style = {styles.tableHeaderCell}>
+                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
                         </View>
                     </View>
                     <SGListView style = {styles.heroesListView}
                         dataSource = {this.heroesDS.cloneWithRows(this.props.heroes)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}
+                        initialListSize = {120}
                     />
                 </View>
             )

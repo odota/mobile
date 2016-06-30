@@ -6,7 +6,8 @@ import {
     TextInput,
     ScrollView,
     ListView,
-    AsyncStorage
+    AsyncStorage,
+    Platform
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -15,6 +16,7 @@ import * as playerSearchActions from '../actions/player_search_act';
 import * as settingsActions from '../actions/settings_act';
 import { Actions } from 'react-native-router-flux';
 
+import ProgressBar from 'ProgressBarAndroid';
 import Spinner from 'react-native-spinkit';
 import SGListView from 'react-native-sglistview';
 
@@ -59,7 +61,11 @@ class PlayerSearch extends Component {
         //TODO:20 Move this to splash screen
         AsyncStorage.getItem("theme").then((value) => {
             this.props.settingsActions.changeTheme(value);
-        }).done();
+        })
+        .catch((error) => {
+            this.props.settingsActions.changeTheme(1);
+        })
+        .done();
     }
 
     renderRow(rowData, i, j) {
@@ -74,10 +80,15 @@ class PlayerSearch extends Component {
 
     render() {
         var contentBottom;
+        if(Platform.OS == 'ios') {
+            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+        } else {
+            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
+        }
         if(this.props.isLoadingPlayers) {
             contentBottom = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+                    {spinner}
                 </View>
             )
         } else if(this.props.isEmptyPlayers) {

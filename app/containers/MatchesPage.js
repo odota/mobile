@@ -5,8 +5,11 @@ import {
     StyleSheet,
     ScrollView,
     ListView,
-    TouchableOpacity
+    TouchableOpacity,
+    Platform
 } from 'react-native';
+
+import ProgressBar from 'ProgressBarAndroid';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -57,11 +60,16 @@ class MatchesPage extends Component {
     render() {
 
         var content;
-
+        var spinner;
+        if(Platform.OS == 'ios') {
+            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+        } else {
+            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
+        }
         if(this.props.isLoadingMatches) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
+                    {spinner}
                 </View>
             )
         } else if (this.props.isEmptyMatches) {

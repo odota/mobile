@@ -301,6 +301,7 @@ class MatchesCard extends Component {
                         dataSource = {this.matchesDS.cloneWithRows(this.props.matches)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}
+                        initialListSize = {120}
                     />
                 </View>
             )
