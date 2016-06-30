@@ -74,9 +74,7 @@ class PlayerOverview extends Component {
             )
         } else {
             content = (
-                <ScrollView>
-                    <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
-                </ScrollView>
+                <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
             )
         }
         return(

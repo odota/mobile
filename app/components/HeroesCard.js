@@ -23,6 +23,8 @@ import SGListView from 'react-native-sglistview';
 import heroes from '../json/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
+import moment from 'moment';
+
 import _ from 'lodash';
 
 export const mapStateToProps = state => ({
@@ -62,6 +64,9 @@ class HeroesCard extends Component {
         playedRate = rowData.games / maxPlayed
         index = this.getIndex(rowData.hero_id, heroes.result.heroes);
         var staticUri = getHeroImage(rowData.hero_id);
+        var lastPlayedTime = rowData.last_played * 1000;
+        var now = moment();
+        var friendlyLastPlayedTime = moment.duration(now.diff(lastPlayedTime)).humanize();
         return (
             <View style = {rowContainer}>
                 <View style = {styles.heroCell}>
@@ -89,6 +94,9 @@ class HeroesCard extends Component {
                             maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
                             style = {styles.sliderContainer}
                             thumbStyle = {styles.hiddenThumb}/>
+                </View>
+                <View style = {styles.lastPlayedCell}>
+                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyLastPlayedTime}</Text>
                 </View>
 
             </View>
@@ -119,7 +127,7 @@ class HeroesCard extends Component {
                         <View style = {styles.tableHeaderCell}>
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
                         </View>
-                        <View style = {styles.tableHeaderCell}>
+                        <View style = {[styles.tableHeaderCell, {marginRight: 10}]}>
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
                         </View>
                     </View>
@@ -184,12 +192,14 @@ const baseStyles = _.extend(base.general, {
     tableHeaderText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        textAlign: 'center'
     },
     tableValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     heroValueText: {
         fontFamily: Fonts.base,
@@ -212,6 +222,12 @@ const baseStyles = _.extend(base.general, {
         flex: 1,
         marginLeft: 10,
         marginRight: 10,
+        justifyContent: 'center'
+    },
+    lastPlayedCell: {
+        flex: 1,
+        marginLeft: 10,
+        marginRight: 20,
         justifyContent: 'center'
     },
     sliderContainer: {
