@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import * as navigationActions from '../actions/navigation_act';
 
 import { Avatar } from 'react-native-material-design';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -55,6 +56,9 @@ class PlayerCard extends Component {
                     <View style = {styles.dataContainer}>
                         <View style = {styles.nameContainer}>
                             <Text style = {[styles.data, {color: this.props.secondLegend}]}>{info.personaname}</Text>
+                            <TouchableOpacity style = {styles.favIcon}>
+                                    <FontAwesome name = "star" size = {16} allowFontScaling = {false} color = {this.props.legend}/>
+                            </TouchableOpacity>
                         </View>
                         <View style = {[styles.separator, {backgroundColor: this.props.legend}]}/>
                         <View style = {styles.nameContainer}>
@@ -97,7 +101,17 @@ const baseStyles = _.extend(base.general, {
     },
     nameContainer: {
         marginBottom: 5,
-        marginTop: 5
+        marginTop: 5,
+        flexDirection: 'row'
+    },
+    favIcon: {
+        position: 'absolute',
+        right: 5
+    },
+    starContainer: {
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end'
     }
 });
 
