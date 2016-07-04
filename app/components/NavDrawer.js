@@ -75,6 +75,18 @@ class NavDrawer extends Component {
                     </TouchableOpacity>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
+                    <TouchableOpacity onPress = {() => {this.goto('favourites')}}>
+                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
+                            <View style = {styles.navIconContainer}>
+                                <FontAwesome name = "star" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                            </View>
+                            <View style = {styles.navTextContainer}>
+                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Favourites</Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+
                     <TouchableOpacity onPress = {() => {this.goto('search')}}>
                         <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>

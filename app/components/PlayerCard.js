@@ -4,13 +4,15 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    Image
+    Image,
+    AsyncStorage
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import * as navigationActions from '../actions/navigation_act';
+import * as favouritesActions from '../actions/favourites_act';
 
 import { Avatar } from 'react-native-material-design';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -25,11 +27,13 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    favourites: state.favouritesState.favourites
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    navigationActions: bindActionCreators(navigationActions, dispatch)
+    navigationActions: bindActionCreators(navigationActions, dispatch),
+    favouritesActions: bindActionCreators(favouritesActions, dispatch)
 });
 
 class PlayerCard extends Component {
@@ -37,6 +41,7 @@ class PlayerCard extends Component {
     constructor(props) {
         super(props);
         this.onPlayerPressed = this.onPlayerPressed.bind(this);
+        this.favouritesPressed = this.favouritesPressed.bind(this);
     }
 
     onPlayerPressed() {
@@ -45,8 +50,39 @@ class PlayerCard extends Component {
         Actions.playerProfile();
     }
 
+    favouritesPressed(info) {
+        var index = -1;
+        for(i = 0; i < this.props.favourites.length; i++) {
+            if(this.props.favourites[i].account_id == info.account_id) {
+                index = i;
+            }
+        }
+        if(index == -1) {
+            this.props.favouritesActions.addFavourites(info);
+        } else {
+            this.props.favouritesActions.removeFavourites(info.account_id);
+        }
+
+        setTimeout(() => {
+            var favouritesString = JSON.stringify(this.props.favourites);
+            AsyncStorage.setItem("favourites", favouritesString);
+        }, 1000);
+    }
+
     render() {
         var info = this.props.info;
+        var iconName;
+        var index = -1;
+        for(i = 0; i < this.props.favourites.length; i++) {
+            if(this.props.favourites[i].account_id == info.account_id) {
+                index = i;
+            }
+        }
+        if(index == -1) {
+            iconName = "star-o";
+        } else {
+            iconName = "star";
+        }
         return (
             <TouchableOpacity onPress = {this.onPlayerPressed}>
                 <View style = {[styles.playerCardContainer, { backgroundColor: this.props.mod }]}>
@@ -56,15 +92,15 @@ class PlayerCard extends Component {
                     <View style = {styles.dataContainer}>
                         <View style = {styles.nameContainer}>
                             <Text style = {[styles.data, {color: this.props.secondLegend}]}>{info.personaname}</Text>
-                            <TouchableOpacity style = {styles.favIcon}>
-                                    <FontAwesome name = "star" size = {16} allowFontScaling = {false} color = {this.props.legend}/>
-                            </TouchableOpacity>
                         </View>
                         <View style = {[styles.separator, {backgroundColor: this.props.legend}]}/>
                         <View style = {styles.nameContainer}>
                             <Text style = {[styles.data, {color: this.props.secondLegend}]}>ID: {info.account_id}</Text>
                         </View>
                     </View>
+                    <TouchableOpacity style = {[styles.favContainer, {borderColor: this.props.legend}]} onPress = {() => {this.favouritesPressed(info)}}>
+                        <FontAwesome name = {iconName} size = {30} allowFontScaling = {false} color = {this.props.legend}/>
+                    </TouchableOpacity>
                 </View>
             </TouchableOpacity>
         );
@@ -81,12 +117,14 @@ const baseStyles = _.extend(base.general, {
         flexDirection: 'row'
     },
     avatarContainer: {
-        flex: 1,
+        flex: 2,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: 5,
+        marginRight: 5
     },
     dataContainer: {
-        flex: 3,
+        flex: 6,
         marginTop: 10,
         marginBottom: 10,
         marginLeft: 5,
@@ -104,14 +142,14 @@ const baseStyles = _.extend(base.general, {
         marginTop: 5,
         flexDirection: 'row'
     },
-    favIcon: {
-        position: 'absolute',
-        right: 5
+    favContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 10,
+        paddingLeft: 10,
     },
-    starContainer: {
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end'
+    favIcon: {
     }
 });
 

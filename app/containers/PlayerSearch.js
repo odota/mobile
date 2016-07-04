@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playerSearchActions from '../actions/player_search_act';
 import * as settingsActions from '../actions/settings_act';
+import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 
 import ProgressBar from 'ProgressBarAndroid';
@@ -42,7 +43,8 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(playerSearchActions, dispatch),
-    settingsActions: bindActionCreators(settingsActions, dispatch)
+    settingsActions: bindActionCreators(settingsActions, dispatch),
+    favouritesActions: bindActionCreators(favouritesActions, dispatch)
 });
 
 class PlayerSearch extends Component {
@@ -66,6 +68,17 @@ class PlayerSearch extends Component {
             this.props.settingsActions.changeTheme(1);
         })
         .done();
+
+        AsyncStorage.getItem("favourites").then((value) => {
+            if(value) {
+                this.props.favouritesActions.initializeFavourites(value);
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        .done();
+
     }
 
     renderRow(rowData, i, j) {
