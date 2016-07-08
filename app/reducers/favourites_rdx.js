@@ -17,6 +17,8 @@ export default function favouritesState(state = initialState, action = {}) {
             return Object.assign({}, state, { favourites: [...state.favourites.slice(0, index),
                                                             ...state.favourites.slice(index + 1)] }
                                                         );
+        case types.PURGE_FAVOURITES:
+            return Object.assign({}, state, { favourites: [] });
         default:
             return state;
     }

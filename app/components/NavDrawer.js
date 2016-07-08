@@ -43,6 +43,8 @@ class NavDrawer extends Component {
         this.context.drawer.close();
         if(route == 'home') {
 
+        } else if(route == 'favourites') {
+            Actions.favouriteTab();
         } else if(route == 'search') {
             Actions.searchTab();
         } else if(route == 'settings') {

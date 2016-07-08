@@ -105,7 +105,8 @@ const base = {
         noDataText: {
             fontFamily: Fonts.base,
             fontSize: 20,
-            color: Colors.skyDolchMod
+            color: Colors.skyDolchMod,
+            textAlign: 'center'
         },
         hiddenThumb: {
             width: 0,

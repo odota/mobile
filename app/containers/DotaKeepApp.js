@@ -2,6 +2,7 @@ import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
+import Favourite from './Favourite';
 import Settings from './Settings';
 import MatchesSearch from './MatchesSearch';
 import Drawers from './Drawer';
@@ -14,6 +15,8 @@ import React, { Component } from 'react';
 import { BackAndroid, Text } from 'react-native';
 
 import Colors from '../themes/Colors';
+
+const RouterWithRedux = connect()(Router);
 
 class DotaKeepApp extends Component {
 
@@ -31,14 +34,19 @@ class DotaKeepApp extends Component {
         });
 
         return (
-            <Router sceneStyle = {{backgroundColor: Colors.mainBackground}}>
+            <RouterWithRedux sceneStyle = {{backgroundColor: Colors.mainBackground}}>
                 <Scene key = "root" hideNavBar = {true}>
                     <Scene key = "navDrawer" component = {Drawers} panHandler = {null}>
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandler = {null} navBar = {customNavBar}>
+                            <Scene key = "favouriteTab" title = "Favourites" navBar = {customNavBar}>
+                                <Scene key = "favourite" component = {Favourite} title = "Favourites" initial = {true}/>
+                                <Scene key = "playerProfileFavourite" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
+                                <Scene key = "matchesSearchFavourite" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
+                            </Scene>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
                                 <Scene key = "playerSearch" component = {PlayerSearch} title = "Search Profile" initial = {true} />
-                                <Scene key = "playerProfile" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
-                                <Scene key = "matchesSearch" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
+                                <Scene key = "playerProfileSearch" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
+                                <Scene key = "matchesSearchSearch" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "settingsTab" title = "Settings" navBar = {customNavBar}>
                                 <Scene key = "settings" component = {Settings} />
@@ -46,7 +54,7 @@ class DotaKeepApp extends Component {
                         </Scene>
                     </Scene>
                 </Scene>
-            </Router>
+            </RouterWithRedux>
         )
     }
 }
