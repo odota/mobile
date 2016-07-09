@@ -66,7 +66,7 @@ class Favourite extends Component {
     renderRow(rowData, i, j) {
         if(rowData !== undefined) {
             return (
-                <PlayerCard info = {rowData} parent = "Favourite"/>
+                <PlayerCard info = {rowData}/>
             );
         } else {
             return <View />

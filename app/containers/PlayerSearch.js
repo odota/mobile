@@ -83,7 +83,7 @@ class PlayerSearch extends Component {
 
     renderRow(rowData, i, j) {
         return (
-            <PlayerCard info = {rowData} parent = "PlayerSearch" />
+            <PlayerCard info = {rowData} />
         );
     }
 

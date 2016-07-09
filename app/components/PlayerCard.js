@@ -29,7 +29,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     favourites: state.favouritesState.favourites,
-    scene:state.navigationState.scene
+    scene:state.navigationState.scene,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -49,7 +50,7 @@ class PlayerCard extends Component {
         this.props.navigationActions.changeContextId(this.props.info.account_id);
         if(this.props.parent == "Favourite") {
             Actions.playerProfileFavourite();
-        } else if (this.props.parent == "PlayerSearch") {
+        } else if (this.props.parent == "Search") {
             Actions.playerProfileSearch();
         }
     }

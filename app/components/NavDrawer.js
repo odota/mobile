@@ -14,6 +14,8 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
+import * as navigationActions from '../actions/navigation_act';
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { bindActionCreators } from 'redux';
@@ -26,6 +28,10 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(navigationActions, dispatch)
 });
 
 class NavDrawer extends Component {
@@ -41,13 +47,14 @@ class NavDrawer extends Component {
 
     goto(route) {
         this.context.drawer.close();
-        if(route == 'home') {
+        this.props.actions.changeParent(route);
+        if(route == 'Home') {
 
-        } else if(route == 'favourites') {
+        } else if(route == 'Favourites') {
             Actions.favouriteTab();
-        } else if(route == 'search') {
+        } else if(route == 'Search') {
             Actions.searchTab();
-        } else if(route == 'settings') {
+        } else if(route == 'Settings') {
             Actions.settingsTab();
         } else {
             console.log('UNDEFINED');
@@ -65,7 +72,7 @@ class NavDrawer extends Component {
             <View style = {[styles.drawerContainer, {backgroundColor: this.props.mod}]}>
                 {paddingView}
                 <ScrollView style = {styles.navScroll}>
-                    <TouchableOpacity onPress = {() => {this.goto('home')}}>
+                    <TouchableOpacity onPress = {() => {this.goto('Home')}}>
                         <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
                                 <FontAwesome name = "home" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
@@ -77,7 +84,7 @@ class NavDrawer extends Component {
                     </TouchableOpacity>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
-                    <TouchableOpacity onPress = {() => {this.goto('favourites')}}>
+                    <TouchableOpacity onPress = {() => {this.goto('Favourites')}}>
                         <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
                                 <FontAwesome name = "star" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
@@ -89,7 +96,7 @@ class NavDrawer extends Component {
                     </TouchableOpacity>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
-                    <TouchableOpacity onPress = {() => {this.goto('search')}}>
+                    <TouchableOpacity onPress = {() => {this.goto('Search')}}>
                         <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
                                 <FontAwesome name = "search" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
@@ -101,7 +108,7 @@ class NavDrawer extends Component {
                     </TouchableOpacity>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
 
-                    <TouchableOpacity onPress = {() => {this.goto('settings')}}>
+                    <TouchableOpacity onPress = {() => {this.goto('Settings')}}>
                         <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
                             <View style = {styles.navIconContainer}>
                                 <FontAwesome name = "cog" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
