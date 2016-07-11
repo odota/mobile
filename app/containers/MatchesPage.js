@@ -35,7 +35,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     mod: state.settingsState.mod,
-    alpha: state.settingsState.alpha
+    alpha: state.settingsState.alpha,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -46,10 +47,15 @@ class MatchesPage extends Component {
 
     constructor(props) {
         super(props);
+        this.onSearchPressed = this.onSearchPressed.bind(this);
     }
 
     onSearchPressed() {
-        Actions.matchesSearch();
+        if(this.props.parent == "Favourites") {
+            Actions.matchesSearchFavourite();
+        } else if (this.props.parent == "Search") {
+            Actions.matchesSearchSearch();
+        }
     }
 
     componentWillMount() {
@@ -58,7 +64,6 @@ class MatchesPage extends Component {
     }
 
     render() {
-
         var content;
         var spinner;
         if(Platform.OS == 'ios') {

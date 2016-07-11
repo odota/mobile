@@ -162,4 +162,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(NavDrawer);
+export default connect(mapStateToProps, mapDispatchToProps)(NavDrawer);

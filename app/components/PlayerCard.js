@@ -48,7 +48,7 @@ class PlayerCard extends Component {
 
     onPlayerPressed() {
         this.props.navigationActions.changeContextId(this.props.info.account_id);
-        if(this.props.parent == "Favourite") {
+        if(this.props.parent == "Favourites") {
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
             Actions.playerProfileSearch();
