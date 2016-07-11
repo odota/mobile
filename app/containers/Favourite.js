@@ -7,7 +7,8 @@ import {
     ListView,
     AsyncStorage,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -52,6 +53,7 @@ class Favourite extends Component {
     }
 
     componentWillMount() {
+        // Move this to splash
         AsyncStorage.getItem("favourites").then((value) => {
             if(value) {
                 this.props.actions.initializeFavourites(value);
@@ -74,11 +76,24 @@ class Favourite extends Component {
     }
 
     onPurgePressed() {
+        Alert.alert('Delete All Favourites',
+                    'Are you sure that you want to delete all profiles from favourites?',
+                    [
+                        {text: 'Cancel', style: 'cancel'},
+                        {text: 'OK', onPress: () => {
+                            this.props.actions.purgeFavourites();
+                            setTimeout(() => {
+                                var favouritesString = JSON.stringify(this.props.favouritesList);
+                                AsyncStorage.setItem("favourites", favouritesString);
+                            }, 1000);}},
+                    ])
+                    /*
         this.props.actions.purgeFavourites();
         setTimeout(() => {
             var favouritesString = JSON.stringify(this.props.favouritesList);
             AsyncStorage.setItem("favourites", favouritesString);
         }, 1000);
+        */
     }
 
     render() {
