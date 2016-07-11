@@ -5,7 +5,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     StatusBar,
-    Platform
+    Platform,
+    Alert,
+    AsyncStorage
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -13,6 +15,9 @@ import _ from 'lodash';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import * as favouritesActions from '../actions/favourites_act';
+import * as homeActions from '../actions/home_act';
 
 import NavigationBar from 'react-native-navbar';
 
@@ -26,7 +31,11 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({...favouritesActions, ...homeActions}, dispatch)
 });
 
 class NavBar extends Component {
@@ -34,15 +43,67 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.openDrawer = this.openDrawer.bind(this);
+        this.onPurgeFavouritesPressed = this.onPurgeFavouritesPressed.bind(this);
+        this.onResetHomeProfilePressed = this.onResetHomeProfilePressed.bind(this);
     }
 
     openDrawer() {
         Actions.refresh({key: '0_navDrawer', open: true})
     }
 
-    render() {
+    onPurgeFavouritesPressed() {
+        Alert.alert('Delete All Favourites',
+                    'Are you sure that you want to delete all profiles from favourites?',
+                    [
+                        {text: 'Cancel', style: 'cancel'},
+                        {text: 'OK', onPress: () => {
+                            this.props.actions.purgeFavourites();
+                            setTimeout(() => {
+                                AsyncStorage.setItem("favourites", "");
+                            }, 1000);}},
+                    ])
+    }
 
+    onResetHomeProfilePressed() {
+        Alert.alert('Reset Home Profile',
+                    'Are you sure that you want delete this profile from home??',
+                    [
+                        {text: 'Cancel', style: 'cancel'},
+                        {text: 'OK', onPress: () => {
+                            this.props.actions.resetHomeProfile();
+                            setTimeout(() => {
+                                AsyncStorage.setItem("homeProfile", "");
+                            }, 1000);}},
+                    ])
+    }
+
+    render() {
+        console.log(this.props);
         title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+        var rightElements;
+        if(this.props.title == 'Favourites') {
+            rightElements = (
+                <View style = {styles.navItemView}>
+                    <TouchableOpacity onPress = {() => {this.onPurgeFavouritesPressed()}}>
+                        <View style = {styles.leftNavButtonView}>
+                            <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        } else if (this.props.title == 'Home') {
+            rightElements = (
+                <View style = {styles.navItemView}>
+                    <TouchableOpacity onPress = {() => {this.actions.this.onResetHomeProfilePressed()}}>
+                        <View style = {styles.leftNavButtonView}>
+                            <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            )
+        } else {
+            rightElements = <View />
+        }
 
         var leftElements = (
             <View style = {styles.navItemView}>
@@ -53,10 +114,6 @@ class NavBar extends Component {
                 </TouchableOpacity>
                 {title}
             </View>
-        )
-
-        var rightElements = (
-            <View />
         )
 
         var statusBarPadding;
@@ -131,4 +188,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

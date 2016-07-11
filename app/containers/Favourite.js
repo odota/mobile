@@ -49,7 +49,6 @@ class Favourite extends Component {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
-        this.onPurgePressed = this.onPurgePressed.bind(this);
     }
 
     componentWillMount() {
@@ -75,20 +74,6 @@ class Favourite extends Component {
         }
     }
 
-    onPurgePressed() {
-        Alert.alert('Delete All Favourites',
-                    'Are you sure that you want to delete all profiles from favourites?',
-                    [
-                        {text: 'Cancel', style: 'cancel'},
-                        {text: 'OK', onPress: () => {
-                            this.props.actions.purgeFavourites();
-                            setTimeout(() => {
-                                var favouritesString = JSON.stringify(this.props.favouritesList);
-                                AsyncStorage.setItem("favourites", favouritesString);
-                            }, 1000);}},
-                    ])
-    }
-
     render() {
         var content;
         var spinner
@@ -106,16 +91,6 @@ class Favourite extends Component {
                 </View>
             )
         } else {
-            var purgeButton = (
-                <TouchableOpacity  onPress = {this.onPurgePressed} style = {styles.purgeContainer}>
-                    <View style = {[styles.purgeIconContainer, {backgroundColor: Colors.lose}]}>
-                        <FontAwesome name = "trash" size = {20} allowFontScaling = {false} color = {this.props.secondLegend}/>
-                    </View>
-                    <View style = {[styles.purgeButton, {backgroundColor: Colors.lose}]}>
-                        <Text style = {[styles.purgeButtonText, {color: this.props.secondLegend}]}>Delete All Favourites</Text>
-                    </View>
-                </TouchableOpacity>
-            )
             content = (
                 <View style = {{flex: 1}}>
                     <SGListView
@@ -123,7 +98,6 @@ class Favourite extends Component {
                         renderRow = {this.renderRow}
                         style = {styles.listView}
                         enableEmptySections = {true} />
-                    {purgeButton}
                 </View>
 
             )
