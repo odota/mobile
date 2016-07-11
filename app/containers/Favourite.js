@@ -87,13 +87,6 @@ class Favourite extends Component {
                                 AsyncStorage.setItem("favourites", favouritesString);
                             }, 1000);}},
                     ])
-                    /*
-        this.props.actions.purgeFavourites();
-        setTimeout(() => {
-            var favouritesString = JSON.stringify(this.props.favouritesList);
-            AsyncStorage.setItem("favourites", favouritesString);
-        }, 1000);
-        */
     }
 
     render() {
