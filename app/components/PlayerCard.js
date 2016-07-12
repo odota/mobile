@@ -66,6 +66,7 @@ class PlayerCard extends Component {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
+                this.props.navigationActions.changeContextId(info.account_id);
                 this.props.homeActions.setHomeProfile(info);
             }
 
