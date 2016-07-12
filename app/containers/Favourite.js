@@ -17,8 +17,6 @@ import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import ProgressBar from 'ProgressBarAndroid';
-import Spinner from 'react-native-spinkit';
 import SGListView from 'react-native-sglistview';
 
 import _ from 'lodash';
@@ -76,12 +74,6 @@ class Favourite extends Component {
 
     render() {
         var content;
-        var spinner
-        if(Platform.OS == 'ios') {
-            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
-        } else {
-            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend} />
-        }
 
         if(this.props.favouritesList.length < 1) {
             content = (

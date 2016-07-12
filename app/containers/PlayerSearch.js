@@ -38,7 +38,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
-    legendTranslucent: state.settingsState.legendTranslucent
+    legendTranslucent: state.settingsState.legendTranslucent,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -122,8 +123,14 @@ class PlayerSearch extends Component {
             )
         }
 
+        if(this.props.parent == "Home") {
+            containerStyle = styles.noMarginContainer;
+        } else {
+            containerStyle = styles.container;
+        }
+
         return (
-            <View style = {styles.container}>
+            <View style = {containerStyle}>
                 <View style = {styles.searchFieldContainer}>
                     <TextInput
                         placeholder = 'Search player'
@@ -165,6 +172,14 @@ const baseStyles = _.extend(base.general, {
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center'
+        },
+        noMarginContainer: {
+            flexDirection: 'column',
+            alignSelf: 'stretch',
+            alignItems: 'stretch',
+            justifyContent:'space-between',
+            flex: 1,
+            backgroundColor: Colors.mainBackground
         }
     }
 );

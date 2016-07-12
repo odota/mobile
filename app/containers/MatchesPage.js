@@ -55,6 +55,8 @@ class MatchesPage extends Component {
             Actions.matchesSearchFavourite();
         } else if (this.props.parent == "Search") {
             Actions.matchesSearchSearch();
+        } else if (this.props.parent == "Home") {
+            Actions.matchesSearchHome();
         }
     }
 

@@ -13,9 +13,11 @@ import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import * as navigationActions from '../actions/navigation_act';
 import * as favouritesActions from '../actions/favourites_act';
+import * as homeActions from '../actions/home_act';
 
 import { Avatar } from 'react-native-material-design';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -30,12 +32,14 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend,
     favourites: state.favouritesState.favourites,
     scene:state.navigationState.scene,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    homeProfile: state.homeState.profile
 });
 
 export const mapDispatchToProps = (dispatch) => ({
     navigationActions: bindActionCreators(navigationActions, dispatch),
-    favouritesActions: bindActionCreators(favouritesActions, dispatch)
+    favouritesActions: bindActionCreators(favouritesActions, dispatch),
+    homeActions: bindActionCreators(homeActions, dispatch)
 });
 
 class PlayerCard extends Component {
@@ -52,42 +56,68 @@ class PlayerCard extends Component {
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
             Actions.playerProfileSearch();
+        } else if (this.props.parent == "Home") {
+            Actions.playerProfileHome();
         }
     }
 
     favouritesPressed(info) {
-        var index = -1;
-        for(i = 0; i < this.props.favourites.length; i++) {
-            if(this.props.favourites[i].account_id == info.account_id) {
-                index = i;
+        if(this.props.parent == "Home") {
+            if(this.props.homeProfile.account_id == info.account_id) {
+                this.props.homeActions.resetHomeProfile();
+            } else {
+                this.props.homeActions.setHomeProfile(info);
             }
-        }
-        if(index == -1) {
-            this.props.favouritesActions.addFavourites(info);
+
+            setTimeout(() => {
+                var homeProfileString = JSON.stringify(info);
+                AsyncStorage.setItem("homeProfile", homeProfileString);
+            }, 1000);
         } else {
-            this.props.favouritesActions.removeFavourites(info.account_id);
+            var index = -1;
+            for(i = 0; i < this.props.favourites.length; i++) {
+                if(this.props.favourites[i].account_id == info.account_id) {
+                    index = i;
+                }
+            }
+            if(index == -1) {
+                this.props.favouritesActions.addFavourites(info);
+            } else {
+                this.props.favouritesActions.removeFavourites(info.account_id);
+            }
+
+            setTimeout(() => {
+                var favouritesString = JSON.stringify(this.props.favourites);
+                AsyncStorage.setItem("favourites", favouritesString);
+            }, 1000);
         }
 
-        setTimeout(() => {
-            var favouritesString = JSON.stringify(this.props.favourites);
-            AsyncStorage.setItem("favourites", favouritesString);
-        }, 1000);
     }
 
     render() {
         var info = this.props.info;
-        var iconName;
-        var index = -1;
-        for(i = 0; i < this.props.favourites.length; i++) {
-            if(this.props.favourites[i].account_id == info.account_id) {
-                index = i;
+        if(this.props.parent == "Home") {
+            var iconName;
+            if(this.props.homeProfile.account_id == info.account_id) {
+                iconName = <IonIcon name = "ios-home" size = {30} allowFontScaling = {false} color = {this.props.legend} />
+            } else {
+                iconName = <IonIcon name = "ios-home-outline" size = {30} allowFontScaling = {false} color = {this.props.legend} />
+            }
+        } else {
+            var iconName;
+            var index = -1;
+            for(i = 0; i < this.props.favourites.length; i++) {
+                if(this.props.favourites[i].account_id == info.account_id) {
+                    index = i;
+                }
+            }
+            if(index == -1) {
+                iconName = <FontAwesome name = "star-o" size = {30} allowFontScaling = {false} color = {this.props.legend}/>
+            } else {
+                iconName = <FontAwesome name = "star" size = {30} allowFontScaling = {false} color = {this.props.legend}/>
             }
         }
-        if(index == -1) {
-            iconName = "star-o";
-        } else {
-            iconName = "star";
-        }
+
         return (
             <TouchableOpacity onPress = {this.onPlayerPressed}>
                 <View style = {[styles.playerCardContainer, { backgroundColor: this.props.mod }]}>
@@ -104,7 +134,7 @@ class PlayerCard extends Component {
                         </View>
                     </View>
                     <TouchableOpacity style = {[styles.favContainer, {borderColor: this.props.legend}]} onPress = {() => {this.favouritesPressed(info)}}>
-                        <FontAwesome name = {iconName} size = {30} allowFontScaling = {false} color = {this.props.legend}/>
+                        {iconName}
                     </TouchableOpacity>
                 </View>
             </TouchableOpacity>

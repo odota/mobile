@@ -32,6 +32,8 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
+    favouritesList: state.favouritesState.favourites,
+    homeProfile: state.homeState.profile
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -66,7 +68,7 @@ class NavBar extends Component {
 
     onResetHomeProfilePressed() {
         Alert.alert('Reset Home Profile',
-                    'Are you sure that you want delete this profile from home??',
+                    'Are you sure that you want delete this profile from home?',
                     [
                         {text: 'Cancel', style: 'cancel'},
                         {text: 'OK', onPress: () => {
@@ -78,10 +80,9 @@ class NavBar extends Component {
     }
 
     render() {
-        console.log(this.props);
         title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
         var rightElements;
-        if(this.props.title == 'Favourites') {
+        if(this.props.title == 'Favourites' && this.props.favouritesList.length > 0) {
             rightElements = (
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onPurgeFavouritesPressed()}}>
@@ -91,10 +92,10 @@ class NavBar extends Component {
                     </TouchableOpacity>
                 </View>
             )
-        } else if (this.props.title == 'Home') {
+        } else if (this.props.title == 'Home' && !(Object.keys(this.props.homeProfile).length === 0 && this.props.homeProfile.constructor === Object)) {
             rightElements = (
                 <View style = {styles.navItemView}>
-                    <TouchableOpacity onPress = {() => {this.actions.this.onResetHomeProfilePressed()}}>
+                    <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
                         <View style = {styles.leftNavButtonView}>
                             <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>

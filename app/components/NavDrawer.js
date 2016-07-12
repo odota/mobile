@@ -49,7 +49,7 @@ class NavDrawer extends Component {
         this.context.drawer.close();
         this.props.actions.changeParent(route);
         if(route == 'Home') {
-
+            Actions.homeTab();
         } else if(route == 'Favourites') {
             Actions.favouriteTab();
         } else if(route == 'Search') {
