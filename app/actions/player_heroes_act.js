@@ -39,6 +39,6 @@ export function fetchHeroes(playerId, limit) {
         .catch((error) => {
             console.log("Action - FETCH MATCHES ERROR - " + error);
             dispatch(receiveEmptyHeroes());
-        })
+        });
     }
 }

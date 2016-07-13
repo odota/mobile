@@ -6,6 +6,7 @@ import playerHeroesState from './player_heroes_rdx';
 import settingsState from './settings_rdx';
 import favouritesState from './favourites_rdx';
 import homeState from './home_rdx';
+import peersState from './peers_rdx';
 
 export {
     playerListState,
@@ -15,5 +16,6 @@ export {
     playerHeroesState,
     settingsState,
     favouritesState,
-    homeState
+    homeState,
+    peersState
 };
