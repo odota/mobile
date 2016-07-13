@@ -53,21 +53,6 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        // Move this to splash
-        AsyncStorage.getItem("homeProfile").then((value) => {
-            if(value) {
-                parsedValue = JSON.parse(value);
-                if(!(Object.keys(parsedValue).length === 0 && parsedValue.constructor === Object)) {
-                    this.setState({'profileExist': true});
-                }
-                this.props.actions.changeContextId(parsedValue.account_id);
-                this.props.actions.setHomeProfile(parsedValue);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-        .done();
     }
 
     render() {

@@ -61,25 +61,6 @@ class PlayerSearch extends Component {
     }
 
     componentWillMount() {
-        //TODO:20 Move this to splash screen
-        AsyncStorage.getItem("theme").then((value) => {
-            this.props.settingsActions.changeTheme(value);
-        })
-        .catch((error) => {
-            this.props.settingsActions.changeTheme(1);
-        })
-        .done();
-
-        AsyncStorage.getItem("favourites").then((value) => {
-            if(value) {
-                this.props.favouritesActions.initializeFavourites(value);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-        .done();
-
     }
 
     renderRow(rowData, i, j) {

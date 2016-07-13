@@ -50,16 +50,6 @@ class Favourite extends Component {
     }
 
     componentWillMount() {
-        // Move this to splash
-        AsyncStorage.getItem("favourites").then((value) => {
-            if(value) {
-                this.props.actions.initializeFavourites(value);
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        })
-        .done();
     }
 
     renderRow(rowData, i, j) {
