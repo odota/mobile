@@ -38,13 +38,13 @@ class DotaKeepApp extends Component {
         return (
             <RouterWithRedux sceneStyle = {{backgroundColor: Colors.mainBackground}}>
                 <Scene key = "root" hideNavBar = {true}>
-                    <Scene key = "splash" component = {Splash} panHandler = {null} initial = {true}/>
-                    <Scene key = "navDrawer" component = {Drawers} panHandler = {null}>
-                        <Scene key = "main" tabs = {true} hideTabBar = {true} panHandler = {null} navBar = {customNavBar}>
+                    <Scene key = "splash" component = {Splash} panHandlers = {null} initial = {true}/>
+                    <Scene key = "navDrawer" component = {Drawers} panHandlers = {null} type = "replace">
+                        <Scene key = "main" tabs = {true} hideTabBar = {true} panHandlers = {null} navBar = {customNavBar}>
                             <Scene key = "homeTab" title = "Home" navBar = {customNavBar}>
                                 <Scene key = "home" component = {Home} title = "Home" />
                                 <Scene key = "playerProfileHome" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
-                                <Scene key = "matchesSearchHome" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandler = {null} navBar = {modalNavBar} />
+                                <Scene key = "matchesSearchHome" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "favouriteTab" title = "Favourites" navBar = {customNavBar}>
                                 <Scene key = "favourite" component = {Favourite} title = "Favourites"/>
