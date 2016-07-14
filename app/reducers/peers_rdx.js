@@ -9,7 +9,7 @@ export default function peersState(state = initialState, action = {}) {
             return Object.assign({}, state, { isLoadingPeers: false, isEmptyPeers: false, peers: action.peers });
         case types.RECEIVE_EMPTY_PEERS:
             return Object.assign({}, state, { isLoadingPeers: false, isEmptyPeers: true, peers: [] });
-        case default:
-            retrun state;
+        default:
+            return state;
     }
 }
