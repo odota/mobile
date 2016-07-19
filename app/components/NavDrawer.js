@@ -15,6 +15,7 @@ import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
 import * as navigationActions from '../actions/navigation_act';
+import * as homeActions from '../actions/home_act';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -27,7 +28,8 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    profile: state.homeState.profile
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -49,6 +51,7 @@ class NavDrawer extends Component {
         this.context.drawer.close();
         this.props.actions.changeParent(route);
         if(route == 'Home') {
+            this.props.actions.changeContextId(this.props.profile.account_id);
             Actions.homeTab();
         } else if(route == 'Favourites') {
             Actions.favouriteTab();

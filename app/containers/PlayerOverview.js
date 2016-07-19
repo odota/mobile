@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playerOverviewActions from '../actions/player_overview_act';
 import * as playerMatchesActions from '../actions/player_matches_act';
+import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 
 import ProgressBar from 'ProgressBarAndroid'
@@ -34,11 +35,12 @@ export const mapStateToProps = state => ({
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     wl: state.playerOverviewState.wl,
-    legend: state.settingsState.legend
+    legend: state.settingsState.legend,
+    homeTab: state.navigationState.homeTab
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({...playerOverviewActions, ...playerMatchesActions}, dispatch)
+    actions: bindActionCreators({...playerOverviewActions, ...playerMatchesActions, ...navigationActions}, dispatch)
 });
 
 class PlayerOverview extends Component {
@@ -51,6 +53,14 @@ class PlayerOverview extends Component {
     componentWillMount() {
         this.props.actions.fetchOverview(this.props.contextId);
         this.props.actions.fetchWl(this.props.contextId);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.homeTab) {
+            this.props.actions.consumeHomeTab();
+            this.props.actions.fetchOverview(nextProps.contextId);
+            this.props.actions.fetchWl(nextProps.contextId);
+        }
     }
 
     render() {
