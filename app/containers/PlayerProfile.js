@@ -15,6 +15,7 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import PlayerOverview from './PlayerOverview';
 import MatchesPage from './MatchesPage';
 import HeroesPage from './HeroesPage';
+import Peers from './PeersPage';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -39,6 +40,7 @@ class PlayerProfile extends Component {
                 <PlayerOverview tabLabel = "Overview" />
                 <MatchesPage tabLabel = "Matches" />
                 <HeroesPage tabLabel = "Heroes" />
+                <Peers tabLabel = "Peers" />
             </ScrollableTabView>
         )
     }
