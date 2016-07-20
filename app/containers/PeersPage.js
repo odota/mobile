@@ -14,6 +14,8 @@ import { bindActionCreators } from 'redux';
 import * as peersActions from '../actions/peers_act';
 import { Actions } from 'react-native-router-flux';
 
+import PeersCard from '../components/PeersCard';
+
 import ProgressBar from 'ProgressBarAndroid';
 import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
@@ -47,7 +49,6 @@ class PeersPage extends Component {
 
     render() {
         var content;
-        console.log(this.props.peers);
         if(Platform.OS == 'ios') {
             spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
         } else {
@@ -67,9 +68,7 @@ class PeersPage extends Component {
             )
         } else {
             content = (
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>Peers Loaded</Text>
-                </View>
+                <PeersCard peers = {this.props.peers}/>
             )
         }
 

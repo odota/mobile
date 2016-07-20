@@ -43,6 +43,9 @@ class HeroesCard extends Component {
         this.getIndex = this.getIndex.bind(this);
         this.sortByKey = this.sortByKey.bind(this);
         this.generateProcessedArray = this.generateProcessedArray.bind(this);
+        this.state = {
+            processedHeroList: []
+        };
     }
 
     sortByKey(array, key) {
@@ -70,7 +73,13 @@ class HeroesCard extends Component {
             var currentUnprocessedHero = unprocessedHeroList[j];
             // Process winrate %
             var winrate = currentUnprocessedHero.win / currentUnprocessedHero.games;
-            var winPercentage = Math.round(winrate * 10000)/100;
+            var winPercentage;
+            if(currentUnprocessedHero.games == 0) {
+                winPercentage = "N/A";
+            } else {
+                winPercentage = Math.round(winrate * 10000)/100;
+            }
+
 
 
             // Process playedRate
@@ -84,9 +93,13 @@ class HeroesCard extends Component {
 
             // Process lastPlayedTime
             var lastPlayedTime = currentUnprocessedHero.last_played * 1000;
-            var now = moment();
-            var friendlyLastPlayedTime = moment.duration(now.diff(lastPlayedTime)).humanize();
-
+            var friendlyLastPlayedTime;
+            if(lastPlayedTime == 0) {
+                friendlyLastPlayedTime = "N/A";
+            } else {
+                var now = moment();
+                friendlyLastPlayedTime = moment.duration(now.diff(lastPlayedTime)).humanize();
+            }
             // Process localized_name
             var localizedName = heroes.result.heroes[index].localized_name;
 
@@ -102,10 +115,18 @@ class HeroesCard extends Component {
             processedHero.localizedName = localizedName;
             processedHero.winrate = winrate;
 
-            processedHeroList[j] = processedHero
+            processedHeroList[j] = processedHero;
 
         }
         return processedHeroList;
+    }
+
+    componentWillMount() {
+        if(this.props.heroes && this.props.heroes.length > 0) {
+            var heroesList = this.props.heroes;
+            var processedHeroList = this.generateProcessedArray(heroesList);
+            this.setState({processedHeroList: processedHeroList});
+        }
     }
 
     renderRow(rowData, i, j) {
@@ -159,8 +180,6 @@ class HeroesCard extends Component {
 
     render() {
         if(this.props.heroes && this.props.heroes.length > 0) {
-            var heroesList = this.props.heroes;
-            var processedHeroList = this.generateProcessedArray(heroesList);
             var heroesCardContainerStyle = [styles.heroesCardContainer, {backgroundColor: this.props.mod}];
             return (
                 <View style = {[styles.heroesCardContainer, {backgroundColor: this.props.mod}]}>
@@ -183,7 +202,7 @@ class HeroesCard extends Component {
                         </View>
                     </View>
                     <SGListView style = {styles.heroesListView}
-                        dataSource = {this.heroesDS.cloneWithRows(processedHeroList)}
+                        dataSource = {this.heroesDS.cloneWithRows(this.state.processedHeroList)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}
                         initialListSize = {120}
