@@ -132,9 +132,9 @@ class HeroesCard extends Component {
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
+            rowContainer = [styles.rowContainer, {backgroundColor: this.props.mod}];
         } else {
-            rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
+            rowContainer = [styles.rowContainer, {backgroundColor: this.props.alpha}];
         }
         var staticUri = getHeroImage(rowData.heroId);
         return (
@@ -180,7 +180,6 @@ class HeroesCard extends Component {
 
     render() {
         if(this.props.heroes && this.props.heroes.length > 0) {
-            var heroesCardContainerStyle = [styles.heroesCardContainer, {backgroundColor: this.props.mod}];
             return (
                 <View style = {[styles.heroesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
@@ -218,57 +217,6 @@ class HeroesCard extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-    heroesCardContainer: {
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 5,
-        marginBottom: 10,
-        paddingTop: 10,
-        paddingBottom: 10,
-        borderRadius: 3
-    },
-    titleText: {
-        fontFamily: Fonts.base,
-        fontSize: 28
-    },
-    titleContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10
-    },
-    separator: {
-        height: 2
-    },
-    rowContainerEven: {
-        paddingTop: 5,
-        paddingBottom: 5
-    },
-    rowContainerOdd: {
-        paddingTop: 5,
-        paddingBottom: 5
-    },
-    tableHeaderContainer: {
-        flexDirection: 'row'
-    },
-    tableHeaderCell: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 10,
-        marginBottom: 10
-    },
-    tableHeaderText: {
-        fontFamily: Fonts.base,
-        fontSize: 14,
-        fontWeight: 'bold',
-        textAlign: 'center'
-    },
-    tableValueText: {
-        fontFamily: Fonts.base,
-        fontSize: 14,
-        alignSelf: 'center',
-        textAlign: 'center'
-    },
     heroValueText: {
         fontFamily: Fonts.base,
         fontSize: 14,
@@ -305,13 +253,6 @@ const baseStyles = _.extend(base.general, {
     heroValueTextWrapper: {
         marginLeft: 5,
         marginRight: 5
-    },
-    inRowSeparator: {
-        height: 2,
-        marginLeft: 10,
-        marginRight: 10,
-        marginTop: 5,
-        marginBottom: 5
     }
 });
 

@@ -111,6 +111,69 @@ const base = {
         hiddenThumb: {
             width: 0,
             height: 0
+        },
+        heroesCardContainer: {
+            marginLeft: 10,
+            marginRight: 10,
+            marginTop: 5,
+            marginBottom: 10,
+            paddingTop: 10,
+            paddingBottom: 10,
+            borderRadius: 3
+        },
+        titleText: {
+            fontFamily: Fonts.base,
+            fontSize: 28
+        },
+        titleContainer: {
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 10
+        },
+        separator: {
+            height: 2
+        },
+        rowContainer: {
+            paddingTop: 5,
+            paddingBottom: 5
+        },
+        tableHeaderContainer: {
+            flexDirection: 'row'
+        },
+        tableHeaderCell: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 10,
+            marginBottom: 10
+        },
+        tableHeaderText: {
+            fontFamily: Fonts.base,
+            fontSize: 14,
+            fontWeight: 'bold',
+            textAlign: 'center'
+        },
+        tableValueText: {
+            fontFamily: Fonts.base,
+            fontSize: 14,
+            alignSelf: 'center',
+            textAlign: 'center'
+        },
+        peersCardContainer: {
+            marginLeft: 10,
+            marginRight: 10,
+            marginTop: 5,
+            marginBottom: 10,
+            paddingTop: 10,
+            paddingBottom: 10,
+            borderRadius: 3
+        },
+        inRowSeparator: {
+            height: 2,
+            marginLeft: 10,
+            marginRight: 10,
+            marginTop: 5,
+            marginBottom: 5
         }
     }
 }

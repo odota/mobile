@@ -68,7 +68,9 @@ class PeersPage extends Component {
             )
         } else {
             content = (
-                <PeersCard peers = {this.props.peers}/>
+                <ScrollView style = {{marginTop: 5}}>
+                    <PeersCard peers = {this.props.peers}/>
+                </ScrollView>
             )
         }
 
