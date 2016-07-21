@@ -37,15 +37,19 @@ class PeersCard extends Component {
         this.peersDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
         this.generateProcessedPeers = this.generateProcessedPeers.bind(this);
+        this.onProfilePressed = this.onProfilePressed.bind(this);
         this.state = {
             processedPeersList: []
         };
     }
 
+    onProfilePressed(accountId) {
+        console.log(accountId);
+    }
+
     generateProcessedPeers(unprocessedPeersList) {
         var processedPeersList = [];
         var maxPlayed = unprocessedPeersList[0].games;
-        console.log(unprocessedPeersList);
         for(j = 0; j < unprocessedPeersList.length; j++) {
             var currentUnprocessedPeer = unprocessedPeersList[j];
 
@@ -76,6 +80,7 @@ class PeersCard extends Component {
             processedPeer.avatar = currentUnprocessedPeer.avatar;
             processedPeer.withGames = currentUnprocessedPeer.with_games;
             processedPeer.winRate = winrate;
+            processedPeer.accountId = currentUnprocessedPeer.account_id;
 
             processedPeersList[j] = processedPeer;
         }
@@ -99,44 +104,47 @@ class PeersCard extends Component {
         }
         return (
             <View style = {rowContainer}>
-                <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
+                <TouchableOpacity>
+                    <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
+                </TouchableOpacity>
                 <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
-                <View style = {{flexDirection: 'row'}}>
-                    <View style = {styles.peerCell}>
-                        <View style = {styles.peerValueTextWrapper}>
-                            <View style = {styles.avatarContainer}>
-                                <Avatar image = {<Image source = {{uri: rowData.avatar}} />} size = {40} borderRadius = {20} style = {styles.peerIcon} />
+                <TouchableOpacity onPress = { () => {this.onProfilePressed(rowData.accountId) }}>
+                    <View style = {{flexDirection: 'row'}}>
+                        <View style = {styles.peerCell}>
+                            <View style = {styles.peerValueTextWrapper}>
+                                <View style = {styles.avatarContainer}>
+                                    <Avatar image = {<Image source = {{uri: rowData.avatar}} />} size = {40} borderRadius = {20} style = {styles.peerIcon} />
+                                </View>
                             </View>
                         </View>
+                        <View style = {styles.withCell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.withGames}</Text>
+                            <Slider disabled = {true}
+                                    value = {rowData.playedRate}
+                                    minimumTrackTintColor = {Colors.lose}
+                                    maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
+                                    style = {styles.sliderContainer}
+                                    thumbStyle = {styles.hiddenThumb}/>
+                        </View>
+                        <View style = {styles.winCell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.winPercentage}%</Text>
+                            <Slider disabled = {true}
+                                    value = {rowData.winRate}
+                                    minimumTrackTintColor = {Colors.win}
+                                    maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
+                                    style = {styles.sliderContainer}
+                                    thumbStyle = {styles.hiddenThumb}/>
+                        </View>
+                        <View style = {styles.lastPlayedCell}>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lastPlayed}</Text>
+                        </View>
                     </View>
-                    <View style = {styles.withCell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.withGames}</Text>
-                        <Slider disabled = {true}
-                                value = {rowData.playedRate}
-                                minimumTrackTintColor = {Colors.lose}
-                                maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
-                                style = {styles.sliderContainer}
-                                thumbStyle = {styles.hiddenThumb}/>
-                    </View>
-                    <View style = {styles.winCell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.winPercentage}%</Text>
-                        <Slider disabled = {true}
-                                value = {rowData.winRate}
-                                minimumTrackTintColor = {Colors.win}
-                                maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
-                                style = {styles.sliderContainer}
-                                thumbStyle = {styles.hiddenThumb}/>
-                    </View>
-                    <View style = {styles.lastPlayedCell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lastPlayed}</Text>
-                    </View>
-                </View>
+                </TouchableOpacity>
             </View>
         )
     }
 
     render() {
-        console.log(this.state.processedPeersList);
         if(this.props.peers && this.props.peers.length > 0) {
             return (
                 <View style = {[styles.peersCardContainer, {backgroundColor: this.props.mod}]}>
