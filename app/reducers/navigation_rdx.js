@@ -23,8 +23,6 @@ export default function navigationState(state = initialState, action = {}) {
             return Object.assign({}, state, { contextId: action.contextId });
         case types.CHANGE_PARENT:
             return Object.assign({}, state, { parent: action.parent });
-        case types.PUSH_CONTEXT_ID:
-        case types.POP_CONTEXT_ID:
         default:
             return state;
     }
