@@ -51,7 +51,7 @@ class NavDrawer extends Component {
         this.context.drawer.close();
         this.props.actions.changeParent(route);
         if(route == 'Home') {
-            this.props.actions.switchContextId(this.props.profile.account_id, "Home");
+            this.props.actions.changeContextId(this.props.profile.account_id);
             Actions.homeTab();
         } else if(route == 'Favourites') {
             Actions.favouriteTab();
