@@ -28,10 +28,7 @@ export const mapStateToProps = state => ({
     peers: state.peersState.peers,
     isLoadingPeers: state.peersState.isLoadingPeers,
     isEmptyPeers: state.peersState.isEmptyPeers,
-    contextIdHome: state.navigationState.contextIdHome,
-    contextIdFavourites: state.navigationState.contextIdFavourites,
-    contextIdSearch: state.navigationState.contextIdSearch,
-    parent: state.navigationState.parent,
+    contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend
 });
@@ -47,13 +44,7 @@ class PeersPage extends Component {
     }
 
     componentWillMount() {
-        if(this.props.parent == "Home") {
-            this.props.actions.fetchPeers(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
-        } else if (this.props.parent == "Favourites") {
-            this.props.actions.fetchPeers(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
-        } else if (this.props.parent == "Search") {
-            this.props.actions.fetchPeers(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
-        }
+        this.props.actions.fetchPeers(this.props.contextId);
     }
 
     render() {

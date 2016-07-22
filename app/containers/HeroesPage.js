@@ -27,10 +27,7 @@ export const mapStateToProps = state => ({
     heroes: state.playerHeroesState.heroes,
     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
     isEmptyHeroes: state.playerHeroesState.isEmptyHeroes,
-    contextIdHome: state.navigationState.contextIdHome,
-    contextIdFavourites: state.navigationState.contextIdFavourites,
-    contextIdSearch: state.navigationState.contextIdSearch,
-    parent: state.navigationState.parent,
+    contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend
 });
@@ -46,14 +43,7 @@ class HeroesPage extends Component {
     }
 
     componentWillMount() {
-        if(this.props.parent == "Home") {
-            this.props.actions.fetchHeroes(this.props.contextIdHome[this.props.contextIdHome.length - 1], 30);
-        } else if (this.props.parent == "Favourites") {
-            this.props.actions.fetchHeroes(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1], 30);
-        } else if (this.props.parent == "Search") {
-            this.props.actions.fetchHeroes(this.props.contextIdSearch[this.props.contextIdSearch.length - 1], 30);
-        }
-
+        this.props.actions.fetchHeroes(this.props.contextId, 30);
     }
 
     render() {

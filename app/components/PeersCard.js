@@ -53,7 +53,8 @@ class PeersCard extends Component {
     }
 
     onProfilePressed(accountId) {
-        this.props.actions.pushContextId(accountId, this.props.parent);
+        console.log(accountId);
+        this.props.actions.changeContextId(accountId);
         if(this.props.parent == "Home") {
             Actions.playerProfileHome();
         } else if(this.props.parent == "Favourites") {
