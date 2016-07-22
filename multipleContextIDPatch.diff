@@ -1,0 +1,430 @@
+From 02e6290ba8ace1858b0bd004531c86fc590e672f Mon Sep 17 00:00:00 2001
+From: Stephen Prayogo <stephenprayogo@gmail.com>
+Date: Fri, 22 Jul 2016 10:49:29 +1000
+Subject: [PATCH] Overhauled contextID system to allow independent navigation
+ between the 3 tabs (Home, Favourites, Search). User can now navigate to other
+ user from Peers page. Currently there's a bug where a component can't
+ navigate to the same component as a child.
+
+---
+ app/actions/navigation_act.js      | 20 +++++++++++++-------
+ app/actions/player_overview_act.js |  1 +
+ app/components/DeepNavBar.js       | 15 +++++++++++++--
+ app/components/NavDrawer.js        |  2 +-
+ app/components/PeersCard.js        |  3 +--
+ app/components/PlayerCard.js       |  4 ++--
+ app/containers/HeroesPage.js       | 14 ++++++++++++--
+ app/containers/MatchesPage.js      | 12 ++++++++++--
+ app/containers/MatchesSearch.js    | 31 ++++++++++++++++++++++++-------
+ app/containers/PeersPage.js        | 13 +++++++++++--
+ app/containers/PlayerOverview.js   | 24 ++++++++++++++++++------
+ app/containers/Splash.js           |  2 +-
+ app/reducers/navigation_rdx.js     | 25 ++++++++++++++++++++++++-
+ 13 files changed, 131 insertions(+), 35 deletions(-)
+
+diff --git a/app/actions/navigation_act.js b/app/actions/navigation_act.js
+index b5166dd..51cdb4f 100644
+--- a/app/actions/navigation_act.js
++++ b/app/actions/navigation_act.js
+@@ -3,25 +3,31 @@ export const types = {
+     CHANGE_PARENT: 'CHANGE_PARENT',
+     CONSUME_HOME_TAB: 'CONSUME_HOME_TAB',
+     PUSH_CONTEXT_ID: 'PUSH_CONTEXT_ID',
+-    POP_CONTEXT_ID: 'POP_CONTEXT_ID'
++    POP_CONTEXT_ID: 'POP_CONTEXT_ID',
++    SWITCH_CONTEXT_ID: 'SWITCH_CONTEXT_ID'
+ }
+ 
+-export function pushContextId(id) {
++export function pushContextId(id, parentType) {
+     return {
+         type: types.PUSH_CONTEXT_ID,
+-        contextId: id
++        contextId: id,
++        parentType
+     }
+ }
+ 
+-export function popContextId(id) {
++export function popContextId(parentType) {
+     return {
+         type: types.POP_CONTEXT_ID,
+-        contextId: id
++        parentType
+     }
+ }
+ 
+-export function popContextId(id) {
+-
++export function switchContextId(id, parentType) {
++    return {
++        type: types.SWITCH_CONTEXT_ID,
++        contextId: id,
++        parentType
++    }
+ }
+ 
+ export function changeContextId(id) {
+diff --git a/app/actions/player_overview_act.js b/app/actions/player_overview_act.js
+index 2da0dd7..2d38930 100644
+--- a/app/actions/player_overview_act.js
++++ b/app/actions/player_overview_act.js
+@@ -66,6 +66,7 @@ export function fetchWl(playerId) {
+ 
+ export function fetchOverview(playerId) {
+     var endpoint = "players/" + playerId;
++    console.log(endpoint);
+     return dispatch => {
+         dispatch(requestOverview());
+ 
+diff --git a/app/components/DeepNavBar.js b/app/components/DeepNavBar.js
+index 37cd937..1998fac 100644
+--- a/app/components/DeepNavBar.js
++++ b/app/components/DeepNavBar.js
+@@ -16,6 +16,8 @@ import { bindActionCreators } from 'redux';
+ 
+ import NavigationBar from 'react-native-navbar';
+ 
++import * as navigationActions from '../actions/navigation_act';
++
+ import Colors from '../themes/Colors';
+ import base from '../themes/BaseStyles';
+ import Fonts from '../themes/Fonts';
+@@ -26,7 +28,13 @@ export const mapStateToProps = state => ({
+     alpha: state.settingsState.alpha,
+     mod: state.settingsState.mod,
+     legend: state.settingsState.legend,
+-    secondLegend: state.settingsState.secondLegend
++    secondLegend: state.settingsState.secondLegend,
++    scene: state.navigationState.scene,
++    parent: state.navigationState.parent
++});
++
++export const mapDispatchToProps = (dispatch) => ({
++    actions: bindActionCreators(navigationActions, dispatch)
+ });
+ 
+ class DeepNavBar extends Component {
+@@ -37,6 +45,9 @@ class DeepNavBar extends Component {
+     }
+ 
+     backPressed() {
++        if(this.props.scene.sceneKey == "playerProfileHome" || this.props.scene.sceneKey == "playerProfileSearch" || this.props.scene.sceneKey == "playerProfileFavourite") {
++            this.props.actions.popContextId(this.props.parent);
++        }
+         Actions.pop();
+     }
+ 
+@@ -132,4 +143,4 @@ const baseStyles = _.extend(base.general, {
+ 
+ const styles = StyleSheet.create(baseStyles);
+ 
+-export default connect(mapStateToProps)(DeepNavBar);
++export default connect(mapStateToProps, mapDispatchToProps)(DeepNavBar);
+diff --git a/app/components/NavDrawer.js b/app/components/NavDrawer.js
+index 43411a6..5fe4b22 100644
+--- a/app/components/NavDrawer.js
++++ b/app/components/NavDrawer.js
+@@ -51,7 +51,7 @@ class NavDrawer extends Component {
+         this.context.drawer.close();
+         this.props.actions.changeParent(route);
+         if(route == 'Home') {
+-            this.props.actions.changeContextId(this.props.profile.account_id);
++            this.props.actions.switchContextId(this.props.profile.account_id, "Home");
+             Actions.homeTab();
+         } else if(route == 'Favourites') {
+             Actions.favouriteTab();
+diff --git a/app/components/PeersCard.js b/app/components/PeersCard.js
+index cfc7d92..3258aad 100644
+--- a/app/components/PeersCard.js
++++ b/app/components/PeersCard.js
+@@ -53,8 +53,7 @@ class PeersCard extends Component {
+     }
+ 
+     onProfilePressed(accountId) {
+-        console.log(accountId);
+-        this.props.actions.changeContextId(accountId);
++        this.props.actions.pushContextId(accountId, this.props.parent);
+         if(this.props.parent == "Home") {
+             Actions.playerProfileHome();
+         } else if(this.props.parent == "Favourites") {
+diff --git a/app/components/PlayerCard.js b/app/components/PlayerCard.js
+index c5207ad..200d1db 100644
+--- a/app/components/PlayerCard.js
++++ b/app/components/PlayerCard.js
+@@ -51,7 +51,7 @@ class PlayerCard extends Component {
+     }
+ 
+     onPlayerPressed() {
+-        this.props.navigationActions.changeContextId(this.props.info.account_id);
++        this.props.navigationActions.switchContextId(this.props.info.account_id, this.props.parent);
+         if(this.props.parent == "Favourites") {
+             Actions.playerProfileFavourite();
+         } else if (this.props.parent == "Search") {
+@@ -66,7 +66,7 @@ class PlayerCard extends Component {
+             if(this.props.homeProfile.account_id == info.account_id) {
+                 this.props.homeActions.resetHomeProfile();
+             } else {
+-                this.props.navigationActions.changeContextId(info.account_id);
++                this.props.navigationActions.switchContextId(info.account_id, this.props.parent);
+                 this.props.homeActions.setHomeProfile(info);
+             }
+ 
+diff --git a/app/containers/HeroesPage.js b/app/containers/HeroesPage.js
+index a5cfb5b..b097fb1 100644
+--- a/app/containers/HeroesPage.js
++++ b/app/containers/HeroesPage.js
+@@ -27,7 +27,10 @@ export const mapStateToProps = state => ({
+     heroes: state.playerHeroesState.heroes,
+     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
+     isEmptyHeroes: state.playerHeroesState.isEmptyHeroes,
+-    contextId: state.navigationState.contextId,
++    contextIdHome: state.navigationState.contextIdHome,
++    contextIdFavourites: state.navigationState.contextIdFavourites,
++    contextIdSearch: state.navigationState.contextIdSearch,
++    parent: state.navigationState.parent,
+     legendHex: state.settingsState.legendHex,
+     legend: state.settingsState.legend
+ });
+@@ -43,7 +46,14 @@ class HeroesPage extends Component {
+     }
+ 
+     componentWillMount() {
+-        this.props.actions.fetchHeroes(this.props.contextId, 30);
++        if(this.props.parent == "Home") {
++            this.props.actions.fetchHeroes(this.props.contextIdHome[this.props.contextIdHome.length - 1], 30);
++        } else if (this.props.parent == "Favourites") {
++            this.props.actions.fetchHeroes(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1], 30);
++        } else if (this.props.parent == "Search") {
++            this.props.actions.fetchHeroes(this.props.contextIdSearch[this.props.contextIdSearch.length - 1], 30);
++        }
++
+     }
+ 
+     render() {
+diff --git a/app/containers/MatchesPage.js b/app/containers/MatchesPage.js
+index 3b6ab9c..2cdb4f8 100644
+--- a/app/containers/MatchesPage.js
++++ b/app/containers/MatchesPage.js
+@@ -30,7 +30,9 @@ export const mapStateToProps = state => ({
+     matches: state.playerMatchesState.matches,
+     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
+     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
+-    contextId: state.navigationState.contextId,
++    contextIdHome: state.navigationState.contextIdHome,
++    contextIdFavourites: state.navigationState.contextIdFavourites,
++    contextIdSearch: state.navigationState.contextIdSearch,
+     legendHex: state.settingsState.legendHex,
+     legend: state.settingsState.legend,
+     secondLegend: state.settingsState.secondLegend,
+@@ -62,7 +64,13 @@ class MatchesPage extends Component {
+ 
+     componentWillMount() {
+         var projects = ['game_mode'];
+-        this.props.actions.fetchMatches(this.props.contextId, 30, projects);
++        if(this.props.parent == "Home") {
++            this.props.actions.fetchMatches(this.props.contextIdHome[this.props.contextIdHome.length - 1], 30, projects);
++        } else if (this.props.parent == "Favourites") {
++            this.props.actions.fetchMatches(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1], 30, projects);
++        } else if (this.props.parent == "Search") {
++            this.props.actions.fetchMatches(this.props.contextIdSearch[this.props.contextIdSearch.length - 1], 30, projects);
++        }
+     }
+ 
+     render() {
+diff --git a/app/containers/MatchesSearch.js b/app/containers/MatchesSearch.js
+index d269898..c7ea963 100644
+--- a/app/containers/MatchesSearch.js
++++ b/app/containers/MatchesSearch.js
+@@ -36,7 +36,10 @@ import base from '../themes/BaseStyles';
+ import Fonts from '../themes/Fonts';
+ 
+ export const mapStateToProps = state => ({
+-    contextId: state.navigationState.contextId,
++    contextIdHome: state.navigationState.contextIdHome,
++    contextIdFavourites: state.navigationState.contextIdFavourites,
++    contextIdSearch: state.navigationState.contextIdSearch,
++    parent: state.navigationState.parent,
+     legendHex: state.settingsState.legendHex,
+     mod: state.settingsState.mod,
+     legend: state.settingsState.legend,
+@@ -145,11 +148,26 @@ class MatchesSearch extends Component {
+ 
+         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
+         this.props.actions.changeSortedby(this.state.sort_category_id);
+-        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
+-                                        this.state.sort_category_id, this.state.hero_id,
+-                                        this.state.result_id, this.state.faction_id, this.state.game_mode_id,
+-                                        this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
+-                                        this.state.date_id, this.state.region_id);
++        if(this.props.parent == "Home") {
++            this.props.actions.fetchMatches(this.props.contextIdHome[this.props.contextIdHome.length -1], this.state.match_limit, defaultProjects,
++                                            this.state.sort_category_id, this.state.hero_id,
++                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
++                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
++                                            this.state.date_id, this.state.region_id);
++        } else if (this.props.parent == "Favourites") {
++            this.props.actions.fetchMatches(this.props.contextIdFavourites[this.props.contextIdFavourites.length -1], this.state.match_limit, defaultProjects,
++                                            this.state.sort_category_id, this.state.hero_id,
++                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
++                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
++                                            this.state.date_id, this.state.region_id);
++        } else if (this.props.parent == "Search") {
++            this.props.actions.fetchMatches(this.props.contextIdSearch[this.props.contextIdSearch.length -1], this.state.match_limit, defaultProjects,
++                                            this.state.sort_category_id, this.state.hero_id,
++                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
++                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
++                                            this.state.date_id, this.state.region_id);
++        }
++
+         Actions.pop();
+     }
+ 
+@@ -198,7 +216,6 @@ class MatchesSearch extends Component {
+     render() {
+ 
+         var picker;
+-        console.log(this.state);
+         if(this.state['hero']) {
+             picker = <PickerInput
+                         selectedValue = {this.state.hero_id}
+diff --git a/app/containers/PeersPage.js b/app/containers/PeersPage.js
+index 1f5781b..afe6c26 100644
+--- a/app/containers/PeersPage.js
++++ b/app/containers/PeersPage.js
+@@ -28,7 +28,10 @@ export const mapStateToProps = state => ({
+     peers: state.peersState.peers,
+     isLoadingPeers: state.peersState.isLoadingPeers,
+     isEmptyPeers: state.peersState.isEmptyPeers,
+-    contextId: state.navigationState.contextId,
++    contextIdHome: state.navigationState.contextIdHome,
++    contextIdFavourites: state.navigationState.contextIdFavourites,
++    contextIdSearch: state.navigationState.contextIdSearch,
++    parent: state.navigationState.parent,
+     legendHex: state.settingsState.legendHex,
+     legend: state.settingsState.legend
+ });
+@@ -44,7 +47,13 @@ class PeersPage extends Component {
+     }
+ 
+     componentWillMount() {
+-        this.props.actions.fetchPeers(this.props.contextId);
++        if(this.props.parent == "Home") {
++            this.props.actions.fetchPeers(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
++        } else if (this.props.parent == "Favourites") {
++            this.props.actions.fetchPeers(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
++        } else if (this.props.parent == "Search") {
++            this.props.actions.fetchPeers(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
++        }
+     }
+ 
+     render() {
+diff --git a/app/containers/PlayerOverview.js b/app/containers/PlayerOverview.js
+index bf97e94..a3a1c6f 100644
+--- a/app/containers/PlayerOverview.js
++++ b/app/containers/PlayerOverview.js
+@@ -32,11 +32,14 @@ export const mapStateToProps = state => ({
+     overview: state.playerOverviewState.overview,
+     isLoadingOverview: state.playerOverviewState.isLoadingOverview,
+     isEmptyOverview: state.playerOverviewState.isEmptyOverview,
+-    contextId: state.navigationState.contextId,
++    contextIdHome: state.navigationState.contextIdHome,
++    contextIdFavourites: state.navigationState.contextIdFavourites,
++    contextIdSearch: state.navigationState.contextIdSearch,
+     legendHex: state.settingsState.legendHex,
+     wl: state.playerOverviewState.wl,
+     legend: state.settingsState.legend,
+-    homeTab: state.navigationState.homeTab
++    homeTab: state.navigationState.homeTab,
++    parent: state.navigationState.parent
+ });
+ 
+ export const mapDispatchToProps = (dispatch) => ({
+@@ -51,15 +54,24 @@ class PlayerOverview extends Component {
+     }
+ 
+     componentWillMount() {
+-        this.props.actions.fetchOverview(this.props.contextId);
+-        this.props.actions.fetchWl(this.props.contextId);
++        if(this.props.parent == "Home") {
++            this.props.actions.fetchOverview(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
++            this.props.actions.fetchWl(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
++        } else if (this.props.parent == "Favourites") {
++            this.props.actions.fetchOverview(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
++            this.props.actions.fetchWl(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
++        } else if (this.props.parent == "Search") {
++            this.props.actions.fetchOverview(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
++            this.props.actions.fetchWl(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
++        }
++
+     }
+ 
+     componentWillReceiveProps(nextProps) {
+         if(nextProps.homeTab) {
+             this.props.actions.consumeHomeTab();
+-            this.props.actions.fetchOverview(nextProps.contextId);
+-            this.props.actions.fetchWl(nextProps.contextId);
++            this.props.actions.fetchOverview(nextProps.contextIdHome[nextProps.contextIdHome.length - 1]);
++            this.props.actions.fetchWl(nextProps.contextIdHome[nextProps.contextIdHome.length - 1]);
+         }
+     }
+ 
+diff --git a/app/containers/Splash.js b/app/containers/Splash.js
+index a984ae5..e32dedc 100644
+--- a/app/containers/Splash.js
++++ b/app/containers/Splash.js
+@@ -59,7 +59,7 @@ class Splash extends Component {
+                 if(!(Object.keys(parsedValue).length === 0 && parsedValue.constructor === Object)) {
+                     this.setState({'profileExist': true});
+                 }
+-                this.props.actions.changeContextId(parsedValue.account_id);
++                this.props.actions.pushContextId(parsedValue.account_id, "Home");
+                 this.props.actions.setHomeProfile(parsedValue);
+             }
+         })
+diff --git a/app/reducers/navigation_rdx.js b/app/reducers/navigation_rdx.js
+index b4512f4..bbf6d8f 100644
+--- a/app/reducers/navigation_rdx.js
++++ b/app/reducers/navigation_rdx.js
+@@ -1,6 +1,7 @@
+ import { types } from '../actions/navigation_act';
+-var initialState = { contextId: -1, scene: {}, parent: "Home", homeTab: false };
++var initialState = { contextIdHome: [], contextIdFavourites: [], contextIdSearch: [], scene: {}, parent: "Home", homeTab: false };
+ 
++// TODO: Need to separate contextId into 3 different array. 1 for each drawer item.
+ export default function navigationState(state = initialState, action = {}) {
+     switch(action.type) {
+         case "REACT_NATIVE_ROUTER_FLUX_JUMP":
+@@ -24,7 +25,29 @@ export default function navigationState(state = initialState, action = {}) {
+         case types.CHANGE_PARENT:
+             return Object.assign({}, state, { parent: action.parent });
+         case types.PUSH_CONTEXT_ID:
++            if(action.parentType == "Home") {
++                return Object.assign({}, state, { contextIdHome: [...state.contextIdHome, action.contextId] });
++            } else if (action.parentType == "Favourites") {
++                return Object.assign({}, state, { contextIdHome: [...state.contextIdFavourites, action.contextId] });
++            } else if (action.parentType == "Search") {
++                return Object.assign({}, state, { contextIdHome: [...state.contextIdSearch, action.contextId] });
++            }
+         case types.POP_CONTEXT_ID:
++            if(action.parentType == "Home") {
++                return Object.assign({}, state, { contextIdHome: [...state.contextIdHome.slice(0, state.contextIdHome.length - 1)] });
++            } else if (action.parentType == "Favourites") {
++                return Object.assign({}, state, { contextIdFavourites: [...state.contextIdFavourites.slice(0, state.contextIdFavourites.length - 1)] });
++            } else if (action.parentType == "Search") {
++                return Object.assign({}, state, { contextIdSearch: [...state.contextIdSearch.slice(0, state.contextIdSearch.length - 1)] });
++            }
++        case types.SWITCH_CONTEXT_ID:
++            if(action.parentType == "Home") {
++                return Object.assign({}, state, { contextIdHome: [...state.contextIdHome.slice(0, state.contextIdHome.length - 1), action.contextId] });
++            } else if (action.parentType == "Favourites") {
++                return Object.assign({}, state, { contextIdFavourites: [...state.contextIdFavourites.slice(0, state.contextIdFavourites.length - 1), action.contextId] });
++            } else if (action.parentType == "Search") {
++                return Object.assign({}, state, { contextIdSearch: [...state.contextIdSearch.slice(0, state.contextIdSearch.length - 1), action.contextId] });
++            }
+         default:
+             return state;
+     }
+-- 
+2.8.1
+
