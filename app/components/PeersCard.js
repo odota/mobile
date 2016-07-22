@@ -38,6 +38,7 @@ class PeersCard extends Component {
         this.renderRow = this.renderRow.bind(this);
         this.generateProcessedPeers = this.generateProcessedPeers.bind(this);
         this.onProfilePressed = this.onProfilePressed.bind(this);
+        this.onPeerPressed = this.onPeerPressed.bind(this);
         this.state = {
             processedPeersList: []
         };
@@ -45,6 +46,10 @@ class PeersCard extends Component {
 
     onProfilePressed(accountId) {
         console.log(accountId);
+    }
+
+    onPeerPressed(accountId) {
+
     }
 
     generateProcessedPeers(unprocessedPeersList) {
@@ -103,12 +108,11 @@ class PeersCard extends Component {
             rowContainer = [styles.rowContainer, {backgroundColor: this.props.alpha}];
         }
         return (
-            <View style = {rowContainer}>
-                <TouchableOpacity>
+            <TouchableOpacity onPress = { () => {this.onPeerPressed(rowData.accountId) }}>
+                <View style = {rowContainer}>
                     <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
-                </TouchableOpacity>
-                <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
-                <TouchableOpacity onPress = { () => {this.onProfilePressed(rowData.accountId) }}>
+
+                    <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.peerCell}>
                             <View style = {styles.peerValueTextWrapper}>
@@ -139,13 +143,14 @@ class PeersCard extends Component {
                             <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lastPlayed}</Text>
                         </View>
                     </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+            </TouchableOpacity>
         )
     }
 
     render() {
         if(this.props.peers && this.props.peers.length > 0) {
+            var filteredPeers = this.state.processedPeersList.slice(0, 31);
             return (
                 <View style = {[styles.peersCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
@@ -167,7 +172,7 @@ class PeersCard extends Component {
                         </View>
                     </View>
                     <SGListView style = {styles.peersListView}
-                        dataSource = {this.peersDS.cloneWithRows(this.state.processedPeersList)}
+                        dataSource = {this.peersDS.cloneWithRows(filteredPeers)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}
                         initialListSize = {40}
