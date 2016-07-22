@@ -18,6 +18,7 @@ import * as homeActions from '../actions/home_act';
 import { Avatar } from 'react-native-material-design';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import Toast from 'react-native-root-toast';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -62,12 +63,21 @@ class PlayerCard extends Component {
     }
 
     favouritesPressed(info) {
+        console.log(info);
         if(this.props.parent == "Home") {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
                 this.props.navigationActions.changeContextId(info.account_id);
                 this.props.homeActions.setHomeProfile(info);
+                let toast = Toast.show('Home is set', {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0
+                });
             }
 
             setTimeout(() => {
@@ -83,8 +93,24 @@ class PlayerCard extends Component {
             }
             if(index == -1) {
                 this.props.favouritesActions.addFavourites(info);
+                let toast = Toast.show('Added to Favourites', {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0
+                });
             } else {
                 this.props.favouritesActions.removeFavourites(info.account_id);
+                let toast = Toast.show('Removed from Favourites', {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0
+                });
             }
 
             setTimeout(() => {
@@ -169,6 +195,7 @@ const baseStyles = _.extend(base.general, {
     data: {
         fontFamily: Fonts.base,
         fontSize: 14,
+        overflow: 'hidden'
     },
     separator: {
         height: 2,
@@ -176,7 +203,6 @@ const baseStyles = _.extend(base.general, {
     nameContainer: {
         marginBottom: 5,
         marginTop: 5,
-        flexDirection: 'row'
     },
     favContainer: {
         flex: 1,

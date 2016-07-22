@@ -219,7 +219,7 @@ class HeroesCard extends Component {
 const baseStyles = _.extend(base.general, {
     heroValueText: {
         fontFamily: Fonts.base,
-        fontSize: 14,
+        fontSize: 16,
         alignSelf: 'center'
     },
     avatarContainer: {

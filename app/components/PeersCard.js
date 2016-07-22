@@ -5,11 +5,14 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    ListView
+    ListView,
+    AsyncStorage
 } from 'react-native';
 
 import { Avatar } from 'react-native-material-design';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as favouritesActions from '../actions/favourites_act';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -18,6 +21,7 @@ import Fonts from '../themes/Fonts';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 import SGListView from 'react-native-sglistview';
+import Toast from 'react-native-root-toast';
 
 import moment from 'moment';
 
@@ -27,7 +31,12 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    favourites: state.favouritesState.favourites
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    favouritesActions: bindActionCreators(favouritesActions, dispatch)
 });
 
 class PeersCard extends Component {
@@ -48,8 +57,43 @@ class PeersCard extends Component {
         console.log(accountId);
     }
 
-    onPeerPressed(accountId) {
+    onPeerPressed(accountId, personaName, avatar) {
+        var index = -1;
+        for(i = 0; i < this.props.favourites.length; i++) {
+            if(this.props.favourites[i].account_id == accountId) {
+                index = i;
+            }
+        }
+        if(index == -1) {
+            var info = {};
+            info.account_id = accountId;
+            info.avatarfull = avatar;
+            info.personaname = personaName;
+            this.props.favouritesActions.addFavourites(info);
+            let toast = Toast.show('Added to Favourites', {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0
+            });
+        } else {
+            this.props.favouritesActions.removeFavourites(accountId);
+            let toast = Toast.show('Removed from Favourites', {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0
+            });
+        }
 
+        setTimeout(() => {
+            var favouritesString = JSON.stringify(this.props.favourites);
+            AsyncStorage.setItem("favourites", favouritesString);
+        }, 1000);
     }
 
     generateProcessedPeers(unprocessedPeersList) {
@@ -107,10 +151,28 @@ class PeersCard extends Component {
         } else {
             rowContainer = [styles.rowContainer, {backgroundColor: this.props.alpha}];
         }
+        var iconName;
+        var index = -1;
+        for(i = 0; i < this.props.favourites.length; i++) {
+            if(this.props.favourites[i].account_id == rowData.accountId) {
+                index = i;
+            }
+        }
+
+        if(index == -1) {
+            iconName = <FontAwesome name = "star-o" size = {20} allowFontScaling = {false} color = {this.props.legend} style = {styles.favouriteIcon}/>
+        } else {
+            iconName = <FontAwesome name = "star" size = {20} allowFontScaling = {false} color = {this.props.legend} style = {styles.favouriteIcon}/>
+        }
         return (
-            <TouchableOpacity onPress = { () => {this.onPeerPressed(rowData.accountId) }}>
+            <TouchableOpacity onPress = { () => {this.onPeerPressed(rowData.accountId, rowData.personaName, rowData.avatar)}}>
                 <View style = {rowContainer}>
-                    <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
+                    <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+
+                        <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
+                        {iconName}
+                    </View>
+
 
                     <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
                     <View style = {{flexDirection: 'row'}}>
@@ -192,8 +254,11 @@ class PeersCard extends Component {
 const baseStyles = _.extend(base.general, {
     personaNameText: {
         fontFamily: Fonts.base,
-        fontSize: 14,
-        alignSelf: 'center'
+        fontSize: 16
+    },
+    favouriteIcon: {
+        position: 'absolute',
+        right: 8
     },
     avatarContainer: {
         alignSelf: 'center'
@@ -227,4 +292,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(PeersCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PeersCard);

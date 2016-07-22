@@ -14,6 +14,7 @@
     "react-native-drawer": "^2.2.3",
     "react-native-material-design": "^0.3.6",
     "react-native-navbar": "^1.5.0",
+    "react-native-root-toast": "^1.0.3",
     "react-native-router-flux": "^3.26.16",
     "react-native-scrollable-tab-view": "0.5.0",
     "react-native-sglistview": "^0.3.2",
