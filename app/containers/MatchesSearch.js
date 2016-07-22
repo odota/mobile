@@ -36,7 +36,10 @@ import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
 export const mapStateToProps = state => ({
-    contextId: state.navigationState.contextId,
+    contextIdHome: state.navigationState.contextIdHome,
+    contextIdFavourites: state.navigationState.contextIdFavourites,
+    contextIdSearch: state.navigationState.contextIdSearch,
+    parent: state.navigationState.parent,
     legendHex: state.settingsState.legendHex,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
@@ -145,11 +148,26 @@ class MatchesSearch extends Component {
 
         var defaultProjects = ['hero_id', 'game_mode', 'start_time', 'duration', 'player_slot', 'radiant_win', 'kills', 'deaths', 'assists'];
         this.props.actions.changeSortedby(this.state.sort_category_id);
-        this.props.actions.fetchMatches(this.props.contextId, this.state.match_limit, defaultProjects,
-                                        this.state.sort_category_id, this.state.hero_id,
-                                        this.state.result_id, this.state.faction_id, this.state.game_mode_id,
-                                        this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
-                                        this.state.date_id, this.state.region_id);
+        if(this.props.parent == "Home") {
+            this.props.actions.fetchMatches(this.props.contextIdHome[this.props.contextIdHome.length -1], this.state.match_limit, defaultProjects,
+                                            this.state.sort_category_id, this.state.hero_id,
+                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
+                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
+                                            this.state.date_id, this.state.region_id);
+        } else if (this.props.parent == "Favourites") {
+            this.props.actions.fetchMatches(this.props.contextIdFavourites[this.props.contextIdFavourites.length -1], this.state.match_limit, defaultProjects,
+                                            this.state.sort_category_id, this.state.hero_id,
+                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
+                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
+                                            this.state.date_id, this.state.region_id);
+        } else if (this.props.parent == "Search") {
+            this.props.actions.fetchMatches(this.props.contextIdSearch[this.props.contextIdSearch.length -1], this.state.match_limit, defaultProjects,
+                                            this.state.sort_category_id, this.state.hero_id,
+                                            this.state.result_id, this.state.faction_id, this.state.game_mode_id,
+                                            this.state.lane_id, this.state.lobby_type_id, this.state.patch_id,
+                                            this.state.date_id, this.state.region_id);
+        }
+
         Actions.pop();
     }
 
@@ -198,7 +216,6 @@ class MatchesSearch extends Component {
     render() {
 
         var picker;
-        console.log(this.state);
         if(this.state['hero']) {
             picker = <PickerInput
                         selectedValue = {this.state.hero_id}

@@ -32,11 +32,14 @@ export const mapStateToProps = state => ({
     overview: state.playerOverviewState.overview,
     isLoadingOverview: state.playerOverviewState.isLoadingOverview,
     isEmptyOverview: state.playerOverviewState.isEmptyOverview,
-    contextId: state.navigationState.contextId,
+    contextIdHome: state.navigationState.contextIdHome,
+    contextIdFavourites: state.navigationState.contextIdFavourites,
+    contextIdSearch: state.navigationState.contextIdSearch,
     legendHex: state.settingsState.legendHex,
     wl: state.playerOverviewState.wl,
     legend: state.settingsState.legend,
-    homeTab: state.navigationState.homeTab
+    homeTab: state.navigationState.homeTab,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -51,15 +54,24 @@ class PlayerOverview extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchOverview(this.props.contextId);
-        this.props.actions.fetchWl(this.props.contextId);
+        if(this.props.parent == "Home") {
+            this.props.actions.fetchOverview(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
+            this.props.actions.fetchWl(this.props.contextIdHome[this.props.contextIdHome.length - 1]);
+        } else if (this.props.parent == "Favourites") {
+            this.props.actions.fetchOverview(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
+            this.props.actions.fetchWl(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1]);
+        } else if (this.props.parent == "Search") {
+            this.props.actions.fetchOverview(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
+            this.props.actions.fetchWl(this.props.contextIdSearch[this.props.contextIdSearch.length - 1]);
+        }
+
     }
 
     componentWillReceiveProps(nextProps) {
         if(nextProps.homeTab) {
             this.props.actions.consumeHomeTab();
-            this.props.actions.fetchOverview(nextProps.contextId);
-            this.props.actions.fetchWl(nextProps.contextId);
+            this.props.actions.fetchOverview(nextProps.contextIdHome[nextProps.contextIdHome.length - 1]);
+            this.props.actions.fetchWl(nextProps.contextIdHome[nextProps.contextIdHome.length - 1]);
         }
     }
 

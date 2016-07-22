@@ -16,6 +16,8 @@ import { bindActionCreators } from 'redux';
 
 import NavigationBar from 'react-native-navbar';
 
+import * as navigationActions from '../actions/navigation_act';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -26,7 +28,13 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    scene: state.navigationState.scene,
+    parent: state.navigationState.parent
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(navigationActions, dispatch)
 });
 
 class DeepNavBar extends Component {
@@ -37,6 +45,9 @@ class DeepNavBar extends Component {
     }
 
     backPressed() {
+        if(this.props.scene.sceneKey == "playerProfileHome" || this.props.scene.sceneKey == "playerProfileSearch" || this.props.scene.sceneKey == "playerProfileFavourite") {
+            this.props.actions.popContextId(this.props.parent);
+        }
         Actions.pop();
     }
 
@@ -132,4 +143,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(DeepNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(DeepNavBar);

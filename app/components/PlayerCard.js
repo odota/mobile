@@ -51,7 +51,7 @@ class PlayerCard extends Component {
     }
 
     onPlayerPressed() {
-        this.props.navigationActions.changeContextId(this.props.info.account_id);
+        this.props.navigationActions.switchContextId(this.props.info.account_id, this.props.parent);
         if(this.props.parent == "Favourites") {
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
@@ -66,7 +66,7 @@ class PlayerCard extends Component {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
-                this.props.navigationActions.changeContextId(info.account_id);
+                this.props.navigationActions.switchContextId(info.account_id, this.props.parent);
                 this.props.homeActions.setHomeProfile(info);
             }
 

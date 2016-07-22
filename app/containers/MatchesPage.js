@@ -30,7 +30,9 @@ export const mapStateToProps = state => ({
     matches: state.playerMatchesState.matches,
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
-    contextId: state.navigationState.contextId,
+    contextIdHome: state.navigationState.contextIdHome,
+    contextIdFavourites: state.navigationState.contextIdFavourites,
+    contextIdSearch: state.navigationState.contextIdSearch,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
@@ -62,7 +64,13 @@ class MatchesPage extends Component {
 
     componentWillMount() {
         var projects = ['game_mode'];
-        this.props.actions.fetchMatches(this.props.contextId, 30, projects);
+        if(this.props.parent == "Home") {
+            this.props.actions.fetchMatches(this.props.contextIdHome[this.props.contextIdHome.length - 1], 30, projects);
+        } else if (this.props.parent == "Favourites") {
+            this.props.actions.fetchMatches(this.props.contextIdFavourites[this.props.contextIdFavourites.length - 1], 30, projects);
+        } else if (this.props.parent == "Search") {
+            this.props.actions.fetchMatches(this.props.contextIdSearch[this.props.contextIdSearch.length - 1], 30, projects);
+        }
     }
 
     render() {
