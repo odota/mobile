@@ -4,7 +4,7 @@ export const types = {
     REQUEST_HEROES: 'REQUEST_HEROES',
     RECEIVE_HEROES: 'RECEIVE_HEROES',
     RECEIVE_EMPTY_HEROES: 'RECEIVE_EMPTY_HEROES'
-}
+};
 
 function requestHeroes() {
     return {
