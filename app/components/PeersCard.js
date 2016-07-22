@@ -10,6 +10,10 @@ import {
 
 import { Avatar } from 'react-native-material-design';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux';
+
+import * as navigationActions from '../actions/navigation_act';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -27,7 +31,12 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    parent: state.navigationState.parent
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators(navigationActions, dispatch)
 });
 
 class PeersCard extends Component {
@@ -45,6 +54,14 @@ class PeersCard extends Component {
 
     onProfilePressed(accountId) {
         console.log(accountId);
+        this.props.actions.changeContextId(accountId);
+        if(this.props.parent == "Home") {
+            Actions.playerProfileHome();
+        } else if(this.props.parent == "Favourites") {
+            Actions.playerProfileFavourite();
+        } else if(this.props.parent == "Search") {
+            Actions.playerProfileSearch();
+        }
     }
 
     generateProcessedPeers(unprocessedPeersList) {
@@ -222,4 +239,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(PeersCard);
+export default connect(mapStateToProps, mapDispatchToProps)(PeersCard);
