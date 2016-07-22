@@ -66,6 +66,7 @@ export function fetchWl(playerId) {
 
 export function fetchOverview(playerId) {
     var endpoint = "players/" + playerId;
+    console.log(endpoint);
     return dispatch => {
         dispatch(requestOverview());
 
