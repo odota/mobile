@@ -4,12 +4,9 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ListView,
-    TouchableOpacity,
-    Platform
+    ActivityIndicator,
+    TouchableOpacity
 } from 'react-native';
-
-import ProgressBar from 'ProgressBarAndroid';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -19,7 +16,6 @@ import { Actions } from 'react-native-router-flux';
 import MatchesCard from '../components/MatchesCard';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
 import Colors from '../themes/Colors';
@@ -67,16 +63,10 @@ class MatchesPage extends Component {
 
     render() {
         var content;
-        var spinner;
-        if(Platform.OS == 'ios') {
-            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
-        } else {
-            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
-        }
         if(this.props.isLoadingMatches) {
             content = (
                 <View style = {styles.contentContainer}>
-                    {spinner}
+                    <ActivityIndicator size="large" color = {this.props.legend}/>
                 </View>
             )
         } else if (this.props.isEmptyMatches) {

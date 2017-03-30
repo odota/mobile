@@ -3,9 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     ListView,
-    Platform
+    ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -16,8 +15,6 @@ import * as playerMatchesActions from '../actions/player_matches_act';
 import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 
-import ProgressBar from 'ProgressBarAndroid'
-import Spinner from 'react-native-spinkit';
 import _ from 'lodash';
 
 import ProfileCard from '../components/ProfileCard';
@@ -65,15 +62,10 @@ class PlayerOverview extends Component {
 
     render() {
         var content;
-        if(Platform.OS == 'ios') {
-            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
-        } else {
-            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
-        }
         if(this.props.isLoadingOverview) {
             content = (
                 <View style = {styles.contentContainer}>
-                    {spinner}
+                    <ActivityIndicator size="large" color = {this.props.legend}/>
                 </View>
             )
         } else if(this.props.isEmptyOverview) {
