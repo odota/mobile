@@ -57,8 +57,7 @@ class MatchesPage extends Component {
     }
 
     componentWillMount() {
-        var projects = ['game_mode'];
-        this.props.actions.fetchMatches(this.props.contextId, 30, projects);
+        this.props.actions.fetchMatches(this.props.contextId, 30);
     }
 
     render() {

@@ -20,7 +20,6 @@ import Fonts from '../themes/Fonts';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
-import SGListView from 'react-native-sglistview';
 import Toast from 'react-native-root-toast';
 
 import moment from 'moment';
@@ -233,7 +232,7 @@ class PeersCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
                         </View>
                     </View>
-                    <SGListView style = {styles.peersListView}
+                    <ListView style = {styles.peersListView}
                         dataSource = {this.peersDS.cloneWithRows(filteredPeers)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}

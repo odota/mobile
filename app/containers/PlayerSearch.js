@@ -16,7 +16,6 @@ import * as settingsActions from '../actions/settings_act';
 import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 
-import SGListView from 'react-native-sglistview';
 
 import _ from 'lodash';
 
@@ -85,10 +84,9 @@ class PlayerSearch extends Component {
                 </View>
             )
         } else if(this.props.players.length > 0){
-            console.log('xd');
             contentBottom = (
                 <ScrollView>
-                    <SGListView
+                    <ListView
                         dataSource = {this.ds.cloneWithRows(this.props.players)}
                         renderRow = {this.renderRow}
                         style = {styles.listView}

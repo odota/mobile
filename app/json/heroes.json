@@ -666,6 +666,16 @@
         "id": 113,
         "localized_name": "Arc Warden",
         "img": "../assets/heroes/arc_warden_full.png"
+      },
+      {
+        "name":"npc_dota_hero_abyssal_underlord",
+        "id":108,
+        "localized_name":"Underlord"
+      },
+      {
+        "name":"npc_dota_hero_monkey_king",
+        "id":114,
+        "localized_name":"Monkey King"
       }
     ],
     "status": 200,

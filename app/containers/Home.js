@@ -14,12 +14,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as homeActions from '../actions/home_act';
 import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-import ProgressBar from 'ProgressBarAndroid';
-import Spinner from 'react-native-spinkit';
-import SGListView from 'react-native-sglistview';
 
 import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
