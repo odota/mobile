@@ -212,6 +212,8 @@ export function getHeroImage(id) {
         staticImage = require('../assets/heroes/ember_spirit_full.png');
     } else if (id == 107) {
         staticImage = require('../assets/heroes/earth_spirit_full.png');
+    } else if (id == 108) {
+        staticImage = require('../assets/heroes/underlord_full.png');
     } else if (id == 109) {
         staticImage = require('../assets/heroes/terrorblade_full.png');
     } else if (id == 110) {
@@ -222,6 +224,8 @@ export function getHeroImage(id) {
         staticImage = require('../assets/heroes/winter_wyvern_full.png');
     } else if (id == 113) {
         staticImage = require('../assets/heroes/arc_warden_full.png');
+    } else if (id == 114) {
+        staticImage = require('../assets/heroes/monkey_king_full.png');
     } else {
         staticImage = require('../assets/heroes/rubick_full.png');
     }

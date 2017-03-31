@@ -18,7 +18,6 @@ import Fonts from '../themes/Fonts';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
-import SGListView from 'react-native-sglistview';
 
 import heroes from '../json/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
@@ -153,21 +152,21 @@ class HeroesCard extends Component {
                     </View>
                     <View style = {styles.playedCell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.games}</Text>
-                        <Slider disabled = {true}
-                                value = {rowData.playedRate}
-                                minimumTrackTintColor = {Colors.lose}
-                                maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
-                                style = {styles.sliderContainer}
-                                thumbStyle = {styles.hiddenThumb}/>
+                        {/*<Slider disabled = {true}*/}
+                                {/*value = {rowData.playedRate}*/}
+                                {/*minimumTrackTintColor = {Colors.lose}*/}
+                                {/*maximumTrackTintColor = 'rgba(255, 255, 255, 0)'*/}
+                                {/*style = {styles.sliderContainer}*/}
+                                {/*thumbStyle = {styles.hiddenThumb}/>*/}
                     </View>
                     <View style = {styles.winCell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.winPercentage}%</Text>
-                        <Slider disabled = {true}
-                                value = {rowData.winrate}
-                                minimumTrackTintColor = {Colors.win}
-                                maximumTrackTintColor = 'rgba(255, 255, 255, 0)'
-                                style = {styles.sliderContainer}
-                                thumbStyle = {styles.hiddenThumb}/>
+                        {/*<Slider disabled = {true}*/}
+                                {/*value = {rowData.winrate}*/}
+                                {/*minimumTrackTintColor = {Colors.win}*/}
+                                {/*maximumTrackTintColor = 'rgba(255, 255, 255, 0)'*/}
+                                {/*style = {styles.sliderContainer}*/}
+                                {/*thumbStyle = {styles.hiddenThumb}/>*/}
                     </View>
                     <View style = {styles.lastPlayedCell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lastPlayed}</Text>
@@ -200,7 +199,7 @@ class HeroesCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
                         </View>
                     </View>
-                    <SGListView style = {styles.heroesListView}
+                    <ListView
                         dataSource = {this.heroesDS.cloneWithRows(this.state.processedHeroList)}
                         renderRow = {this.renderRow}
                         enableEmptySections = {true}

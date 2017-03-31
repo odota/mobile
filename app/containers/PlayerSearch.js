@@ -6,8 +6,7 @@ import {
     TextInput,
     ScrollView,
     ListView,
-    AsyncStorage,
-    Platform
+    ActivityIndicator
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -17,9 +16,6 @@ import * as settingsActions from '../actions/settings_act';
 import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 
-import ProgressBar from 'ProgressBarAndroid';
-import Spinner from 'react-native-spinkit';
-import SGListView from 'react-native-sglistview';
 
 import _ from 'lodash';
 
@@ -75,15 +71,10 @@ class PlayerSearch extends Component {
 
     render() {
         var contentBottom;
-        if(Platform.OS == 'ios') {
-            spinner = <Spinner isVisible = {true} size = {100} type = 'Pulse' color = {this.props.legendHex} />
-        } else {
-            spinner = <ProgressBar styleAttr = "Large" color = {this.props.legend}/>
-        }
         if(this.props.isLoadingPlayers) {
             contentBottom = (
                 <View style = {styles.contentContainer}>
-                    {spinner}
+                    <ActivityIndicator size="large" color = {this.props.legend}/>
                 </View>
             )
         } else if(this.props.isEmptyPlayers) {
@@ -95,7 +86,7 @@ class PlayerSearch extends Component {
         } else if(this.props.players.length > 0){
             contentBottom = (
                 <ScrollView>
-                    <SGListView
+                    <ListView
                         dataSource = {this.ds.cloneWithRows(this.props.players)}
                         renderRow = {this.renderRow}
                         style = {styles.listView}

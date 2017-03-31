@@ -36,11 +36,15 @@ export function changeSortedby(sortedBy) {
 export function fetchMatches(   playerId, limit, projects, sortCategory, heroId, result,
                                 faction, gameMode, lane, lobbyType, patch, date, region) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
-    for(i = 0; i < projects.length; i++) {
-        endpoint += ("&project=" + projects[i]);
+
+    if(projects){
+        for(i = 0; i < projects.length; i++) {
+            endpoint += ("&project=" + projects[i]);
+        }
     }
+
     if(sortCategory !== undefined && sortCategory !== "match_id") {
-        endpoint += ("&desc=" + sortCategory);
+        endpoint += ("&sort=" + sortCategory);
     }
 
     if(heroId !== undefined && heroId !== 0) {
