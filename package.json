@@ -10,7 +10,7 @@
     "lodash": "^4.15.0",
     "moment": "^2.15.0",
     "react": "^15.3.1",
-    "react-native": "^0.42.3",
+    "react-native": "^0.43.4",
     "react-native-drawer": "^2.3.0",
     "react-native-material-design": "^0.3.7",
     "react-native-navbar": "^1.5.1",
