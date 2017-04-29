@@ -1,6 +1,8 @@
 mobile
 ====
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/odota/mobile.svg)](https://greenkeeper.io/)
+
 Overview
 ----
 * This project uses the [OpenDota API](https://docs.opendota.com/) to show data on your mobile device (Android or iOS).
