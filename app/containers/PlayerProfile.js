@@ -36,7 +36,8 @@ class PlayerProfile extends Component {
 
     render() {
         return(
-            <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineColor = {this.props.legend}>
+            <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
+                locked = {true}>
                 <PlayerOverview tabLabel = "Overview" />
                 <MatchesPage tabLabel = "Matches" />
                 <HeroesPage tabLabel = "Heroes" />
@@ -50,7 +51,13 @@ class PlayerProfile extends Component {
 const baseStyles = _.extend(base.general, {
     tabBarText: {
         fontFamily: Fonts.base,
-        fontSize: 14
+        fontSize: 16,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    tabBarUnderlineStyle: {
+
     }
 });
 

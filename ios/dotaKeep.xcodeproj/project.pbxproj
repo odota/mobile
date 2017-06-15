@@ -28,6 +28,7 @@
 		5BE68A0ED0A447FAA5713319 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A70F801B64964A848EDA1739 /* Ionicons.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8ABC12F679B049B2AEF747DE /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63AC70A844354B73B0F6AFB3 /* EvilIcons.ttf */; };
+		AE679DC01EF24B37004858EF /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE679DA51EF24B06004858EF /* libRCTAnimation.a */; };
 		AEDA7ECB1D8FBD9400A0E502 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */; };
 		BC0620DA502442A8975DC30C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */; };
 		BF83E837509F4765841E9892 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF3FC8F429BB45C2AC333D51 /* Octicons.ttf */; };
@@ -233,6 +234,20 @@
 			remoteGlobalIDString = 641194871EC9FD4A00D4FC03;
 			remoteInfo = "RNSpinkit-tvOS";
 		};
+		AE679DA21EF24B06004858EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RCTAnimation;
+		};
+		AE679DA41EF24B06004858EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28201D9B03D100D4039D;
+			remoteInfo = "RCTAnimation-tvOS";
+		};
 		AEDA7EB71D8FB0D200A0E502 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F285CA5FD0FA41FB9B7C1129 /* RNSpinkit.xcodeproj */;
@@ -281,6 +296,7 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		A70F801B64964A848EDA1739 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		A99A49CA8D1F47B0BB1075F0 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
+		AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
 		CF3FC8F429BB45C2AC333D51 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		F285CA5FD0FA41FB9B7C1129 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
@@ -308,6 +324,7 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
+				AE679DC01EF24B37004858EF /* libRCTAnimation.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				E01A3D03AEAA4B6F89A7360B /* libRNSpinkit.a in Frameworks */,
 				C753278F173B476BB76E5354 /* libRNVectorIcons.a in Frameworks */,
@@ -453,6 +470,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
 				00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */,
@@ -508,6 +526,15 @@
 				408BB2F7FD6142DE9A6E4B94 /* libRNVectorIcons.a */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		AE679D9D1EF24B06004858EF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE679DA31EF24B06004858EF /* libRCTAnimation.a */,
+				AE679DA51EF24B06004858EF /* libRCTAnimation.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		AEDA7EAA1D8FB0D200A0E502 /* Products */ = {
@@ -601,6 +628,10 @@
 				{
 					ProductGroup = 00C302A81ABCB8CE00DB3ED1 /* Products */;
 					ProjectRef = 00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */;
+				},
+				{
+					ProductGroup = AE679D9D1EF24B06004858EF /* Products */;
+					ProjectRef = AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302B61ABCB90400DB3ED1 /* Products */;
@@ -836,6 +867,20 @@
 			fileType = archive.ar;
 			path = libRNSpinkit.a;
 			remoteRef = AE47370E1EF237C900D0A6C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE679DA31EF24B06004858EF /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = AE679DA21EF24B06004858EF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		AE679DA51EF24B06004858EF /* libRCTAnimation.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTAnimation.a;
+			remoteRef = AE679DA41EF24B06004858EF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		AEDA7EB81D8FB0D200A0E502 /* libRNSpinkit.a */ = {

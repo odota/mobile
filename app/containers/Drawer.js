@@ -26,8 +26,11 @@ class Drawers extends Component {
                 tapToClose = {true}
                 openDrawerOffset = {0.3}
                 negotiatePan = {true}
-                panOpenMask = {0.05}
-                >
+                panCloseMask = {0.2}
+                panOpenMask = {0.1}
+                tweenHandler={(ratio) => ({
+                 main: { opacity:Math.max(0.54,1-ratio) }
+             })}>
                 <DefaultRenderer navigationState = {children[0]} onNavigate = {this.props.onNavigate}/>
             </Drawer>
         );

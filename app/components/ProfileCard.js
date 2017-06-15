@@ -158,7 +158,8 @@ const baseStyles = _.extend(base.general, {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10
+        marginTop: 40,
+        marginBottom: 30
     },
     dataContainer: {
         flex: 4,
@@ -204,7 +205,7 @@ const baseStyles = _.extend(base.general, {
     },
     mmrContainer: {
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 60,
         marginBottom: 10,
         marginLeft: 10,
         marginRight: 10
