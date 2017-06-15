@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dotakeep"
+    package="com.opendota"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -8,7 +8,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="22" />
+        android:targetSdkVersion="25" />
 
     <application
         android:name=".MainApplication"

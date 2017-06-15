@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "clear": "npm cache clean && watchman watch-del-all && rm -rf $TMPDIR/react-*",
-    "postinstall": "rndebugger-open"
+    "clear": "npm cache clean && watchman watch-del-all && rm -rf $TMPDIR/react-*"
   },
   "dependencies": {
     "lodash": "^4.15.0",
