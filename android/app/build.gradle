@@ -87,9 +87,9 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.dotakeep"
+        applicationId "com.opendota"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         ndk {

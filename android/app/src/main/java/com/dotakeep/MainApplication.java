@@ -1,4 +1,4 @@
-package com.dotakeep;
+package com.opendota;
 
 import android.app.Application;
 import android.util.Log;

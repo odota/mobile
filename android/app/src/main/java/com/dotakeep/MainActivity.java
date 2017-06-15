@@ -1,4 +1,4 @@
-package com.dotakeep;
+package com.opendota;
 
 import com.facebook.react.ReactActivity;
 import com.oblador.vectoricons.VectorIconsPackage;
