@@ -668,14 +668,16 @@
         "img": "../assets/heroes/arc_warden_full.png"
       },
       {
-        "name":"npc_dota_hero_abyssal_underlord",
-        "id":108,
-        "localized_name":"Underlord"
+        "name": "npc_dota_hero_abyssal_underlord",
+        "id": 108,
+        "localized_name": "Underlord",
+        "img": "../assets/heroes/abyssal_underlord_full.png"
       },
       {
-        "name":"npc_dota_hero_monkey_king",
-        "id":114,
-        "localized_name":"Monkey King"
+        "name": "npc_dota_hero_monkey_king",
+        "id": 114,
+        "localized_name": "Monkey King",
+        "img": "../assets/heroes/monkey_king_full.png"
       }
     ],
     "status": 200,

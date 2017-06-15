@@ -14,7 +14,7 @@ import modalNavBar from '../components/ModalNavBar';
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { BackAndroid, Text } from 'react-native';
+import { BackHandler, Text } from 'react-native';
 
 import Colors from '../themes/Colors';
 
@@ -27,7 +27,7 @@ class DotaKeepApp extends Component {
     }
 
     render() {
-        BackAndroid.addEventListener('hardwareBackPress', () => {
+        BackHandler.addEventListener('hardwareBackPress', () => {
             try {
                 return Actions.pop();
             } catch (err) {
