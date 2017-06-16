@@ -17,8 +17,6 @@ import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import SGListView from 'react-native-sglistview';
-
 import _ from 'lodash';
 
 import Colors from '../themes/Colors';
@@ -75,7 +73,7 @@ class Favourite extends Component {
         } else {
             content = (
                 <View style = {{flex: 1}}>
-                    <SGListView
+                    <ListView
                         dataSource = {this.ds.cloneWithRows(this.props.favouritesList)}
                         renderRow = {this.renderRow}
                         style = {styles.listView}
