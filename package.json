@@ -9,8 +9,8 @@
   "dependencies": {
     "lodash": "^4.15.0",
     "moment": "^2.15.0",
-    "react": "^16.0.0-alpha.12",
-    "react-native": "^0.45.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.45.1",
     "react-native-drawer": "^2.3.0",
     "react-native-material-design": "^0.3.7",
     "react-native-navbar": "^1.5.1",
