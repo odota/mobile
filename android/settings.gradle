@@ -1,4 +1,4 @@
-rootProject.name = 'dotaKeep'
+rootProject.name = 'OpenDota'
 
 include ':app'
 include ':react-native-vector-icons'

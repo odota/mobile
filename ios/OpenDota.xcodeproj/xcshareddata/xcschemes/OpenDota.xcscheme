@@ -15,23 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "dotaKeep.app"
-               BlueprintName = "dotaKeep"
-               ReferencedContainer = "container:dotaKeep.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "dotaKeepTests.xctest"
-               BlueprintName = "dotaKeepTests"
-               ReferencedContainer = "container:dotaKeep.xcodeproj">
+               BuildableName = "OpenDota.app"
+               BlueprintName = "OpenDota"
+               ReferencedContainer = "container:OpenDota.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -42,26 +28,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "dotaKeepTests.xctest"
-               BlueprintName = "dotaKeepTests"
-               ReferencedContainer = "container:dotaKeep.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "dotaKeep.app"
-            BlueprintName = "dotaKeep"
-            ReferencedContainer = "container:dotaKeep.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -80,9 +47,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "dotaKeep.app"
-            BlueprintName = "dotaKeep"
-            ReferencedContainer = "container:dotaKeep.xcodeproj">
+            BuildableName = "OpenDota.app"
+            BlueprintName = "OpenDota"
+            ReferencedContainer = "container:OpenDota.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,16 +61,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "dotaKeep.app"
-            BlueprintName = "dotaKeep"
-            ReferencedContainer = "container:dotaKeep.xcodeproj">
+            BuildableName = "OpenDota.app"
+            BlueprintName = "OpenDota"
+            ReferencedContainer = "container:OpenDota.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

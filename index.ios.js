@@ -7,4 +7,4 @@ import {
     AppRegistry
 } from 'react-native';
 
-AppRegistry.registerComponent('dotaKeep', () => App)
+AppRegistry.registerComponent('OpenDota', () => App)
