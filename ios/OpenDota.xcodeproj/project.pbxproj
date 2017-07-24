@@ -545,11 +545,6 @@
 			attributes = {
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = OpenDota;
-				TargetAttributes = {
-					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = T7MURUAQGN;
-					};
-				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "OpenDota" */;
 			compatibilityVersion = "Xcode 8.0";
@@ -925,7 +920,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.opendota.OpenDota;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opendota;
 				PRODUCT_NAME = OpenDota;
 			};
 			name = Debug;
@@ -948,7 +943,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.opendota.OpenDota;
+				PRODUCT_BUNDLE_IDENTIFIER = com.opendota;
 				PRODUCT_NAME = OpenDota;
 			};
 			name = Release;

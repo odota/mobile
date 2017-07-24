@@ -86,7 +86,7 @@ class NavBar extends Component {
             rightElements = (
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onPurgeFavouritesPressed()}}>
-                        <View style = {styles.leftNavButtonView}>
+                        <View style = {styles.rightNavButtonView}>
                             <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>
                     </TouchableOpacity>
@@ -96,7 +96,7 @@ class NavBar extends Component {
             rightElements = (
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
-                        <View style = {styles.leftNavButtonView}>
+                        <View style = {styles.rightNavButtonView}>
                             <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>
                     </TouchableOpacity>
@@ -165,21 +165,29 @@ const baseStyles = _.extend(base.general, {
         paddingRight: 30
     },
     title: {
-        flex: 1,
         fontSize: 20,
         fontFamily: Fonts.base,
         marginLeft: 10,
         marginRight: 10
     },
     navItemView: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     leftNavButtonView: {
-        paddingLeft: 20,
+        marginLeft: -10,
         paddingRight: 20,
+        paddingTop: 8,
+        paddingBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+        flex: 1
+    },
+    rightNavButtonView: {
+        marginRight: -10,
+        paddingLeft: 20,
         paddingTop: 8,
         paddingBottom: 8,
         justifyContent: 'center',
