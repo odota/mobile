@@ -20,6 +20,20 @@ export function changeTheme(themeSet) {
         secondLegend = Colors.hyperfuseSecondLegend;
         legendHex = Colors.hyperfuseLegendHex;
         legendTranslucent = Colors.hyperfuseLegendTranslucent;
+    } else if (themeSet == 3) {
+        alpha = Colors.hasteAlpha;
+        mod = Colors.hasteMod;
+        legend = Colors.hasteLegend;
+        secondLegend = Colors.hasteSecondLegend;
+        legendHex = Colors.hasteLegendHex;
+        legendTranslucent = Colors.hasteLegendTranslucent;
+    } else if (themeSet == 4) {
+        alpha = Colors.invisibilityAlpha;
+        mod = Colors.invisibilityMod;
+        legend = Colors.invisibilityLegend;
+        secondLegend = Colors.invisibilitySecondLegend;
+        legendHex = Colors.invisibilityLegendHex;
+        legendTranslucent = Colors.invisibilityLegendTranslucent;
     } else if (themeSet == 5) {
         alpha = Colors.doubleDamageAlpha;
         mod = Colors.doubleDamageMod;
@@ -27,6 +41,20 @@ export function changeTheme(themeSet) {
         secondLegend = Colors.doubleDamageSecondLegend;
         legendHex = Colors.doubleDamageLegendHex;
         legendTranslucent = Colors.doubleDamageLegendTranslucent;
+    } else if (themeSet == 6) {
+        alpha = Colors.regenerationAlpha;
+        mod = Colors.regenerationMod;
+        legend = Colors.regenerationLegend;
+        secondLegend = Colors.regenerationSecondLegend;
+        legendHex = Colors.regenerationLegendHex;
+        legendTranslucent = Colors.regenerationLegendTranslucent;
+    } else if (themeSet == 7) {
+        alpha = Colors.illusionAlpha;
+        mod = Colors.illusionMod;
+        legend = Colors.illusionLegend;
+        secondLegend = Colors.illusionSecondLegend;
+        legendHex = Colors.illusionLegendHex;
+        legendTranslucent = Colors.illusionLegendTranslucent;
     } else {
         console.log(value);
     }
