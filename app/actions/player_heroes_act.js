@@ -3,7 +3,9 @@ import { fetchAPI } from '../utils/fetch';
 export const types = {
     REQUEST_HEROES: 'REQUEST_HEROES',
     RECEIVE_HEROES: 'RECEIVE_HEROES',
-    RECEIVE_EMPTY_HEROES: 'RECEIVE_EMPTY_HEROES'
+    RECEIVE_EMPTY_HEROES: 'RECEIVE_EMPTY_HEROES',
+    NAVIGATE_NEXT: 'NAVIGATE_NEXT',
+    NAVIGATE_PREVIOUS: 'NAVIGATE_PREVIOUS'
 };
 
 function requestHeroes() {
@@ -40,5 +42,17 @@ export function fetchHeroes(playerId, limit) {
             console.log("Action - FETCH MATCHES ERROR - " + error);
             dispatch(receiveEmptyHeroes());
         });
+    }
+}
+
+export function navigateNext() {
+    return {
+        type: types.NAVIGATE_NEXT
+    }
+}
+
+export function navigatePrevious() {
+    return {
+        type: types.NAVIGATE_PREVIOUS
     }
 }

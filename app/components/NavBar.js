@@ -176,7 +176,6 @@ const baseStyles = _.extend(base.general, {
         justifyContent: 'center',
     },
     leftNavButtonView: {
-        marginLeft: -10,
         paddingRight: 20,
         paddingTop: 8,
         paddingBottom: 8,
@@ -186,7 +185,6 @@ const baseStyles = _.extend(base.general, {
         flex: 1
     },
     rightNavButtonView: {
-        marginRight: -10,
         paddingLeft: 20,
         paddingTop: 8,
         paddingBottom: 8,

@@ -128,6 +128,14 @@ class HeroesCard extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.heroes && nextProps.heroes.length > 0) {
+            var heroesList = nextProps.heroes;
+            var processedHeroList = this.generateProcessedArray(heroesList);
+            this.setState({processedHeroList: processedHeroList});
+        }
+    }
+
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
@@ -139,7 +147,7 @@ class HeroesCard extends Component {
         return (
             <View style = {rowContainer}>
                 <Text style = {[styles.heroValueText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.localizedName}</Text>
-                <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
+                <View style = {[styles.inRowSeparator, {backgroundColor: this.props.legend}]} />
                 <View style = {{flexDirection: 'row'}}>
 
                     <View style = {styles.heroCell}>
