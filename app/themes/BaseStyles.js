@@ -170,10 +170,14 @@ const base = {
         },
         inRowSeparator: {
             height: 2,
-            marginLeft: 10,
-            marginRight: 10,
             marginTop: 5,
             marginBottom: 5
+        },
+        filterText: {
+            justifyContent: 'center',
+            alignSelf: 'center',
+            marginTop: 10,
+            marginBottom: 10
         }
     }
 }

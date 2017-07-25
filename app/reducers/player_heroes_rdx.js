@@ -1,5 +1,5 @@
 import { types } from '../actions/player_heroes_act';
-var initialState = { isLoadingHeroes: false, isEmptyHeroes: false, heroes: {} };
+var initialState = { isLoadingHeroes: false, isEmptyHeroes: false, heroes: {}, page: 1 };
 
 export default function playerHeroesState(state = initialState, action = {}) {
     switch(action.type) {
@@ -9,6 +9,10 @@ export default function playerHeroesState(state = initialState, action = {}) {
             return Object.assign({}, state, { isLoadingHeroes: false, isEmptyHeroes: false, heroes: action.heroes });
         case types.RECEIVE_EMPTY_HEROES:
             return Object.assign({}, state, { isLoadingHeroes: false, isEmptyHeroes: true, heroes: {} });
+        case types.NAVIGATE_NEXT:
+            return Object.assign({}, state, { page: state.page + 1 });
+        case types.NAVIGATE_PREVIOUS:
+            return Object.assign({}, state, { page: state.page - 1 });
         default:
             return state;
     }

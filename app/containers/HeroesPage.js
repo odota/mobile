@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ActivityIndicator
+    ActivityIndicator,
+    TouchableOpacity
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -14,6 +15,7 @@ import { Actions } from 'react-native-router-flux';
 
 import HeroesCard from '../components/HeroesCard';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 
 import Colors from '../themes/Colors';
@@ -22,6 +24,7 @@ import Fonts from '../themes/Fonts';
 
 export const mapStateToProps = state => ({
     heroes: state.playerHeroesState.heroes,
+    page: state.playerHeroesState.page,
     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
     isEmptyHeroes: state.playerHeroesState.isEmptyHeroes,
     contextId: state.navigationState.contextId,
@@ -37,14 +40,76 @@ class HeroesPage extends Component {
 
     constructor(props) {
         super(props);
+        this.previousControl = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigatePrevious()}}>
+                <View style = {styles.individualPageControlView}>
+                    <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
+        this.nextControl = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigateNext()}}>
+                <View style = {styles.individualPageControlView}>
+                    <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
     }
 
     componentWillMount() {
         this.props.actions.fetchHeroes(this.props.contextId, 30);
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.initialValue = 1 + ((nextProps.page - 1) * 20);
+        this.endValue = nextProps.page * 20;
+        this.totalHeroes = nextProps.heroes.length;
+        this.pageControl = (<View/>);
+        if(this.totalHeroes > 0){
+            if(this.endValue > this.totalHeroes) {
+                this.endValue = this.totalHeroes;
+            }
+            this.heroesSubset = new Array();
+            for(var i = this.initialValue-1; i < this.endValue; i++) {
+                this.heroesSubset.push(nextProps.heroes[i]);
+            }
+
+            if(this.initialValue == 1) {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        {this.nextControl}
+                    </View>
+                );
+            } else if (this.endValue == this.totalHeroes) {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        {this.previousControl}
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        <FontAwesome style={styles.individualPageControlView} name = "chevron-right" size = {40} allowFontScaling = {false} color = "#00000000"/>
+                    </View>
+                );
+            } else {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        {this.previousControl}
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        {this.nextControl}
+                    </View>
+                );
+            }
+        }
+    }
+
     render() {
-        var content;
+        var content = (<View/>);
         if(this.props.isLoadingHeroes) {
             content = (
                 <View style = {styles.contentContainer}>
@@ -57,10 +122,14 @@ class HeroesPage extends Component {
                     <Text style = {styles.noDataText}>No data found</Text>
                 </View>
             )
-        } else {
+        } else if (this.heroesSubset != null){
             content = (
                 <ScrollView style = {{marginTop: 5}}>
-                    <HeroesCard heroes = {this.props.heroes} />
+                    <HeroesCard heroes = {this.heroesSubset} />
+                    {this.pageControl}
+                    <Text style = {styles.filterText}>
+                        {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
+                    </Text>
                 </ScrollView>
             )
         }
@@ -75,7 +144,28 @@ class HeroesPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-
+    paginationContainer: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
+    individualPageControlView: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        paddingLeft: 40,
+        paddingRight: 40
+    },
+    individualPageControl: {
+        fontSize: 40
+    },
+    pageContainer: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginBottom: 5
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);
