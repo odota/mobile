@@ -158,7 +158,7 @@ const baseStyles = _.extend(base.general, {
         paddingRight: 40
     },
     individualPageControl: {
-        fontSize: 40
+        fontSize: 32
     },
     pageContainer: {
         alignItems: 'center',

@@ -8,6 +8,9 @@
   },
   "dependencies": {
     "lodash": "^4.15.0",
+    "mobile-center": "^0.7.0",
+    "mobile-center-analytics": "^0.7.0",
+    "mobile-center-crashes": "^0.7.0",
     "moment": "^2.15.0",
     "react": "16.0.0-alpha.12",
     "react-native": "^0.46.4",
