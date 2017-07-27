@@ -48,7 +48,7 @@ class ModalNavBar extends Component {
             <View style = {styles.navItemView}>
                 <TouchableOpacity onPress = {() => {this.backPressed()}}>
                     <View style = {styles.leftNavButtonView}>
-                        <FontAwesome name = "times" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                        <FontAwesome name = "times" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                     </View>
                 </TouchableOpacity>
                 {title}
@@ -115,13 +115,11 @@ const baseStyles = _.extend(base.general, {
         marginRight: 10
     },
     navItemView: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     leftNavButtonView: {
-        paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 8,
         paddingBottom: 8,

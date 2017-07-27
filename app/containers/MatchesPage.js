@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ScrollView,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -26,6 +27,7 @@ export const mapStateToProps = state => ({
     matches: state.playerMatchesState.matches,
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
+    page: state.playerMatchesState.page,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
@@ -44,6 +46,31 @@ class MatchesPage extends Component {
     constructor(props) {
         super(props);
         this.onSearchPressed = this.onSearchPressed.bind(this);
+        this.previousControl = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches()}}>
+                <View style = {styles.individualPageControlView}>
+                    <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
+        this.nextControl = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches()}}>
+                <View style = {styles.individualPageControlView}>
+                    <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
+        this.pageControl = (<View/>);
+        this.state = {
+            refreshing: false
+        };
+    }
+
+    onRefresh() {
+        this.setState({refreshing: true});
+        this.props.actions.fetchMatches(this.props.contextId).then(() => {
+            this.setState({refreshing: false});
+        });
     }
 
     onSearchPressed() {
@@ -57,11 +84,58 @@ class MatchesPage extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchMatches(this.props.contextId, 30);
+        this.props.actions.fetchMatches(this.props.contextId);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.initialValue = 1 + ((nextProps.page - 1) * 20);
+        this.endValue = nextProps.page * 20;
+        this.totalMatches = nextProps.matches.length;
+
+        if(this.totalMatches > 0) {
+            if(this.endValue > this.totalMatches) {
+                this.endValue = this.totalMatches;
+            }
+            this.matchesSubset = new Array();
+            for(var i = this.initialValue - 1; i < this.endValue; i ++) {
+                this.matchesSubset.push(nextProps.matches[i]);
+            }
+            if(this.initialValue == 1){
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        {this.nextControl}
+                    </View>
+                );
+            } else if (this.endValue == this.totalPeers) {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        {this.previousControl}
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        <FontAwesome style={styles.individualPageControlView} name = "chevron-right" size = {40} allowFontScaling = {false} color = "#00000000"/>
+                    </View>
+                );
+            } else {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        {this.previousControl}
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                        {this.nextControl}
+                    </View>
+                );
+            }
+        }
     }
 
     render() {
-        var content;
+        var content = (<View />);
         if(this.props.isLoadingMatches) {
             content = (
                 <View style = {styles.contentContainer}>
@@ -74,9 +148,21 @@ class MatchesPage extends Component {
                     <Text style = {styles.noDataText}>No data found</Text>
                 </View>
             )
-        } else {
+        } else if (this.matchesSubset != null){
+            var refreshColor = this.props.legendHex;
             content = (
-                <ScrollView style = {{marginTop: 5}}>
+                <ScrollView style = {{marginTop: 5}}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing = {this.state.refreshing}
+                            onRefresh = {this.onRefresh.bind(this)}
+                            tintColor = {refreshColor}
+                            title = 'Refreshing'
+                            titleColor = {refreshColor}
+                            colors = {[refreshColor]}
+                            progressBackgroundColor="#ffffffff"
+                        />
+                    }>
                         <TouchableOpacity  onPress = {this.onSearchPressed} style = {styles.searchContainer}>
                             <View style = {[styles.searchIconContainer, {backgroundColor: this.props.mod}]}>
                                 <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
@@ -85,7 +171,14 @@ class MatchesPage extends Component {
                                 <Text style = {[styles.searchButtonText, {color: this.props.legend}]}>Search Matches</Text>
                             </View>
                         </TouchableOpacity>
-                    <MatchesCard matches = {this.props.matches} default = {false} />
+                    <Text style = {styles.filterText}>
+                        {this.initialValue} - {this.endValue} of {this.totalMatches} matches
+                    </Text>
+                    <MatchesCard matches = {this.matchesSubset} default = {false} />
+                    {this.pageControl}
+                    <Text style = {styles.filterText}>
+                        {this.initialValue} - {this.endValue} of {this.totalMatches} matches
+                    </Text>
                 </ScrollView>
             )
         }
@@ -133,7 +226,30 @@ const baseStyles = _.extend(base.general, {
         paddingLeft: 10,
         paddingRight: 10,
         flex: 1
+    },
+    paginationContainer: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
+    individualPageControlView: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        paddingLeft: 40,
+        paddingRight: 40
+    },
+    individualPageControl: {
+        fontSize: 32
+    },
+    pageContainer: {
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginBottom: 5
     }
+
 });
 
 const styles = StyleSheet.create(baseStyles);

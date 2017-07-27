@@ -4,7 +4,21 @@ export const types = {
     REQUEST_MATCHES: 'REQUEST_MATCHES',
     RECEIVE_MATCHES: 'RECEIVE_MATCHES',
     RECEIVE_EMPTY_MATCHES: 'RECEIVE_EMPTY_MATCHES',
-    CHANGE_SORTED_BY: 'CHANGE_SORTED_BY'
+    CHANGE_SORTED_BY: 'CHANGE_SORTED_BY',
+    NAVIGATE_NEXT_MATCHES: 'NAVIGATE_NEXT_MATCHES',
+    NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES'
+}
+
+export function navigateNextMatches() {
+    return {
+        type: types.NAVIGATE_NEXT_MATCHES
+    };
+}
+
+export function navigatePreviousMatches() {
+    return {
+        type: types.NAVIGATE_PREVIOUS_MATCHES
+    };
 }
 
 function requestMatches() {
@@ -33,7 +47,7 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function fetchMatches(   playerId, limit, projects, sortCategory, heroId, result,
+export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result,
                                 faction, gameMode, lane, lobbyType, patch, date, region) {
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
 

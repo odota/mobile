@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ScrollView,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -54,6 +55,17 @@ class HeroesPage extends Component {
                 </View>
             </TouchableOpacity>
         );
+        this.pageControl = (<View/>);
+        this.state = {
+            refreshing: false
+        };
+    }
+
+    onRefresh() {
+        this.setState({refreshing: true});
+        this.props.actions.fetchHeroes(this.props.contextId, 30).then(() => {
+            this.setState({refreshing: false});
+        });
     }
 
     componentWillMount() {
@@ -64,7 +76,7 @@ class HeroesPage extends Component {
         this.initialValue = 1 + ((nextProps.page - 1) * 20);
         this.endValue = nextProps.page * 20;
         this.totalHeroes = nextProps.heroes.length;
-        this.pageControl = (<View/>);
+
         if(this.totalHeroes > 0){
             if(this.endValue > this.totalHeroes) {
                 this.endValue = this.totalHeroes;
@@ -123,8 +135,24 @@ class HeroesPage extends Component {
                 </View>
             )
         } else if (this.heroesSubset != null){
+            var refreshColor = this.props.legendHex;
             content = (
-                <ScrollView style = {{marginTop: 5}}>
+                <ScrollView style = {{marginTop: 5}}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing = {this.state.refreshing}
+                            onRefresh = {this.onRefresh.bind(this)}
+                            tintColor = {refreshColor}
+                            title = 'Refreshing'
+                            titleColor = {refreshColor}
+                            colors = {[refreshColor]}
+                            progressBackgroundColor="#ffffffff"
+                        />
+                    }
+                    >
+                    <Text style = {styles.filterText}>
+                        {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
+                    </Text>
                     <HeroesCard heroes = {this.heroesSubset} />
                     {this.pageControl}
                     <Text style = {styles.filterText}>

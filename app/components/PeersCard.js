@@ -11,8 +11,10 @@ import {
 
 import { Avatar } from 'react-native-material-design';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import * as favouritesActions from '../actions/favourites_act';
+import * as navigationActions from '../actions/navigation_act';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -31,11 +33,13 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    favourites: state.favouritesState.favourites
+    favourites: state.favouritesState.favourites,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    favouritesActions: bindActionCreators(favouritesActions, dispatch)
+    favouritesActions: bindActionCreators(favouritesActions, dispatch),
+    navigationActions: bindActionCreators(navigationActions, dispatch)
 });
 
 class PeersCard extends Component {
@@ -56,7 +60,19 @@ class PeersCard extends Component {
         console.log(accountId);
     }
 
-    onPeerPressed(accountId, personaName, avatar) {
+    onPeerPressed(accountId) {
+        this.props.navigationActions.pushContextId(accountId);
+        this.props.navigationActions.changeContextId(accountId);
+        if(this.props.parent == "Favourites") {
+            Actions.playerProfileFavourite();
+        } else if (this.props.parent == "Search") {
+            Actions.playerProfileSearch();
+        } else if (this.props.parent == "Home") {
+            Actions.playerProfileHome();
+        }
+    }
+
+    onFavouritePressed(accountId, personaName, avatar) {
         var index = -1;
         for(i = 0; i < this.props.favourites.length; i++) {
             if(this.props.favourites[i].account_id == accountId) {
@@ -143,6 +159,14 @@ class PeersCard extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.peers && nextProps.peers.length > 0) {
+            var peersList = nextProps.peers;
+            var processedPeersList = this.generateProcessedPeers(peersList);
+            this.setState({processedPeersList: processedPeersList});
+        }
+    }
+
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
@@ -164,13 +188,17 @@ class PeersCard extends Component {
             iconName = <FontAwesome name = "star" size = {20} allowFontScaling = {false} color = {this.props.legend} style = {styles.favouriteIcon}/>
         }
         return (
-            <TouchableOpacity onPress = { () => {this.onPeerPressed(rowData.accountId, rowData.personaName, rowData.avatar)}}>
+            <TouchableOpacity onPress = { () => {this.onPeerPressed(rowData.accountId)}}>
                 <View style = {rowContainer}>
-                    <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                    <TouchableOpacity onPress = { () => {this.onFavouritePressed(rowData.accountId, rowData.personaName, rowData.avatar)}}>
+                        <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
-                        <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
-                        {iconName}
-                    </View>
+                            <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
+
+                                {iconName}
+
+                        </View>
+                    </TouchableOpacity>
 
 
                     <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
