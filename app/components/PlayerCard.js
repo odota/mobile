@@ -52,6 +52,7 @@ class PlayerCard extends Component {
     }
 
     onPlayerPressed() {
+        this.props.navigationActions.pushContextId(this.props.info.account_id);
         this.props.navigationActions.changeContextId(this.props.info.account_id);
         if(this.props.parent == "Favourites") {
             Actions.playerProfileFavourite();
@@ -63,11 +64,11 @@ class PlayerCard extends Component {
     }
 
     favouritesPressed(info) {
-        console.log(info);
         if(this.props.parent == "Home") {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
+                this.props.navigationActions.pushContextId(info.account_id);
                 this.props.navigationActions.changeContextId(info.account_id);
                 this.props.homeActions.setHomeProfile(info);
                 let toast = Toast.show('Home is set', {

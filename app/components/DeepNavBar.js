@@ -14,6 +14,8 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+import * as navigationActions from '../actions/navigation_act';
+
 import NavigationBar from 'react-native-navbar';
 
 import Colors from '../themes/Colors';
@@ -26,7 +28,12 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    contextIdStack: state.navigationState.contextIdStack
+});
+
+export const mapDispatchToProps = (dispatch) => ({
+    navigationActions: bindActionCreators(navigationActions, dispatch)
 });
 
 class DeepNavBar extends Component {
@@ -37,6 +44,8 @@ class DeepNavBar extends Component {
     }
 
     backPressed() {
+        this.props.navigationActions.popContextId();
+        this.props.navigationActions.changeContextId(this.props.contextIdStack[this.props.contextIdStack.length-2]);
         Actions.pop();
     }
 
@@ -115,13 +124,11 @@ const baseStyles = _.extend(base.general, {
         marginRight: 10
     },
     navItemView: {
-        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center'
     },
     leftNavButtonView: {
-        paddingLeft: 20,
         paddingRight: 20,
         paddingTop: 8,
         paddingBottom: 8,
@@ -134,4 +141,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps)(DeepNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(DeepNavBar);
