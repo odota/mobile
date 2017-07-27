@@ -5,7 +5,8 @@ import {
     StyleSheet,
     ScrollView,
     ActivityIndicator,
-    TouchableOpacity
+    TouchableOpacity,
+    RefreshControl
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -55,6 +56,16 @@ class PeersPage extends Component {
             </TouchableOpacity>
         );
         this.pageControl = (<View/>);
+        this.state = {
+            refreshing: false
+        };
+    }
+
+    onRefresh() {
+        this.setState({refreshing: true});
+        this.props.actions.fetchPeers(this.props.contextId).then(() => {
+            this.setState({refreshing: false});
+        });
     }
 
     componentWillMount() {
@@ -123,8 +134,23 @@ class PeersPage extends Component {
                 </View>
             )
         } else if (this.peersSubset != null){
+            var refreshColor = this.props.legendHex
             content = (
-                <ScrollView style = {{marginTop: 5}}>
+                <ScrollView style = {{marginTop: 5}}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing = {this.state.refreshing}
+                            onRefresh = {this.onRefresh.bind(this)}
+                            tintColor = {refreshColor}
+                            title = 'Refreshing'
+                            titleColor = {refreshColor}
+                            colors = {[refreshColor]}
+                            progressBackgroundColor="#ffffffff"
+                        />
+                    }>
+                    <Text style = {styles.filterText}>
+                        {this.initialValue} - {this.endValue} of {this.totalPeers} peers
+                    </Text>
                     <PeersCard peers = {this.peersSubset} />
                     {this.pageControl}
                     <Text style = {styles.filterText}>
