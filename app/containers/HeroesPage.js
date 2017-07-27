@@ -54,6 +54,7 @@ class HeroesPage extends Component {
                 </View>
             </TouchableOpacity>
         );
+        this.pageControl = (<View/>);
     }
 
     componentWillMount() {
@@ -64,7 +65,7 @@ class HeroesPage extends Component {
         this.initialValue = 1 + ((nextProps.page - 1) * 20);
         this.endValue = nextProps.page * 20;
         this.totalHeroes = nextProps.heroes.length;
-        this.pageControl = (<View/>);
+
         if(this.totalHeroes > 0){
             if(this.endValue > this.totalHeroes) {
                 this.endValue = this.totalHeroes;

@@ -4,8 +4,8 @@ export const types = {
     REQUEST_HEROES: 'REQUEST_HEROES',
     RECEIVE_HEROES: 'RECEIVE_HEROES',
     RECEIVE_EMPTY_HEROES: 'RECEIVE_EMPTY_HEROES',
-    NAVIGATE_NEXT: 'NAVIGATE_NEXT',
-    NAVIGATE_PREVIOUS: 'NAVIGATE_PREVIOUS'
+    NAVIGATE_NEXT_HEROES: 'NAVIGATE_NEXT_HEROES',
+    NAVIGATE_PREVIOUS_HEROES: 'NAVIGATE_PREVIOUS_HEROES'
 };
 
 function requestHeroes() {
@@ -47,12 +47,12 @@ export function fetchHeroes(playerId, limit) {
 
 export function navigateNext() {
     return {
-        type: types.NAVIGATE_NEXT
+        type: types.NAVIGATE_NEXT_HEROES
     }
 }
 
 export function navigatePrevious() {
     return {
-        type: types.NAVIGATE_PREVIOUS
+        type: types.NAVIGATE_PREVIOUS_HEROES
     }
 }

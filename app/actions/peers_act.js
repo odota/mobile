@@ -3,7 +3,9 @@ import { fetchAPI } from '../utils/fetch';
 export const types = {
     REQUEST_PEERS: 'REQUEST_PEERS',
     RECEIVE_PEERS: 'RECEIVE_PEERS',
-    RECEIVE_EMPTY_PEERS: 'RECEIVE_EMPTY_PEERS'
+    RECEIVE_EMPTY_PEERS: 'RECEIVE_EMPTY_PEERS',
+    NAVIGATE_NEXT_PEERS: 'NAVIGATE_NEXT_PEERS',
+    NAVIGATE_PREVIOUS_PEERS: 'NAVIGATE_PREVIOUS_PEERS'
 }
 
 function requestPeers() {
@@ -40,5 +42,17 @@ export function fetchPeers(playerId) {
             console.log("Action - FETCH PEERS ERROR - " + error);
             dispatch(receiveEmptyPeers());
         });
+    }
+}
+
+export function navigateNext() {
+    return {
+        type: types.NAVIGATE_NEXT_PEERS
+    }
+}
+
+export function navigatePrevious() {
+    return {
+        type: types.NAVIGATE_PREVIOUS_PEERS
     }
 }
