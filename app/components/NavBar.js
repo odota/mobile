@@ -87,7 +87,7 @@ class NavBar extends Component {
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onPurgeFavouritesPressed()}}>
                         <View style = {styles.rightNavButtonView}>
-                            <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            <FontAwesome name = "trash-o" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -97,7 +97,7 @@ class NavBar extends Component {
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
                         <View style = {styles.rightNavButtonView}>
-                            <FontAwesome name = "trash-o" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            <FontAwesome name = "trash-o" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -110,7 +110,7 @@ class NavBar extends Component {
             <View style = {styles.navItemView}>
                 <TouchableOpacity onPress = {() => {this.openDrawer()}}>
                     <View style = {styles.leftNavButtonView}>
-                        <FontAwesome name = "bars" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                        <FontAwesome name = "bars" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                     </View>
                 </TouchableOpacity>
                 {title}
