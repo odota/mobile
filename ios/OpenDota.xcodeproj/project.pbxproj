@@ -659,7 +659,7 @@
 				ORGANIZATIONNAME = OpenDota;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1145,7 +1145,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opendota;
 				PRODUCT_NAME = OpenDota;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b6ed6696-244f-4de6-951e-a5ed2554612c";
+				PROVISIONING_PROFILE_SPECIFIER = "OpenDota Development Profile";
 			};
 			name = Debug;
 		};
@@ -1153,7 +1154,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7DD247138BEBE763CFA6994 /* Pods-OpenDota.release.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = T7MURUAQGN;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1180,8 +1181,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opendota;
 				PRODUCT_NAME = OpenDota;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "9973c476-9e68-41b5-ab74-8e381abe2430";
+				PROVISIONING_PROFILE_SPECIFIER = "OpenDota Mobile Center Distribution";
 			};
 			name = Release;
 		};
