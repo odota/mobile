@@ -48,8 +48,10 @@ class PlayerOverview extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchOverview(this.props.contextId);
-        this.props.actions.fetchWl(this.props.contextId);
+        if(!this.props.isLoadingOverview) {
+            this.props.actions.fetchOverview(this.props.contextId);
+            this.props.actions.fetchWl(this.props.contextId);
+        }
     }
 
     componentWillReceiveProps(nextProps) {

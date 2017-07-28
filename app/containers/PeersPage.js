@@ -12,6 +12,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as peersActions from '../actions/peers_act';
+import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 
 import PeersCard from '../components/PeersCard';
@@ -30,16 +31,18 @@ export const mapStateToProps = state => ({
     isEmptyPeers: state.peersState.isEmptyPeers,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
-    legend: state.settingsState.legend
+    legend: state.settingsState.legend,
+    justPopped: state.navigationState.justPopped
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(peersActions, dispatch)
+    actions: bindActionCreators({...peersActions, ...navigationActions}, dispatch)
 });
 
 class PeersPage extends Component {
 
     constructor(props) {
+        console.log("CONSTRUCT");
         super(props);
         this.previousControl = (
             <TouchableOpacity onPress = {() => {this.props.actions.navigatePrevious()}}>
@@ -69,7 +72,20 @@ class PeersPage extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchPeers(this.props.contextId);
+        console.log("WILL MOUNT");
+        if(!this.props.isLoadingPeers) {
+            this.props.actions.fetchPeers(this.props.contextId);
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        /*
+        console.log("COMPONENT WILL UPDATE");
+        if(this.props.justPopped) {
+            this.props.actions.togglePop();
+            this.props.actions.fetchPeers(this.props.contextId);
+        }
+        */
     }
 
     componentWillReceiveProps(nextProps) {
