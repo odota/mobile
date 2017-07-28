@@ -29,7 +29,10 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    profile: state.homeState.profile
+    profile: state.homeState.profile,
+    contextIdStackHome: state.navigationState.contextIdStackHome,
+    contextIdStackSearch: state.navigationState.contextIdStackSearch,
+    contextIdStackFavourite: state.navigationState.contextIdStackFavourite
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -51,11 +54,19 @@ class NavDrawer extends Component {
         this.context.drawer.close();
         this.props.actions.changeParent(route);
         if(route == 'Home') {
-            this.props.actions.changeContextId(this.props.profile.account_id);
+            if(this.props.contextIdStackHome.length > 0) {
+                this.props.actions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-1]);
+            }
             Actions.homeTab();
         } else if(route == 'Favourites') {
+            if(this.props.contextIdStackFavourite.length > 0) {
+                this.props.actions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-1]);
+            }
             Actions.favouriteTab();
         } else if(route == 'Search') {
+            if(this.props.contextIdStackSearch.length > 0) {
+                this.props.actions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-1]);
+            }
             Actions.searchTab();
         } else if(route == 'Settings') {
             Actions.settingsTab();

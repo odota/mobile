@@ -69,7 +69,9 @@ class HeroesPage extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchHeroes(this.props.contextId, 30);
+        if(!this.props.isLoadingHeroes) {
+            this.props.actions.fetchHeroes(this.props.contextId, 30);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
