@@ -29,7 +29,10 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    contextIdStack: state.navigationState.contextIdStack
+    contextIdStackHome: state.navigationState.contextIdStackHome,
+    contextIdStackFavourite: state.navigationState.contextIdStackFavourite,
+    contextIdStackSearch: state.navigationState.contextIdStackSearch,
+    parent: state.navigationState.parent
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -44,8 +47,16 @@ class DeepNavBar extends Component {
     }
 
     backPressed() {
-        this.props.navigationActions.popContextId();
-        this.props.navigationActions.changeContextId(this.props.contextIdStack[this.props.contextIdStack.length-2]);
+        if(this.props.parent == "Favourites") {
+            this.props.navigationActions.popContextIdFavourite();
+            this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-2]);
+        } else if (this.props.parent == "Search") {
+            this.props.navigationActions.popContextIdSearch();
+            this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-2]);
+        } else if (this.props.parent == "Home") {
+            this.props.navigationActions.popContextIdHome();
+            this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-2]);
+        }
         Actions.pop();
     }
 

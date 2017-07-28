@@ -52,13 +52,17 @@ class PlayerCard extends Component {
     }
 
     onPlayerPressed() {
-        this.props.navigationActions.pushContextId(this.props.info.account_id);
-        this.props.navigationActions.changeContextId(this.props.info.account_id);
         if(this.props.parent == "Favourites") {
+            this.props.navigationActions.pushContextIdFavourite(this.props.info.account_id);
+            this.props.navigationActions.changeContextId(this.props.info.account_id);
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
+            this.props.navigationActions.pushContextIdSearch(this.props.info.account_id);
+            this.props.navigationActions.changeContextId(this.props.info.account_id);
             Actions.playerProfileSearch();
         } else if (this.props.parent == "Home") {
+            this.props.navigationActions.PUSH_CONTEXT_ID_HOME(this.props.info.account_id);
+            this.props.navigationActions.changeContextId(this.props.info.account_id);
             Actions.playerProfileHome();
         }
     }
@@ -68,7 +72,7 @@ class PlayerCard extends Component {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
-                this.props.navigationActions.pushContextId(info.account_id);
+                this.props.navigationActions.pushContextIdHome(info.account_id);
                 this.props.navigationActions.changeContextId(info.account_id);
                 this.props.homeActions.setHomeProfile(info);
                 let toast = Toast.show('Home is set', {

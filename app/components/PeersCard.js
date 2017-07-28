@@ -34,7 +34,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     favourites: state.favouritesState.favourites,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    currentScene: state.navigationState.scene
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -61,13 +62,18 @@ class PeersCard extends Component {
     }
 
     onPeerPressed(accountId) {
-        this.props.navigationActions.pushContextId(accountId);
-        this.props.navigationActions.changeContextId(accountId);
+
         if(this.props.parent == "Favourites") {
+            this.props.navigationActions.pushContextIdFavourite(accountId);
+            this.props.navigationActions.changeContextId(accountId);
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
+            this.props.navigationActions.pushContextIdSearch(accountId);
+            this.props.navigationActions.changeContextId(accountId);
             Actions.playerProfileSearch();
         } else if (this.props.parent == "Home") {
+            this.props.navigationActions.pushContextIdHome(accountId);
+            this.props.navigationActions.changeContextId(accountId);
             Actions.playerProfileHome();
         }
     }

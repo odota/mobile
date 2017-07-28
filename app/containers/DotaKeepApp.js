@@ -43,17 +43,17 @@ class DotaKeepApp extends Component {
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandlers = {null} navBar = {customNavBar}>
                             <Scene key = "homeTab" title = "Home" navBar = {customNavBar}>
                                 <Scene key = "home" component = {Home} title = "Home" />
-                                <Scene key = "playerProfileHome" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
+                                <Scene clone = {true}  key = "playerProfileHome" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene key = "matchesSearchHome" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "favouriteTab" title = "Favourites" navBar = {customNavBar}>
                                 <Scene key = "favourite" component = {Favourite} title = "Favourites"/>
-                                <Scene key = "playerProfileFavourite" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
+                                <Scene clone = {true} key = "playerProfileFavourite" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene key = "matchesSearchFavourite" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
                                 <Scene key = "playerSearch" component = {PlayerSearch} title = "Search Profile" />
-                                <Scene key = "playerProfileSearch" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
+                                <Scene clone = {true} key = "playerProfileSearch" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene key = "matchesSearchSearch" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                             </Scene>
                             <Scene key = "settingsTab" title = "Settings" navBar = {customNavBar}>

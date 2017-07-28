@@ -84,7 +84,9 @@ class MatchesPage extends Component {
     }
 
     componentWillMount() {
-        this.props.actions.fetchMatches(this.props.contextId);
+        if(!this.props.isLoadingMatches) {
+            this.props.actions.fetchMatches(this.props.contextId);
+        }
     }
 
     componentWillReceiveProps(nextProps) {

@@ -1117,6 +1117,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 90B7F8F4AC020530C60C58BC /* Pods-OpenDota.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = T7MURUAQGN;
@@ -1154,6 +1155,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7DD247138BEBE763CFA6994 /* Pods-OpenDota.release.xcconfig */;
 			buildSettings = {
+        ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = T7MURUAQGN;
 				HEADER_SEARCH_PATHS = (
