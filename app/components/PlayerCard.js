@@ -61,7 +61,7 @@ class PlayerCard extends Component {
             this.props.navigationActions.changeContextId(this.props.info.account_id);
             Actions.playerProfileSearch();
         } else if (this.props.parent == "Home") {
-            this.props.navigationActions.PUSH_CONTEXT_ID_HOME(this.props.info.account_id);
+            this.props.navigationActions.pushContextIdHome(this.props.info.account_id);
             this.props.navigationActions.changeContextId(this.props.info.account_id);
             Actions.playerProfileHome();
         }
