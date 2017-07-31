@@ -50,7 +50,7 @@ class NavBar extends Component {
     }
 
     openDrawer() {
-        Actions.refresh({key: 'navDrawer', open: true})
+        Actions.drawerOpen();
     }
 
     onPurgeFavouritesPressed() {

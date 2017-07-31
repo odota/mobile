@@ -41,17 +41,13 @@ export const mapDispatchToProps = (dispatch) => ({
 
 class NavDrawer extends Component {
 
-    static contextTypes = {
-        drawer: PropTypes.object.isRequired
-    }
-
     constructor(props) {
         super(props);
         this.goto = this.goto.bind(this);
     }
 
     goto(route) {
-        this.context.drawer.close();
+        Actions.drawerClose();
         this.props.actions.changeParent(route);
         if(route == 'Home') {
             if(this.props.contextIdStackHome.length > 0) {
