@@ -7,7 +7,7 @@ import Favourite from './Favourite';
 import Settings from './Settings';
 import MatchesSearch from './MatchesSearch';
 import Splash from './Splash';
-import Drawers from './Drawer';
+import NavDrawer from '../components/NavDrawer';
 import customNavBar from '../components/NavBar';
 import deepNavBar from '../components/DeepNavBar';
 import modalNavBar from '../components/ModalNavBar';
@@ -39,7 +39,7 @@ class DotaKeepApp extends Component {
             <RouterWithRedux sceneStyle = {{backgroundColor: Colors.mainBackground}}>
                 <Scene key = "root" hideNavBar = {true}>
                     <Scene key = "splash" component = {Splash} panHandlers = {null} initial = {true}/>
-                    <Scene key = "navDrawer" component = {Drawers} panHandlers = {null} type = "replace">
+                    <Scene key = "navDrawer" drawer contentComponent = {NavDrawer}>
                         <Scene key = "main" tabs = {true} hideTabBar = {true} panHandlers = {null} navBar = {customNavBar}>
                             <Scene key = "homeTab" title = "Home" navBar = {customNavBar}>
                                 <Scene key = "home" component = {Home} title = "Home" />
