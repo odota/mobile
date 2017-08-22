@@ -52,7 +52,6 @@ class PlayerProfile extends Component {
     }
 
     handleChangeTab({i, ref, from}) {
-        console.log("CHANGE TAB");
         if(this.props) {
             if (i == 0 && !this.props.isLoadingOverview) {
                 this.props.actions.fetchOverview(this.props.contextId);

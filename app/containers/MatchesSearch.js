@@ -199,7 +199,6 @@ class MatchesSearch extends Component {
     render() {
 
         var picker;
-        console.log(this.state);
         if(this.state['hero']) {
             picker = <PickerInput
                         selectedValue = {this.state.hero_id}
@@ -311,6 +310,7 @@ class MatchesSearch extends Component {
                                     <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Number of matches</Text>
                                 </View>
                                 <TextInput
+                                    underlineColorAndroid='rgba(255,255,255,0)'
                                     value = {this.state.match_limit}
                                     style = {[styles.limitInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
                                     autoCorrect = {false}

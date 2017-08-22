@@ -39,7 +39,7 @@ export const mapDispatchToProps = (dispatch) => ({
     navigationActions: bindActionCreators(navigationActions, dispatch)
 });
 
-class DeepNavBar extends Component {
+class MatchNavBar extends Component {
 
     constructor(props) {
         super(props);
@@ -47,20 +47,11 @@ class DeepNavBar extends Component {
     }
 
     backPressed() {
-        if(this.props.parent == "Favourites") {
-            this.props.navigationActions.popContextIdFavourite();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-2]);
-        } else if (this.props.parent == "Search") {
-            this.props.navigationActions.popContextIdSearch();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-2]);
-        } else if (this.props.parent == "Home") {
-            this.props.navigationActions.popContextIdHome();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-2]);
-        }
         Actions.pop();
     }
 
     render() {
+
         title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
 
         var leftElements = (
@@ -150,4 +141,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeepNavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(MatchNavBar);

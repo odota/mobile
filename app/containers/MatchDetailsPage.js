@@ -41,6 +41,44 @@ export const mapDispatchToProps = (dispatch) => ({
 
 class MatchDetailsPage extends Component {
 
+    componentWillMount() {
+        if(!this.props.isLoadingMatchDetails) {
+            this.props.actions.fetchMatchDetails(this.props.data)
+        }
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if(nextProps.matchDetails) {
+            this.content = nextProps.matchDetails;
+        }
+    }
+
+    render() {
+        var content = (<View />);
+        if(this.props.isLoadingMatchDetails) {
+            content = (
+                <View style = {styles.contentContainer}>
+                    <ActivityIndicator size="large" color = {this.props.legend}/>
+                </View>
+            );
+        } else if (this.props.isEmptyMatchDetails) {
+            content = (
+                <View style = {styles.contentContainer}>
+                    <Text style = {styles.noDataText}>No data found</Text>
+                </View>
+            );
+        } else {
+            content = (<View />);
+        }
+        return (
+            <View style = {styles.container}>
+                {content}
+            </View>
+        )
+    }
+
 }
 
 const baseStyles = _.extend(base.general, {

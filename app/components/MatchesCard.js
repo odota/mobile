@@ -16,6 +16,7 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
+import { Actions } from 'react-native-router-flux';
 
 import gameMode from '../json/game_mode.json';
 import { getHeroImage } from '../utils/getHeroImage';
@@ -28,7 +29,8 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    sortedBy: state.playerMatchesState.sortedBy
+    sortedBy: state.playerMatchesState.sortedBy,
+    parent: state.navigationState.parent
 });
 
 class MatchesCard extends Component {
@@ -40,6 +42,17 @@ class MatchesCard extends Component {
         this.getHeader = this.getHeader.bind(this);
         this.getValue = this.getValue.bind(this);
         this.getFriendlyDuration = this.getFriendlyDuration.bind(this);
+        this.matchPressed = this.matchPressed.bind(this);
+    }
+
+    matchPressed(data) {
+        console.log(data);
+        var matchId = data.match_id;
+        if(this.props.parent == "Favourites") {
+        } else if (this.props.parent == "Search") {
+        } else if (this.props.parent == "Home") {
+            Actions.matchDetailsHome(matchId);
+        }
     }
 
     getHeader() {
@@ -227,7 +240,7 @@ class MatchesCard extends Component {
             var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
             var dynamicValue = this.getValue(rowData);
             return (
-                <TouchableOpacity style = {{flexDirection: 'row', flex: 1}}>
+                <TouchableOpacity style = {{flexDirection: 'row', flex: 1}} onPress = {() => {this.matchPressed(rowData)}}>
                     <View style = {rowContainer}>
                         <View style = {{flex: 2,
                             justifyContent: 'center',

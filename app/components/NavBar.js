@@ -166,9 +166,10 @@ const baseStyles = _.extend(base.general, {
     },
     title: {
         fontSize: 20,
+        fontWeight: 'bold',
         fontFamily: Fonts.base,
-        marginLeft: 10,
-        marginRight: 10
+        alignSelf: 'center',
+        justifyContent: 'center'
     },
     navItemView: {
         flexDirection: 'row',
