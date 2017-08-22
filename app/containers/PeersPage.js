@@ -19,6 +19,7 @@ import PeersCard from '../components/PeersCard';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -152,7 +153,7 @@ class PeersPage extends Component {
         } else if (this.peersSubset != null){
             var refreshColor = this.props.legendHex
             content = (
-                <ScrollView style = {{marginTop: 5}}
+                <KeyboardAwareScrollView style = {{marginTop: 5}}
                     refreshControl={
                         <RefreshControl
                             refreshing = {this.state.refreshing}
@@ -172,7 +173,7 @@ class PeersPage extends Component {
                     <Text style = {styles.filterText}>
                         {this.initialValue} - {this.endValue} of {this.totalPeers} peers
                     </Text>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             )
         }
 

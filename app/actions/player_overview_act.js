@@ -77,6 +77,6 @@ export function fetchOverview(playerId) {
         .catch((error) => {
             console.log("Action - FETCH OVERVIEW ERROR - " + error);
             dispatch(receiveEmptyOverview());
-        })
+        });
     }
 }

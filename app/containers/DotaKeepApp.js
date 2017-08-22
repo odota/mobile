@@ -6,11 +6,13 @@ import PlayerProfile from './PlayerProfile';
 import Favourite from './Favourite';
 import Settings from './Settings';
 import MatchesSearch from './MatchesSearch';
+import MatchDetailsPage from './MatchDetailsPage';
 import Splash from './Splash';
 import NavDrawer from '../components/NavDrawer';
 import customNavBar from '../components/NavBar';
 import deepNavBar from '../components/DeepNavBar';
 import modalNavBar from '../components/ModalNavBar';
+import MatchNavBar from '../components/MatchNavBar';
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
@@ -45,6 +47,7 @@ class DotaKeepApp extends Component {
                                 <Scene key = "home" component = {Home} title = "Home" />
                                 <Scene clone = {true}  key = "playerProfileHome" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene key = "matchesSearchHome" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
+                                <Scene key = "matchDetailsHome" component = {MatchDetailsPage} title = "Match Details" panHandlers = {null} navBar = {MatchNavBar} />
                             </Scene>
                             <Scene key = "favouriteTab" title = "Favourites" navBar = {customNavBar}>
                                 <Scene key = "favourite" component = {Favourite} title = "Favourites"/>
