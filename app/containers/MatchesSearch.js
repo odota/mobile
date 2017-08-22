@@ -15,6 +15,7 @@ import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
@@ -198,7 +199,6 @@ class MatchesSearch extends Component {
     render() {
 
         var picker;
-        console.log(this.state);
         if(this.state['hero']) {
             picker = <PickerInput
                         selectedValue = {this.state.hero_id}
@@ -301,7 +301,7 @@ class MatchesSearch extends Component {
 
         return (
             <View style = {styles.container}>
-                <ScrollView>
+                <KeyboardAwareScrollView>
 
                         <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>
 
@@ -310,6 +310,7 @@ class MatchesSearch extends Component {
                                     <Text style = {[styles.pickerTitle, {color: this.props.legend}]}>Number of matches</Text>
                                 </View>
                                 <TextInput
+                                    underlineColorAndroid='rgba(255,255,255,0)'
                                     value = {this.state.match_limit}
                                     style = {[styles.limitInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
                                     autoCorrect = {false}
@@ -488,7 +489,7 @@ class MatchesSearch extends Component {
                         </TouchableOpacity>
 
 
-                </ScrollView>
+                </KeyboardAwareScrollView>
                 {picker}
             </View>
 

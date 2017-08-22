@@ -4,9 +4,9 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    ScrollView,
     ListView,
-    ActivityIndicator
+    ActivityIndicator,
+    Keyboard
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -16,6 +16,7 @@ import * as settingsActions from '../actions/settings_act';
 import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
 
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
 
@@ -67,6 +68,7 @@ class PlayerSearch extends Component {
 
     searchPlayer() {
         this.props.actions.fetchPlayers(this.state.searchInput);
+        Keyboard.dismiss();
     }
 
     render() {
@@ -85,13 +87,13 @@ class PlayerSearch extends Component {
             )
         } else if(this.props.players.length > 0){
             contentBottom = (
-                <ScrollView>
+                <KeyboardAwareScrollView>
                     <ListView
                         dataSource = {this.ds.cloneWithRows(this.props.players)}
                         renderRow = {this.renderRow}
                         style = {styles.listView}
                         enableEmptySections = {true}/>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             )
         }
 
@@ -105,6 +107,7 @@ class PlayerSearch extends Component {
             <View style = {containerStyle}>
                 <View style = {styles.searchFieldContainer}>
                     <TextInput
+                        underlineColorAndroid='rgba(255,255,255,0)'
                         placeholder = 'Search player'
                         value = {this.state.searchInput}
                         style = {[styles.searchInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}

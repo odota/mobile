@@ -161,14 +161,15 @@ const baseStyles = _.extend(base.general, {
     navBar: {
         borderBottomWidth: 1,
         borderBottomColor: '#A5A5A5',
-        paddingLeft: 30,
-        paddingRight: 30
+        paddingLeft: 15,
+        paddingRight: 15
     },
     title: {
         fontSize: 20,
+        fontWeight: 'bold',
         fontFamily: Fonts.base,
-        marginLeft: 10,
-        marginRight: 10
+        alignSelf: 'center',
+        justifyContent: 'center'
     },
     navItemView: {
         flexDirection: 'row',

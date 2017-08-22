@@ -14,6 +14,7 @@ import * as settingsActions from '../actions/settings_act';
 import { Actions } from 'react-native-router-flux';
 
 import { RadioButtonGroup } from 'react-native-material-design';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
 
@@ -59,7 +60,7 @@ class Settings extends Component {
         //BUG:0 Selected does not get rendered if it's a variable. Probably problem with library?
         return (
             <View style = {styles.container}>
-                <ScrollView>
+                <KeyboardAwareScrollView>
                     <View style = {[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
                         <View style = {styles.settingsTitle}>
                             <Text style = {[styles.settingsTitleText, { color: this.props.legend}]}>Themes</Text>
@@ -79,7 +80,7 @@ class Settings extends Component {
                             />
                         </View>
                     </View>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             </View>
         )
     }

@@ -16,6 +16,7 @@ import { Actions } from 'react-native-router-flux';
 
 import MatchesCard from '../components/MatchesCard';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
 
@@ -85,7 +86,7 @@ class MatchesPage extends Component {
 
     componentWillMount() {
         if(!this.props.isLoadingMatches) {
-            this.props.actions.fetchMatches(this.props.contextId);
+            this.props.actions.fetchMatches(this.props.contextId, 30);
         }
     }
 
@@ -153,7 +154,7 @@ class MatchesPage extends Component {
         } else if (this.matchesSubset != null){
             var refreshColor = this.props.legendHex;
             content = (
-                <ScrollView style = {{marginTop: 5}}
+                <KeyboardAwareScrollView style = {{marginTop: 5}}
                     refreshControl={
                         <RefreshControl
                             refreshing = {this.state.refreshing}
@@ -181,7 +182,7 @@ class MatchesPage extends Component {
                     <Text style = {styles.filterText}>
                         {this.initialValue} - {this.endValue} of {this.totalMatches} matches
                     </Text>
-                </ScrollView>
+                </KeyboardAwareScrollView>
             )
         }
 
