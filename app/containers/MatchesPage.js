@@ -167,11 +167,11 @@ class MatchesPage extends Component {
                         />
                     }>
                         <TouchableOpacity  onPress = {this.onSearchPressed} style = {styles.searchContainer}>
-                            <View style = {[styles.searchIconContainer, {backgroundColor: this.props.mod}]}>
-                                <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+                            <View style = {[styles.searchIconContainer, {backgroundColor: this.props.alpha}]}>
+                                <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.secondLegend}/>
                             </View>
-                            <View style = {[styles.searchButton, {backgroundColor: this.props.mod}]}>
-                                <Text style = {[styles.searchButtonText, {color: this.props.legend}]}>Search Matches</Text>
+                            <View style = {[styles.searchButton, {backgroundColor: this.props.alpha}]}>
+                                <Text style = {[styles.searchButtonText, {color: this.props.secondLegend}]}>Search Matches</Text>
                             </View>
                         </TouchableOpacity>
                     <Text style = {styles.filterText}>
