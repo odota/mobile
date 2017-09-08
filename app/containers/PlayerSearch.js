@@ -15,6 +15,7 @@ import * as playerSearchActions from '../actions/player_search_act';
 import * as settingsActions from '../actions/settings_act';
 import * as favouritesActions from '../actions/favourites_act';
 import { Actions } from 'react-native-router-flux';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -106,22 +107,27 @@ class PlayerSearch extends Component {
         return (
             <View style = {containerStyle}>
                 <View style = {styles.searchFieldContainer}>
-                    <TextInput
-                        underlineColorAndroid='rgba(255,255,255,0)'
-                        placeholder = 'Search player'
-                        value = {this.state.searchInput}
-                        style = {[styles.searchInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
-                        autoCorrect = {false}
-                        placeholderTextColor = {this.props.legendTranslucent}
-                        autoCapitalize = 'none'
-                        returnKeyType = 'search'
-                        selectionColor = 'white'
-                        onSubmitEditing = {this.searchPlayer}
-                        onChange = {(event) => {
-                            this.setState({
-                                searchInput: event.nativeEvent.text
-                            });
-                        }}/>
+                    <View style = {{flex: 1, borderTopLeftRadius: 3, borderBottomLeftRadius: 3, marginLeft: 10, backgroundColor: this.props.alpha, height: 40, alignItems: 'center', alignSelf: 'center', justifyContent: 'center'}}>
+                        <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.secondLegend}/>
+                    </View>
+                    <View style = {{flex: 7}}>
+                        <TextInput
+                            underlineColorAndroid='rgba(255,255,255,0)'
+                            placeholder = 'Search player'
+                            value = {this.state.searchInput}
+                            style = {[styles.searchInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
+                            autoCorrect = {false}
+                            placeholderTextColor = {this.props.secondLegend}
+                            autoCapitalize = 'none'
+                            returnKeyType = 'search'
+                            selectionColor = 'white'
+                            onSubmitEditing = {this.searchPlayer}
+                            onChange = {(event) => {
+                                this.setState({
+                                    searchInput: event.nativeEvent.text
+                                });
+                            }}/>
+                    </View>
                 </View>
                 {contentBottom}
             </View>
@@ -131,15 +137,17 @@ class PlayerSearch extends Component {
 
 const baseStyles = _.extend(base.general, {
         searchFieldContainer: {
-            height: 60
+            height: 60,
+            flexDirection: 'row',
+            alignItems: 'center'
         },
         searchInput: {
             height: 40,
             fontSize: 14,
-            marginVertical: 10,
-            marginHorizontal: 10,
-            borderRadius: 3,
-            paddingHorizontal: 20,
+            marginRight: 10,
+            borderTopRightRadius: 3,
+            borderBottomRightRadius: 3,
+            paddingRight: 20,
             paddingVertical: 3,
             fontFamily: Fonts.base
         },

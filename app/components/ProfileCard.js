@@ -93,43 +93,50 @@ class ProfileCard extends Component {
 
             return (
                 <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
-                    <View style = {styles.nameContainer}>
-                        {name}
+
+                    <View style = {{flexDirection: 'row'}}>
+                        <View style = {styles.avatarContainer}>
+                            <Avatar image = {<Image source = {{uri: info.profile.avatarfull}} />} size = {80} borderRadius = {40}/>
+                        </View>
+                        <View style = {styles.info}>
+                            <View style = {styles.nameContainer}>
+                                {name}
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>WINS: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{wl.win}</Text>
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>LOSSES: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{wl.lose}</Text>
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>WINRATE: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{winPercentage}%</Text>
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>SOLO MMR: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{soloMMR}</Text>
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>PARTY MMR: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{teamMMR}</Text>
+                            </View>
+                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>ESTIMATED MMR: </Text>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{estimateMMR}</Text>
+                            </View>
+                        </View>
                     </View>
-                    <View style = {styles.avatarContainer}>
-                        <Avatar image = {<Image source = {{uri: info.profile.avatarfull}} />} size = {80} borderRadius = {40}/>
-                    </View>
+
                     <Slider disabled = {true}
                             value = {winrate}
                             minimumTrackTintColor = {Colors.win}
                             maximumTrackTintColor = {Colors.lose}
                             thumbStyle = {styles.hiddenThumb}/>
-                    <View style = {styles.winRateContainer}>
-                        <FontAwesome name = "trophy" size = {25} allowFontAcaling = {false} color = {this.props.legend}/>
-                        <View style = {styles.winRateTextContainer}>
-                            <Text style = {{color: Colors.win, fontFamily: Fonts.base, fontSize: 14}}>{wl.win} </Text>
-                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>-</Text>
-                            <Text style = {{color: Colors.lose, fontFamily: Fonts.base, fontSize: 14}}> {wl.lose}</Text>
-                        </View>
-                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14}}>({winPercentage}%)</Text>
+                        <View style = {{marginHorizontal: 15, marginBottom: 10, flexDirection: 'row', alignItems: 'center'}}>
+                        {url}
                     </View>
-                    <View style = {styles.mmrContainer}>
-                        <View style = {styles.soloContainer}>
-                            <FontAwesome name = "user" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
-                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{soloMMR}</Text>
-                        </View>
-                        <View style = {styles.estimateContainer}>
-                            <FontAwesome name = "question" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
-                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{estimateMMR}</Text>
-                        </View>
-                        <View style = {styles.teamContainer}>
-                            <FontAwesome name = "users" size = {20} allowFontAcaling = {false} color = {this.props.legend}/>
-                            <Text style = {[styles.mmrText, {color: this.props.secondLegend}]}>{teamMMR}</Text>
-                        </View>
-                    </View>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-                    {url}
-
                 </View>
             )
         } else {
@@ -155,11 +162,12 @@ const baseStyles = _.extend(base.general, {
         flexDirection: 'row'
     },
     avatarContainer: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 40,
-        marginBottom: 30
+        flex: 1
+    },
+    info: {
+        flex: 2
     },
     dataContainer: {
         flex: 4,
@@ -169,8 +177,7 @@ const baseStyles = _.extend(base.general, {
     },
     name: {
         fontFamily: Fonts.base,
-        fontSize: 20,
-        flex: 7
+        fontSize: 20
     },
     country: {
         fontFamily: Fonts.base,
@@ -184,8 +191,6 @@ const baseStyles = _.extend(base.general, {
         alignItems: 'flex-end'
     },
     nameContainer: {
-        justifyContent: 'center',
-        alignItems: 'center'
     },
     soloContainer: {
         flex: 1,
@@ -218,7 +223,6 @@ const baseStyles = _.extend(base.general, {
         fontSize: 14
     },
     urlContainer: {
-        marginLeft: 10,
         marginRight: 10,
         marginTop: 5
     },
