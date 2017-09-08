@@ -18,6 +18,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import _ from 'lodash';
 
+import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import MatchOverview from './MatchOverview';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -49,7 +52,6 @@ class MatchDetailsPage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         if(nextProps.matchDetails) {
             this.content = nextProps.matchDetails;
         }
@@ -70,7 +72,17 @@ class MatchDetailsPage extends Component {
                 </View>
             );
         } else {
-            content = (<View />);
+            content = (
+                <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}
+                    tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend}
+                    tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
+                    renderTabBar = {() => <ScrollableTabBar />}locked = {true} >
+                    <MatchOverview tabLabel = "Overview" />
+                    <MatchOverview tabLabel = "Benchmarks" />
+                    <MatchOverview tabLabel = "Performances" />
+                    <MatchOverview tabLabel = "Laning" />
+                </ScrollableTabView>
+            );
         }
         return (
             <View style = {styles.container}>
@@ -82,7 +94,16 @@ class MatchDetailsPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
+    tabBarText: {
+        fontFamily: Fonts.base,
+        fontSize: 16,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        alignItems: 'center'
+    },
+    tabBarUnderlineStyle: {
 
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);
