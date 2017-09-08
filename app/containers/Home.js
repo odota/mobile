@@ -62,12 +62,14 @@ class Home extends Component {
             containerStyle = styles.container;
             content = (
                 <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>
-                        You have not set any profile as Home yet.
-                    </Text>
-                    <Text style = {styles.noDataText}>
-                        You can search your profile below using Steam ID or Username
-                    </Text>
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 9, marginVertical: 5}}>
+                        <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>
+                            You have not set any profile as Home yet.
+                        </Text>
+                        <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>
+                            You can search your profile below using Steam ID or Username
+                        </Text>
+                    </View>
                     <PlayerSearch />
                 </View>
             )

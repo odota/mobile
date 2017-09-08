@@ -146,8 +146,7 @@ class HeroesCard extends Component {
         var staticUri = getHeroImage(rowData.heroId);
         return (
             <View style = {rowContainer}>
-                <Text style = {[styles.heroValueText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.localizedName}</Text>
-                <View style = {[styles.inRowSeparator, {backgroundColor: this.props.legend}]} />
+
                 <View style = {{flexDirection: 'row'}}>
 
                     <View style = {styles.heroCell}>
@@ -203,7 +202,7 @@ class HeroesCard extends Component {
                         <View style = {styles.tableHeaderCell}>
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
                         </View>
-                        <View style = {[styles.tableHeaderCell, {marginRight: 10}]}>
+                        <View style = {[styles.tableHeaderCell]}>
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
                         </View>
                     </View>
@@ -237,20 +236,14 @@ const baseStyles = _.extend(base.general, {
     },
     playedCell: {
         flex: 1,
-        marginLeft: 10,
-        marginRight: 10,
         justifyContent: 'center'
     },
     winCell: {
         flex: 1,
-        marginLeft: 10,
-        marginRight: 10,
         justifyContent: 'center'
     },
     lastPlayedCell: {
         flex: 1,
-        marginLeft: 10,
-        marginRight: 20,
         justifyContent: 'center'
     },
     sliderContainer: {

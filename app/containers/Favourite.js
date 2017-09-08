@@ -66,8 +66,10 @@ class Favourite extends Component {
         if(this.props.favouritesList.length < 1) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>Looks like you have not added anyone as favourite.
-                    Add them from search tab!</Text>
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5}}>
+                        <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>Looks like you have not added anyone as favourite.
+                        Add them from search tab!</Text>
+                    </View>
                 </View>
             )
         } else {
@@ -93,8 +95,8 @@ class Favourite extends Component {
 const baseStyles = _.extend(base.general, {
     contentContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        marginTop: 10,
+        marginHorizontal: 10
     },
     purgeButton: {
         borderTopRightRadius: 3,

@@ -207,7 +207,7 @@ class PeersCard extends Component {
                     </TouchableOpacity>
 
 
-                    <View style = {[styles.inRowSeparator, {backgroundColor: this.props.secondLegend}]} />
+                    <View style = {[styles.inRowSeparator, {backgroundColor: this.props.legend}]} />
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.peerCell}>
                             <View style = {styles.peerValueTextWrapper}>
