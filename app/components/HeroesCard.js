@@ -139,13 +139,15 @@ class HeroesCard extends Component {
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = [styles.rowContainer, {backgroundColor: this.props.mod}];
+            rowContainer = {backgroundColor: this.props.mod, marginTop: 10, paddingVertical: 5, borderRadius: 3};
         } else {
-            rowContainer = [styles.rowContainer, {backgroundColor: this.props.alpha}];
+            rowContainer = {backgroundColor: this.props.alpha, marginTop: 10, paddingVertical: 5, borderRadius: 3};
         }
         var staticUri = getHeroImage(rowData.heroId);
         return (
             <View style = {rowContainer}>
+                <Text style = {[styles.heroValueText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.localizedName}</Text>
+                <View style = {[styles.inRowSeparator, {backgroundColor: this.props.legend}]} />
 
                 <View style = {{flexDirection: 'row'}}>
 
@@ -187,23 +189,25 @@ class HeroesCard extends Component {
     render() {
         if(this.props.heroes && this.props.heroes.length > 0) {
             return (
-                <View style = {[styles.heroesCardContainer, {backgroundColor: this.props.mod}]}>
-                    <View style = {styles.titleContainer}>
-                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>HEROES</Text>
-                    </View>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-                    <View style = {styles.tableHeaderContainer}>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
+                <View style = {[styles.heroesCardContainer, {}]}>
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 3}}>
+                        <View style = {styles.titleContainer}>
+                            <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>HEROES</Text>
                         </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Played</Text>
-                        </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
-                        </View>
-                        <View style = {[styles.tableHeaderCell]}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
+                        <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                        <View style = {styles.tableHeaderContainer}>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
+                            </View>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Played</Text>
+                            </View>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
+                            </View>
+                            <View style = {[styles.tableHeaderCell]}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
+                            </View>
                         </View>
                     </View>
                     <ListView

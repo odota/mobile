@@ -176,9 +176,10 @@ class PeersCard extends Component {
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
-            rowContainer = [styles.rowContainer, {backgroundColor: this.props.mod}];
+            rowContainer = {backgroundColor: this.props.mod, marginTop: 10, paddingVertical: 5, borderRadius: 3};
+
         } else {
-            rowContainer = [styles.rowContainer, {backgroundColor: this.props.alpha}];
+            rowContainer = {backgroundColor: this.props.alpha, marginTop: 10, paddingVertical: 5, borderRadius: 3};
         }
         var iconName;
         var index = -1;
@@ -200,13 +201,9 @@ class PeersCard extends Component {
                         <View style = {{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
 
                             <Text style = {[styles.personaNameText, {color: this.props.secondLegend}]} numberOfLines = {1}>{rowData.personaName}</Text>
-
-                                {iconName}
-
+                            {iconName}
                         </View>
                     </TouchableOpacity>
-
-
                     <View style = {[styles.inRowSeparator, {backgroundColor: this.props.legend}]} />
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.peerCell}>
@@ -247,25 +244,28 @@ class PeersCard extends Component {
         if(this.props.peers && this.props.peers.length > 0) {
             var filteredPeers = this.state.processedPeersList.slice(0, 31);
             return (
-                <View style = {[styles.peersCardContainer, {backgroundColor: this.props.mod}]}>
-                    <View style = {styles.titleContainer}>
-                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>PEERS</Text>
+                <View style = {[styles.peersCardContainer, {}]}>
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 3}}>
+                        <View style = {styles.titleContainer}>
+                            <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>PEERS</Text>
+                        </View>
+                        <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                        <View style = {styles.tableHeaderContainer}>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
+                            </View>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>With</Text>
+                            </View>
+                            <View style = {styles.tableHeaderCell}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
+                            </View>
+                            <View style = {[styles.tableHeaderCell, {marginRight: 10}]}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
+                            </View>
+                        </View>
                     </View>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-                    <View style = {styles.tableHeaderContainer}>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
-                        </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>With</Text>
-                        </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Win%</Text>
-                        </View>
-                        <View style = {[styles.tableHeaderCell, {marginRight: 10}]}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Last Played</Text>
-                        </View>
-                    </View>
+
                     <ListView style = {styles.peersListView}
                         dataSource = {this.peersDS.cloneWithRows(filteredPeers)}
                         renderRow = {this.renderRow}
