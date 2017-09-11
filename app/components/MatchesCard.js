@@ -46,7 +46,6 @@ class MatchesCard extends Component {
     }
 
     matchPressed(data) {
-        console.log(data);
         var matchId = data.match_id;
         if(this.props.parent == "Favourites") {
         } else if (this.props.parent == "Search") {
