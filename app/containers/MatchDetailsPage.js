@@ -94,6 +94,12 @@ class MatchDetailsPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: 10
+    },
     tabBarText: {
         fontFamily: Fonts.base,
         fontSize: 16,
