@@ -98,7 +98,11 @@ class MatchOverview extends Component {
 
             var processedPlayer = {};
             processedPlayer.hero = currentUnprocessedPlayer.hero_id;
-            processedPlayer.player = currentUnprocessedPlayer.personaname;
+            if(currentUnprocessedPlayer.account_id) {
+                processedPlayer.player = currentUnprocessedPlayer.personaname;
+            } else {
+                processedPlayer.player = "Anonymous";
+            }
             processedPlayer.level = currentUnprocessedPlayer.level;
             processedPlayer.kills = currentUnprocessedPlayer.kills;
             processedPlayer.deaths = currentUnprocessedPlayer.deaths;
