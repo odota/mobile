@@ -146,30 +146,33 @@ class MatchOverview extends Component {
         }
         var staticUri = getHeroImage(rowData.hero);
         return (
-            <View style = {rowContainer}>
-                <View style = {{flex: 2,
-                    justifyContent: 'center',
-                    alignItems: 'center'}}>
-                    <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+            <TouchableOpacity onPress = {() => {this.setState({this.state["i"]: true})}}>
+                <View style = {rowContainer}>
+                    <View style = {{flex: 2,
+                        justifyContent: 'center',
+                        alignItems: 'center'}}>
+                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.gpm}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.xpm}</Text>
+                    </View>
                 </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.gpm}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.xpm}</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
 
         );
     }
 
     render() {
+        console.log(this.state);
         var content;
         if(this.props.isLoadingMatchDetails) {
             content = (
