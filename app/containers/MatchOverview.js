@@ -23,6 +23,8 @@ import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import items from '../json/items.json';
+import itemIds from '../json/item_ids.json';
 
 import _ from 'lodash';
 
@@ -61,21 +63,23 @@ class MatchOverview extends Component {
         this.direDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
         this.state = {
-            '0': false,
-            '1': false,
-            '2': false,
-            '3': false,
-            '4': false,
-            '5': false,
-            '6': false,
-            '7': false,
-            '8': false,
-            '9': false,
+            zero: false,
+            one: false,
+            two: false,
+            three: false,
+            four: false,
+            five: false,
+            six: false,
+            seven: false,
+            eight: false,
+            nine: false,
             radiantPlayersList: [],
             direPlayersList: [],
             refreshing: false
         };
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
+        this.getItemIndex = this.getItemIndex.bind(this);
+        this.onRowPressed = this.onRowPressed.bind(this);
     }
 
     componentWillMount() {
@@ -91,6 +95,14 @@ class MatchOverview extends Component {
         }
     }
 
+    getItemIndex(itemId, itemsArray) {
+        for (i = 0; i < itemsArray.length; i++) {
+            if(itemId == itemsArray[i].id) {
+                return i;
+            }
+        }
+    }
+
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
         for (i = 0; i < unprocessedPlayersList.length; i++) {
@@ -98,7 +110,11 @@ class MatchOverview extends Component {
 
             var processedPlayer = {};
             processedPlayer.hero = currentUnprocessedPlayer.hero_id;
-            processedPlayer.player = currentUnprocessedPlayer.personaname;
+            if(currentUnprocessedPlayer.account_id) {
+                processedPlayer.player = currentUnprocessedPlayer.personaname;
+            } else {
+                processedPlayer.player = "Anonymous";
+            }
             processedPlayer.level = currentUnprocessedPlayer.level;
             processedPlayer.kills = currentUnprocessedPlayer.kills;
             processedPlayer.deaths = currentUnprocessedPlayer.deaths;
@@ -111,6 +127,25 @@ class MatchOverview extends Component {
             processedPlayer.heroHealing = kFormatter(currentUnprocessedPlayer.hero_healing);
             processedPlayer.towerDamage = kFormatter(currentUnprocessedPlayer.tower_damage);
             processedPlayer.totalGold = kFormatter(currentUnprocessedPlayer.total_gold);
+            processedPlayer.backpack_0 = currentUnprocessedPlayer.backpack_0;
+            processedPlayer.backpack_1 = currentUnprocessedPlayer.backpack_1;
+            processedPlayer.backpack_2 = currentUnprocessedPlayer.backpack_2;
+            processedPlayer.item_0 = currentUnprocessedPlayer.item_0;
+            processedPlayer.item_1 = currentUnprocessedPlayer.item_1;
+            processedPlayer.item_2 = currentUnprocessedPlayer.item_2;
+            processedPlayer.item_3 = currentUnprocessedPlayer.item_3;
+            processedPlayer.item_4 = currentUnprocessedPlayer.item_4;
+            processedPlayer.item_5 = currentUnprocessedPlayer.item_5;
+            var backpack_0_key = itemIds[currentUnprocessedPlayer.backpack_0];
+            if(backpack_0_key) {
+                processedPlayer.backpack_0_path = items.itemdata[backpack_0_key].img;
+            } else {
+                processedPlayer.backpack_0_path = "../assets/blank.jpg";
+            }
+            console.log(currentUnprocessedPlayer.backpack_0);
+            console.log(backpack_0_key);
+            console.log(processedPlayer.backpack_0_path);
+            processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
         }
@@ -133,34 +168,127 @@ class MatchOverview extends Component {
         }
     }
 
+    onRowPressed(row) {
+        if(row == 0) {
+            this.setState({zero: !this.state.zero});
+        } else if (row == 1) {
+            this.setState({one: !this.state.one});
+        } else if (row == 2) {
+            this.setState({two: !this.state.two});
+        } else if (row == 3) {
+            this.setState({three: !this.state.three});
+        } else if (row == 4) {
+            this.setState({four: !this.state.four});
+        } else if (row == 5) {
+            this.setState({five: !this.state.five});
+        } else if (row == 6) {
+            this.setState({six: !this.state.six});
+        } else if (row == 7) {
+            this.setState({seven: !this.state.seven});
+        } else if (row == 8) {
+            this.setState({eight: !this.state.eight});
+        } else if (row == 9) {
+            this.setState({nine: !this.state.nine});
+        }
+    }
+
     renderRow(rowData, i, j) {
         var rowContainer;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
+            additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.mod, flex: 1, flexDirection: 'row'};
         } else {
             rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
+            additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.alpha, flex: 1, flexDirection: 'row'};
         }
         var staticUri = getHeroImage(rowData.hero);
+        var toggled;
+        if (rowData.slot == 0) {
+            toggled = this.state.zero;
+        } else if (rowData.slot == 1) {
+            toggled = this.state.one;
+        } else if (rowData.slot == 2) {
+            toggled = this.state.two;
+        } else if (rowData.slot == 3) {
+            toggled = this.state.three;
+        } else if (rowData.slot == 4) {
+            toggled = this.state.four;
+        } else if (rowData.slot == 5) {
+            toggled = this.state.five;
+        } else if (rowData.slot == 6) {
+            toggled = this.state.six;
+        } else if (rowData.slot == 7) {
+            toggled = this.state.seven;
+        } else if (rowData.slot == 8) {
+            toggled = this.state.eight;
+        } else if (rowData.slot == 9) {
+            toggled = this.state.nine;
+        }
+        var additionalInfo;
+        if(toggled) {
+            additionalInfo = (
+                <View style = {[additionalRowContainer, {paddingHorizontal: 15}]}>
+                    <View style = {{flex: 1}}>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Last Hits: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.lastHits}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Denies: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.denies}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Total Gold: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.totalGold}</Text>
+                        </View>
+                    </View>
+                    <View style = {{flex: 1}}>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Hero Damage: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.heroDamage}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Hero Healing: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.heroHealing}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Tower Damage: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.towerDamage}</Text>
+                        </View>
+                    </View>
+                    <View style = {{flex: 1}}>
+                        <Image
+                            source={{uri: rowData.backpack_0_path}}
+                       />
+                    </View>
+                </View>
+            );
+        } else {
+            additionalInfo = (<View/>);
+        }
         return (
-            <View style = {rowContainer}>
-                <View style = {{flex: 2,
-                    justifyContent: 'center',
-                    alignItems: 'center'}}>
-                    <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+            <TouchableOpacity onPress = {() => {this.onRowPressed(rowData.slot)}}>
+                <View style = {rowContainer}>
+                    <View style = {{flex: 2,
+                        justifyContent: 'center',
+                        alignItems: 'center'}}>
+                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.gpm}</Text>
+                    </View>
+                    <View style = {styles.cell}>
+                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.xpm}</Text>
+                    </View>
                 </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.gpm}</Text>
-                </View>
-                <View style = {styles.cell}>
-                    <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.xpm}</Text>
-                </View>
-            </View>
+                {additionalInfo}
+            </TouchableOpacity>
 
         );
     }
