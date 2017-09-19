@@ -22,9 +22,12 @@ import { Actions } from 'react-native-router-flux';
 import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
+import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import items from '../json/items.json';
-import itemIds from '../json/item_ids.json';
+import gameMode from '../json/game_mode.json';
+import regionsArray from '../json/regions_list.json';
+
+import moment from 'moment';
 
 import _ from 'lodash';
 
@@ -75,29 +78,112 @@ class MatchOverview extends Component {
             nine: false,
             radiantPlayersList: [],
             direPlayersList: [],
-            refreshing: false
+            refreshing: false,
+            formattedDuration: '',
+            radiantScore: -1,
+            direScore: -1,
+            radiantWin: true,
+            endedTime: '',
+            gameMode: '',
+            matchId: -1,
+            region: '',
+            averageMMR: -1,
+            skill: ""
         };
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
-        this.getItemIndex = this.getItemIndex.bind(this);
+        this.generateProcessedData = this.generateProcessedData.bind(this);
+        this.getRegionIndex = this.getRegionIndex.bind(this);
+        this.calculateAverageMMR = this.calculateAverageMMR.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
     }
 
     componentWillMount() {
-        if(this.props.matchDetails.players) {
-            if(this.props.matchDetails.players.length > 0) {
-                var players = this.props.matchDetails.players;
-                var processedPlayersList = this.generateProcessedPlayers(players);
-                var radiantPlayersList = processedPlayersList.slice(0,5);
-                var direPlayersList = processedPlayersList.slice(5,10);
-                this.setState({radiantPlayersList: radiantPlayersList});
-                this.setState({direPlayersList: direPlayersList});
+        if(this.props.matchDetails) {
+            this.generateProcessedData(this.props.matchDetails);
+
+            if(this.props.matchDetails.players) {
+                if(this.props.matchDetails.players.length > 0) {
+
+                    var players = this.props.matchDetails.players;
+                    var processedPlayersList = this.generateProcessedPlayers(players);
+                    var radiantPlayersList = processedPlayersList.slice(0,5);
+                    var direPlayersList = processedPlayersList.slice(5,10);
+                    this.setState({radiantPlayersList: radiantPlayersList});
+                    this.setState({direPlayersList: direPlayersList});
+                }
             }
         }
     }
 
-    getItemIndex(itemId, itemsArray) {
-        for (i = 0; i < itemsArray.length; i++) {
-            if(itemId == itemsArray[i].id) {
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.matchDetails && nextProps.matchDetails.players.length > 0) {
+            this.generateProcessedData(nextProps.matchDetails);
+            var players = nextProps.matchDetails.players;
+            var processedPlayersList = this.generateProcessedPlayers(players);
+            var radiantPlayersList = processedPlayersList.slice(0,5);
+            var direPlayersList = processedPlayersList.slice(5,9);
+            this.setState({radiantPlayersList: radiantPlayersList});
+            this.setState({direPlayersList: direPlayersList});
+        }
+    }
+
+    generateProcessedData(data) {
+        var duration = moment("1900-01-01 00:00:00").add(data.duration, 'seconds').format("HH:mm:ss");
+        this.setState({formattedDuration: duration});
+        this.setState({radiantScore: data.radiant_score});
+        this.setState({direScore: data.dire_score});
+        this.setState({radiantWin: data.radiant_win});
+
+        if(data.duration && data.start_time) {
+            var endedTime = (data.start_time + data.duration) * 1000;
+            var now = moment();
+            friendlyEndedTime = moment.duration(now.diff(endedTime)).humanize();
+            this.setState({endedTime: friendlyEndedTime});
+        }
+        if(data.game_mode) {
+            this.setState({gameMode: gameMode[data.game_mode].name});
+        }
+        if(data.match_id) {
+            this.setState({matchId: data.match_id});
+        }
+
+        if(data.region) {
+            var index = this.getRegionIndex(data.region, regionsArray);
+            this.setState({region: regionsArray[index].localized_name});
+        }
+
+        if(data.players) {
+            var players = data.players;
+            this.calculateAverageMMR(players);
+        }
+
+        if(data.skill) {
+            if(data.skill == 1) {
+                this.setState({skill: "Normal"});
+            } else if (data.skill == 2) {
+                this.setState({skill: "High"});
+            } else if (data.skill == 3) {
+                this.setState({skill: "Very High"});
+            }
+        }
+    }
+
+    calculateAverageMMR(data) {
+        var totalMMR = 0;
+        var availablePlayers = 0;
+        for (i = 0; i < data.length; i++) {
+            if(data[i].solo_competitive_rank) {
+                availablePlayers++;
+                totalMMR += data[i].solo_competitive_rank;
+            }
+        }
+        var averageMMR = Math.round(totalMMR/availablePlayers);
+        this.setState({averageMMR: averageMMR});
+    }
+
+    getRegionIndex(regionId, regionsArray) {
+        for (i = 0; i < regionsArray.length; i++) {
+            if(regionId == regionsArray[i].id) {
                 return i;
             }
         }
@@ -136,15 +222,15 @@ class MatchOverview extends Component {
             processedPlayer.item_3 = currentUnprocessedPlayer.item_3;
             processedPlayer.item_4 = currentUnprocessedPlayer.item_4;
             processedPlayer.item_5 = currentUnprocessedPlayer.item_5;
-            var backpack_0_key = itemIds[currentUnprocessedPlayer.backpack_0];
-            if(backpack_0_key) {
-                processedPlayer.backpack_0_path = items.itemdata[backpack_0_key].img;
-            } else {
-                processedPlayer.backpack_0_path = "../assets/blank.jpg";
-            }
-            console.log(currentUnprocessedPlayer.backpack_0);
-            console.log(backpack_0_key);
-            console.log(processedPlayer.backpack_0_path);
+            processedPlayer.backpack_0_uri = getItemImage(currentUnprocessedPlayer.backpack_0);
+            processedPlayer.backpack_1_uri = getItemImage(currentUnprocessedPlayer.backpack_1);
+            processedPlayer.backpack_2_uri = getItemImage(currentUnprocessedPlayer.backpack_2);
+            processedPlayer.item_0_uri = getItemImage(currentUnprocessedPlayer.item_0);
+            processedPlayer.item_1_uri = getItemImage(currentUnprocessedPlayer.item_1);
+            processedPlayer.item_2_uri = getItemImage(currentUnprocessedPlayer.item_2);
+            processedPlayer.item_3_uri = getItemImage(currentUnprocessedPlayer.item_3);
+            processedPlayer.item_4_uri = getItemImage(currentUnprocessedPlayer.item_4);
+            processedPlayer.item_5_uri = getItemImage(currentUnprocessedPlayer.item_5);
             processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
@@ -157,15 +243,6 @@ class MatchOverview extends Component {
         this.props.actions.fetchMatchDetails(this.props.matchDetails.match_id).then(() => {
             this.setState({refreshing: false});
         });
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.matchDetails && nextProps.matchDetails.players.length > 0) {
-            var players = nextProps.matchDetails.players;
-            var processedPlayersList = this.generateProcessedPlayers(players);
-            var radiantPlayersList = processedPlayersList.slice(0,5);
-            var direPlayersList = processedPlayersList.slice(5,9);
-        }
     }
 
     onRowPressed(row) {
@@ -241,8 +318,6 @@ class MatchOverview extends Component {
                             <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Total Gold: </Text>
                             <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.totalGold}</Text>
                         </View>
-                    </View>
-                    <View style = {{flex: 1}}>
                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
                             <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Hero Damage: </Text>
                             <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.heroDamage}</Text>
@@ -256,10 +331,44 @@ class MatchOverview extends Component {
                             <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.towerDamage}</Text>
                         </View>
                     </View>
-                    <View style = {{flex: 1}}>
-                        <Image
-                            source={{uri: rowData.backpack_0_path}}
-                       />
+                    <View style = {{flex: 1, alignItems: 'center', justifyContent: 'center', marginRight: 23}}>
+                        <View style = {{flexDirection: 'row'}}>
+                            <Image
+                                source={rowData.item_0_uri} style={{width: 30, height: 24, marginLeft: 23}}
+                            />
+                            <Image
+                                source={rowData.item_1_uri} style={{width: 30, height: 24}}
+                            />
+                            <Image
+                                source={rowData.item_2_uri} style={{width: 30, height: 24}}
+                            />
+                        </View>
+                        <View style = {{flexDirection: 'row'}}>
+                            <Image
+                                source={rowData.item_3_uri} style={{width: 30, height: 24, marginLeft: 23}}
+                            />
+                            <Image
+                                source={rowData.item_4_uri} style={{width: 30, height: 24}}
+                            />
+                            <Image
+                                source={rowData.item_5_uri} style={{width: 30, height: 24}}
+                            />
+                        </View>
+                        <View style = {{flexDirection: 'row'}}>
+                            <Image
+                                source={require('../assets/backpack.png')} style={{width: 23, height: 23}}
+                            />
+                            <Image
+                                source={rowData.backpack_0_uri} style={{width: 30, height: 24}}
+                            />
+                            <Image
+                                source={rowData.backpack_1_uri} style={{width: 30, height: 24}}
+                            />
+                            <Image
+                                source={rowData.backpack_2_uri} style={{width: 30, height: 24}}
+                            />
+                        </View>
+
                     </View>
                 </View>
             );
@@ -310,6 +419,22 @@ class MatchOverview extends Component {
         } else {
             if(this.props.matchDetails) {
                 if(this.props.matchDetails.players.length > 0) {
+                    var teamImage = (<View/>);
+                    if(this.state.radiantWin) {
+                        teamImage = (
+                            <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+                                <Image source={require('../assets/radiant.png')} style={{width: 50, height: 50}}/>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 16, fontWeight: 'bold'}}>Radiant Victory</Text>
+                            </View>
+                        );
+                    } else {
+                        teamImage = (
+                            <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+                                <Image source={require('../assets/dire.png')} style={{width: 50, height: 50}}/>
+                                <Text style = {{color: this.props.secondLegend, fontSize: 16, fontWeight: 'bold'}}>Dire Victory</Text>
+                            </View>
+                        );
+                    }
                     var refreshColor = this.props.legendHex;
                     content = (
                         <KeyboardAwareScrollView style = {{marginTop: 5}}
@@ -324,6 +449,45 @@ class MatchOverview extends Component {
                                     progressBackgroundColor="#ffffffff"
                                 />
                             }>
+                            <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
+                                <View style = {{flexDirection: 'row'}}>
+                                    <View style = {{flex: 1}}>
+                                        {teamImage}
+                                    </View>
+                                    <View style = {{flex: 1, justifyContent: 'center'}}>
+                                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Match ID: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.matchId}</Text>
+                                        </View>
+                                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Region: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.region}</Text>
+                                        </View>
+                                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Average MMR: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.averageMMR}</Text>
+                                        </View>
+                                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Skill: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.skill}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style = {{flexDirection: 'row', marginTop: 10}}>
+                                    <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                        <Text style = {{color: Colors.win, fontSize: 40}}>{this.state.radiantScore}</Text>
+                                    </View>
+                                    <View style = {{alignItems: 'center', justifyContent: 'center'}}>
+                                        <Text style = {{color: this.props.secondLegend, fontSize: 14}}>{this.state.gameMode}</Text>
+                                        <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.formattedDuration}</Text>
+                                        <Text style = {{color: this.props.secondLegend, fontSize: 14}}>ENDED {this.state.endedTime} AGO</Text>
+                                    </View>
+                                    <View style = {{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                                        <Text style = {{color: Colors.lose, fontSize: 40}}>{this.state.direScore}</Text>
+                                    </View>
+                                </View>
+
+                            </View>
                             <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
                                 <View style = {styles.titleContainer}>
                                     <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>RADIANT</Text>

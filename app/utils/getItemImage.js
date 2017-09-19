@@ -146,8 +146,6 @@ export function getItemImage(id) {
         staticImage = require('../assets/items/poor_mans_shield_lg.png');
     } else if (id == 73) {
         staticImage = require('../assets/items/bracer_lg.png');
-    } else if (id == 264) {
-        staticImage = require('../assets/items/banana_lg.png');
     } else if (id == 75) {
         staticImage = require('../assets/items/wraith_band_lg.png');
     } else if (id == 77) {
@@ -230,8 +228,142 @@ export function getItemImage(id) {
         staticImage = require('../assets/items/soul_booster_lg.png');
     } else if (id == 131) {
         staticImage = require('../assets/items/hood_of_defiance_lg.png');
+    } else if (id == 133) {
+        staticImage = require('../assets/items/rapier_lg.png');
+    } else if (id == 135) {
+        staticImage = require('../assets/items/monkey_king_bar_lg.png');
+    } else if (id == 137) {
+        staticImage = require('../assets/items/radiance_lg.png');
+    } else if (id == 139) {
+        staticImage = require('../assets/items/butterfly_lg.png');
+    } else if (id == 141) {
+        staticImage = require('../assets/items/greater_crit_lg.png');
+    } else if (id == 143) {
+        staticImage = require('../assets/items/basher_lg.png');
+    } else if (id == 145) {
+        staticImage = require('../assets/items/bfury_lg.png');
+    } else if (id == 147) {
+        staticImage = require('../assets/items/manta_lg.png');
+    } else if (id == 149) {
+        staticImage = require('../assets/items/lesser_crit_lg.png');
+    } else if (id == 236) {
+        staticImage = require('../assets/items/dragon_lance_lg.png');
+    } else if (id == 151) {
+        staticImage = require('../assets/items/armlet_lg.png');
+    } else if (id == 152) {
+        staticImage = require('../assets/items/invis_sword_lg.png');
+    } else if (id == 249) {
+        staticImage = require('../assets/items/silver_edge_lg.png');
+    } else if (id == 154) {
+        staticImage = require('../assets/items/sange_and_yasha_lg.png');
+    } else if (id == 156) {
+        staticImage = require('../assets/items/satanic_lg.png');
+    } else if (id == 158) {
+        staticImage = require('../assets/items/mjollnir_lg.png');
+    } else if (id == 160) {
+        staticImage = require('../assets/items/skadi_lg.png');
+    } else if (id == 162) {
+        staticImage = require('../assets/items/sange_lg.png');
+    } else if (id == 164) {
+        staticImage = require('../assets/items/helm_of_the_dominator_lg.png');
+    } else if (id == 166) {
+        staticImage = require('../assets/items/maelstrom_lg.png');
+    } else if (id == 168) {
+        staticImage = require('../assets/items/desolator_lg.png');
+    } else if (id == 170) {
+        staticImage = require('../assets/items/yasha_lg.png');
+    } else if (id == 172) {
+        staticImage = require('../assets/items/mask_of_madness_lg.png');
+    } else if (id == 174) {
+        staticImage = require('../assets/items/diffusal_blade_lg.png');
+    } else if (id == 196) {
+        staticImage = require('../assets/items/diffusal_blade_2_lg.png');
+    } else if (id == 176) {
+        staticImage = require('../assets/items/ethereal_blade_lg.png');
+    } else if (id == 178) {
+        staticImage = require('../assets/items/soul_ring_lg.png');
+    } else if (id == 180) {
+        staticImage = require('../assets/items/arcane_boots_lg.png');
+    } else if (id == 235) {
+        staticImage = require('../assets/items/octarine_core_lg.png');
+    } else if (id == 181) {
+        staticImage = require('../assets/items/orb_of_venom_lg.png');
+    } else if (id == 240) {
+        staticImage = require('../assets/items/blight_stone_lg.png');
+    } else if (id == 185) {
+        staticImage = require('../assets/items/ancient_janggo_lg.png');
+    } else if (id == 187) {
+        staticImage = require('../assets/items/medallion_of_courage_lg.png');
+    } else if (id == 229) {
+        staticImage = require('../assets/items/solar_crest_lg.png');
+    } else if (id == 188) {
+        staticImage = require('../assets/items/smoke_of_deceit_lg.png');
+    } else if (id == 257) {
+        staticImage = require('../assets/items/tome_of_knowledge_lg.png');
+    } else if (id == 190) {
+        staticImage = require('../assets/items/veil_of_discord_lg.png');
+    } else if (id == 231) {
+        staticImage = require('../assets/items/guardian_greaves_lg.png');
+    } else if (id == 206) {
+        staticImage = require('../assets/items/rod_of_atos_lg.png');
+    } else if (id == 239) {
+        staticImage = require('../assets/items/iron_talon_lg.png');
+    } else if (id == 208) {
+        staticImage = require('../assets/items/iron_talon_lg.png');
+    } else if (id == 210) {
+        staticImage = require('../assets/items/heavens_halberd_lg.png');
+    } else if (id == 212) {
+        staticImage = require('../assets/items/ring_of_aquila_lg.png');
+    } else if (id == 214) {
+        staticImage = require('../assets/items/tranquil_boots_lg.png');
+    } else if (id == 215) {
+        staticImage = require('../assets/items/shadow_amulet_lg.png');
+    } else if (id == 254) {
+        staticImage = require('../assets/items/glimmer_cape_lg.png');
+    } else if (id == 1000) {
+        staticImage = require('../assets/items/halloween_candy_corn_lg.png');
+    } else if (id == 1001) {
+        staticImage = require('../assets/items/mystery_hook_lg.png');
+    } else if (id == 1002) {
+        staticImage = require('../assets/items/mystery_arrow_lg.png');
+    } else if (id == 1003) {
+        staticImage = require('../assets/items/mystery_missile_lg.png');
+    } else if (id == 1004) {
+        staticImage = require('../assets/items/mystery_toss_lg.png');
+    } else if (id == 1005) {
+        staticImage = require('../assets/items/mystery_vacuum_lg.png');
+    } else if (id == 1006) {
+        staticImage = require('../assets/items/halloween_rapier_lg.png');
+    } else if (id == 1007) {
+        staticImage = require('../assets/items/greevil_whistle_lg.png');
+    } else if (id == 1008) {
+        staticImage = require('../assets/items/greevil_whistle_toggle_lg.png');
+    } else if (id == 1009) {
+        staticImage = require('../assets/items/present_lg.png');
+    } else if (id == 1010) {
+        staticImage = require('../assets/items/winter_stocking_lg.png');
+    } else if (id == 1011) {
+        staticImage = require('../assets/items/winter_skates_lg.png');
+    } else if (id == 1012) {
+        staticImage = require('../assets/items/winter_cake_lg.png');
+    } else if (id == 1013) {
+        staticImage = require('../assets/items/winter_cookie_lg.png');
+    } else if (id == 1014) {
+        staticImage = require('../assets/items/winter_coco_lg.png');
+    } else if (id == 1015) {
+        staticImage = require('../assets/items/winter_ham_lg.png');
+    } else if (id == 1016) {
+        staticImage = require('../assets/items/winter_kringle_lg.png');
+    } else if (id == 1017) {
+        staticImage = require('../assets/items/winter_mushroom_lg.png');
+    } else if (id == 1018) {
+        staticImage = require('../assets/items/winter_greevil_treat_lg.png');
+    } else if (id == 1019) {
+        staticImage = require('../assets/items/winter_greevil_garbage_lg.png');
+    } else if (id == 1020) {
+        staticImage = require('../assets/items/winter_greevil_chewy_lg.png');
     } else {
-        staticImage = require('../assets/blank.jpg');
+        staticImage = require('../assets/no-item.png');
     }
     return staticImage;
 }
