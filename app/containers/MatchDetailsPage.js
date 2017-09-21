@@ -21,6 +21,7 @@ import _ from 'lodash';
 import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import MatchOverview from './MatchOverview';
 import MatchBenchmark from './MatchBenchmark';
+import MatchPerformance from './MatchPerformance';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -82,7 +83,7 @@ class MatchDetailsPage extends Component {
                         renderTabBar = {() => <ScrollableTabBar />}locked = {true} >
                         <MatchOverview tabLabel = "Overview" />
                         <MatchBenchmark tabLabel = "Benchmarks" />
-                        <MatchOverview tabLabel = "Performances" />
+                        <MatchPerformance tabLabel = "Performances" />
                         <MatchOverview tabLabel = "Laning" />
                     </ScrollableTabView>
                 );
