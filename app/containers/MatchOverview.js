@@ -14,8 +14,6 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
-import * as playerOverviewActions from '../actions/player_overview_act';
-import * as playerMatchesActions from '../actions/player_matches_act';
 import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 
@@ -26,14 +24,11 @@ import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import gameMode from '../json/game_mode.json';
 import regionsArray from '../json/regions_list.json';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import moment from 'moment';
 
 import _ from 'lodash';
-
-import ProfileCard from '../components/ProfileCard';
-import HeroesCard from '../components/HeroesCard';
-import MatchesCard from '../components/MatchesCard';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -43,8 +38,6 @@ export const mapStateToProps = state => ({
     matchDetails: state.matchDetailsState.matchDetails,
     isLoadingMatchDetails: state.matchDetailsState.isLoadingMatchDetails,
     isEmptyMatchDetails: state.matchDetailsState.isEmptyMatchDetails,
-    isLoadingOverview: state.playerOverviewState.isLoadingOverview,
-    isEmptyOverview: state.playerOverviewState.isEmptyOverview,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
@@ -121,7 +114,7 @@ class MatchOverview extends Component {
             var players = nextProps.matchDetails.players;
             var processedPlayersList = this.generateProcessedPlayers(players);
             var radiantPlayersList = processedPlayersList.slice(0,5);
-            var direPlayersList = processedPlayersList.slice(5,9);
+            var direPlayersList = processedPlayersList.slice(5,10);
             this.setState({radiantPlayersList: radiantPlayersList});
             this.setState({direPlayersList: direPlayersList});
         }
@@ -201,6 +194,7 @@ class MatchOverview extends Component {
             } else {
                 processedPlayer.player = "Anonymous";
             }
+            processedPlayer.soloCompetitiveRank = currentUnprocessedPlayer.solo_competitive_rank;
             processedPlayer.level = currentUnprocessedPlayer.level;
             processedPlayer.kills = currentUnprocessedPlayer.kills;
             processedPlayer.deaths = currentUnprocessedPlayer.deaths;
@@ -375,6 +369,13 @@ class MatchOverview extends Component {
         } else {
             additionalInfo = (<View/>);
         }
+
+        var mmr;
+        if(rowData.soloCompetitiveRank) {
+            mmr = (<Text style = {{color: this.props.legend, fontSize: 12}}>{rowData.soloCompetitiveRank}</Text>);
+        } else {
+            mmr = (<View/>);
+        }
         return (
             <TouchableOpacity onPress = {() => {this.onRowPressed(rowData.slot)}}>
                 <View style = {rowContainer}>
@@ -385,6 +386,7 @@ class MatchOverview extends Component {
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
+                        {mmr}
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
@@ -398,7 +400,6 @@ class MatchOverview extends Component {
                 </View>
                 {additionalInfo}
             </TouchableOpacity>
-
         );
     }
 
@@ -435,6 +436,21 @@ class MatchOverview extends Component {
                             </View>
                         );
                     }
+                    var parsedWarning = (<View/>);
+                    if(this.props.matchDetails.radiant_gold_adv) {
+                        parsedWarning = (<View/>);
+                    } else {
+                        parsedWarning = (
+                            <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}]}>
+                                <View style = {{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                                    <FontAwesome name = "exclamation-triangle" size = {24} allowFontScaling = {false} color = {this.props.legend}/>
+                                </View>
+                                <View style = {{flex: 7}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 16}}>The replay for this match has not yet been parsed. Not all data may be available.</Text>
+                                </View>
+                            </View>
+                        );
+                    }
                     var refreshColor = this.props.legendHex;
                     content = (
                         <KeyboardAwareScrollView style = {{marginTop: 5}}
@@ -449,27 +465,28 @@ class MatchOverview extends Component {
                                     progressBackgroundColor="#ffffffff"
                                 />
                             }>
+                            {parsedWarning}
                             <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
                                 <View style = {{flexDirection: 'row'}}>
-                                    <View style = {{flex: 1}}>
+                                    <View style = {{flex: 4}}>
                                         {teamImage}
                                     </View>
-                                    <View style = {{flex: 1, justifyContent: 'center'}}>
+                                    <View style = {{flex: 5, justifyContent: 'center'}}>
                                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Match ID: </Text>
-                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.matchId}</Text>
+                                            <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Match ID: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.matchId}</Text>
                                         </View>
                                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Region: </Text>
-                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.region}</Text>
+                                            <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Region: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.region}</Text>
                                         </View>
                                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Average MMR: </Text>
-                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.averageMMR}</Text>
+                                            <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Average MMR: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.averageMMR}</Text>
                                         </View>
                                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                            <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>Skill: </Text>
-                                            <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{this.state.skill}</Text>
+                                            <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Skill: </Text>
+                                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.skill}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -489,7 +506,8 @@ class MatchOverview extends Component {
 
                             </View>
                             <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
-                                <View style = {styles.titleContainer}>
+                                <View style = {[styles.titleContainer, {flexDirection: 'row'}]}>
+                                    <Image source={require('../assets/radiant.png')} style={{width: 30, height: 30, marginRight: 10}}/>
                                     <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>RADIANT</Text>
                                 </View>
                                 <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
@@ -522,7 +540,8 @@ class MatchOverview extends Component {
                                 />
                             </View>
                             <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
-                                <View style = {styles.titleContainer}>
+                                <View style = {[styles.titleContainer, {flexDirection: 'row'}]}>
+                                    <Image source={require('../assets/dire.png')} style={{width: 30, height: 30, marginRight: 10}}/>
                                     <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>DIRE</Text>
                                 </View>
                                 <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
