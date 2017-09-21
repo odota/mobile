@@ -1,5 +1,12 @@
 const colors = {
     mainBackground: 'rgb(255, 255, 255)',
+    gray: 'rgb(179,179,179)',
+    openDotaAlpha: 'rgb(48, 49, 67)',
+    openDotaMod: 'rgb(38, 39, 57)',
+    openDotaLegend: 'rgb(102, 187, 255)',
+    openDotaLegendHex: '#66BBFF',
+    openDotaLegendTranslucent: 'rgba(102, 187, 255, 0.8)',
+    openDotaSecondLegend: 'rgb(255, 255, 255)',
     skyDolchAlpha: 'rgb(130, 130, 130)',
     skyDolchMod: 'rgb(80, 80, 80)',
     skyDolchLegend: 'rgb(43, 208, 239)',
