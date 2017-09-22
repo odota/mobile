@@ -7,7 +7,8 @@ import {
     ActivityIndicator,
     Image,
     TouchableOpacity,
-    RefreshControl
+    RefreshControl,
+    ImageBackground
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -20,7 +21,10 @@ import { Actions } from 'react-native-router-flux';
 import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
+import { getAbilityImage } from '../utils/getAbilityImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import heroes from '../json/heroes.json';
+import abilities from '../json/ability_ids.json';
 
 import moment from 'moment';
 
@@ -70,6 +74,8 @@ class MatchPerformance extends Component {
             refreshing: false
         };
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
+        this.getHeroId = this.getHeroId.bind(this);
+        this.getAbilityId = this.getAbilityId.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
     }
 
@@ -169,11 +175,43 @@ class MatchPerformance extends Component {
             processedPlayer.xpPerMin = (currentUnprocessedPlayer.benchmarks.xp_per_min.pct * 100).toFixed(2);
             processedPlayer.xpPerMinRaw = currentUnprocessedPlayer.benchmarks.xp_per_min.raw.toFixed(2);
 
+            var inflictedHeroName = currentUnprocessedPlayer.max_hero_hit.key;
+            var inflictedHeroID = this.getHeroId(inflictedHeroName);
+            var inflictor = currentUnprocessedPlayer.max_hero_hit.inflictor;
+            if(inflictor) {
+                var inflictorID = this.getAbilityId(inflictor);
+                processedPlayer.maxInflictorHit = getAbilityImage(inflictorID);
+            } else {
+                processedPlayer.maxInflictorHit = getAbilityImage(5001);
+            }
+            processedPlayer.maxHeroHit = getHeroImage(inflictedHeroID);
+            processedPlayer.maxValueHit = currentUnprocessedPlayer.max_hero_hit.value;
+
             processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
         }
         return processedPlayersList;
+    }
+
+    getHeroId(heroName) {
+        var heroesList = heroes.result.heroes;
+        var heroId = -1;
+        for(var i = 0; i < heroesList.length; i++) {
+            if (heroesList[i].name == heroName) {
+                return heroesList[i].id;
+            }
+        }
+    }
+
+    getAbilityId(abilityName) {
+        for(var key in abilities) {
+            if(abilities.hasOwnProperty(key)) {
+                if(abilities[key] == abilityName) {
+                    return key;
+                }
+            }
+        }
     }
 
     onRefresh() {
@@ -242,25 +280,39 @@ class MatchPerformance extends Component {
         var additionalInfo;
         if(toggled) {
             additionalInfo = (
-                <View style = {[additionalRowContainer, {paddingHorizontal: 15}]}>
-                <View style = {{flex: 1}}>
-                    <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Stacked: </Text>
-                        <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.stacked}</Text>
+                <View style = {[additionalRowContainer, {paddingHorizontal: 15, flexDirection: 'row'}]}>
+                    <View style = {{flex: 1}}>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Stacked: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.stacked}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Dead: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.dead}</Text>
+                        </View>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Buybacks: </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.buyback}</Text>
+                        </View>
                     </View>
-                    <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Dead: </Text>
-                        <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.dead}</Text>
+                    <View style = {{flex: 1}}>
+                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
+                            <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Pings (Map): </Text>
+                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.pings}</Text>
+                        </View>
+                        <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Biggest Hit: </Text>
+                        <View style = {{flexDirection: 'row'}}>
+                            <ImageBackground
+                                source={rowData.maxInflictorHit} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.maxValueHit}</Text>
+                                </View>
+                            </ImageBackground>
+                            <Image
+                                source={rowData.maxHeroHit} style={{width: 30, height: 24}}
+                            />
+                        </View>
                     </View>
-                    <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Buybacks: </Text>
-                        <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.buyback}</Text>
-                    </View>
-                    <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                        <Text style = {{color: this.props.legend, fontSize: 12, fontWeight: 'bold'}}>Pings (Map): </Text>
-                        <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{rowData.pings}</Text>
-                    </View>
-                </View>
                 </View>
             )
         } else {
