@@ -7,10 +7,10 @@ var data = "export function getAbilityImage(id) {\n\tvar staticImage;\n";
 for(var key in abilities) {
     if(abilities.hasOwnProperty(key)) {
         if(abilities[key].includes("special_bonus")) {
-            var newLine = "\t} else if (id == " + key + ") {\n\t\tstaticImage = require('../assets/talent_tree.png')};\n"
+            var newLine = "\t} else if (id == " + key + ") {\n\t\tstaticImage = require('../assets/talent_tree.png');\n"
             data += newLine;
         } else {
-            var newLine = "\t} else if (id == " + key + ") {\n\t\tstaticImage = require('../assets/abilities/" + abilities[key] + "_lg.png')};\n"
+            var newLine = "\t} else if (id == " + key + ") {\n\t\tstaticImage = require('../assets/abilities/" + abilities[key] + "_lg.png');\n"
             data += newLine;
         }
     }
