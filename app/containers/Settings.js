@@ -72,11 +72,8 @@ class Settings extends Component {
                                     { value: 1, label: 'OpenDota' },
                                     { value: 2, label: 'Sky Dolch' },
                                     { value: 3, label: 'Hyperfuse' },
-                                    { value: 4, label: 'Haste' },
                                     { value: 5, label: 'Invisibility' },
-                                    { value: 6, label: 'Double Damage' },
-                                    { value: 7, label: 'Regeneration' },
-                                    { value: 8, label: 'Illusion' }
+                                    { value: 6, label: 'Double Damage' }
                                 ]}
                             />
                         </View>
