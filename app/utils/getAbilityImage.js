@@ -1,11 +1,7 @@
 export function getAbilityImage(id) {
 	var staticImage;
-	if (id == 0) {
-
-	} else if (id == 5001) {
+	if (id == 5001) {
 		staticImage = require('../assets/abilities/default_attack_lg.png');
-	} else if (id == 5002) {
-
 	} else if (id == 5003) {
 		staticImage = require('../assets/abilities/antimage_mana_break_lg.png');
 	} else if (id == 5004) {
@@ -100,8 +96,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/morphling_waveform_lg.png');
 	} else if (id == 5053) {
 		staticImage = require('../assets/abilities/morphling_adaptive_strike_lg.png');
-	} else if (id == 5054) {
-
 	} else if (id == 5055) {
 		staticImage = require('../assets/abilities/morphling_morph_agi_lg.png');
 	} else if (id == 5056) {
@@ -390,40 +384,12 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/templar_assassin_psionic_trap_lg.png');
 	} else if (id == 5198) {
 		staticImage = require('../assets/abilities/templar_assassin_trap_lg.png');
-	} else if (id == 5199) {
-
 	} else if (id == 5200) {
 		staticImage = require('../assets/abilities/necronomicon_warrior_last_will_lg.png');
 	} else if (id == 5201) {
 		staticImage = require('../assets/abilities/necronomicon_warrior_true_sight_lg.png');
-	} else if (id == 5202) {
-
 	} else if (id == 5203) {
 		staticImage = require('../assets/abilities/necronomicon_archer_mana_burn_lg.png');
-	} else if (id == 5204) {
-
-	} else if (id == 5205) {
-
-	} else if (id == 5206) {
-
-	} else if (id == 5207) {
-
-	} else if (id == 5208) {
-
-	} else if (id == 5209) {
-
-	} else if (id == 5210) {
-
-	} else if (id == 5213) {
-
-	} else if (id == 5214) {
-
-	} else if (id == 5215) {
-
-	} else if (id == 5216) {
-
-	} else if (id == 5217) {
-
 	} else if (id == 5218) {
 		staticImage = require('../assets/abilities/viper_poison_attack_lg.png');
 	} else if (id == 5219) {
@@ -448,8 +414,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/dragon_knight_dragon_blood_lg.png');
 	} else if (id == 5229) {
 		staticImage = require('../assets/abilities/dragon_knight_elder_dragon_form_lg.png');
-	} else if (id == 5232) {
-
 	} else if (id == 5233) {
 		staticImage = require('../assets/abilities/dazzle_poison_touch_lg.png');
 	} else if (id == 5234) {
@@ -548,10 +512,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/broodmother_incapacitating_bite_lg.png');
 	} else if (id == 5282) {
 		staticImage = require('../assets/abilities/broodmother_insatiable_hunger_lg.png');
-	} else if (id == 5283) {
-
-	} else if (id == 5284) {
-
 	} else if (id == 5285) {
 		staticImage = require('../assets/abilities/bounty_hunter_shuriken_toss_lg.png');
 	} else if (id == 5286) {
@@ -568,14 +528,8 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/weaver_geminate_attack_lg.png');
 	} else if (id == 5292) {
 		staticImage = require('../assets/abilities/weaver_time_lapse_lg.png');
-	} else if (id == 5293) {
-
-	} else if (id == 5294) {
-
 	} else if (id == 5295) {
 		staticImage = require('../assets/abilities/centaur_khan_war_stomp_lg.png');
-	} else if (id == 5296) {
-
 	} else if (id == 5297) {
 		staticImage = require('../assets/abilities/jakiro_dual_breath_lg.png');
 	} else if (id == 5298) {
@@ -584,40 +538,22 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/jakiro_liquid_fire_lg.png');
 	} else if (id == 5300) {
 		staticImage = require('../assets/abilities/jakiro_macropyre_lg.png');
-	} else if (id == 5301) {
-
 	} else if (id == 5302) {
 		staticImage = require('../assets/abilities/polar_furbolg_ursa_warrior_thunder_clap_lg.png');
-	} else if (id == 5303) {
-
 	} else if (id == 5304) {
 		staticImage = require('../assets/abilities/ogre_magi_frost_armor_lg.png');
 	} else if (id == 5305) {
 		staticImage = require('../assets/abilities/dark_troll_warlord_ensnare_lg.png');
 	} else if (id == 5306) {
 		staticImage = require('../assets/abilities/dark_troll_warlord_raise_dead_lg.png');
-	} else if (id == 5307) {
-
-	} else if (id == 5308) {
-
-	} else if (id == 5309) {
-
-	} else if (id == 5310) {
-
 	} else if (id == 5312) {
 		staticImage = require('../assets/abilities/enraged_wildkin_tornado_lg.png');
-	} else if (id == 5313) {
-
 	} else if (id == 5314) {
 		staticImage = require('../assets/abilities/satyr_trickster_purge_lg.png');
 	} else if (id == 5315) {
 		staticImage = require('../assets/abilities/satyr_soulstealer_mana_burn_lg.png');
 	} else if (id == 5316) {
 		staticImage = require('../assets/abilities/satyr_hellcaller_shockwave_lg.png');
-	} else if (id == 5317) {
-
-	} else if (id == 5318) {
-
 	} else if (id == 5319) {
 		staticImage = require('../assets/abilities/harpy_storm_chain_lightning_lg.png');
 	} else if (id == 5320) {
@@ -628,14 +564,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/batrider_firefly_lg.png');
 	} else if (id == 5323) {
 		staticImage = require('../assets/abilities/batrider_flaming_lasso_lg.png');
-	} else if (id == 5324) {
-
-	} else if (id == 5325) {
-
-	} else if (id == 5326) {
-
-	} else if (id == 5327) {
-
 	} else if (id == 5328) {
 		staticImage = require('../assets/abilities/chen_penitence_lg.png');
 	} else if (id == 5329) {
@@ -644,10 +572,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/chen_holy_persuasion_lg.png');
 	} else if (id == 5331) {
 		staticImage = require('../assets/abilities/chen_hand_of_god_lg.png');
-	} else if (id == 5332) {
-
-	} else if (id == 5333) {
-
 	} else if (id == 5334) {
 		staticImage = require('../assets/abilities/spectre_spectral_dagger_lg.png');
 	} else if (id == 5335) {
@@ -680,10 +604,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/ancient_apparition_ice_blast_lg.png');
 	} else if (id == 5349) {
 		staticImage = require('../assets/abilities/ancient_apparition_ice_blast_release_lg.png');
-	} else if (id == 5350) {
-
-	} else if (id == 5351) {
-
 	} else if (id == 5352) {
 		staticImage = require('../assets/abilities/beastmaster_greater_boar_poison_lg.png');
 	} else if (id == 5353) {
@@ -756,8 +676,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/invoker_sun_strike_lg.png');
 	} else if (id == 5387) {
 		staticImage = require('../assets/abilities/invoker_forge_spirit_lg.png');
-	} else if (id == 5388) {
-
 	} else if (id == 5389) {
 		staticImage = require('../assets/abilities/invoker_ice_wall_lg.png');
 	} else if (id == 5390) {
@@ -778,8 +696,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/lycan_feral_impulse_lg.png');
 	} else if (id == 5398) {
 		staticImage = require('../assets/abilities/lycan_shapeshift_lg.png');
-	} else if (id == 5399) {
-
 	} else if (id == 5400) {
 		staticImage = require('../assets/abilities/brewmaster_thunder_clap_lg.png');
 	} else if (id == 5401) {
@@ -868,10 +784,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/undying_soul_rip_lg.png');
 	} else if (id == 5444) {
 		staticImage = require('../assets/abilities/undying_tombstone_lg.png');
-	} else if (id == 5445) {
-
-	} else if (id == 5446) {
-
 	} else if (id == 5447) {
 		staticImage = require('../assets/abilities/undying_flesh_golem_lg.png');
 	} else if (id == 5448) {
@@ -888,12 +800,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/rubick_empty1_lg.png');
 	} else if (id == 5454) {
 		staticImage = require('../assets/abilities/rubick_empty2_lg.png');
-	} else if (id == 5455) {
-
-	} else if (id == 5456) {
-
-	} else if (id == 5457) {
-
 	} else if (id == 5458) {
 		staticImage = require('../assets/abilities/disruptor_thunder_strike_lg.png');
 	} else if (id == 5459) {
@@ -960,10 +866,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/wisp_tether_break_lg.png');
 	} else if (id == 5490) {
 		staticImage = require('../assets/abilities/wisp_spirits_in_lg.png');
-	} else if (id == 5491) {
-
-	} else if (id == 5492) {
-
 	} else if (id == 5493) {
 		staticImage = require('../assets/abilities/wisp_spirits_out_lg.png');
 	} else if (id == 5494) {
@@ -974,12 +876,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/slark_essence_shift_lg.png');
 	} else if (id == 5497) {
 		staticImage = require('../assets/abilities/slark_shadow_dance_lg.png');
-	} else if (id == 5500) {
-
-	} else if (id == 5501) {
-
-	} else if (id == 5502) {
-
 	} else if (id == 5503) {
 		staticImage = require('../assets/abilities/keeper_of_the_light_spirit_form_illuminate_end_lg.png');
 	} else if (id == 5504) {
@@ -1030,44 +926,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/shredder_chakram_lg.png');
 	} else if (id == 5528) {
 		staticImage = require('../assets/abilities/shredder_return_chakram_lg.png');
-	} else if (id == 5529) {
-
-	} else if (id == 5530) {
-
-	} else if (id == 5531) {
-
-	} else if (id == 5532) {
-
-	} else if (id == 5533) {
-
-	} else if (id == 5534) {
-
-	} else if (id == 5535) {
-
-	} else if (id == 5536) {
-
-	} else if (id == 5537) {
-
-	} else if (id == 5538) {
-
-	} else if (id == 5539) {
-
-	} else if (id == 5540) {
-
-	} else if (id == 5541) {
-
-	} else if (id == 5542) {
-
-	} else if (id == 5543) {
-
-	} else if (id == 5544) {
-
-	} else if (id == 5545) {
-
-	} else if (id == 5546) {
-
-	} else if (id == 5547) {
-
 	} else if (id == 5548) {
 		staticImage = require('../assets/abilities/bristleback_viscous_nasal_goo_lg.png');
 	} else if (id == 5549) {
@@ -1076,33 +934,7 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/bristleback_bristleback_lg.png');
 	} else if (id == 5551) {
 		staticImage = require('../assets/abilities/bristleback_warpath_lg.png');
-	} else if (id == 5552) {
-
-	} else if (id == 5553) {
-
-	} else if (id == 5554) {
-
-	} else if (id == 5555) {
-
-	} else if (id == 5556) {
-
-	} else if (id == 5557) {
-
-	} else if (id == 5558) {
-
-	} else if (id == 5559) {
-
-	} else if (id == 5560) {
-
-	} else if (id == 5561) {
-
-	} else if (id == 5562) {
-
-	} else if (id == 5563) {
-
-	} else if (id == 5564) {
-
-	} else if (id == 5565) {
+    } else if (id == 5565) {
 		staticImage = require('../assets/abilities/tusk_ice_shards_lg.png');
 	} else if (id == 5566) {
 		staticImage = require('../assets/abilities/tusk_snowball_lg.png');
@@ -1110,28 +942,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/tusk_frozen_sigil_lg.png');
 	} else if (id == 5568) {
 		staticImage = require('../assets/abilities/tusk_walrus_punch_lg.png');
-	} else if (id == 5569) {
-
-	} else if (id == 5570) {
-
-	} else if (id == 5571) {
-
-	} else if (id == 5572) {
-
-	} else if (id == 5573) {
-
-	} else if (id == 5574) {
-
-	} else if (id == 5575) {
-
-	} else if (id == 5576) {
-
-	} else if (id == 5577) {
-
-	} else if (id == 5578) {
-
-	} else if (id == 5579) {
-
 	} else if (id == 5580) {
 		staticImage = require('../assets/abilities/beastmaster_call_of_the_wild_boar_lg.png');
 	} else if (id == 5581) {
@@ -1152,8 +962,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/abaddon_borrowed_time_lg.png');
 	} else if (id == 5589) {
 		staticImage = require('../assets/abilities/elder_titan_echo_stomp_lg.png');
-	} else if (id == 5590) {
-
 	} else if (id == 5591) {
 		staticImage = require('../assets/abilities/elder_titan_ancestral_spirit_lg.png');
 	} else if (id == 5592) {
@@ -1208,8 +1016,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/abyssal_underlord_dark_rift_lg.png');
 	} else if (id == 5617) {
 		staticImage = require('../assets/abilities/abyssal_underlord_cancel_dark_rift_lg.png');
-	} else if (id == 5618) {
-
 	} else if (id == 5619) {
 		staticImage = require('../assets/abilities/terrorblade_reflection_lg.png');
 	} else if (id == 5620) {
@@ -1238,8 +1044,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/drow_ranger_wave_of_silence_lg.png');
 	} else if (id == 5635) {
 		staticImage = require('../assets/abilities/techies_focused_detonate_lg.png');
-	} else if (id == 5636) {
-
 	} else if (id == 5637) {
 		staticImage = require('../assets/abilities/oracle_fortunes_end_lg.png');
 	} else if (id == 5638) {
@@ -1250,10 +1054,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/oracle_false_promise_lg.png');
 	} else if (id == 5641) {
 		staticImage = require('../assets/abilities/tusk_launch_snowball_lg.png');
-	} else if (id == 5642) {
-
-	} else if (id == 5643) {
-
 	} else if (id == 5644) {
 		staticImage = require('../assets/abilities/techies_minefield_sign_lg.png');
 	} else if (id == 5645) {
@@ -1264,8 +1064,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/earth_spirit_petrify_lg.png');
 	} else if (id == 5649) {
 		staticImage = require('../assets/abilities/treant_eyes_in_the_forest_lg.png');
-	} else if (id == 5650) {
-
 	} else if (id == 5651) {
 		staticImage = require('../assets/abilities/winter_wyvern_arctic_burn_lg.png');
 	} else if (id == 5652) {
@@ -1276,34 +1074,8 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/winter_wyvern_winters_curse_lg.png');
 	} else if (id == 5655) {
 		staticImage = require('../assets/abilities/life_stealer_control_lg.png');
-	} else if (id == 5656) {
-
-	} else if (id == 5657) {
-
-	} else if (id == 5658) {
-
-	} else if (id == 5659) {
-
-	} else if (id == 5660) {
-
-	} else if (id == 5661) {
-
-	} else if (id == 5662) {
-
-	} else if (id == 5663) {
-
-	} else if (id == 5664) {
-
-	} else if (id == 5665) {
-
 	} else if (id == 5666) {
 		staticImage = require('../assets/abilities/nyx_assassin_burrow_lg.png');
-	} else if (id == 5667) {
-
-	} else if (id == 5668) {
-
-	} else if (id == 5669) {
-
 	} else if (id == 5670) {
 		staticImage = require('../assets/abilities/mud_golem_hurl_boulder_lg.png');
 	} else if (id == 5671) {
@@ -1316,36 +1088,20 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/morphling_hybrid_lg.png');
 	} else if (id == 5675) {
 		staticImage = require('../assets/abilities/life_stealer_assimilate_eject_lg.png');
-	} else if (id == 5676) {
-
 	} else if (id == 5677) {
 		staticImage = require('../assets/abilities/arc_warden_flux_lg.png');
 	} else if (id == 5678) {
 		staticImage = require('../assets/abilities/arc_warden_magnetic_field_lg.png');
 	} else if (id == 5679) {
 		staticImage = require('../assets/abilities/arc_warden_spark_wraith_lg.png');
-	} else if (id == 5680) {
-
-	} else if (id == 5681) {
-
-	} else if (id == 5682) {
-
 	} else if (id == 5683) {
 		staticImage = require('../assets/abilities/arc_warden_tempest_double_lg.png');
-	} else if (id == 5684) {
-
 	} else if (id == 5685) {
 		staticImage = require('../assets/abilities/death_prophet_spirit_siphon_lg.png');
-	} else if (id == 5686) {
-
 	} else if (id == 5687) {
 		staticImage = require('../assets/abilities/lone_druid_savage_roar_lg.png');
-	} else if (id == 5688) {
-
 	} else if (id == 5689) {
 		staticImage = require('../assets/abilities/black_dragon_fireball_lg.png');
-	} else if (id == 5690) {
-
 	} else if (id == 5691) {
 		staticImage = require('../assets/abilities/faceless_void_time_dilation_lg.png');
 	} else if (id == 5716) {
@@ -1362,10 +1118,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/abilities/monkey_king_primal_spring_lg.png');
 	} else if (id == 5725) {
 		staticImage = require('../assets/abilities/monkey_king_wukongs_command_lg.png');
-	} else if (id == 5726) {
-
-	} else if (id == 5750) {
-
 	} else if (id == 5900) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 5901) {
@@ -1778,10 +1530,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6121) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6125) {
-
-	} else if (id == 6126) {
-
 	} else if (id == 6127) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6128) {
@@ -1964,8 +1712,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6225) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6226) {
-
 	} else if (id == 6227) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6228) {
@@ -2036,10 +1782,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6269) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6270) {
-
-	} else if (id == 6278) {
-
 	} else if (id == 6280) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6281) {
@@ -2100,8 +1842,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6314) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6316) {
-
 	} else if (id == 6317) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6318) {
@@ -2118,20 +1858,12 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6327) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6328) {
-
-	} else if (id == 6329) {
-
 	} else if (id == 6330) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6331) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6332) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 6333) {
-
-	} else if (id == 6334) {
-
 	} else if (id == 6350) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6351) {
@@ -2386,28 +2118,6 @@ export function getAbilityImage(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6670) {
 		staticImage = require('../assets/talent_tree.png');
-	} else if (id == 9990) {
-
-	} else if (id == 9991) {
-
-	} else if (id == 9993) {
-
-	} else if (id == 9994) {
-
-	} else if (id == 9995) {
-
-	} else if (id == 9997) {
-
-	} else if (id == 9998) {
-
-	} else if (id == 9999) {
-
-	} else if (id == 10000) {
-
-	} else if (id == 10001) {
-
-	} else if (id == 10002) {
-        
 	}
 	 return staticImage;
 }
