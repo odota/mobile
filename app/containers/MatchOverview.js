@@ -7,7 +7,8 @@ import {
     ActivityIndicator,
     Image,
     TouchableOpacity,
-    RefreshControl
+    RefreshControl,
+    ImageBackground
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -25,6 +26,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import gameMode from '../json/game_mode.json';
 import regionsArray from '../json/regions_list.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import items from '../json/item_ids.json';
 
 import moment from 'moment';
 
@@ -86,6 +88,8 @@ class MatchOverview extends Component {
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
         this.generateProcessedData = this.generateProcessedData.bind(this);
         this.getRegionIndex = this.getRegionIndex.bind(this);
+        this.getItemName = this.getItemName.bind(this);
+        this.findItemTiming = this.findItemTiming.bind(this);
         this.calculateAverageMMR = this.calculateAverageMMR.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
     }
@@ -207,15 +211,52 @@ class MatchOverview extends Component {
             processedPlayer.heroHealing = kFormatter(currentUnprocessedPlayer.hero_healing);
             processedPlayer.towerDamage = kFormatter(currentUnprocessedPlayer.tower_damage);
             processedPlayer.totalGold = kFormatter(currentUnprocessedPlayer.total_gold);
+
             processedPlayer.backpack_0 = currentUnprocessedPlayer.backpack_0;
+            var backpack_0_name = this.getItemName(processedPlayer.backpack_0);
+            if(backpack_0_name) {
+                processedPlayer.backpack_0_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_0_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.backpack_1 = currentUnprocessedPlayer.backpack_1;
+            var backpack_1_name = this.getItemName(processedPlayer.backpack_1);
+            if(backpack_1_name) {
+                processedPlayer.backpack_1_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_1_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.backpack_2 = currentUnprocessedPlayer.backpack_2;
+            var backpack_2_name = this.getItemName(processedPlayer.backpack_2);
+            if(backpack_2_name) {
+                processedPlayer.backpack_2_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_2_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_0 = currentUnprocessedPlayer.item_0;
+            var item_0_name = this.getItemName(processedPlayer.item_0);
+            if(item_0_name) {
+                processedPlayer.item_0_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_1 = currentUnprocessedPlayer.item_1;
+            var item_1_name = this.getItemName(processedPlayer.item_1);
+            if(item_1_name) {
+                processedPlayer.item_1_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_1_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_2 = currentUnprocessedPlayer.item_2;
+            var item_2_name = this.getItemName(processedPlayer.item_2);
+            if(item_2_name) {
+                processedPlayer.item_2_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_2_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_3 = currentUnprocessedPlayer.item_3;
+            var item_3_name = this.getItemName(processedPlayer.item_3);
+            if(item_3_name) {
+                processedPlayer.item_3_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_3_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_4 = currentUnprocessedPlayer.item_4;
+            var item_4_name = this.getItemName(processedPlayer.item_4);
+            if(item_4_name) {
+                processedPlayer.item_4_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_4_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.item_5 = currentUnprocessedPlayer.item_5;
+            var item_5_name = this.getItemName(processedPlayer.item_5);
+            if(item_5_name) {
+                processedPlayer.item_5_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_5_name), 'seconds').format("mm:ss");
+            }
             processedPlayer.backpack_0_uri = getItemImage(currentUnprocessedPlayer.backpack_0);
             processedPlayer.backpack_1_uri = getItemImage(currentUnprocessedPlayer.backpack_1);
             processedPlayer.backpack_2_uri = getItemImage(currentUnprocessedPlayer.backpack_2);
@@ -230,6 +271,26 @@ class MatchOverview extends Component {
             processedPlayersList[i] = processedPlayer;
         }
         return processedPlayersList;
+    }
+
+    getItemName(itemId) {
+        for(var key in items) {
+            if(items.hasOwnProperty(key)) {
+                if(key == itemId) {
+                    return items[key];
+                }
+            }
+        }
+    }
+
+    findItemTiming(purchaseLog, itemName) {
+        for(var purchase in purchaseLog) {
+            if(purchaseLog.hasOwnProperty(purchase)) {
+                if(purchaseLog[purchase].key == itemName) {
+                    return purchaseLog[purchase].time;
+                }
+            }
+        }
     }
 
     onRefresh() {
@@ -327,40 +388,58 @@ class MatchOverview extends Component {
                     </View>
                     <View style = {{flex: 1, alignItems: 'center', justifyContent: 'center', marginRight: 23}}>
                         <View style = {{flexDirection: 'row'}}>
-                            <Image
-                                source={rowData.item_0_uri} style={{width: 30, height: 24, marginLeft: 23}}
-                            />
-                            <Image
-                                source={rowData.item_1_uri} style={{width: 30, height: 24}}
-                            />
-                            <Image
-                                source={rowData.item_2_uri} style={{width: 30, height: 24}}
-                            />
+                            <ImageBackground source={rowData.item_0_uri} style={{width: 30, height: 24, marginLeft: 23}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_0_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.item_1_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_1_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.item_2_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_2_timing}</Text>
+                                </View>
+                            </ImageBackground>
                         </View>
                         <View style = {{flexDirection: 'row'}}>
-                            <Image
-                                source={rowData.item_3_uri} style={{width: 30, height: 24, marginLeft: 23}}
-                            />
-                            <Image
-                                source={rowData.item_4_uri} style={{width: 30, height: 24}}
-                            />
-                            <Image
-                                source={rowData.item_5_uri} style={{width: 30, height: 24}}
-                            />
+                            <ImageBackground source={rowData.item_3_uri} style={{width: 30, height: 24, marginLeft: 23}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_3_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.item_4_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_4_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.item_5_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.item_5_timing}</Text>
+                                </View>
+                            </ImageBackground>
                         </View>
                         <View style = {{flexDirection: 'row'}}>
                             <Image
                                 source={require('../assets/backpack.png')} style={{width: 23, height: 23}}
                             />
-                            <Image
-                                source={rowData.backpack_0_uri} style={{width: 30, height: 24}}
-                            />
-                            <Image
-                                source={rowData.backpack_1_uri} style={{width: 30, height: 24}}
-                            />
-                            <Image
-                                source={rowData.backpack_2_uri} style={{width: 30, height: 24}}
-                            />
+                            <ImageBackground source={rowData.backpack_0_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.backpack_0_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.backpack_1_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.backpack_1_timing}</Text>
+                                </View>
+                            </ImageBackground>
+                            <ImageBackground source={rowData.backpack_2_uri} style={{width: 30, height: 24}}>
+                                <View style = {{backgroundColor: 'rgba(0,0,0,0.5)', position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'center', justifyContent: 'center'}}>
+                                    <Text style = {{color: this.props.secondLegend, fontSize: 10}}>{rowData.backpack_2_timing}</Text>
+                                </View>
+                            </ImageBackground>
                         </View>
 
                     </View>

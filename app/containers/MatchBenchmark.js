@@ -20,6 +20,7 @@ import { Actions } from 'react-native-router-flux';
 import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
+import { getAbilityImage } from '../utils/getAbilityImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';

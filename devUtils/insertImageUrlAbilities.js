@@ -3,12 +3,14 @@ var fs = require('fs');
 var _ = require('lodash');
 var util = require('util');
 
-for(var key in abilities.abilitydata) {
-    if(abilities.abilitydata.hasOwnProperty(key)) {
+for(var key in abilities) {
+    if(abilities.hasOwnProperty(key)) {
         var abilityName = key;
-        var path = "../assets/abilities/" + abilityName + "_lg.png";
-        var extendedAbilities = _.extend(abilities.abilitydata[key], {"img": path});
-        abilities.abilitydata[key] = extendedAbilities;
+        if(!abilityName.includes("special_bonus")) {
+            var path = "../assets/abilities/" + abilityName + "_lg.png";
+            var extendedAbilities = _.extend(abilities[key], {"img": path});
+            abilities[key] = extendedAbilities;
+        }
     }
 }
 
