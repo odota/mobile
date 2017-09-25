@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
@@ -33,21 +33,18 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend
 })
 
-class HeroesCard extends Component {
+class HeroesCard extends PureComponent {
+    heroesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
     state = {
         processedHeroList: []
     }
-    constructor (props) {
-        super(props)
-        this.heroesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    }
 
     sortByKey = (array, key) => {
-        return array.sort((a, b) => a[key] - b[key]);
+        return array.sort((a, b) => a[key] - b[key])
     }
 
     getIndex = (heroId, heroesArray) => {
-        return heroesArray.findIndex(item => item.id === heroId);
+        return heroesArray.findIndex(item => item.id === heroId)
     }
 
     generateProcessedArray = (unprocessedHeroList) => {
@@ -188,10 +185,10 @@ class HeroesCard extends Component {
                         </View>
                     </View>
                     <ListView
-                      dataSource={this.heroesDS.cloneWithRows(this.state.processedHeroList)}
-                      renderRow={this.renderRow}
-                      enableEmptySections={true}
-                      initialListSize={120}
+                        dataSource={this.heroesDS.cloneWithRows(this.state.processedHeroList)}
+                        renderRow={this.renderRow}
+                        enableEmptySections
+                        initialListSize={120}
                     />
                 </View>
             )
@@ -210,7 +207,7 @@ const baseStyles = extend(base.general, {
         alignSelf: 'center'
     },
     heroCell: {
-        flex: 1,
+        flex: 1
     },
     playedCell: {
         flex: 1,
@@ -232,8 +229,8 @@ const baseStyles = extend(base.general, {
         marginLeft: 5,
         marginRight: 5
     }
-});
+})
 
-const styles = StyleSheet.create(baseStyles);
+const styles = StyleSheet.create(baseStyles)
 
-export default connect(mapStateToProps)(HeroesCard);
+export default connect(mapStateToProps)(HeroesCard)
