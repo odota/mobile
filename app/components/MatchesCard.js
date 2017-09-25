@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
@@ -12,14 +12,14 @@ import { Avatar } from 'react-native-material-design'
 
 import { connect } from 'react-redux'
 
-import Colors from '../themes/Colors'
-import base from '../themes/BaseStyles'
-import Fonts from '../themes/Fonts'
+import Colors from 'Themes/Colors'
+import base from 'Themes/BaseStyles'
+import Fonts from 'Themes/Fonts'
 
 import { Actions } from 'react-native-router-flux'
 
-import gameMode from '../json/game_mode.json'
-import { getHeroImage } from '../utils/getHeroImage'
+import gameMode from 'Json/game_mode.json'
+import { getHeroImage } from 'Utils/getHeroImage'
 
 import extend from 'lodash/extend'
 import moment from 'moment'
@@ -33,7 +33,7 @@ export const mapStateToProps = state => ({
     parent: state.navigationState.parent
 })
 
-class MatchesCard extends Component {
+class MatchesCard extends PureComponent {
     matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
 
     matchPressed = (data) => {
@@ -46,7 +46,7 @@ class MatchesCard extends Component {
         }
     }
 
-    getHeader () {
+    getHeader = () => {
         var dynamicHeader
         if (this.props.default) {
             dynamicHeader = 'K/D/A'
@@ -116,8 +116,8 @@ class MatchesCard extends Component {
         return dynamicHeader
     }
 
-    getValue (rowData) {
-        var dynamicValue
+    getValue = (rowData) => {
+        let dynamicValue
         if (this.props.default) {
             dynamicValue = rowData.kills + '/' + rowData.deaths + '/' + rowData.assists
         } else {
@@ -186,17 +186,17 @@ class MatchesCard extends Component {
         return dynamicValue
     }
 
-    getFriendlyDuration (duration) {
-        var minutes = Math.floor(duration / 60)
-        var seconds = duration - (minutes * 60)
+    getFriendlyDuration = (duration) => {
+        const minutes = Math.floor(duration / 60)
+        let seconds = duration - (minutes * 60)
         if (seconds < 10) {
             seconds = '0' + seconds
         }
-        var friendlyDuration = minutes + ':' + seconds
+        const friendlyDuration = minutes + ':' + seconds
         return friendlyDuration
     }
 
-    renderRow (rowData, i, j) {
+    renderRow = (rowData, i, j) => {
         if (rowData) {
             let rowContainer
             let team

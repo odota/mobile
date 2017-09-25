@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
@@ -39,7 +39,7 @@ export const mapDispatchToProps = (dispatch) => ({
     navigationActions: bindActionCreators(navigationActions, dispatch)
 })
 
-class DeepNavBar extends Component {
+class DeepNavBar extends PureComponent {
     backPressed = () => {
         const { parent, navigationActions } = this.props
         if (parent === 'Favourites') {
