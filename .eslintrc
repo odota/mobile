@@ -12,8 +12,8 @@
   "rules": {
     "react/jsx-sort-props": [0, { "callbacksLast": true }],
     "react/sort-prop-types": [0, { "callbacksLast": true }],
-    "indent" : ["error", 4],
-    "react/jsx-indent" : ["error", 4, { "ignoredNodes": ["JSXElement *"] }],
+    "indent" : ["error", 4, { "ignoredNodes": ["JSXElement *"] }],
+    "react/jsx-indent" : ["error", 4],
     "react/jsx-indent-props": ["error", 4],
     "no-unused-vars": [1],
     "comma-dangle": [1],
