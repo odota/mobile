@@ -22,6 +22,7 @@ import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native
 import MatchOverview from './MatchOverview';
 import MatchBenchmark from './MatchBenchmark';
 import MatchPerformance from './MatchPerformance';
+import MatchLaning from './MatchLaning';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -84,7 +85,7 @@ class MatchDetailsPage extends Component {
                         <MatchOverview tabLabel = "Overview" />
                         <MatchBenchmark tabLabel = "Benchmarks" />
                         <MatchPerformance tabLabel = "Performances" />
-                        <MatchOverview tabLabel = "Laning" />
+                        <MatchLaning tabLabel = "Laning" />
                     </ScrollableTabView>
                 );
             } else {
