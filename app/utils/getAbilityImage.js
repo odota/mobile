@@ -1,3 +1,4 @@
+/* eslint-disable */
 export function getAbilityImage(id) {
 	var staticImage;
 	if (id == 5001) {

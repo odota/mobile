@@ -1,3 +1,4 @@
+/* eslint-disable */
 export function getHeroImage(id) {
     var staticImage;
     if(id == 1) {
