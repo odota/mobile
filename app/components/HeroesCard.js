@@ -74,7 +74,7 @@ class HeroesCard extends PureComponent {
             }
 
             // Process localized_name
-            const localizedName = heroes.result.heroes[index].localized_name
+            const localizedName = heroes.result.heroes[index] ? heroes.result.heroes[index].localized_name : null
 
             return {
                 winPercentage: winPercentage,

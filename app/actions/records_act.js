@@ -1,4 +1,4 @@
-import { fetchAPI } from '../utils/fetch'
+import { fetchAPI } from 'Utils/fetch'
 
 export const types = {
     REQUEST_RECORDS: 'REQUEST_RECORDS',
@@ -31,7 +31,6 @@ export function fetchRecords (playerId) {
     return dispatch => {
         dispatch(requestRecords())
 
-        var jsonData
         return fetchAPI(endpoint)
             .then((json) => {
                 dispatch(receiveRecords(json))

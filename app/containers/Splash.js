@@ -33,7 +33,7 @@ class Splash extends PureComponent {
         AsyncStorage
             .getItem('theme')
             .then((value) => {
-                this.props.actions.changeTheme(value)
+                this.props.actions.changeTheme(parseInt(value || '0'))
             })
             .catch(error => {
                 if (error) {

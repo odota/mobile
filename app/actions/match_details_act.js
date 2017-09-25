@@ -1,4 +1,4 @@
-import { fetchAPI } from '../utils/fetch'
+import { fetchAPI } from 'Utils/fetch'
 
 export const types = {
     REQUEST_MATCH_DETAILS: 'REQUEST_MATCH_DETAILS',

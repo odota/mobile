@@ -1,4 +1,4 @@
-import { fetchAPI } from '../utils/fetch'
+import { fetchAPI } from 'Utils/fetch'
 
 export const types = {
     REQUEST_HEROES: 'REQUEST_HEROES',
@@ -32,16 +32,14 @@ export function fetchHeroes (playerId, limit) {
     console.log(endpoint)
     return dispatch => {
         dispatch(requestHeroes())
-
-        var jsonData
         return fetchAPI(endpoint)
             .then((json) => {
                 dispatch(receiveHeroes(json))
-        })
+            })
             .catch((error) => {
                 console.log('Action - FETCH MATCHES ERROR - ' + error)
-            dispatch(receiveEmptyHeroes())
-        })
+                dispatch(receiveEmptyHeroes())
+            })
     }
 }
 
