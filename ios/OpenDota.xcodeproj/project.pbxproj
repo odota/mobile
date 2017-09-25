@@ -5,6 +5,7 @@
 	};
 	objectVersion = 48;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -28,6 +29,7 @@
 		96C8092192684E4B9DBAB320 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B067572B63D4E699FC3F655 /* libRNAnalytics.a */; };
 		A45DEDD7A5E24F959C58C549 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 610F2BD11B6140C99EB044C0 /* SimpleLineIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
+		AE4E022A1F78CBD50027A4BA /* heatmap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = AE4E02041F78CBD50027A4BA /* heatmap.min.js */; };
 		AE679DC01EF24B37004858EF /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE679DA51EF24B06004858EF /* libRCTAnimation.a */; };
 		AEDA7ECB1D8FBD9400A0E502 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */; };
 		BC0620DA502442A8975DC30C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */; };
@@ -349,6 +351,8 @@
 		A99A49CA8D1F47B0BB1075F0 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		ADB540DFAAE149B3BFD15713 /* RNCrashes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCrashes.xcodeproj; path = "../node_modules/mobile-center-crashes/ios/RNCrashes.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		AE4E02041F78CBD50027A4BA /* heatmap.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = heatmap.min.js; path = assets/heatmap.min.js; sourceTree = "<group>"; };
+		AE4E02291F78CBD50027A4BA /* heatmap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = heatmap.html; path = assets/heatmap.html; sourceTree = "<group>"; };
 		AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
 		B7DD247138BEBE763CFA6994 /* Pods-OpenDota.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenDota.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenDota/Pods-OpenDota.release.xcconfig"; sourceTree = "<group>"; };
@@ -560,6 +564,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AE4E02291F78CBD50027A4BA /* heatmap.html */,
+				AE4E02041F78CBD50027A4BA /* heatmap.min.js */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				13B07FAE1A68108700A75B9A /* OpenDota */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -568,6 +574,7 @@
 				E5F60E26AF40459485A259BC /* MobileCenter-Config.plist */,
 				3F85B7CD8BA642687386FC54 /* Pods */,
 				192E71A6B1D9C3EDEB01E5DA /* Frameworks */,
+				AE1B8E2F1F7886D600370E42 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -589,6 +596,18 @@
 				AE30D4911F68AA600074346D /* libRCTBlob-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AE1B8E2F1F7886D600370E42 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				1DA6D0B7B14F4F1DB66C065B /* libRNSpinkit.a */,
+				408BB2F7FD6142DE9A6E4B94 /* libRNVectorIcons.a */,
+				FC6E1CA740D14BFF8A91349C /* libRNMobileCenter.a */,
+				3B067572B63D4E699FC3F655 /* libRNAnalytics.a */,
+				396C931F6DEB4893BE6AF987 /* libRNCrashes.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		AE5680291F281775004F9FEC /* Products */ = {
@@ -1035,6 +1054,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE4E022A1F78CBD50027A4BA /* heatmap.min.js in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				089A813CEA944FAF855F87CE /* Entypo.ttf in Resources */,
