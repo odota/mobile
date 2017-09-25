@@ -4,6 +4,7 @@
     ["module-resolver", {
       "alias": {
         "Json": "./app/json",
+        "Actions": "./app/actions",
         "Components": "./app/components",
         "Containers": "./app/containers",
         "Themes": "./app/themes",
