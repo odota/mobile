@@ -164,7 +164,7 @@ class MatchBenchmark extends PureComponent {
         }
     }
 
-    renderRow (rowData, i, j) {
+    renderRow = (rowData, i, j) => {
         let rowContainer
         let additionalRowContainer
         if ((parseInt(j) + 1) % 2 === 0) {
