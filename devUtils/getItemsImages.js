@@ -1,3 +1,4 @@
+/* eslint-disable */
 var items = require('../node_modules/dotaconstants/build/items.json');
 var fs = require('fs');
 var request = require('request');

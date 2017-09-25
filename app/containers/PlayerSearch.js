@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
@@ -7,25 +7,25 @@ import {
     ListView,
     ActivityIndicator,
     Keyboard
-} from 'react-native';
-import { connect } from 'react-redux';
+} from 'react-native'
+import { connect } from 'react-redux'
 
-import { bindActionCreators } from 'redux';
-import * as playerSearchActions from '../actions/player_search_act';
-import * as settingsActions from '../actions/settings_act';
-import * as favouritesActions from '../actions/favourites_act';
-import { Actions } from 'react-native-router-flux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { bindActionCreators } from 'redux'
+import * as playerSearchActions from 'Actions/player_search_act'
+import * as settingsActions from 'Actions/settings_act'
+import * as favouritesActions from 'Actions/favourites_act'
+import { Actions } from 'react-native-router-flux'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import _ from 'lodash';
+import extend from 'lodash/extend'
 
-import Colors from '../themes/Colors';
-import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
+import Colors from 'Themes/Colors'
+import base from 'Themes/BaseStyles'
+import Fonts from 'Themes/Fonts'
 
-import PlayerCard from '../components/PlayerCard';
+import PlayerCard from 'Components/PlayerCard'
 
 export const mapStateToProps = state => ({
     players: state.playerListState.players,
@@ -38,95 +38,87 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     legendTranslucent: state.settingsState.legendTranslucent,
     parent: state.navigationState.parent
-});
+})
 
 export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(playerSearchActions, dispatch),
     settingsActions: bindActionCreators(settingsActions, dispatch),
     favouritesActions: bindActionCreators(favouritesActions, dispatch)
-});
+})
 
-class PlayerSearch extends Component {
-
-    constructor(props) {
-        super(props);
-        this.ds = new ListView.DataSource ({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.state = {
-            searchInput: ''
-        };
-        this.renderRow = this.renderRow.bind(this);
-        this.searchPlayer = this.searchPlayer.bind(this);
+class PlayerSearch extends PureComponent {
+    ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    state = {
+        searchInput: ''
     }
 
-    componentWillMount() {
-    }
-
-    renderRow(rowData, i, j) {
+    renderRow = (rowData, i, j) => {
         return (
-            <PlayerCard info = {rowData} />
-        );
+            <PlayerCard info={rowData} />
+        )
     }
 
-    searchPlayer() {
-        this.props.actions.fetchPlayers(this.state.searchInput);
-        Keyboard.dismiss();
+    searchPlayer = () => {
+        this.props.actions.fetchPlayers(this.state.searchInput)
+        Keyboard.dismiss()
     }
 
-    render() {
-        var contentBottom;
-        if(this.props.isLoadingPlayers) {
+    render () {
+        var contentBottom
+        let containerStyle
+        if (this.props.isLoadingPlayers) {
             contentBottom = (
-                <View style = {styles.contentContainer}>
-                    <ActivityIndicator size="large" color = {this.props.legend}/>
+                <View style={styles.contentContainer}>
+                    <ActivityIndicator size='large' color={this.props.legend} />
                 </View>
             )
-        } else if(this.props.isEmptyPlayers) {
+        } else if (this.props.isEmptyPlayers) {
             contentBottom = (
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>No data found</Text>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.noDataText}>No data found</Text>
                 </View>
             )
-        } else if(this.props.players.length > 0){
+        } else if (this.props.players.length > 0) {
             contentBottom = (
                 <KeyboardAwareScrollView>
                     <ListView
-                        dataSource = {this.ds.cloneWithRows(this.props.players)}
-                        renderRow = {this.renderRow}
-                        style = {styles.listView}
-                        enableEmptySections = {true}/>
+                        dataSource={this.ds.cloneWithRows(this.props.players)}
+                        renderRow={this.renderRow}
+                        style={styles.listView}
+                        enableEmptySections />
                 </KeyboardAwareScrollView>
             )
         }
 
-        if(this.props.parent == "Home") {
-            containerStyle = styles.noMarginContainer;
+        if (this.props.parent === 'Home') {
+            containerStyle = styles.noMarginContainer
         } else {
-            containerStyle = styles.container;
+            containerStyle = styles.container
         }
 
         return (
-            <View style = {containerStyle}>
-                <View style = {styles.searchFieldContainer}>
-                    <View style = {{flex: 1, borderTopLeftRadius: 3, borderBottomLeftRadius: 3, marginLeft: 10, backgroundColor: this.props.alpha, height: 40, alignItems: 'center', alignSelf: 'center', justifyContent: 'center'}}>
-                        <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.secondLegend}/>
+            <View style={containerStyle}>
+                <View style={styles.searchFieldContainer}>
+                    <View style={{flex: 1, borderTopLeftRadius: 3, borderBottomLeftRadius: 3, marginLeft: 10, backgroundColor: this.props.alpha, height: 40, alignItems: 'center', alignSelf: 'center', justifyContent: 'center'}}>
+                        <FontAwesome name='search' size={20} allowFontScaling={false} color={this.props.secondLegend} />
                     </View>
-                    <View style = {{flex: 7}}>
+                    <View style={{flex: 7}}>
                         <TextInput
                             underlineColorAndroid='rgba(255,255,255,0)'
-                            placeholder = 'Search player'
-                            value = {this.state.searchInput}
-                            style = {[styles.searchInput, { backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
-                            autoCorrect = {false}
-                            placeholderTextColor = {this.props.secondLegend}
-                            autoCapitalize = 'none'
-                            returnKeyType = 'search'
-                            selectionColor = 'white'
-                            onSubmitEditing = {this.searchPlayer}
-                            onChange = {(event) => {
+                            placeholder='Search player'
+                            value={this.state.searchInput}
+                            style={[styles.searchInput, {backgroundColor: this.props.alpha, color: this.props.secondLegend}]}
+                            autoCorrect={false}
+                            placeholderTextColor={this.props.secondLegend}
+                            autoCapitalize='none'
+                            returnKeyType='search'
+                            selectionColor='white'
+                            onSubmitEditing={this.searchPlayer}
+                            onChange={(event) => {
                                 this.setState({
                                     searchInput: event.nativeEvent.text
-                                });
-                            }}/>
+                                })
+                            }} />
                     </View>
                 </View>
                 {contentBottom}
@@ -135,37 +127,37 @@ class PlayerSearch extends Component {
     }
 }
 
-const baseStyles = _.extend(base.general, {
-        searchFieldContainer: {
-            height: 60,
-            flexDirection: 'row',
-            alignItems: 'center'
-        },
-        searchInput: {
-            height: 40,
-            fontSize: 14,
-            marginRight: 10,
-            borderTopRightRadius: 3,
-            borderBottomRightRadius: 3,
-            paddingRight: 20,
-            paddingVertical: 3,
-            fontFamily: Fonts.base
-        },
-        contentContainer: {
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center'
-        },
-        noMarginContainer: {
-            flexDirection: 'column',
-            alignSelf: 'stretch',
-            alignItems: 'stretch',
-            justifyContent:'space-between',
-            flex: 1,
-            backgroundColor: Colors.mainBackground
-        }
+const baseStyles = extend(base.general, {
+    searchFieldContainer: {
+        height: 60,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    searchInput: {
+        height: 40,
+        fontSize: 14,
+        marginRight: 10,
+        borderTopRightRadius: 3,
+        borderBottomRightRadius: 3,
+        paddingRight: 20,
+        paddingVertical: 3,
+        fontFamily: Fonts.base
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    noMarginContainer: {
+        flexDirection: 'column',
+        alignSelf: 'stretch',
+        alignItems: 'stretch',
+        justifyContent: 'space-between',
+        flex: 1,
+        backgroundColor: Colors.mainBackground
     }
-);
-const styles = StyleSheet.create(baseStyles);
+}
+)
+const styles = StyleSheet.create(baseStyles)
 
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerSearch);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerSearch)

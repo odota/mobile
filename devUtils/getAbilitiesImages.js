@@ -1,3 +1,4 @@
+/* eslint-disable */
 var abilities = require('../node_modules/dotaconstants/build/abilities.json');
 var fs = require('fs');
 var request = require('request');

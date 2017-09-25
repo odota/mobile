@@ -1,17 +1,16 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
-import thunk from 'redux-thunk';
-import * as reducers from '../reducers';
-import { createLogger } from 'redux-logger';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
+import thunk from 'redux-thunk'
+import * as reducers from '../reducers'
+import { createLogger } from 'redux-logger'
 
 export default initialState => {
-
     const finalCreateStore = compose(
         applyMiddleware(
             thunk,
             createLogger()
         )
-    )(createStore);
+    )(createStore)
 
-    const reducer = combineReducers(reducers);
-    return finalCreateStore(reducer, initialState);
-};
+    const reducer = combineReducers(reducers)
+    return finalCreateStore(reducer, initialState)
+}

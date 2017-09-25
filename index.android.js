@@ -1,7 +1,5 @@
-'use strict';
-
-import React from 'react';
-import App from './app/containers/App';
+import React from 'react'
+import App from 'Containers/App'
 
 import {
     AppRegistry

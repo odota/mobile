@@ -1,4 +1,4 @@
-import { fetchAPI } from '../utils/fetch';
+import { fetchAPI } from 'Utils/fetch'
 
 export const types = {
     REQUEST_OVERVIEW: 'REQUEST_OVERVIEW',
@@ -9,74 +9,74 @@ export const types = {
     RECEIVE_EMPTY_WL: 'RECEIVE_EMPTY_WL'
 }
 
-function requestOverview() {
+function requestOverview () {
     return {
         type: types.REQUEST_OVERVIEW
-    };
+    }
 }
 
-function receiveOverview(overview) {
+function receiveOverview (overview) {
     return {
         type: types.RECEIVE_OVERVIEW,
         overview
-    };
+    }
 }
 
-function receiveEmptyOverview() {
+function receiveEmptyOverview () {
     return {
         type: types.RECEIVE_EMPTY_OVERVIEW
-    };
+    }
 }
 
-function requestWl() {
+function requestWl () {
     return {
         type: types.REQUEST_WL
-    };
+    }
 }
 
-function receiveWl(wl) {
+function receiveWl (wl) {
     return {
         type: types.RECEIVE_WL,
         wl
-    };
+    }
 }
 
-function receiveEmptyWl() {
+function receiveEmptyWl () {
     return {
         type: types.RECEIVE_EMPTY_WL
-    };
+    }
 }
 
-export function fetchWl(playerId) {
-    var endpoint = "players/" + playerId + "/wl";
+export function fetchWl (playerId) {
+    var endpoint = 'players/' + playerId + '/wl';
     return dispatch => {
-        dispatch(requestWl());
+        dispatch(requestWl())
 
-        var jsonData;
+        var jsonData
         return fetchAPI(endpoint)
-        .then((json) => {
-            dispatch(receiveWl(json));
+            .then((json) => {
+                dispatch(receiveWl(json))
         })
-        .catch((error) => {
-            console.log("Action - FETCH WL ERROR - " + error);
-            dispatch(receiveEmptyWl());
+            .catch((error) => {
+                console.log('Action - FETCH WL ERROR - ' + error)
+            dispatch(receiveEmptyWl())
         })
     }
 }
 
-export function fetchOverview(playerId) {
-    var endpoint = "players/" + playerId;
+export function fetchOverview (playerId) {
+    var endpoint = 'players/' + playerId
     return dispatch => {
-        dispatch(requestOverview());
+        dispatch(requestOverview())
 
-        var jsonData;
+        var jsonData
         return fetchAPI(endpoint)
-        .then((json) => {
-            dispatch(receiveOverview(json));
+            .then((json) => {
+                dispatch(receiveOverview(json))
         })
-        .catch((error) => {
-            console.log("Action - FETCH OVERVIEW ERROR - " + error);
-            dispatch(receiveEmptyOverview());
-        });
+            .catch((error) => {
+                console.log('Action - FETCH OVERVIEW ERROR - ' + error)
+            dispatch(receiveEmptyOverview())
+        })
     }
 }
