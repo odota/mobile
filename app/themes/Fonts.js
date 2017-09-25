@@ -6,4 +6,4 @@ const fonts = {
     medium: 'Roboto-Medium'
 }
 
-export default fonts;
+export default fonts

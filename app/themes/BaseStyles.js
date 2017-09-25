@@ -1,8 +1,6 @@
-import Fonts from './Fonts';
-import Metrics from './Metrics';
-import Colors from './Colors';
-
-import { Platform } from 'react-native';
+import Fonts from './Fonts'
+import Metrics from './Metrics'
+import Colors from './Colors'
 
 const base = {
     navbar: {
@@ -15,67 +13,67 @@ const base = {
             alignSelf: 'stretch',
             flex: 1
         },
-        navItemView:{
-            flex:1,
-            flexDirection:'row',
-            alignItems:'center',
-            justifyContent:'center',
+        navItemView: {
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             alignSelf: 'stretch'
         },
         navTextWrapper: {
-            flex: 1,
+            flex: 1
         },
-        title:{
+        title: {
             flex: 1,
             fontSize: Metrics.fonts.header,
             fontWeight: '400',
             fontFamily: Fonts.base,
             color: Colors.navBaseText,
             marginRight: 8,
-            marginLeft: 8,
+            marginLeft: 8
         },
-        titleDelete:{
+        titleDelete: {
             fontSize: Metrics.fonts.header,
             fontWeight: '400',
             fontFamily: Fonts.base,
             color: Colors.delete,
             marginRight: 8,
-            marginLeft: 8,
+            marginLeft: 8
         },
-        navBar:{
-            backgroundColor:'#FFFFFF',
+        navBar: {
+            backgroundColor: '#FFFFFF',
             borderBottomWidth: 0.9,
-            borderBottomColor: '#A5A5A5',
+            borderBottomColor: '#A5A5A5'
         },
         leftNavButtonView: {
             paddingRight: 5,
             paddingLeft: 12,
             paddingTop: 8,
             marginBottom: 8,
-            justifyContent:'center',
-            alignItems:'center',
-            flexDirection:'row',
-            flex:1
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            flex: 1
         },
         rightNavButtonView: {
             paddingLeft: 12,
             paddingRight: 14,
             paddingTop: 8,
             paddingBottom: 8,
-            justifyContent:'center',
-            alignItems:'center',
-            flexDirection:'row',
-            flex:1
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            flex: 1
         },
-        expandIconButtonView:{
+        expandIconButtonView: {
             paddingLeft: 6,
             paddingRight: 6,
             paddingTop: 8,
             paddingBottom: 8,
-            justifyContent:'center',
-            alignItems:'center',
-            flexDirection:'row',
-            flex:1
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
+            flex: 1
         },
         icon: {
             marginRight: 6,
@@ -87,7 +85,7 @@ const base = {
             height: 22,
             width: 22
         },
-        notificationBadge:{
+        notificationBadge: {
             marginLeft: 0
         }
     },
@@ -97,7 +95,7 @@ const base = {
             flexDirection: 'column',
             alignSelf: 'stretch',
             alignItems: 'stretch',
-            justifyContent:'space-between',
+            justifyContent: 'space-between',
             marginTop: Metrics.navBarHeight,
             flex: 1,
             backgroundColor: Colors.mainBackground
@@ -181,4 +179,4 @@ const base = {
     }
 }
 
-export default base;
+export default base
