@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "dotaconstants": "^5.11.0",
+    "heatmap.js": "^2.0.5",
     "lodash": "^4.15.0",
     "mobile-center": "^0.7.0",
     "mobile-center-analytics": "^0.7.0",
