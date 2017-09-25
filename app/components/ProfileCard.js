@@ -141,7 +141,6 @@ class ProfileCard extends PureComponent {
         }
     }
 }
-console.log('base.general', base.general)
 
 const baseStyles = extend(base.general, {
     profileCardContainer: {
