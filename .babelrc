@@ -8,7 +8,8 @@
         "Components": "./app/components",
         "Containers": "./app/containers",
         "Themes": "./app/themes",
-        "Utils": "./app/utils"
+        "Utils": "./app/utils",
+        "Assets": "./app/assets"
       }
     }]
   ]

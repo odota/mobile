@@ -1,3 +1,4 @@
+/* eslint-disable */
 var heroes = require('../app/json/heroes.json');
 var fs = require('fs');
 var _ = require('lodash');
@@ -5,7 +6,7 @@ var util = require('util');
 
 for(i = 0; i < heroes.result.heroes.length; i++) {
     var heroName = heroes.result.heroes[i].name.replace("npc_dota_hero_", "");
-    var path = "../assets/heroes/" + heroName + "_full.png";
+    var path = "Assets/heroes/" + heroName + "_full.png";
     var extendedHeroes = _.extend(heroes.result.heroes[i], {"img": path});
     heroes.result.heroes[i] = extendedHeroes;
 

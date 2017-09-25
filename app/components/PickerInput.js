@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
@@ -6,82 +6,73 @@ import {
     TouchableOpacity,
     Dimensions,
     Picker
-} from 'react-native';
+} from 'react-native'
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
-import Colors from '../themes/Colors';
-import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
+import Colors from 'Themes/Colors'
+import base from 'Themes/BaseStyles'
+import Fonts from 'Themes/Fonts'
 
-import _ from 'lodash';
+import extend from 'lodash/extend'
 
 export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend
-});
+})
 
-class PickerInput extends Component {
-
-    constructor(props) {
-        super(props);
-        this.onSelect = this.onSelect.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-        this.onPickerDone = this.onPickerDone.bind(this);
-        this.state = {
-            selectedValue: props.selectedValue,
-            selectedLabel: props.selectedLabel
-        }
+class PickerInput extends PureComponent {
+    state = {
+        selectedValue: this.props.selectedValue,
+        selectedLabel: this.props.selectedLabel
     }
 
-    onSelect() {
-        this.props.onPickerDone(this.state.selectedValue, this.state.selectedLabel);
+    onSelect = () => {
+        this.props.onPickerDone(this.state.selectedValue, this.state.selectedLabel)
     }
 
-    onCancel() {
-        this.props.onPickerCancel();
+    onCancel = () => {
+        this.props.onPickerCancel()
     }
 
-    onPickerDone(pickedValue, idx) {
-        item = this.props.items[idx];
-        this.setState({selectedValue: pickedValue, selectedLabel: item.localized_name});
+    onPickerDone = (pickedValue, idx) => {
+        const item = this.props.items[idx]
+        this.setState({selectedValue: pickedValue, selectedLabel: item.localized_name})
     }
 
-    render() {
+    render () {
         return (
-            <View style = {styles.pickerWrapper}>
-                <View style = {styles.pickerContainer}>
-                    <View style = {styles.inputRow}>
-                        <TouchableOpacity onPress = {this.onCancel}>
-                            <Text style = {[styles.inputRowItemLeft, {color: this.props.legend}]} ref = {textInput => this.textInput = textInput}> CANCEL </Text>
+            <View style={styles.pickerWrapper}>
+                <View style={styles.pickerContainer}>
+                    <View style={styles.inputRow}>
+                        <TouchableOpacity onPress={this.onCancel}>
+                            <Text style={[styles.inputRowItemLeft, {color: this.props.legend}]}> CANCEL </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress = {this.onSelect}>
-                            <Text style={[styles.inputRowItemRight, {color: this.props.legend}]} ref={textInput => this.textInput = textInput}> OK </Text>
+                        <TouchableOpacity onPress={this.onSelect}>
+                            <Text style={[styles.inputRowItemRight, {color: this.props.legend}]}> OK </Text>
                         </TouchableOpacity>
                     </View>
                     <Picker
-                        ref={picker => this.pickers = picker}
                         style={styles.picker}
                         showDuration={300}
-                        showMask={true}
-                        selectedValue = {this.state.selectedValue}
+                        showMask
+                        selectedValue={this.state.selectedValue}
                         onValueChange={this.onPickerDone}
-                        itemStyle = {styles.item}
+                        itemStyle={styles.item}
                         >
-                    { this.props.items.map(function (item) {
+                        { this.props.items.map(function (item) {
                         return <Picker.Item label={item.localized_name} value={item.id} key={item.id} />
                     }) }
-                  </Picker>
+                    </Picker>
                 </View>
             </View>
-        );
+        )
     }
-
 }
 
-const baseStyles = _.extend(base.general, {
+const baseStyles = extend(base.general, {
     pickerWrapper: {
         height: Dimensions.get('window').height,
         position: 'absolute',
@@ -124,8 +115,8 @@ const baseStyles = _.extend(base.general, {
     item: {
     }
 
-});
+})
 
-const styles = StyleSheet.create(baseStyles);
+const styles = StyleSheet.create(baseStyles)
 
-export default connect(mapStateToProps)(PickerInput);
+export default connect(mapStateToProps)(PickerInput)

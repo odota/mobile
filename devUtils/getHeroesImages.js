@@ -1,3 +1,4 @@
+/* eslint-disable */
 var heroes = require('../app/json/heroes.json');
 var fs = require('fs');
 var request = require('request');

@@ -1,3 +1,4 @@
+/* eslint-disable */
 var abilities = require('../app/json/abilities.json');
 var fs = require('fs');
 var _ = require('lodash');
@@ -7,7 +8,7 @@ for(var key in abilities) {
     if(abilities.hasOwnProperty(key)) {
         var abilityName = key;
         if(!abilityName.includes("special_bonus")) {
-            var path = "../assets/abilities/" + abilityName + "_lg.png";
+            var path = "Assets/abilities/" + abilityName + "_lg.png";
             var extendedAbilities = _.extend(abilities[key], {"img": path});
             abilities[key] = extendedAbilities;
         }

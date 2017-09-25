@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react'
 import {
     View,
     Text,
     StyleSheet,
     ScrollView,
     AsyncStorage
-} from 'react-native';
+} from 'react-native'
 
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 
-import { bindActionCreators } from 'redux';
-import * as settingsActions from '../actions/settings_act';
-import { Actions } from 'react-native-router-flux';
+import { bindActionCreators } from 'redux'
+import * as settingsActions from 'Actions/settings_act'
+import { Actions } from 'react-native-router-flux'
 
-import { RadioButtonGroup } from 'react-native-material-design';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { RadioButtonGroup } from 'react-native-material-design'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
-import _ from 'lodash';
+import extend from 'lodash/extend'
 
-import Colors from '../themes/Colors';
-import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
+import Colors from 'Themes/Colors'
+import base from 'Themes/BaseStyles'
+import Fonts from 'Themes/Fonts'
 
 export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
@@ -28,47 +28,36 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     theme: state.settingsState.theme
-});
+})
 
 export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(settingsActions, dispatch)
-});
+})
 
-class Settings extends Component {
-
-    constructor(props) {
-        super(props);
-        this.onThemeSelected = this.onThemeSelected.bind(this);
-        this.setTheme = this.setTheme.bind(this);
+class Settings extends PureComponent {
+    onThemeSelected = (value) => {
+        AsyncStorage.setItem('theme', value.toString())
+        this.setTheme(value)
     }
 
-    onThemeSelected(value) {
-        AsyncStorage.setItem("theme", value.toString());
-        this.setTheme(value);
+    setTheme = (value) => {
+        this.setState({theme: value})
+        this.props.actions.changeTheme(value)
     }
 
-    setTheme(value) {
-        this.setState({theme: value});
-        this.props.actions.changeTheme(value);
-    }
-
-    componentWillMount() {
-
-    }
-
-    render() {
-        //BUG:0 Selected does not get rendered if it's a variable. Probably problem with library?
+    render () {
+        // BUG:0 Selected does not get rendered if it's a variable. Probably problem with library?
         return (
-            <View style = {styles.container}>
+            <View style={styles.container}>
                 <KeyboardAwareScrollView>
-                    <View style = {[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
-                        <View style = {styles.settingsTitle}>
-                            <Text style = {[styles.settingsTitleText, { color: this.props.legend}]}>Themes</Text>
+                    <View style={[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
+                        <View style={styles.settingsTitle}>
+                            <Text style={[styles.settingsTitleText, {color: this.props.legend}]}>Themes</Text>
                             <RadioButtonGroup
-                                selected = {this.props.theme}
-                                theme = 'dark'
-                                onSelect = {this.onThemeSelected}
-                                items = {[
+                                selected={this.props.theme}
+                                theme='dark'
+                                onSelect={this.onThemeSelected}
+                                items={[
                                     { value: 1, label: 'OpenDota' },
                                     { value: 2, label: 'Sky Dolch' },
                                     { value: 3, label: 'Hyperfuse' },
@@ -84,7 +73,7 @@ class Settings extends Component {
     }
 }
 
-const baseStyles = _.extend(base.general, {
+const baseStyles = extend(base.general, {
     settingsItemContainer: {
         flex: 1,
         marginTop: 10,
@@ -101,7 +90,7 @@ const baseStyles = _.extend(base.general, {
         fontWeight: 'bold'
     }
 
-});
-const styles = StyleSheet.create(baseStyles);
+})
+const styles = StyleSheet.create(baseStyles)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)
