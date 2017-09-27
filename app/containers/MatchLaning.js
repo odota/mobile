@@ -17,11 +17,13 @@ import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
 import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
+import Heatmap from '../components/Heatmap';
 
 import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
+import { unpackPositionData } from '../utils/unpackPositionData';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import heroes from '../json/heroes.json';
 import lanes from '../json/lane_role.json';
@@ -130,6 +132,8 @@ class MatchLaning extends Component {
                 processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
             }
 
+            processedPlayer.unpackedPosition = unpackPositionData(currentUnprocessedPlayer.lane_pos);
+
             processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
@@ -170,12 +174,15 @@ class MatchLaning extends Component {
 
     renderRow(rowData, i, j) {
         var rowContainer;
+        var bgColor;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
-            additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.mod, flex: 1, flexDirection: 'row'};
+            additionalRowContainer = {backgroundColor: this.props.mod, flex: 1};
+            bgColor = this.props.mod;
         } else {
             rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
-            additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.alpha, flex: 1, flexDirection: 'row'};
+            additionalRowContainer = {backgroundColor: this.props.alpha, flex: 1};
+            bgColor = this.props.alpha;
         }
         var staticUri = getHeroImage(rowData.hero);
         var toggled;
@@ -201,10 +208,11 @@ class MatchLaning extends Component {
             toggled = this.state.nine;
         }
         var additionalInfo;
+        //<Heatmap points = {rowData.unpackedPosition} background = {bgColor}/>
         if(toggled) {
             additionalInfo = (
-                <View style = {[additionalRowContainer, {paddingHorizontal: 15, flexDirection: 'row'}]}>
-                    
+                <View style = {additionalRowContainer}>
+
                 </View>
             )
         } else {
