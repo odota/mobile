@@ -9,53 +9,22 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 
 class Heatmap extends Component {
-    state = {}
 
     componentDidMount() {
-        setTimeout(
-            () => {
-                this.refs.heatmap.measure((ox, oy, width, height) => {
-                    const radius = Math.round(width * 0.05);
-                    this.handleShuffle(width, height, radius);
-                    this.setState({width, height, radius});
-                });
-            }
-        );
-    }
-
-    generatePoints(width, height) {
-        const points = [];
-        for(const i = 0; i < 25; i++) {
-            points.push({x: randomize(width), y: randomize(height) });
-        }
-        return points;
-    }
-
-    handleShuffle(width, height, radius) {
-        setTimeout(() => {
-            const points = this.generatePoints(width, height);
-            const processedPoints = heatmapUtils.processPoints({x: 0, y: height}, {x:0, y:0}, {x: width, y: 0}, points, width, height, radius);
-            this.setState({ processedPoints });
-        });
-        this.setState({processedPoints: null});
     }
 
     render() {
         let webview = null;
-        console.log(this.state.processedPoints);
-        console.log(this.props.background);
-        if(this.state.processedPoints) {
-            const uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
-            const maxValue = Math.max(...this.state.processedPoints.map((p) => p.value));
-            const script = heatmapInputGenerator(this.state.processedPoints, this.state.radius, maxValue);
+        if(this.props.points) {
+            console.log(this.props.points);
+            uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
+            script = heatmapInputGenerator(this.props.points, 300);
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
                 injectedJavaScript = {script}
                 javaScriptEnabled
                 style = {{width: 300, height: 300, backgroundColor: this.props.background}}
-                onError = {() => {console.log("FAILED");}}
-                onLoad = {() => {console.log("LOAD");}}
             />;
         }
 
@@ -69,20 +38,41 @@ class Heatmap extends Component {
     }
 }
 
-const heatmapInputGenerator = (points, radius, max) => {
+const heatmapInputGenerator = (points, width) => {
     return `
+    function scaleAndExtrema(points, scalef, max, shift) {
+        const newPoints = points.map(p => ({
+            x: Math.floor(p.x * scalef),
+            y: Math.floor(p.y * scalef),
+            value: p.value + (shift || 0)
+        }));
+
+        const vals = points.map(p => p.value);
+        const localMax = Math.max.apply(null, vals);
+        return {
+            min: 0,
+            max: max || localMax,
+            data: newPoints
+        };
+    }
+
+    const drawHeatmap = ({
+        points = [],
+        width,
+    }, heatmap) => {
+        const adjustedData = scaleAndExtrema(points, width / 127, null, 25);
+        heatmap.setData(adjustedData);
+    }
+
     var heatmapInstance = h337.create({
         container: document.querySelector('.heatmap'),
-        radius: ${radius}
+        radius:15 * (${width} / 300)
     });
-    heatmapInstance.setData({
-        max: ${max},
-        data: ${JSON.stringify(points)}
-    });
+    drawHeatmap({points: ${points}, width: 300}, heatmapInstance);
+
+    console.log(heatmapInstance);
   `;
 };
-
-const randomize = (max) => parseInt(Math.random() * (max + 1));
 
 const baseStyles = _.extend(base.general, {
     button: {

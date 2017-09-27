@@ -23,6 +23,7 @@ import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
+import { unpackPositionData } from '../utils/unpackPositionData';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import heroes from '../json/heroes.json';
 import lanes from '../json/lane_role.json';
@@ -131,6 +132,8 @@ class MatchLaning extends Component {
                 processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
             }
 
+            processedPlayer.unpackedPosition = unpackPositionData(currentUnprocessedPlayer.lane_pos);
+
             processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
@@ -205,10 +208,11 @@ class MatchLaning extends Component {
             toggled = this.state.nine;
         }
         var additionalInfo;
+        //<Heatmap points = {rowData.unpackedPosition} background = {bgColor}/>
         if(toggled) {
             additionalInfo = (
                 <View style = {additionalRowContainer}>
-                    <Heatmap background = {bgColor}/>
+
                 </View>
             )
         } else {
