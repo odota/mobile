@@ -50,7 +50,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(matchDetailsActions, dispatch)
+    actions: bindActionCreators(matchDetailsActions, dispatch),
+    navigationActions: bindActionCreators(navigationActions, dispatch)
 });
 
 class MatchOverview extends Component {
@@ -92,6 +93,7 @@ class MatchOverview extends Component {
         this.findItemTiming = this.findItemTiming.bind(this);
         this.calculateAverageMMR = this.calculateAverageMMR.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
+        this.onNamePressed = this.onNamePressed.bind(this);
     }
 
     componentWillMount() {
@@ -266,6 +268,8 @@ class MatchOverview extends Component {
             processedPlayer.item_3_uri = getItemImage(currentUnprocessedPlayer.item_3);
             processedPlayer.item_4_uri = getItemImage(currentUnprocessedPlayer.item_4);
             processedPlayer.item_5_uri = getItemImage(currentUnprocessedPlayer.item_5);
+
+            processedPlayer.accountId = currentUnprocessedPlayer.account_id;
             processedPlayer.slot = i;
 
             processedPlayersList[i] = processedPlayer;
@@ -321,6 +325,24 @@ class MatchOverview extends Component {
             this.setState({eight: !this.state.eight});
         } else if (row == 9) {
             this.setState({nine: !this.state.nine});
+        }
+    }
+
+    onNamePressed(id) {
+        if(id) {
+            if(this.props.parent == "Favourites") {
+                this.props.navigationActions.pushContextIdFavourite(id);
+                this.props.navigationActions.changeContextId(id);
+                Actions.playerProfileFavourite();
+            } else if (this.props.parent == "Search") {
+                this.props.navigationActions.pushContextIdSearch(id);
+                this.props.navigationActions.changeContextId(id);
+                Actions.playerProfileSearch();
+            } else if (this.props.parent == "Home") {
+                this.props.navigationActions.pushContextIdHome(id);
+                this.props.navigationActions.changeContextId(id);
+                Actions.playerProfileHome();
+            }
         }
     }
 
@@ -463,10 +485,12 @@ class MatchOverview extends Component {
                         alignItems: 'center'}}>
                         <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
                     </View>
-                    <View style = {styles.cell}>
-                        <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
-                        {mmr}
-                    </View>
+                    <TouchableOpacity style = {styles.cell} onPress = {() => {this.onNamePressed(rowData.accountId)}}>
+                        <View>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.player}</Text>
+                            {mmr}
+                        </View>
+                    </TouchableOpacity>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.kills}/{rowData.deaths}/{rowData.assists}</Text>
                     </View>

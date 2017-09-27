@@ -48,7 +48,9 @@ class MatchesCard extends Component {
     matchPressed(data) {
         var matchId = data.match_id;
         if(this.props.parent == "Favourites") {
+            Actions.mastchDetailsFavourite(matchId);
         } else if (this.props.parent == "Search") {
+            Actions.matchDetailsSearch(matchId);
         } else if (this.props.parent == "Home") {
             Actions.matchDetailsHome(matchId);
         }

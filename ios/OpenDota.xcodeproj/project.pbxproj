@@ -30,6 +30,8 @@
 		A45DEDD7A5E24F959C58C549 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 610F2BD11B6140C99EB044C0 /* SimpleLineIcons.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		AE4E022A1F78CBD50027A4BA /* heatmap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = AE4E02041F78CBD50027A4BA /* heatmap.min.js */; };
+		AE4E02761F7A0B490027A4BA /* heatmap.html in Resources */ = {isa = PBXBuildFile; fileRef = AE4E02291F78CBD50027A4BA /* heatmap.html */; };
+		AE4E029C1F7A20320027A4BA /* detailed.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4E029B1F7A202F0027A4BA /* detailed.png */; };
 		AE679DC01EF24B37004858EF /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE679DA51EF24B06004858EF /* libRCTAnimation.a */; };
 		AEDA7ECB1D8FBD9400A0E502 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */; };
 		BC0620DA502442A8975DC30C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */; };
@@ -353,6 +355,7 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AE4E02041F78CBD50027A4BA /* heatmap.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = heatmap.min.js; path = assets/heatmap.min.js; sourceTree = "<group>"; };
 		AE4E02291F78CBD50027A4BA /* heatmap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = heatmap.html; path = assets/heatmap.html; sourceTree = "<group>"; };
+		AE4E029B1F7A202F0027A4BA /* detailed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = detailed.png; path = assets/detailed.png; sourceTree = "<group>"; };
 		AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
 		B7DD247138BEBE763CFA6994 /* Pods-OpenDota.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenDota.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenDota/Pods-OpenDota.release.xcconfig"; sourceTree = "<group>"; };
@@ -564,6 +567,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				AE4E029B1F7A202F0027A4BA /* detailed.png */,
 				AE4E02291F78CBD50027A4BA /* heatmap.html */,
 				AE4E02041F78CBD50027A4BA /* heatmap.min.js */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
@@ -1055,6 +1059,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE4E022A1F78CBD50027A4BA /* heatmap.min.js in Resources */,
+				AE4E029C1F7A20320027A4BA /* detailed.png in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				089A813CEA944FAF855F87CE /* Entypo.ttf in Resources */,
@@ -1069,6 +1074,7 @@
 				F90AFFD6B8074394AD1D723D /* MaterialCommunityIcons.ttf in Resources */,
 				A45DEDD7A5E24F959C58C549 /* SimpleLineIcons.ttf in Resources */,
 				5138F926DAD44427A83B67D9 /* MobileCenter-Config.plist in Resources */,
+				AE4E02761F7A0B490027A4BA /* heatmap.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
