@@ -13,8 +13,8 @@ Quick Start (React Native)
 ----
 * Follow the official [React Native guide](https://facebook.github.io/react-native/docs/getting-started.html) to setup your environment.
 * Clone the repo
-* do a `yarn install` to install dependencies (or use `npm install`)
-* `cd` into it and run `react-native run-ios` or `react-native run-android`
+* `cd` into local folder and do a `yarn install` to install dependencies (or use `npm install`)
+* run `react-native run-ios` or `react-native run-android`
 
 Notes
 ----
