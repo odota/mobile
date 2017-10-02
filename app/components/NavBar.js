@@ -67,8 +67,8 @@ class NavBar extends Component {
     }
 
     onResetHomeProfilePressed() {
-        Alert.alert('Reset Home Profile',
-                    'Are you sure that you want delete this profile from home?',
+        Alert.alert('Logout',
+                    'Are you sure that you want to logout?',
                     [
                         {text: 'Cancel', style: 'cancel'},
                         {text: 'OK', onPress: () => {
@@ -97,7 +97,7 @@ class NavBar extends Component {
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
                         <View style = {styles.rightNavButtonView}>
-                            <FontAwesome name = "trash-o" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                            <FontAwesome name = "power-off" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
                         </View>
                     </TouchableOpacity>
                 </View>

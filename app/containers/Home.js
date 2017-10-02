@@ -7,7 +7,8 @@ import {
     ListView,
     AsyncStorage,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -18,6 +19,8 @@ import * as navigationActions from '../actions/navigation_act';
 import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
 
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Actions } from 'react-native-router-flux';
 import _ from 'lodash';
 
 import Colors from '../themes/Colors';
@@ -44,6 +47,11 @@ class Home extends Component {
         this.state = {
             'profileExist': false
         }
+        this.onLoginPressed = this.onLoginPressed.bind(this);
+    }
+
+    onLoginPressed() {
+        Actions.login();
     }
 
     componentWillMount() {
@@ -61,17 +69,57 @@ class Home extends Component {
         } else {
             containerStyle = styles.container;
             content = (
-                <View style = {styles.contentContainer}>
+                <ScrollView style = {styles.contentContainer}>
                     <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 9, marginVertical: 5}}>
-                        <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>
-                            You have not set any profile as Home yet.
+                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 36, textAlign: 'center'}}>
+                            OPENDOTA
                         </Text>
                         <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>
-                            You can search your profile below using Steam ID or Username
+                            Open source Dota 2 data platform
+                        </Text>
+                        <TouchableOpacity onPress = {() => {this.onLoginPressed()}}>
+                            <View style = {{borderColor: this.props.secondLegend, borderRadius: 1, borderWidth: 2, padding: 10, margin: 15, flexDirection: 'row', alignItems: 'center', alignSelf: 'center'}}>
+                                <FontAwesome name = "steam-square" size = {20} allowFontScaling = {false} color = {this.props.legend} style = {{marginRight: 5}}/>
+                                <Text style = {{fontFamily: Fonts.base, fontSize: 16, color: this.props.secondLegend}}>
+                                    Login for automatic replay parsing
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style = {{flexDirection: 'row'}}>
+                        <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginLeft: 9, marginRight: 5, flex: 1}}>
+                            <Image source={require('../assets/open_source.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
+                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                                Open Source
+                            </Text>
+                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                                All project code is open source and available for contributors to improve and modify.
+                            </Text>
+                        </View>
+
+                        <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginRight: 9, flex: 1}}>
+                            <Image source={require('../assets/stats_bar.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
+                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                                In-Depth Data
+                            </Text>
+                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                                Parsing replay files provides highly detailed match data.
+                            </Text>
+                        </View>
+                    </View>
+
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginHorizontal: 9, marginTop: 5}}>
+                        <Image source={require('../assets/wand.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
+                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                            Free of Charge
+                        </Text>
+                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                            Servers are funded by sponsors and volunteers maintain the code, so the service is offered free of charge.
                         </Text>
                     </View>
-                    <PlayerSearch />
-                </View>
+
+                </ScrollView>
             )
         }
         return (
@@ -85,8 +133,6 @@ class Home extends Component {
 const baseStyles = _.extend(base.general, {
     contentContainer: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
         marginTop: 10
     },
     localContainer: {
