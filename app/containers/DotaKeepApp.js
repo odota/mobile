@@ -1,6 +1,7 @@
 import { Router, Scene, Actions } from 'react-native-router-flux';
 
 import Home from './Home';
+import LoginPage from './LoginPage';
 import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
 import Favourite from './Favourite';
@@ -42,9 +43,10 @@ class DotaKeepApp extends Component {
                 <Scene key = "root" hideNavBar = {true}>
                     <Scene key = "splash" component = {Splash} panHandlers = {null} initial = {true}/>
                     <Scene key = "navDrawer" drawer contentComponent = {NavDrawer}>
-                        <Scene key = "main" tabs = {true} hideTabBar = {true} panHandlers = {null} navBar = {customNavBar}>
+                        <Scene key = "main" tabs = {true} hideTabBar = {true} panHandlers = {null} navBar = {customNavBar} swipeEnabled = {false}>
                             <Scene key = "homeTab" title = "Home" navBar = {customNavBar}>
                                 <Scene key = "home" component = {Home} title = "Home" />
+                                <Scene key = "login" component = {LoginPage} title = "Login" />
                                 <Scene clone = {true} key = "playerProfileHome" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene clone = {true} key = "matchesSearchHome" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
                                 <Scene clone = {true} key = "matchDetailsHome" component = {MatchDetailsPage} title = "Match Details" panHandlers = {null} navBar = {MatchNavBar} />

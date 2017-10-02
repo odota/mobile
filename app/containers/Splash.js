@@ -59,8 +59,8 @@ class Splash extends Component {
                 if(!(Object.keys(parsedValue).length === 0 && parsedValue.constructor === Object)) {
                     this.setState({'profileExist': true});
                 }
-                this.props.actions.pushContextIdHome(parsedValue.account_id);
-                this.props.actions.changeContextId(parsedValue.account_id);
+                this.props.actions.pushContextIdHome(parsedValue);
+                this.props.actions.changeContextId(parsedValue);
                 this.props.actions.setHomeProfile(parsedValue);
             }
         })
