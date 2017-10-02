@@ -3,7 +3,8 @@ import {
     View,
     Text,
     StyleSheet,
-    AsyncStorage
+    AsyncStorage,
+    Image
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -19,6 +20,7 @@ import _ from 'lodash';
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
+import Metrics from '../themes/Metrics';
 
 export const mapStateToProps = state => ({
 
@@ -78,10 +80,8 @@ class Splash extends Component {
 
     render() {
         return (
-            <View style = {styles.container}>
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>Dota Keep</Text>
-                </View>
+            <View style = {styles.contentContainer}>
+                <Image source={require('../assets/splash.png')} style = {{flex: 1, width: Metrics.screenWidth, height: Metrics.screenHeight }}/>
             </View>
         )
     }
