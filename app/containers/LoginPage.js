@@ -44,7 +44,7 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            'profileExist': false
+            'redirecting': false
         }
     }
 
@@ -53,7 +53,8 @@ class LoginPage extends Component {
 
     onNavigationStateChange(navState) {
         var splitted = navState.url.split("/");
-        if(splitted[2] == "www.opendota.com") {
+        if(splitted[2] == "www.opendota.com" && !this.state.redirecting) {
+            this.setState({redirecting: true});
             this.props.actions.pushContextIdHome(splitted[4]);
             this.props.actions.changeContextId(splitted[4]);
             this.props.actions.setHomeProfile(splitted[4]);
