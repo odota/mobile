@@ -31,7 +31,8 @@ export const mapStateToProps = state => ({
     isEmptyHeroes: state.playerHeroesState.isEmptyHeroes,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
-    legend: state.settingsState.legend
+    legend: state.settingsState.legend,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -60,6 +61,10 @@ class HeroesPage extends Component {
         this.state = {
             refreshing: false
         };
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Heroes');
     }
 
     onRefresh() {

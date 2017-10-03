@@ -46,7 +46,8 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     secondLegend: state.settingsState.secondLegend,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -94,6 +95,10 @@ class MatchOverview extends Component {
         this.calculateAverageMMR = this.calculateAverageMMR.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
         this.onNamePressed = this.onNamePressed.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Match Overview');
     }
 
     componentWillMount() {

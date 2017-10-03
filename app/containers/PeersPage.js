@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
-    justPopped: state.navigationState.justPopped
+    justPopped: state.navigationState.justPopped,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -63,6 +64,10 @@ class PeersPage extends Component {
         this.state = {
             refreshing: false
         };
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Peers');
     }
 
     onRefresh() {

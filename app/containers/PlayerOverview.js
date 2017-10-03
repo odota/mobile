@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     wl: state.playerOverviewState.wl,
     legend: state.settingsState.legend,
-    homeTab: state.navigationState.homeTab
+    homeTab: state.navigationState.homeTab,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -45,6 +46,10 @@ class PlayerOverview extends Component {
     constructor(props) {
         super(props);
         this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Player Overview');
     }
 
     componentWillMount() {

@@ -37,7 +37,8 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
     legendTranslucent: state.settingsState.legendTranslucent,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -56,6 +57,10 @@ class PlayerSearch extends Component {
         };
         this.renderRow = this.renderRow.bind(this);
         this.searchPlayer = this.searchPlayer.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Player Search');
     }
 
     componentWillMount() {

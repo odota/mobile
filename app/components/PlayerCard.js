@@ -34,7 +34,8 @@ export const mapStateToProps = state => ({
     favourites: state.favouritesState.favourites,
     scene:state.navigationState.scene,
     parent: state.navigationState.parent,
-    homeProfile: state.homeState.profile
+    homeProfile: state.homeState.profile,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -97,6 +98,7 @@ class PlayerCard extends Component {
                 }
             }
             if(index == -1) {
+                this.props.tracker.trackEvent('Favourites', 'Added');
                 this.props.favouritesActions.addFavourites(info);
                 let toast = Toast.show('Added to Favourites', {
                     duration: Toast.durations.SHORT,
@@ -107,6 +109,7 @@ class PlayerCard extends Component {
                     delay: 0
                 });
             } else {
+                this.props.tracker.trackEvent('Favourites', 'Removed');
                 this.props.favouritesActions.removeFavourites(info.account_id);
                 let toast = Toast.show('Removed from Favourites', {
                     duration: Toast.durations.SHORT,

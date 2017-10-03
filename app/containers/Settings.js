@@ -27,7 +27,8 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    theme: state.settingsState.theme
+    theme: state.settingsState.theme,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -42,12 +43,27 @@ class Settings extends Component {
         this.setTheme = this.setTheme.bind(this);
     }
 
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Settings');
+    }
+
     onThemeSelected(value) {
         AsyncStorage.setItem("theme", value.toString());
         this.setTheme(value);
     }
 
     setTheme(value) {
+        if (value === 1) {
+            this.props.tracker.trackEvent('Theme Selected', 'OpenDota');
+        } else if (value === 2) {
+            this.props.tracker.trackEvent('Theme Selected', 'Sky Dolch');
+        } else if (value === 3) {
+            this.props.tracker.trackEvent('Theme Selected', 'Hyperfuse');
+        } else if (value === 4) {
+            this.props.tracker.trackEvent('Theme Selected', 'Invisibility');
+        } else if (value === 5) {
+            this.props.tracker.trackEvent('Theme Selected', 'Double Damage');
+        }
         this.setState({theme: value});
         this.props.actions.changeTheme(value);
     }
