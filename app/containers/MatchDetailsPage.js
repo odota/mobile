@@ -38,7 +38,8 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend,
     mod: state.settingsState.mod,
     alpha: state.settingsState.alpha,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -51,7 +52,10 @@ class MatchDetailsPage extends Component {
         if(!this.props.isLoadingMatchDetails) {
             this.props.actions.fetchMatchDetails(this.props.data)
         }
+    }
 
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Match Details');
     }
 
     componentWillReceiveProps(nextProps) {

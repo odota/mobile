@@ -42,7 +42,8 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     alpha: state.settingsState.alpha,
-    secondLegend: state.settingsState.secondLegend
+    secondLegend: state.settingsState.secondLegend,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -138,6 +139,10 @@ class MatchesSearch extends Component {
         sortedDates.unshift({"id": -1, "localized_name": "None"});
         sortedRegions = _.cloneDeep(regions);
         sortedRegions.unshift({"id": -1, "localized_name": "None"});
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Matches Search');
     }
 
     onFilterPressed() {

@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     favouritesList: state.favouritesState.favourites,
-    homeProfile: state.homeState.profile
+    homeProfile: state.homeState.profile,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -59,6 +60,7 @@ class NavBar extends Component {
                     [
                         {text: 'Cancel', style: 'cancel'},
                         {text: 'OK', onPress: () => {
+                            this.props.tracker.trackEvent('Favourites', 'Purged');
                             this.props.actions.purgeFavourites();
                             setTimeout(() => {
                                 AsyncStorage.setItem("favourites", "");
@@ -72,6 +74,7 @@ class NavBar extends Component {
                     [
                         {text: 'Cancel', style: 'cancel'},
                         {text: 'OK', onPress: () => {
+                            this.props.tracker.trackEvent('Logout', 'Success');
                             this.props.actions.resetHomeProfile();
                             setTimeout(() => {
                                 AsyncStorage.setItem("homeProfile", "");

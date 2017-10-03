@@ -32,7 +32,8 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
     legendTranslucent: state.settingsState.legendTranslucent,
-    favouritesList: state.favouritesState.favourites
+    favouritesList: state.favouritesState.favourites,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -45,6 +46,10 @@ class Favourite extends Component {
         super(props);
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Favourite');
     }
 
     componentWillMount() {

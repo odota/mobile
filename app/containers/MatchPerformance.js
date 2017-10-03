@@ -44,7 +44,8 @@ export const mapStateToProps = state => ({
     alpha: state.settingsState.alpha,
     mod: state.settingsState.mod,
     secondLegend: state.settingsState.secondLegend,
-    parent: state.navigationState.parent
+    parent: state.navigationState.parent,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -77,6 +78,10 @@ class MatchPerformance extends Component {
         this.getHeroId = this.getHeroId.bind(this);
         this.getAbilityId = this.getAbilityId.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Match Performance');
     }
 
     componentWillMount() {

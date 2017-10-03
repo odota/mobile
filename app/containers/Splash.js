@@ -30,6 +30,8 @@ export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({...homeActions, ...favouritesActions, ...settingsActions, ...navigationActions}, dispatch)
 });
 
+import { GoogleAnalyticsTracker, GoogleAnalyticsSettings } from 'react-native-google-analytics-bridge';
+
 class Splash extends Component {
 
     constructor(props) {
@@ -37,6 +39,9 @@ class Splash extends Component {
     }
 
     componentWillMount() {
+        GoogleAnalyticsSettings.setDispatchInterval(30);
+        let tracker = new GoogleAnalyticsTracker('UA-107430194-1');
+        this.props.actions.setGATracker(tracker);
         AsyncStorage.getItem("theme").then((value) => {
             this.props.actions.changeTheme(value);
         })
