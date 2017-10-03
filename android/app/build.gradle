@@ -140,6 +140,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-google-analytics-bridge')
     compile project(':mobile-center-crashes')
     compile project(':mobile-center-analytics')
     compile project(':mobile-center')

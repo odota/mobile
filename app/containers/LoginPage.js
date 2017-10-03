@@ -30,7 +30,8 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
-    legendHex: state.settingsState.legendHex
+    legendHex: state.settingsState.legendHex,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -44,8 +45,12 @@ class LoginPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            'profileExist': false
+            'redirecting': false
         }
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Login');
     }
 
     componentWillMount() {
@@ -53,7 +58,9 @@ class LoginPage extends Component {
 
     onNavigationStateChange(navState) {
         var splitted = navState.url.split("/");
-        if(splitted[2] == "www.opendota.com") {
+        if(splitted[2] == "www.opendota.com" && !this.state.redirecting) {
+            this.props.tracker.trackEvent('Login', 'Success');
+            this.setState({redirecting: true});
             this.props.actions.pushContextIdHome(splitted[4]);
             this.props.actions.changeContextId(splitted[4]);
             this.props.actions.setHomeProfile(splitted[4]);

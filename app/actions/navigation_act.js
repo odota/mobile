@@ -7,7 +7,15 @@ export const types = {
     PUSH_CONTEXT_ID_SEARCH: 'PUSH_CONTEXT_ID_SEARCH',
     POP_CONTEXT_ID_SEARCH: 'POP_CONTEXT_ID_SEARCH',
     CHANGE_PARENT: 'CHANGE_PARENT',
-    CONSUME_HOME_TAB: 'CONSUME_HOME_TAB'
+    CONSUME_HOME_TAB: 'CONSUME_HOME_TAB',
+    SET_GA_TRACKER: 'SET_GA_TRACKER'
+}
+
+export function setGATracker(tracker) {
+    return {
+        type: types.SET_GA_TRACKER,
+        tracker: tracker
+    };
 }
 
 export function changeContextId(id) {

@@ -1,5 +1,5 @@
 import { types } from '../actions/navigation_act';
-var initialState = { contextId: -1, scene: {}, parent: "Home", homeTab: false, contextIdStackHome: [], contextIdStackFavourite: [], contextIdStackSearch: [] };
+var initialState = { contextId: -1, scene: {}, parent: "Home", homeTab: false, contextIdStackHome: [], contextIdStackFavourite: [], contextIdStackSearch: [], tracker: {} };
 
 export default function navigationState(state = initialState, action = {}) {
     switch(action.type) {
@@ -35,6 +35,8 @@ export default function navigationState(state = initialState, action = {}) {
             return Object.assign({}, state, { contextIdStackSearch: [...state.contextIdStackSearch, action.newContextId] });
         case types.POP_CONTEXT_ID_SEARCH:
             return Object.assign({}, state, { contextIdStackSearch: state.contextIdStackSearch.slice(0, state.contextIdStackSearch.length - 1) });
+        case types.SET_GA_TRACKER:
+            return Object.assign({}, state, { tracker: action.tracker });
         default:
             return state;
     }

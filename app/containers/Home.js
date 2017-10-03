@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
-    profile: state.homeState.profile
+    profile: state.homeState.profile,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -55,6 +56,10 @@ class Home extends Component {
     }
 
     componentWillMount() {
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Home');
     }
 
     render() {

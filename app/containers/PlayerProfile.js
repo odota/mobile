@@ -37,7 +37,8 @@ export const mapStateToProps = state => ({
     isLoadingPeers: state.peersState.isLoadingPeers,
     isLoadingMatches: state.peersState.isLoadingMatches,
     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
-    contextId: state.navigationState.contextId
+    contextId: state.navigationState.contextId,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -48,6 +49,10 @@ class PlayerProfile extends Component {
 
     constructor(props) {
         super(props)
+    }
+
+    componentDidMount() {
+        this.props.tracker.trackScreenView('Player Profile');
     }
 
     handleChangeTab({i, ref, from}) {
