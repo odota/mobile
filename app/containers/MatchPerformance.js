@@ -22,9 +22,11 @@ import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
+import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import heroes from '../json/heroes.json';
 import abilities from '../json/ability_ids.json';
+import items from '../json/item_ids.json';
 
 import moment from 'moment';
 
@@ -185,7 +187,13 @@ class MatchPerformance extends Component {
             var inflictor = currentUnprocessedPlayer.max_hero_hit.inflictor;
             if(inflictor) {
                 var inflictorID = this.getAbilityId(inflictor);
-                processedPlayer.maxInflictorHit = getAbilityImage(inflictorID);
+                if(inflictorID) {
+                    processedPlayer.maxInflictorHit = getAbilityImage(inflictorID);
+                } else {
+                    var inflictorID = this.getItemId(inflictor);
+                    processedPlayer.maxInflictorHit = getItemImage(inflictorID);
+                }
+
             } else {
                 processedPlayer.maxInflictorHit = getAbilityImage(5001);
             }
@@ -213,6 +221,16 @@ class MatchPerformance extends Component {
         for(var key in abilities) {
             if(abilities.hasOwnProperty(key)) {
                 if(abilities[key] == abilityName) {
+                    return key;
+                }
+            }
+        }
+    }
+
+    getItemId(itemName) {
+        for(var key in items) {
+            if(items.hasOwnProperty(key)) {
+                if(items[key] == itemName) {
                     return key;
                 }
             }

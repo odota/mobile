@@ -28,6 +28,8 @@ import regionsArray from '../json/regions_list.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import items from '../json/item_ids.json';
 
+import { StockLine } from 'react-native-pathjs-charts';
+
 import moment from 'moment';
 
 import _ from 'lodash';
@@ -222,47 +224,75 @@ class MatchOverview extends Component {
             processedPlayer.backpack_0 = currentUnprocessedPlayer.backpack_0;
             var backpack_0_name = this.getItemName(processedPlayer.backpack_0);
             if(backpack_0_name) {
-                processedPlayer.backpack_0_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_0_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_0_name);
+                if(itemTiming) {
+                    processedPlayer.backpack_0_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.backpack_1 = currentUnprocessedPlayer.backpack_1;
             var backpack_1_name = this.getItemName(processedPlayer.backpack_1);
             if(backpack_1_name) {
-                processedPlayer.backpack_1_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_1_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_1_name);
+                if(itemTiming) {
+                    processedPlayer.backpack_1_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.backpack_2 = currentUnprocessedPlayer.backpack_2;
             var backpack_2_name = this.getItemName(processedPlayer.backpack_2);
             if(backpack_2_name) {
-                processedPlayer.backpack_2_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_2_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_2_name);
+                if(itemTiming) {
+                    processedPlayer.backpack_2_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_0 = currentUnprocessedPlayer.item_0;
             var item_0_name = this.getItemName(processedPlayer.item_0);
             if(item_0_name) {
-                processedPlayer.item_0_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name);
+                console.log(itemTiming);
+                if(itemTiming) {
+                    processedPlayer.item_0_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_1 = currentUnprocessedPlayer.item_1;
             var item_1_name = this.getItemName(processedPlayer.item_1);
             if(item_1_name) {
-                processedPlayer.item_1_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_1_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_1_name);
+                if(itemTiming) {
+                    processedPlayer.item_1_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_2 = currentUnprocessedPlayer.item_2;
             var item_2_name = this.getItemName(processedPlayer.item_2);
             if(item_2_name) {
-                processedPlayer.item_2_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_2_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_2_name);
+                if(itemTiming) {
+                    processedPlayer.item_2_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_3 = currentUnprocessedPlayer.item_3;
             var item_3_name = this.getItemName(processedPlayer.item_3);
             if(item_3_name) {
-                processedPlayer.item_3_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_3_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_3_name);
+                if(itemTiming) {
+                    processedPlayer.item_3_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_4 = currentUnprocessedPlayer.item_4;
             var item_4_name = this.getItemName(processedPlayer.item_4);
             if(item_4_name) {
-                processedPlayer.item_4_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_4_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_4_name);
+                if(itemTiming) {
+                    processedPlayer.item_4_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.item_5 = currentUnprocessedPlayer.item_5;
             var item_5_name = this.getItemName(processedPlayer.item_5);
             if(item_5_name) {
-                processedPlayer.item_5_timing = moment("1900-01-01 00:00:00").add(this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_5_name), 'seconds').format("mm:ss");
+                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_5_name);
+                if(itemTiming) {
+                    processedPlayer.item_5_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
+                }
             }
             processedPlayer.backpack_0_uri = getItemImage(currentUnprocessedPlayer.backpack_0);
             processedPlayer.backpack_1_uri = getItemImage(currentUnprocessedPlayer.backpack_1);
@@ -478,7 +508,7 @@ class MatchOverview extends Component {
 
         var mmr;
         if(rowData.soloCompetitiveRank) {
-            mmr = (<Text style = {{color: this.props.legend, fontSize: 12}}>{rowData.soloCompetitiveRank}</Text>);
+            mmr = (<Text style = {{color: this.props.legend, fontSize: 12, alignSelf: 'center'}}>{rowData.soloCompetitiveRank}</Text>);
         } else {
             mmr = (<View/>);
         }
