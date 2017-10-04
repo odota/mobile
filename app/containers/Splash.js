@@ -48,7 +48,6 @@ class Splash extends Component {
         .catch((error) => {
             this.props.actions.changeTheme(1);
         })
-        .done();
 
         AsyncStorage.getItem("favourites").then((value) => {
             if(value) {
@@ -58,7 +57,6 @@ class Splash extends Component {
         .catch((error) => {
             console.log(error);
         })
-        .done();
 
         AsyncStorage.getItem("homeProfile").then((value) => {
             if(value) {
@@ -74,7 +72,6 @@ class Splash extends Component {
         .catch((error) => {
             console.log(error);
         })
-        .done();
     }
 
     componentDidMount() {

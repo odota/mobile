@@ -73,9 +73,9 @@ class PlayerCard extends Component {
             if(this.props.homeProfile.account_id == info.account_id) {
                 this.props.homeActions.resetHomeProfile();
             } else {
-                this.props.navigationActions.pushContextIdHome(info.account_id);
-                this.props.navigationActions.changeContextId(info.account_id);
-                this.props.homeActions.setHomeProfile(info);
+                // this.props.navigationActions.pushContextIdHome(info.account_id);
+                // this.props.navigationActions.changeContextId(info.account_id);
+                // this.props.homeActions.setHomeProfile(info);
                 let toast = Toast.show('Home is set', {
                     duration: Toast.durations.SHORT,
                     position: Toast.positions.BOTTOM,
