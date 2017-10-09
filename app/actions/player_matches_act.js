@@ -9,15 +9,17 @@ export const types = {
     NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES'
 }
 
-export function navigateNextMatches() {
+export function navigateNextMatches(amount) {
     return {
-        type: types.NAVIGATE_NEXT_MATCHES
+        type: types.NAVIGATE_NEXT_MATCHES,
+        amount
     };
 }
 
-export function navigatePreviousMatches() {
+export function navigatePreviousMatches(amount) {
     return {
-        type: types.NAVIGATE_PREVIOUS_MATCHES
+        type: types.NAVIGATE_PREVIOUS_MATCHES,
+        amount
     };
 }
 
