@@ -12,9 +12,15 @@ export default function playerMatchesState(state = initialState, action = {}) {
         case types.CHANGE_SORTED_BY:
             return Object.assign({}, state, { sortedBy: action.sortedBy });
         case types.NAVIGATE_NEXT_MATCHES:
-            return Object.assign({}, state, { page: state.page + 1 });
+            newPage = state.page + action.amount;
+
+            return Object.assign({}, state, { page: newPage });
         case types.NAVIGATE_PREVIOUS_MATCHES:
-            return Object.assign({}, state, { page: state.page - 1 });
+            newPage = state.page - action.amount;
+            if(newPage < 1) {
+                newPage = 1;
+            }
+            return Object.assign({}, state, { page: newPage });
         default:
             return state;
     }

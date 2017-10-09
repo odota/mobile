@@ -49,16 +49,30 @@ class MatchesPage extends Component {
         super(props);
         this.onSearchPressed = this.onSearchPressed.bind(this);
         this.previousControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches()}}>
-                <View style = {styles.individualPageControlView}>
+            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches(1)}}>
+                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 0, paddingRight: 40}}>
                     <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
                 </View>
             </TouchableOpacity>
         );
+        this.previousTen = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches(10)}}>
+                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 0, paddingRight: 20}}>
+                    <FontAwesome name = "angle-double-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
         this.nextControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches()}}>
-                <View style = {styles.individualPageControlView}>
+            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches(1)}}>
+                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 40, paddingRight: 0}}>
                     <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
+                </View>
+            </TouchableOpacity>
+        );
+        this.nextTen = (
+            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches(10)}}>
+                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 20, paddingRight: 0}}>
+                    <FontAwesome name = "angle-double-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
                 </View>
             </TouchableOpacity>
         );
@@ -99,6 +113,7 @@ class MatchesPage extends Component {
         this.initialValue = 1 + ((nextProps.page - 1) * 20);
         this.endValue = nextProps.page * 20;
         this.totalMatches = nextProps.matches.length;
+        let totalPages = Math.ceil(this.totalMatches/20);
 
         if(this.totalMatches > 0) {
             if(this.endValue > this.totalMatches) {
@@ -115,13 +130,19 @@ class MatchesPage extends Component {
                         <View style={styles.pageContainer}>
                             <Text style={styles.individualPageControl}>{nextProps.page}</Text>
                         </View>
-                        {this.nextControl}
+                        <View style = {{flexDirection: 'row'}}>
+                            {this.nextControl}
+                            {this.nextTen}
+                        </View>
                     </View>
                 );
-            } else if (this.endValue == this.totalPeers) {
+            } else if (this.endValue == this.totalMatches) {
                 this.pageControl = (
                     <View style={styles.paginationContainer}>
-                        {this.previousControl}
+                        <View style = {{flexDirection: 'row'}}>
+                            {this.previousTen}
+                            {this.previousControl}
+                        </View>
                         <View style={styles.pageContainer}>
                             <Text style={styles.individualPageControl}>{nextProps.page}</Text>
                         </View>
@@ -129,13 +150,27 @@ class MatchesPage extends Component {
                     </View>
                 );
             } else {
+                var previousTenControl = (<View style = {{width: 40}}/>);
+                var nextTenControl = (<View style = {{width: 40}}/>);
+                if(nextProps.page >= 10) {
+                    previousTenControl = this.previousTen;
+                }
+                if(nextProps.page <= totalPages - 10) {
+                    nextTenControl = this.nextTen;
+                }
                 this.pageControl = (
                     <View style={styles.paginationContainer}>
-                        {this.previousControl}
+                        <View style = {{flexDirection: 'row'}}>
+                            {previousTenControl}
+                            {this.previousControl}
+                        </View>
                         <View style={styles.pageContainer}>
                             <Text style={styles.individualPageControl}>{nextProps.page}</Text>
                         </View>
-                        {this.nextControl}
+                        <View style = {{flexDirection: 'row'}}>
+                            {this.nextControl}
+                            {nextTenControl}
+                        </View>
                     </View>
                 );
             }
