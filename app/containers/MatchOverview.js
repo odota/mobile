@@ -8,7 +8,8 @@ import {
     Image,
     TouchableOpacity,
     RefreshControl,
-    ImageBackground
+    ImageBackground,
+    ScrollView
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -87,7 +88,9 @@ class MatchOverview extends Component {
             matchId: -1,
             region: '',
             averageMMR: -1,
-            skill: ""
+            skill: "",
+            radiantGoldAdvantage: [],
+            radiantXpAdvantage: []
         };
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
         this.generateProcessedData = this.generateProcessedData.bind(this);
@@ -172,6 +175,32 @@ class MatchOverview extends Component {
                 this.setState({skill: "Very High"});
             }
         }
+
+        if(data.radiant_gold_adv) {
+            let graphDataArray = [];
+            let graphData = [];
+            for(var point in data.radiant_gold_adv) {
+                if(data.radiant_gold_adv.hasOwnProperty(point)) {
+                    var newPoint = {x: parseInt(point), y: data.radiant_gold_adv[point]};
+                    graphData.push(newPoint);
+                }
+            }
+            graphDataArray.push(graphData);
+            this.setState({radiantGoldAdvantage: graphDataArray});
+        }
+
+        if(data.radiant_xp_adv) {
+            let graphDataArray = [];
+            let graphData = [];
+            for(var point in data.radiant_xp_adv) {
+                if(data.radiant_xp_adv.hasOwnProperty(point)) {
+                    var newPoint = {x: parseInt(point), y: data.radiant_xp_adv[point]};
+                    graphData.push(newPoint);
+                }
+            }
+            graphDataArray.push(graphData);
+            this.setState({radiantXpAdvantage: graphDataArray});
+        }
     }
 
     calculateAverageMMR(data) {
@@ -249,7 +278,6 @@ class MatchOverview extends Component {
             var item_0_name = this.getItemName(processedPlayer.item_0);
             if(item_0_name) {
                 var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name);
-                console.log(itemTiming);
                 if(itemTiming) {
                     processedPlayer.item_0_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -577,6 +605,66 @@ class MatchOverview extends Component {
                     var parsedWarning = (<View/>);
                     if(this.props.matchDetails.radiant_gold_adv) {
                         parsedWarning = (<View/>);
+                        let options = {
+                            width: this.state.radiantGoldAdvantage[0].length * 10,
+                            height: 380,
+                            color: '#fd7f28',
+                            margin: {
+                              top: 18,
+                              left: 50,
+                              bottom: 18,
+                              right: 20
+                            },
+                            animate: {
+                              type: 'delayed',
+                              duration: 200
+                            },
+                            axisX: {
+                              showAxis: false,
+                              showLines: true,
+                              showLabels: true,
+                              showTicks: true,
+                              zeroAxis: true,
+                              orient: 'bottom',
+                              tickValues: [],
+                              gridColor: this.props.secondLegend,
+                              hideGrid: true,
+                              label: {
+                                fontFamily: 'Arial',
+                                fontSize: 14,
+                                fill: this.props.secondLegend
+                              }
+                            },
+                            axisY: {
+                                showAxis: false,
+                                showLines: true,
+                                showLabels: true,
+                                showTicks: true,
+                                zeroAxis: true,
+                                orient: 'left',
+                                gridColor: this.props.secondLegend,
+                                tickValues: [{value: -35000}, {value: -30000}, {value: -25000}, {value: -20000}, {value: -15000}, {value: -10000}, {value: -5000}, {value: 0}, {value: 5000}, {value: 10000}, {value: 15000}, {value: 20000}, {value: 25000}, {value: 30000}, {value: 35000}],
+                                label: {
+                                    fontFamily: 'Arial',
+                                    fontSize: 14,
+                                    fill: this.props.secondLegend
+                                }
+                            }
+                        }
+                        goldGraph = (
+                            <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
+                                <View style = {{alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginHorizontal: 10}}>
+                                    <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>Radiant Gold Advantage</Text>
+                                </View>
+                                <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                                <ScrollView horizontal showsHorizontalScrollIndicator = {true}>
+                                    <View style = {{flexDirection: 'row'}}>
+                                        <StockLine data={this.state.radiantGoldAdvantage} options={options} xKey='x' yKey='y' />
+                                    </View>
+                                </ScrollView>
+                            </View>
+
+                        );
                     } else {
                         parsedWarning = (
                             <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod, alignItems: 'center', justifyContent: 'center', flexDirection: 'row'}]}>
@@ -588,7 +676,74 @@ class MatchOverview extends Component {
                                 </View>
                             </View>
                         );
+                        goldGraph = (<View/>);
                     }
+
+                    if(this.props.matchDetails.radiant_xp_adv) {
+                        let options = {
+                            width: this.state.radiantXpAdvantage[0].length * 10,
+                            height: 380,
+                            color: '#2576b0',
+                            margin: {
+                              top: 18,
+                              left: 50,
+                              bottom: 18,
+                              right: 20
+                            },
+                            animate: {
+                              type: 'delayed',
+                              duration: 200
+                            },
+                            axisX: {
+                              showAxis: false,
+                              showLines: true,
+                              showLabels: true,
+                              showTicks: true,
+                              zeroAxis: true,
+                              orient: 'bottom',
+                              tickValues: [],
+                              gridColor: this.props.secondLegend,
+                              hideGrid: true,
+                              label: {
+                                fontFamily: 'Arial',
+                                fontSize: 14,
+                                fill: this.props.secondLegend
+                              }
+                            },
+                            axisY: {
+                                showAxis: false,
+                                showLines: true,
+                                showLabels: true,
+                                showTicks: true,
+                                zeroAxis: true,
+                                orient: 'left',
+                                gridColor: this.props.secondLegend,
+                                tickValues: [{value: -35000}, {value: -30000}, {value: -25000}, {value: -20000}, {value: -15000}, {value: -10000}, {value: -5000}, {value: 0}, {value: 5000}, {value: 10000}, {value: 15000}, {value: 20000}, {value: 25000}, {value: 30000}, {value: 35000}],
+                                label: {
+                                    fontFamily: 'Arial',
+                                    fontSize: 14,
+                                    fill: this.props.secondLegend
+                                }
+                            }
+                        }
+                        xpGraph = (
+                            <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
+                                <View style = {{alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginHorizontal: 10}}>
+                                    <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>Radiant XP Advantage</Text>
+                                </View>
+                                <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                                <ScrollView horizontal showsHorizontalScrollIndicator = {true}>
+                                    <View style = {{flexDirection: 'row'}}>
+                                        <StockLine data={this.state.radiantXpAdvantage} options={options} xKey='x' yKey='y' />
+                                    </View>
+                                </ScrollView>
+                            </View>
+
+                        );
+                    } else {
+                        xpGraph = (<View/>);
+                    }
+
                     var refreshColor = this.props.legendHex;
                     content = (
                         <KeyboardAwareScrollView style = {{marginTop: 5}}
@@ -711,6 +866,8 @@ class MatchOverview extends Component {
                                     initialListSize = {120}
                                 />
                             </View>
+                            {goldGraph}
+                            {xpGraph}
                         </KeyboardAwareScrollView>
                     )
                 }
@@ -735,7 +892,8 @@ const baseStyles = _.extend(base.general, {
     },
     titleText: {
         fontFamily: Fonts.base,
-        fontSize: 28
+        fontSize: 28,
+        textAlign: 'center'
     },
     titleContainer: {
         justifyContent: 'center',
