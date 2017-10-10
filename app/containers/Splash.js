@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     AsyncStorage,
-    Image
+    Image,
+    StatusBar
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -83,6 +84,10 @@ class Splash extends Component {
     render() {
         return (
             <View style = {styles.contentContainer}>
+                <StatusBar
+                    backgroundColor = {this.props.mod}
+                    barStyle = "dark-content"
+                    />
                 <Image source={require('../assets/splash.png')} style = {{flex: 1, width: Metrics.screenWidth, height: Metrics.screenHeight }}/>
             </View>
         )
