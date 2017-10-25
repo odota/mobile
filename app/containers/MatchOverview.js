@@ -147,7 +147,7 @@ class MatchOverview extends Component {
             var endedTime = (data.start_time + data.duration) * 1000;
             var now = moment();
             friendlyEndedTime = moment.duration(now.diff(endedTime)).humanize();
-            this.setState({endedTime: friendlyEndedTime});
+            this.setState({endedTime: friendlyEndedTime.toUpperCase()});
         }
         if(data.game_mode) {
             this.setState({gameMode: gameMode[data.game_mode].name});
