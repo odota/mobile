@@ -5,7 +5,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
-    Platform
+    Platform,
+    AsyncStorage,
+    Alert
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -32,11 +34,12 @@ export const mapStateToProps = state => ({
     profile: state.homeState.profile,
     contextIdStackHome: state.navigationState.contextIdStackHome,
     contextIdStackSearch: state.navigationState.contextIdStackSearch,
-    contextIdStackFavourite: state.navigationState.contextIdStackFavourite
+    contextIdStackFavourite: state.navigationState.contextIdStackFavourite,
+    tracker: state.navigationState.tracker
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators(navigationActions, dispatch)
+    actions: bindActionCreators({...navigationActions, ...homeActions}, dispatch)
 });
 
 class NavDrawer extends Component {
@@ -44,6 +47,22 @@ class NavDrawer extends Component {
     constructor(props) {
         super(props);
         this.goto = this.goto.bind(this);
+        this.onResetHomeProfilePressed = this.onResetHomeProfilePressed.bind(this);
+    }
+
+    onResetHomeProfilePressed() {
+        Alert.alert('Logout',
+                    'Are you sure that you want to logout?',
+                    [
+                        {text: 'Cancel', style: 'cancel'},
+                        {text: 'OK', onPress: () => {
+                            this.props.tracker.trackEvent('Logout', 'Success');
+                            this.props.actions.resetHomeProfile();
+                            setTimeout(() => {
+                                AsyncStorage.setItem("homeProfile", "");
+                            }, 1000);
+                            Actions.drawerClose();}},
+                    ])
     }
 
     goto(route) {
@@ -77,6 +96,24 @@ class NavDrawer extends Component {
             paddingView = <View style = {{marginTop: 15}} />
         } else {
             paddingView = <View />
+        }
+        var logout = (<View />);
+        if(!(Object.keys(this.props.profile).length === 0 && this.props.profile.constructor === Object)) {
+            logout = (
+                <View>
+                    <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
+                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
+                            <View style = {styles.navIconContainer}>
+                                <FontAwesome name = "power-off" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                            </View>
+                            <View style = {styles.navTextContainer}>
+                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Logout</Text>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                </View>
+            );
         }
         return (
             <View style = {[styles.drawerContainer, {backgroundColor: this.props.mod}]}>
@@ -129,6 +166,8 @@ class NavDrawer extends Component {
                         </View>
                     </TouchableOpacity>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+
+                    {logout}
 
                 </ScrollView>
             </View>
