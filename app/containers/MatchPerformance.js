@@ -24,9 +24,9 @@ import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
 import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import heroes from '../json/heroes.json';
-import abilities from '../json/ability_ids.json';
-import items from '../json/item_ids.json';
+import heroes from 'dotaconstants/build/heroes.json';
+import abilities from 'dotaconstants/build/ability_ids.json';
+import items from 'dotaconstants/build/item_ids.json';
 
 import moment from 'moment';
 

@@ -18,7 +18,7 @@ import Fonts from '../themes/Fonts';
 
 import { Actions } from 'react-native-router-flux';
 
-import gameMode from '../json/game_mode.json';
+import gameMode from 'dotaconstants/build/game_mode.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
 import _ from 'lodash';
