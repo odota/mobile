@@ -1,4 +1,4 @@
-var abilities = require('../app/json/ability_ids.json');
+var abilities = require('dotaconstants/build/ability_ids.json');
 var fs = require('fs');
 var _ = require('lodash');
 

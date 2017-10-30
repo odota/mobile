@@ -24,10 +24,10 @@ import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import gameMode from '../json/game_mode.json';
+import gameMode from 'dotaconstants/build/game_mode.json';
+import items from 'dotaconstants/build/item_ids.json';
 import regionsArray from '../json/regions_list.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import items from '../json/item_ids.json';
 
 import { StockLine } from 'react-native-pathjs-charts';
 
