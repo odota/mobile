@@ -19,7 +19,7 @@ import Fonts from '../themes/Fonts';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 
-import heroes from 'dotaconstants/build/heroes.json';
+import heroes from '../json/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
 import moment from 'moment';

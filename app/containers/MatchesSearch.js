@@ -17,10 +17,10 @@ import { Actions } from 'react-native-router-flux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import heroes from 'dotaconstants/build/heroes.json';
 import gameModes from 'dotaconstants/build/game_mode.json';
 import lobbyTypes from 'dotaconstants/build/lobby_type.json';
 import patches from 'dotaconstants/build/patch.json';
+import heroes from '../json/heroes.json';
 import factions from '../json/factions.json';
 import results from '../json/results.json';
 import lanes from '../json/lanes.json';
