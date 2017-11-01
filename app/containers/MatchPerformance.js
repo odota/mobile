@@ -208,11 +208,13 @@ class MatchPerformance extends Component {
     }
 
     getHeroId(heroName) {
-        var heroesList = heroes.result.heroes;
+        var heroesList = heroes;
         var heroId = -1;
-        for(var i = 0; i < heroesList.length; i++) {
-            if (heroesList[i].name == heroName) {
-                return heroesList[i].id;
+        for(var hero in heroesList) {
+            if(heroesList.hasOwnProperty(hero)) {
+                if(heroesList[hero].name == heroName) {
+                    return heroesList[hero].id;
+                }
             }
         }
     }

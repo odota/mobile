@@ -43,6 +43,7 @@ class MatchesCard extends Component {
         this.getValue = this.getValue.bind(this);
         this.getFriendlyDuration = this.getFriendlyDuration.bind(this);
         this.matchPressed = this.matchPressed.bind(this);
+        this.normalizeGameMode = this.normalizeGameMode.bind(this);
     }
 
     matchPressed(data) {
@@ -240,6 +241,7 @@ class MatchesCard extends Component {
             var now = moment();
             var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
             var dynamicValue = this.getValue(rowData);
+            var localizedGameMode = this.normalizeGameMode(gameMode[rowData.game_mode].name)
             return (
                 <TouchableOpacity style = {{flexDirection: 'row', flex: 1}} onPress = {() => {this.matchPressed(rowData)}}>
                     <View style = {rowContainer}>
@@ -250,7 +252,7 @@ class MatchesCard extends Component {
                             <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
                         </View>
                         <View style = {styles.cell}>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{gameMode[rowData.game_mode].name}</Text>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{localizedGameMode}</Text>
                         </View>
                         <View style = {styles.cell}>
                             <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
@@ -270,6 +272,17 @@ class MatchesCard extends Component {
             return <View />;
         }
 
+    }
+
+    normalizeGameMode(gameMode) {
+        var trimmed = gameMode.replace('game_mode_', '');
+        var split = trimmed.split("_");
+        var normalized = "";
+        for(var i = 0; i < split.length; i++) {
+            split[i][0].toUpperCase();
+            normalized += split[i].charAt(0).toUpperCase() + split[i].slice(1) + " ";
+        }
+        return normalized;
     }
 
     render() {
