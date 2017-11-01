@@ -30,6 +30,7 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     sortedBy: state.playerMatchesState.sortedBy,
+    sortDirection: state.playerMatchesState.sortDirection,
     parent: state.navigationState.parent
 });
 
@@ -49,7 +50,7 @@ class MatchesCard extends Component {
     matchPressed(data) {
         var matchId = data.match_id;
         if(this.props.parent == "Favourites") {
-            Actions.mastchDetailsFavourite(matchId);
+            Actions.matchDetailsFavourite(matchId);
         } else if (this.props.parent == "Search") {
             Actions.matchDetailsSearch(matchId);
         } else if (this.props.parent == "Home") {
@@ -289,6 +290,23 @@ class MatchesCard extends Component {
         if(this.props.matches) {
             var dynamicHeader = this.getHeader();
 
+            var sortDirection = "";
+            if(!this.props.sortDirection || this.props.sortDirection === "ASC") {
+                sortDirection = "DESC";
+            } else if (this.props.sortDirection === "DESC") {
+                sortDirection = "ASC";
+            }
+
+            let dynamicText = <Text numberOfLines = {1} style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>{dynamicHeader}</Text>;
+
+            if (dynamicHeader === 'K/D/A') {
+                dynamicText = (
+                    <TouchableOpacity onPress = {() => {this.props.sortMatches("kda", sortDirection)}}>
+                        {dynamicText}
+                    </TouchableOpacity>
+                );
+            }
+
             return (
                 <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
@@ -308,13 +326,17 @@ class MatchesCard extends Component {
                             <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Mode</Text>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Ended</Text>
+                            <TouchableOpacity onPress = {() => {this.props.sortMatches("ended", sortDirection)}}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Ended</Text>
+                            </TouchableOpacity>
                         </View>
                         <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Length</Text>
+                            <TouchableOpacity onPress = {() => {this.props.sortMatches("duration", sortDirection)}}>
+                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Length</Text>
+                            </TouchableOpacity>
                         </View>
                         <View style = {styles.doubleTableHeaderCell}>
-                            <Text numberOfLines = {1} style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>{dynamicHeader}</Text>
+                            {dynamicText}
                         </View>
                         <View style = {{width: 5}} />
                     </View>

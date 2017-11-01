@@ -29,6 +29,8 @@ export const mapStateToProps = state => ({
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
     page: state.playerMatchesState.page,
+    sortColumn: state.playerMatchesState.sortColumn,
+    sortDirection: state.playerMatchesState.sortDirection,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
@@ -80,6 +82,8 @@ class MatchesPage extends Component {
         this.state = {
             refreshing: false
         };
+
+        this.sortMatches = this.sortMatches.bind(this);
     }
 
     componentDidMount() {
@@ -101,6 +105,10 @@ class MatchesPage extends Component {
         } else if (this.props.parent == "Home") {
             Actions.matchesSearchHome();
         }
+    }
+
+    sortMatches(sortColumn, sortDirection) {
+        this.props.actions.sortMatches(sortColumn, sortDirection);
     }
 
     componentWillMount() {
@@ -217,7 +225,7 @@ class MatchesPage extends Component {
                     <Text style = {styles.filterText}>
                         {this.initialValue} - {this.endValue} of {this.totalMatches} matches
                     </Text>
-                    <MatchesCard matches = {this.matchesSubset} default = {false} />
+                    <MatchesCard matches = {this.matchesSubset} sortMatches = {this.sortMatches} default = {false} />
                     {this.pageControl}
                     <Text style = {styles.filterText}>
                         {this.initialValue} - {this.endValue} of {this.totalMatches} matches
