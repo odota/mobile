@@ -50,10 +50,10 @@ export function changeSortedby(sortedBy) {
     };
 }
 
-export function sortMatches(sortColumn, sortDirection) {
+export function sortMatches(sortField, sortDirection) {
     return {
         type: types.SORT_MATCHES,
-        sortColumn,
+        sortField,
         sortDirection
     }
 }

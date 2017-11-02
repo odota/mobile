@@ -29,7 +29,7 @@ export const mapStateToProps = state => ({
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
     isEmptyMatches: state.playerMatchesState.isEmptyMatches,
     page: state.playerMatchesState.page,
-    sortColumn: state.playerMatchesState.sortColumn,
+    sortField: state.playerMatchesState.sortField,
     sortDirection: state.playerMatchesState.sortDirection,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
@@ -107,8 +107,8 @@ class MatchesPage extends Component {
         }
     }
 
-    sortMatches(sortColumn, sortDirection) {
-        this.props.actions.sortMatches(sortColumn, sortDirection);
+    sortMatches(sortField, sortDirection) {
+        this.props.actions.sortMatches(sortField, sortDirection);
     }
 
     componentWillMount() {
