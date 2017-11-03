@@ -218,6 +218,24 @@ export function getItemImage(id) {
         staticImage = require('../assets/items/sphere_lg.png');
     } else if (id == 226) {
         staticImage = require('../assets/items/lotus_orb_lg.png');
+    } else if (id == 223) {
+        staticImage = require('../assets/items/meteor_hammer_lg.png');
+    } else if (id == 225) {
+        staticImage = require('../assets/items/nullifier_lg.png');
+    } else if (id == 255) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 256) {
+        staticImage = require('../assets/items/combo_breaker_lg.png');
+    } else if (id == 258) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 259) {
+        staticImage = require('../assets/items/trident_lg.png');
+    } else if (id == 260) {
+        staticImage = require('../assets/no-item.png');
+    } else if (id == 266) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 267) {
+        staticImage = require('../assets/items/spirit_vessel_lg.png');
     } else if (id == 125) {
         staticImage = require('../assets/items/vanguard_lg.png');
     } else if (id == 242) {

@@ -122,7 +122,7 @@ class MatchesPage extends Component {
         this.endValue = nextProps.page * 20;
         this.totalMatches = nextProps.matches.length;
         let totalPages = Math.ceil(this.totalMatches/20);
-
+        this.props.actions.setMaxPages(totalPages);
         if(this.totalMatches > 0) {
             if(this.endValue > this.totalMatches) {
                 this.endValue = this.totalMatches;
@@ -160,16 +160,10 @@ class MatchesPage extends Component {
             } else {
                 var previousTenControl = (<View style = {{width: 40}}/>);
                 var nextTenControl = (<View style = {{width: 40}}/>);
-                if(nextProps.page >= 10) {
-                    previousTenControl = this.previousTen;
-                }
-                if(nextProps.page <= totalPages - 10) {
-                    nextTenControl = this.nextTen;
-                }
                 this.pageControl = (
                     <View style={styles.paginationContainer}>
                         <View style = {{flexDirection: 'row'}}>
-                            {previousTenControl}
+                            {this.previousTen}
                             {this.previousControl}
                         </View>
                         <View style={styles.pageContainer}>
@@ -177,11 +171,18 @@ class MatchesPage extends Component {
                         </View>
                         <View style = {{flexDirection: 'row'}}>
                             {this.nextControl}
-                            {nextTenControl}
+                            {this.nextTen}
                         </View>
                     </View>
                 );
             }
+        } else if (this.totalMatches == 0) {
+            this.matchesSubset = new Array();
+            this.pageControl = (
+                <View/>
+            )
+            this.initialValue = 0;
+            this.endValue = 0;
         }
     }
 
