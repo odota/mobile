@@ -55,7 +55,7 @@ class DotaKeepApp extends Component {
                                 <Scene key = "favourite" component = {Favourite} title = "Favourites"/>
                                 <Scene clone = {true} key = "playerProfileFavourite" component = {PlayerProfile} title = "Player Profile" panHandlers = {null} navBar = {deepNavBar} />
                                 <Scene clone = {true} key = "matchesSearchFavourite" component = {MatchesSearch} title = "Search Matches" direction = 'vertical' panHandlers = {null} navBar = {modalNavBar} />
-                                <Scene clone = {true} key = "mastchDetailsFavourite" component = {MatchDetailsPage} title = "Match Details" panHandlers = {null} navBar = {MatchNavBar} />
+                                <Scene clone = {true} key = "matchDetailsFavourite" component = {MatchDetailsPage} title = "Match Details" panHandlers = {null} navBar = {MatchNavBar} />
                             </Scene>
                             <Scene key = "searchTab" title = "Search" navBar = {customNavBar}>
                                 <Scene key = "playerSearch" component = {PlayerSearch} title = "Search Profile" />

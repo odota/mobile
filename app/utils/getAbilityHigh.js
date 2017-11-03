@@ -970,6 +970,24 @@ export function getAbilityHigh(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6670) {
 		staticImage = require('../assets/talent_tree.png');
+	} else if (id == 6339) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6340) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6341) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6342) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6343) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6344) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6346) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6459) {
+		staticImage = require('../assets/no-item.png');
+	} else if (id == 6461) {
+		staticImage = require('../assets/no-item.png');
 	} else {
 		staticImage = require('../assets/talent_tree.png');
 	}
