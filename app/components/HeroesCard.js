@@ -19,7 +19,7 @@ import Fonts from '../themes/Fonts';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 
-import heroes from '../json/heroes.json';
+import heroes from 'dotaconstants/build/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
 import moment from 'moment';
@@ -55,9 +55,11 @@ class HeroesCard extends Component {
     }
 
     getIndex(heroId, heroesArray) {
-        for(i = 0; i < heroesArray.length; i++) {
-            if(heroId == heroesArray[i].id) {
-                return i;
+        for(var hero in heroesArray) {
+            if(heroesArray.hasOwnProperty(hero)) {
+                if(heroesArray[hero].id == heroId) {
+                    return hero;
+                }
             }
         }
     }
@@ -85,7 +87,7 @@ class HeroesCard extends Component {
             var playedRate = currentUnprocessedHero.games / maxPlayed;
 
             // Process index
-            var index = this.getIndex(currentUnprocessedHero.hero_id, heroes.result.heroes);
+            var index = this.getIndex(currentUnprocessedHero.hero_id, heroes);
 
             // Process staticUri
             //var staticUri = getHeroImage(unprocessedHeroList[i].hero_id);
@@ -100,7 +102,7 @@ class HeroesCard extends Component {
                 friendlyLastPlayedTime = moment.duration(now.diff(lastPlayedTime)).humanize();
             }
             // Process localized_name
-            var localizedName = heroes.result.heroes[index].localized_name;
+            var localizedName = heroes[index].localized_name;
 
 
             var processedHero = {};

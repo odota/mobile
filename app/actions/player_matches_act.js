@@ -5,6 +5,8 @@ export const types = {
     RECEIVE_MATCHES: 'RECEIVE_MATCHES',
     RECEIVE_EMPTY_MATCHES: 'RECEIVE_EMPTY_MATCHES',
     CHANGE_SORTED_BY: 'CHANGE_SORTED_BY',
+    SORT_MATCHES: 'SORT_MATCHES',
+    SET_MAX_PAGES: 'SET_MAX_PAGES',
     NAVIGATE_NEXT_MATCHES: 'NAVIGATE_NEXT_MATCHES',
     NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES'
 }
@@ -42,11 +44,26 @@ function receiveEmptyMatches() {
     };
 }
 
+export function setMaxPages(maxPages) {
+    return {
+        type: types.SET_MAX_PAGES,
+        maxPages
+    }
+}
+
 export function changeSortedby(sortedBy) {
     return {
         type: types.CHANGE_SORTED_BY,
         sortedBy
     };
+}
+
+export function sortMatches(sortField, sortDirection) {
+    return {
+        type: types.SORT_MATCHES,
+        sortField,
+        sortDirection
+    }
 }
 
 export function fetchMatches(playerId, limit, projects, sortCategory, heroId, result,

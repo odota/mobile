@@ -7,7 +7,7 @@
     "clear": "npm cache clean && watchman watch-del-all && rm -rf $TMPDIR/react-*"
   },
   "dependencies": {
-    "dotaconstants": "5.11.0",
+    "dotaconstants": "5.15.0",
     "heatmap.js": "2.0.5",
     "lodash": "4.17.4",
     "mobile-center": "0.9.0",

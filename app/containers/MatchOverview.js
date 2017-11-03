@@ -24,10 +24,10 @@ import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getItemImage } from '../utils/getItemImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import gameMode from '../json/game_mode.json';
+import gameMode from 'dotaconstants/build/game_mode.json';
+import items from 'dotaconstants/build/item_ids.json';
 import regionsArray from '../json/regions_list.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import items from '../json/item_ids.json';
 
 import { StockLine } from 'react-native-pathjs-charts';
 
@@ -38,6 +38,8 @@ import _ from 'lodash';
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
+
+import { defaultSort, SORT_ENUM } from '../utils/sorting';
 
 export const mapStateToProps = state => ({
     matchDetails: state.matchDetailsState.matchDetails,
@@ -90,7 +92,11 @@ class MatchOverview extends Component {
             averageMMR: -1,
             skill: "",
             radiantGoldAdvantage: [],
-            radiantXpAdvantage: []
+            radiantXpAdvantage: [],
+            radiantSortField: "",            
+            radiantSortDirection: "",
+            direSortField: "",
+            direSortDirection: ""
         };
         this.generateProcessedPlayers = this.generateProcessedPlayers.bind(this);
         this.generateProcessedData = this.generateProcessedData.bind(this);
@@ -100,6 +106,8 @@ class MatchOverview extends Component {
         this.calculateAverageMMR = this.calculateAverageMMR.bind(this);
         this.onRowPressed = this.onRowPressed.bind(this);
         this.onNamePressed = this.onNamePressed.bind(this);
+        this.normalizeGameMode = this.normalizeGameMode.bind(this);
+        this.sortPlayers = this.sortPlayers.bind(this);
     }
 
     componentDidMount() {
@@ -150,7 +158,8 @@ class MatchOverview extends Component {
             this.setState({endedTime: friendlyEndedTime.toUpperCase()});
         }
         if(data.game_mode) {
-            this.setState({gameMode: gameMode[data.game_mode].name});
+            var localizedName = this.normalizeGameMode(gameMode[data.game_mode].name);
+            this.setState({gameMode: localizedName});
         }
         if(data.match_id) {
             this.setState({matchId: data.match_id});
@@ -201,6 +210,39 @@ class MatchOverview extends Component {
             graphDataArray.push(graphData);
             this.setState({radiantXpAdvantage: graphDataArray});
         }
+    }
+
+    normalizeGameMode(gameMode) {
+        var trimmed = gameMode.replace('game_mode_', '');
+        var split = trimmed.split("_");
+        var normalized = "";
+        for(var i = 0; i < split.length; i++) {
+            split[i][0].toUpperCase();
+            normalized += split[i].charAt(0).toUpperCase() + split[i].slice(1) + " ";
+        }
+        return normalized;
+    }
+
+    sortPlayers(array, sortField, sortDirection, isRadiant) {
+        var obj = {};
+
+        if (isRadiant) {
+            obj.radiantSortField = sortField;
+            obj.radiantSortDirection = 
+                sortField === this.state.radiantSortField ? 
+                SORT_ENUM.next(SORT_ENUM[sortDirection]) : 
+                SORT_ENUM[0]
+            obj.radiantsPlayerList = defaultSort(array, sortField, obj.radiantSortDirection);
+        } else {
+            obj.direSortField = sortField;
+            obj.direSortDirection = 
+                sortField === this.state.direSortField ? 
+                SORT_ENUM.next(SORT_ENUM[sortDirection]) : 
+                SORT_ENUM[0]
+            obj.direPlayersList = defaultSort(array, sortField, obj.direSortDirection);
+        }
+
+        this.setState(obj)
     }
 
     calculateAverageMMR(data) {
@@ -813,16 +855,24 @@ class MatchOverview extends Component {
                                         <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.radiantPlayersList, "player", this.state.radiantSortDirection, true)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.radiantPlayersList, "kda", this.state.radiantSortDirection, true)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>GPM</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.radiantPlayersList, "gpm", this.state.radiantSortDirection, true)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>GPM</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>XPM</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.radiantPlayersList, "xpm", this.state.radiantSortDirection, true)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>XPM</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                                 <ListView style = {styles.matchesListView}
@@ -847,16 +897,24 @@ class MatchOverview extends Component {
                                         <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.direPlayersList, "player", this.state.direSortDirection)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Player</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.direPlayersList, "kda", this.state.direSortDirection)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>K/D/A</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>GPM</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.direPlayersList, "gpm", this.state.direSortDirection)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>GPM</Text>
+                                        </TouchableOpacity>
                                     </View>
                                     <View style = {styles.tableHeaderCell}>
-                                        <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>XPM</Text>
+                                        <TouchableOpacity onPress = {() => this.sortPlayers(this.state.direPlayersList, "xpm", this.state.direSortDirection)}>
+                                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>XPM</Text>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                                 <ListView style = {styles.matchesListView}

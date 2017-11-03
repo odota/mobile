@@ -226,8 +226,12 @@ export function getHeroImage(id) {
         staticImage = require('../assets/heroes/arc_warden_full.png');
     } else if (id == 114) {
         staticImage = require('../assets/heroes/monkey_king_full.png');
+    } else if (id == 119) {
+        staticImage = require('../assets/no-item.png');
+    } else if (id == 120) {
+        staticImage = require('../assets/no-item.png');
     } else {
-        staticImage = require('../assets/heroes/rubick_full.png');
+        staticImage = require('../assets/no-item.png');
     }
     return staticImage;
 }

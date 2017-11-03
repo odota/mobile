@@ -1148,6 +1148,8 @@ export function getAbilityLow(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 5914) {
 		staticImage = require('../assets/talent_tree.png');
-	}
+	} else {
+        staticImage = require('../assets/no-item.png');
+    }
     return staticImage;
 }
