@@ -288,6 +288,7 @@ class MatchesCard extends Component {
 
     render() {
         if(this.props.matches) {
+
             var dynamicHeader = this.getHeader();
             var dynamicText = <Text numberOfLines = {1} style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>{dynamicHeader}</Text>;
 

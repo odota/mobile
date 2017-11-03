@@ -6,6 +6,7 @@ export const types = {
     RECEIVE_EMPTY_MATCHES: 'RECEIVE_EMPTY_MATCHES',
     CHANGE_SORTED_BY: 'CHANGE_SORTED_BY',
     SORT_MATCHES: 'SORT_MATCHES',
+    SET_MAX_PAGES: 'SET_MAX_PAGES',
     NAVIGATE_NEXT_MATCHES: 'NAVIGATE_NEXT_MATCHES',
     NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES'
 }
@@ -41,6 +42,13 @@ function receiveEmptyMatches() {
     return {
         type: types.RECEIVE_EMPTY_MATCHES
     };
+}
+
+export function setMaxPages(maxPages) {
+    return {
+        type: types.SET_MAX_PAGES,
+        maxPages
+    }
 }
 
 export function changeSortedby(sortedBy) {

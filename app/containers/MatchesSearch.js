@@ -115,7 +115,7 @@ class MatchesSearch extends Component {
     }
 
     componentWillMount() {
-        var heroesArray = _.cloneDeep(heroes.result.heroes);
+        var heroesArray = _.cloneDeep(heroes);
         sortedHeroes = _.sortBy(heroesArray, ['localized_name']);
         sortedHeroes.unshift({"id": 0, "localized_name": "None"});
         sortedFactions = _.cloneDeep(factions);
