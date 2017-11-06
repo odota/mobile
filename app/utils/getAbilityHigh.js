@@ -971,23 +971,27 @@ export function getAbilityHigh(id) {
 	} else if (id == 6670) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6339) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/dark_willow_bramble_maze_lg.png');
 	} else if (id == 6340) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/dark_willow_bedlam_lg.png');
 	} else if (id == 6341) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/dark_willow_shadow_realm_lg.png');
 	} else if (id == 6342) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/dark_willow_cursed_crown_lg.png');
 	} else if (id == 6343) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/pangolier_gyroshell_lg.png');
 	} else if (id == 6344) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/pangolier_swashbuckle_lg.png');
 	} else if (id == 6346) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/pangolier_heartpiercer_lg.png');
 	} else if (id == 6459) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/pangolier_gyroshell_stop_lg.png');
 	} else if (id == 6461) {
-		staticImage = require('../assets/no-item.png');
+		staticImage = require('../assets/abilities/pangolier_shield_crash_lg.png');
+	} else if (id == 6937) {
+		staticImage = require('../assets/abilities/tiny_toss_tree_lg.png');
+	} else if (id == 8340) {
+		staticImage = require('../assets/abilities/dark_willow_terrorize_lg.png');
 	} else {
 		staticImage = require('../assets/talent_tree.png');
 	}

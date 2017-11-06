@@ -95,7 +95,7 @@ export function getAbilityLow(id) {
 	} else if (id == 5052) {
 		staticImage = require('../assets/abilities/morphling_waveform_lg.png');
 	} else if (id == 5053) {
-		staticImage = require('../assets/abilities/morphling_adaptive_strike_lg.png');
+		staticImage = require('../assets/abilities/morphling_adaptive_strike_agi_lg.png');
 	} else if (id == 5055) {
 		staticImage = require('../assets/abilities/morphling_morph_agi_lg.png');
 	} else if (id == 5056) {

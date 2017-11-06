@@ -19,6 +19,7 @@ import Fonts from '../themes/Fonts';
 import { Actions } from 'react-native-router-flux';
 
 import gameMode from 'dotaconstants/build/game_mode.json';
+import lobbyType from 'dotaconstants/build/lobby_type.json';
 import { getHeroImage } from '../utils/getHeroImage';
 
 import _ from 'lodash';
@@ -45,6 +46,7 @@ class MatchesCard extends Component {
         this.getFriendlyDuration = this.getFriendlyDuration.bind(this);
         this.matchPressed = this.matchPressed.bind(this);
         this.normalizeGameMode = this.normalizeGameMode.bind(this);
+        this.normalizeLobbyType = this.normalizeLobbyType.bind(this);
     }
 
     matchPressed(data) {
@@ -242,7 +244,8 @@ class MatchesCard extends Component {
             var now = moment();
             var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
             var dynamicValue = this.getValue(rowData);
-            var localizedGameMode = this.normalizeGameMode(gameMode[rowData.game_mode].name)
+            var localizedGameMode = this.normalizeGameMode(gameMode[rowData.game_mode].name);
+            var localizedLobbyType = this.normalizeLobbyType(lobbyType[rowData.lobby_type].name);
             return (
                 <TouchableOpacity style = {{flexDirection: 'row', flex: 1}} onPress = {() => {this.matchPressed(rowData)}}>
                     <View style = {rowContainer}>
@@ -254,6 +257,7 @@ class MatchesCard extends Component {
                         </View>
                         <View style = {styles.cell}>
                             <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{localizedGameMode}</Text>
+                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend, fontSize: 12}]}>{localizedLobbyType}</Text>
                         </View>
                         <View style = {styles.cell}>
                             <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
@@ -277,6 +281,16 @@ class MatchesCard extends Component {
 
     normalizeGameMode(gameMode) {
         var trimmed = gameMode.replace('game_mode_', '');
+        var split = trimmed.split("_");
+        var normalized = "";
+        for(var i = 0; i < split.length; i++) {
+            normalized += split[i].charAt(0).toUpperCase() + split[i].slice(1) + " ";
+        }
+        return normalized;
+    }
+
+    normalizeLobbyType(lobbyType) {
+        var trimmed = lobbyType.replace('lobby_type_', '');
         var split = trimmed.split("_");
         var normalized = "";
         for(var i = 0; i < split.length; i++) {
