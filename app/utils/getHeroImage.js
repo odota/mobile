@@ -227,9 +227,9 @@ export function getHeroImage(id) {
     } else if (id == 114) {
         staticImage = require('../assets/heroes/monkey_king_full.png');
     } else if (id == 119) {
-        staticImage = require('../assets/no-item.png');
+        staticImage = require('../assets/heroes/dark_willow_full.png');
     } else if (id == 120) {
-        staticImage = require('../assets/no-item.png');
+        staticImage = require('../assets/heroes/pangolier_full.png');
     } else {
         staticImage = require('../assets/no-item.png');
     }
