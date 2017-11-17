@@ -8,17 +8,39 @@ import { connect } from 'react-redux';
 
 import _ from 'lodash';
 
-class Heatmap extends Component {
+const heatmapInputGenerator = (adjustedData, width) => {
+    return `
+        var heatmapInstance = h337.create({
+            container: document.querySelector('.heatmap'),
+            radius: ${15 * (width / 600)}
+        });
+        heatmapInstance.setData(${adjustedData})
+    `;
+}
 
-    componentDidMount() {
+class Heatmap extends Component {
+    scaleAndExtrema(points, scalef, max, shift) {
+        const newPoints = points.map(p => ({
+            x: Math.floor(p.x * scalef),
+            y: Math.floor(p.y * scalef),
+            value: p.value + (shift || 0),
+        }));
+        const vals = points.map(p => p.value);
+        const localMax = Math.max.apply(null, vals);
+        return {
+            min: 0,
+            max: max || localMax,
+            data: newPoints,
+        }
     }
 
     render() {
         let webview = null;
         if(this.props.points) {
-            console.log(this.props.points);
             uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
-            script = heatmapInputGenerator(this.props.points, 300);
+            const width = 285;
+            const adjustedData = this.scaleAndExtrema(this.props.points, width / 127, null, 25)
+            script = heatmapInputGenerator(JSON.stringify(adjustedData), width);
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
@@ -37,42 +59,6 @@ class Heatmap extends Component {
         );
     }
 }
-
-const heatmapInputGenerator = (points, width) => {
-    return `
-    function scaleAndExtrema(points, scalef, max, shift) {
-        const newPoints = points.map(p => ({
-            x: Math.floor(p.x * scalef),
-            y: Math.floor(p.y * scalef),
-            value: p.value + (shift || 0)
-        }));
-
-        const vals = points.map(p => p.value);
-        const localMax = Math.max.apply(null, vals);
-        return {
-            min: 0,
-            max: max || localMax,
-            data: newPoints
-        };
-    }
-
-    const drawHeatmap = ({
-        points = [],
-        width,
-    }, heatmap) => {
-        const adjustedData = scaleAndExtrema(points, width / 127, null, 25);
-        heatmap.setData(adjustedData);
-    }
-
-    var heatmapInstance = h337.create({
-        container: document.querySelector('.heatmap'),
-        radius:15 * (${width} / 300)
-    });
-    drawHeatmap({points: ${points}, width: 300}, heatmapInstance);
-
-    console.log(heatmapInstance);
-  `;
-};
 
 const baseStyles = _.extend(base.general, {
     button: {
