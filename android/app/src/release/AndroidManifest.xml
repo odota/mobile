@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.opendota"
-    android:versionCode="5"
-    android:versionName="0.1.3">
+    android:versionCode="6"
+    android:versionName="0.1.4">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
