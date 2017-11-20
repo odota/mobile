@@ -84,7 +84,7 @@ class ProfileCard extends Component {
             if(info.profile.profileurl) {
                 url = (
                     <TouchableOpacity style = {styles.urlContainer} onPress = {() => this.onURLPressed(info.profile.profileurl)}>
-                        <Text style = {{color: this.props.secondLegend, textDecorationLine: 'underline'}}>{info.profile.profileurl}</Text>
+                        <Text style = {{color: this.props.secondLegend, textDecorationLine: 'underline', fontFamily: Fonts.base}}>{info.profile.profileurl}</Text>
                     </TouchableOpacity>
                 )
             } else {
@@ -103,28 +103,28 @@ class ProfileCard extends Component {
                                 {name}
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>WINS: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{wl.win}</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>WINS: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{wl.win}</Text>
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>LOSSES: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{wl.lose}</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>LOSSES: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{wl.lose}</Text>
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>WINRATE: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{winPercentage}%</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>WINRATE: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{winPercentage}%</Text>
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>SOLO MMR: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{soloMMR}</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>SOLO MMR: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{soloMMR}</Text>
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>PARTY MMR: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{teamMMR}</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>PARTY MMR: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{teamMMR}</Text>
                             </View>
                             <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {{color: this.props.legend, fontSize: 16, fontWeight: 'bold'}}>ESTIMATED MMR: </Text>
-                                <Text style = {{color: this.props.secondLegend, fontSize: 14, fontWeight: 'bold'}}>{estimateMMR}</Text>
+                                <Text style = {[styles.captionText, {color: this.props.legend}]}>ESTIMATED MMR: </Text>
+                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{estimateMMR}</Text>
                             </View>
                         </View>
                     </View>
@@ -229,6 +229,16 @@ const baseStyles = _.extend(base.general, {
     separator: {
         height: 2,
     },
+    captionText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        fontFamily: Fonts.base
+    },
+    contentText: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: Fonts.base
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);
