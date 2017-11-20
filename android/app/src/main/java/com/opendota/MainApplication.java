@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.horcrux.svg.SvgPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.microsoft.azure.mobile.react.crashes.RNCrashesPackage;
@@ -31,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new RNSpinkitPackage(),
            new MainReactPackage(),
+            new RNDeviceInfo(),
             new SvgPackage(),
             new GoogleAnalyticsBridgePackage(),
             new RNCrashesPackage(MainApplication.this, getResources().getString(R.string.mobileCenterCrashes_whenToSendCrashes)),

@@ -173,6 +173,7 @@ const base = {
             marginBottom: 5
         },
         filterText: {
+            fontFamily: Fonts.base,
             justifyContent: 'center',
             alignSelf: 'center',
             marginTop: 10,
