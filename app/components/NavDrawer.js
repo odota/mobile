@@ -16,6 +16,8 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
+import DeviceInfo from 'react-native-device-info';
+
 import * as navigationActions from '../actions/navigation_act';
 import * as homeActions from '../actions/home_act';
 
@@ -93,7 +95,10 @@ class NavDrawer extends Component {
     render() {
         var paddingView;
         if(Platform.OS === 'ios') {
-            paddingView = <View style = {{marginTop: 15}} />
+            if(DeviceInfo.getModel() == "iPhone X")
+                paddingView = <View style = {{marginTop: 44}} />
+            else
+                paddingView = <View style = {{marginTop: 15}} />
         } else {
             paddingView = <View />
         }
