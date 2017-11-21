@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, Text, TouchableOpacity, View, WebView, StyleSheet } from 'react-native';
+import patch from 'dotaconstants/build/patch.json';
 
 import heatmapUtils from '../utils/heatmapUtils';
 import base from '../themes/BaseStyles';
@@ -8,17 +9,43 @@ import { connect } from 'react-redux';
 
 import _ from 'lodash';
 
-const heatmapInputGenerator = (adjustedData, width) => {
+const heatmapInputGenerator = (adjustedData, width, map) => {
     return `
+        document.querySelector('.map').src = 'maps/${map}';
         var heatmapInstance = h337.create({
             container: document.querySelector('.heatmap'),
             radius: ${15 * (width / 600)}
         });
-        heatmapInstance.setData(${adjustedData})
+        heatmapInstance.setData(${adjustedData});
     `;
 }
 
+const dotaMaps = [
+    { patchName: '7.07', mapImage: 'detailed_707.png' },
+    { patchName: '7.00', mapImage: 'detailed_700.png' },
+    { patchName: '6.86', mapImage: 'detailed_686.png' },
+    { patchName: '6.82', mapImage: 'detailed_682.png' },
+    { patchName: '6.70', mapImage: 'detailed_pre682.png' },
+];
+
+const patchDate = {};
+patch.forEach((patchElement) => {
+    patchDate[patchElement.name] = new Date(patchElement.date).getTime() / 1000;
+});
+
 class Heatmap extends Component {
+    getMap(startTime) {
+        if (startTime == null) {
+            return dotaMaps[0].mapImage;
+        }
+        for (let i = 0; i < dotaMaps.length; i += 1) {
+            if (startTime >= patchDate[dotaMaps[i].patchName]) {
+                return dotaMaps[i].mapImage;
+            }
+        }
+        return dotaMaps[0].mapImage;
+    }
+
     scaleAndExtrema(points, scalef, max, shift) {
         const newPoints = points.map(p => ({
             x: Math.floor(p.x * scalef),
@@ -40,7 +67,7 @@ class Heatmap extends Component {
             uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
             const width = 285;
             const adjustedData = this.scaleAndExtrema(this.props.points, width / 127, null, 25)
-            script = heatmapInputGenerator(JSON.stringify(adjustedData), width);
+            script = heatmapInputGenerator(JSON.stringify(adjustedData), width, this.getMap(this.props.startTime));
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
