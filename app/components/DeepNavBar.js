@@ -114,7 +114,7 @@ class DeepNavBar extends Component {
 
 const baseStyles = _.extend(base.general, {
     statusBarPadding: {
-        height: 16
+        height: 20
     },
     iPhoneXPadding: {
         height: 40
