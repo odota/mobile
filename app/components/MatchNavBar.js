@@ -108,7 +108,7 @@ const baseStyles = _.extend(base.general, {
         height: 20
     },
     iPhoneXPadding: {
-        height: 40
+        height: 44
     },
     navBarContainer: {
         position: 'absolute',
