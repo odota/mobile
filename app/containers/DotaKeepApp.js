@@ -29,15 +29,19 @@ class DotaKeepApp extends Component {
         super(props);
     }
 
-    render() {
-        BackHandler.addEventListener('hardwareBackPress', () => {
-            try {
-                return Actions.pop();
-            } catch (err) {
-                return false;
-            }
-        });
+    componentDidMount() {
+      BackHandler.addEventListener('hardwareBackPress', () => {
+          try {
+              if (Actions.currentScene == 'home') BackHandler.exitApp();
 
+              return false;
+          } catch (err) {
+              return false;
+          }
+      });
+    }
+
+    render() {
         return (
             <RouterWithRedux sceneStyle = {{backgroundColor: Colors.mainBackground}}>
                 <Scene key = "root" hideNavBar = {true}>

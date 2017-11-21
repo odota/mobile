@@ -1,12 +1,13 @@
 import React from 'react';
 import { Platform, Dimensions } from 'react-native';
+import DeviceInfo from 'react-native-device-info';
 
 let width, height;
 
 width = Dimensions.get('window').width;
 height = Dimensions.get('window').height;
 
-const navBarHeight = (Platform.OS === 'ios') ? 60 : 40;
+const navBarHeight = (DeviceInfo.getModel() == "iPhone X") ? 84 :(Platform.OS === 'ios') ? 60 : 40;
 
 const metrics = {
     navBarHeight: navBarHeight,

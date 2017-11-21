@@ -90,8 +90,8 @@ android {
         applicationId "com.opendota"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 6
-        versionName "0.1.4"
+        versionCode 7
+        versionName "0.1.5"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
