@@ -20,6 +20,8 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
+import DeviceInfo from 'react-native-device-info';
+
 import { Actions } from 'react-native-router-flux';
 
 export const mapStateToProps = state => ({
@@ -62,7 +64,11 @@ class ModalNavBar extends Component {
         var statusBarPadding;
         var navBarMargin;
         if(Platform.OS == "ios") {
-            statusBarPadding = <View style = {[styles.statusBarPadding, {backgroundColor: this.props.mod}]} />;
+            if(DeviceInfo.getModel() == "iPhone X") {
+                statusBarPadding = <View style = {[styles.iPhoneXPadding, { backgroundColor: this.props.mod}]} />;
+            } else {
+                statusBarPadding = <View style={[styles.statusBarPadding, {backgroundColor: this.props.mod}]}/>;
+            }
             navBarMargin = -20;
         } else {
             statusBarPadding = <View />;
@@ -89,7 +95,10 @@ class ModalNavBar extends Component {
 
 const baseStyles = _.extend(base.general, {
     statusBarPadding: {
-        height: 16
+        height: 20
+    },
+    iPhoneXPadding: {
+        height: 40
     },
     navBarContainer: {
         position: 'absolute',
