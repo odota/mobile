@@ -129,14 +129,18 @@ class MatchLaning extends Component {
             processedPlayer.isRoaming = currentUnprocessedPlayer.is_roaming;
             processedPlayer.efficiency = (currentUnprocessedPlayer.lane_efficiency * 100).toFixed(2);
 
-            if(currentUnprocessedPlayer.lh_t[10] != null) {
-                processedPlayer.lh = currentUnprocessedPlayer.lh_t[10];
+            if(currentUnprocessedPlayer.lh_t) {
+                if(currentUnprocessedPlayer.lh_t[10] != null) {
+                    processedPlayer.lh = currentUnprocessedPlayer.lh_t[10];
+                }
             }
 
-            if(currentUnprocessedPlayer.dn_t[10] != null) {
-                processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
+            if(currentUnprocessedPlayer.dn_t) {
+                if(currentUnprocessedPlayer.dn_t[10] != null) {
+                    processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
+                }
             }
-
+            
             processedPlayer.unpackedPosition = unpackPositionData(currentUnprocessedPlayer.lane_pos);
 
             processedPlayer.slot = i;
