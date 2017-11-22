@@ -92,7 +92,9 @@ class MatchOverview extends Component {
             averageMMR: -1,
             skill: "",
             radiantGoldAdvantage: [],
+            radiantGoldAdvantageScale: [],
             radiantXpAdvantage: [],
+            radiantXpAdvantageScale: [],
             radiantSortField: "",            
             radiantSortDirection: "",
             direSortField: "",
@@ -195,6 +197,26 @@ class MatchOverview extends Component {
                 }
             }
             graphDataArray.push(graphData);
+
+            // Figures out mathematically an even spread to return 5 rows in the y axis
+            let graphScale = [];
+
+            let minPoint = Math.min(...data.radiant_gold_adv);
+            let maxPoint = Math.max(...data.radiant_gold_adv);
+
+            let average = Math.round(Math.abs(minPoint - maxPoint)) / 5;
+            let power = Math.pow(10,Math.floor(Math.log10(average)));
+            average = Math.round(average / power) * power;
+
+            let scale = Math.round(minPoint / average) * average;
+            let maxScale = Math.round(maxPoint / average) * average;
+
+            while (scale  != maxScale){
+                var newScaleValue = {value: scale};
+                graphScale.push(newScaleValue);
+                scale+= average;
+            }
+            this.setState({radiantGoldAdvantageScale: graphScale});
             this.setState({radiantGoldAdvantage: graphDataArray});
         }
 
@@ -208,6 +230,26 @@ class MatchOverview extends Component {
                 }
             }
             graphDataArray.push(graphData);
+
+            // Figures out mathematically an even spread to return 5 rows in the y axis
+            let graphScale = [];
+
+            let minPoint = Math.min(...data.radiant_xp_adv);
+            let maxPoint = Math.max(...data.radiant_xp_adv);
+
+            let average = Math.round(Math.abs(minPoint - maxPoint)) / 5;
+            let power = Math.pow(10,Math.floor(Math.log10(average)));
+            average = Math.round(average / power) * power;
+
+            let scale = Math.round(minPoint / average) * average;
+            let maxScale = Math.round(maxPoint / average) * average;
+
+            while (scale  != maxScale){
+                var newScaleValue = {value: scale};
+                graphScale.push(newScaleValue);
+                scale+= average;
+            }
+            this.setState({radiantXpAdvantageScale: graphScale});
             this.setState({radiantXpAdvantage: graphDataArray});
         }
     }
@@ -652,10 +694,10 @@ class MatchOverview extends Component {
                             height: 380,
                             color: '#fd7f28',
                             margin: {
-                              top: 18,
+                              top: 20,
                               left: 50,
-                              bottom: 18,
-                              right: 20
+                              bottom: 22,
+                              right: 12
                             },
                             animate: {
                               type: 'delayed',
@@ -685,7 +727,7 @@ class MatchOverview extends Component {
                                 zeroAxis: true,
                                 orient: 'left',
                                 gridColor: this.props.secondLegend,
-                                tickValues: [{value: -35000}, {value: -30000}, {value: -25000}, {value: -20000}, {value: -15000}, {value: -10000}, {value: -5000}, {value: 0}, {value: 5000}, {value: 10000}, {value: 15000}, {value: 20000}, {value: 25000}, {value: 30000}, {value: 35000}],
+                                tickValues: this.state.radiantGoldAdvantageScale,
                                 label: {
                                     fontFamily: 'Arial',
                                     fontSize: 14,
@@ -727,10 +769,10 @@ class MatchOverview extends Component {
                             height: 380,
                             color: '#2576b0',
                             margin: {
-                              top: 18,
+                              top: 20,
                               left: 50,
-                              bottom: 18,
-                              right: 20
+                              bottom: 22,
+                              right: 12
                             },
                             animate: {
                               type: 'delayed',
@@ -760,7 +802,7 @@ class MatchOverview extends Component {
                                 zeroAxis: true,
                                 orient: 'left',
                                 gridColor: this.props.secondLegend,
-                                tickValues: [{value: -35000}, {value: -30000}, {value: -25000}, {value: -20000}, {value: -15000}, {value: -10000}, {value: -5000}, {value: 0}, {value: 5000}, {value: 10000}, {value: 15000}, {value: 20000}, {value: 25000}, {value: 30000}, {value: 35000}],
+                                tickValues: this.state.radiantXpAdvantageScale,
                                 label: {
                                     fontFamily: 'Arial',
                                     fontSize: 14,
