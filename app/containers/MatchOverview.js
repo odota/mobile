@@ -204,7 +204,7 @@ class MatchOverview extends Component {
             let minPoint = Math.min(...data.radiant_gold_adv);
             let maxPoint = Math.max(...data.radiant_gold_adv);
 
-            let average = Math.round(maxPoint- minPoint) / 5;
+            let average = Math.round(Math.abs(minPoint - maxPoint)) / 5;
             let power = Math.pow(10,Math.floor(Math.log10(average)));
             average = Math.round(average / power) * power;
 
@@ -237,7 +237,7 @@ class MatchOverview extends Component {
             let minPoint = Math.min(...data.radiant_xp_adv);
             let maxPoint = Math.max(...data.radiant_xp_adv);
 
-            let average = Math.round(maxPoint- minPoint) / 5;
+            let average = Math.round(Math.abs(minPoint - maxPoint)) / 5;
             let power = Math.pow(10,Math.floor(Math.log10(average)));
             average = Math.round(average / power) * power;
 
@@ -697,7 +697,7 @@ class MatchOverview extends Component {
                               top: 20,
                               left: 50,
                               bottom: 22,
-                              right: 20
+                              right: 12
                             },
                             animate: {
                               type: 'delayed',
@@ -772,7 +772,7 @@ class MatchOverview extends Component {
                               top: 20,
                               left: 50,
                               bottom: 22,
-                              right: 20
+                              right: 12
                             },
                             animate: {
                               type: 'delayed',
