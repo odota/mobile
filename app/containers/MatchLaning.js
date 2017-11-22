@@ -217,11 +217,14 @@ class MatchLaning extends Component {
             toggled = this.state.nine;
         }
         var additionalInfo;
-        //<Heatmap points = {rowData.unpackedPosition} background = {bgColor}/>
         if(toggled) {
             additionalInfo = (
                 <View style = {additionalRowContainer}>
-
+                    <Heatmap 
+                        points = {rowData.unpackedPosition} 
+                        background = {bgColor} 
+                        startTime={this.props.matchDetails.start_time} 
+                    />
                 </View>
             )
         } else {
