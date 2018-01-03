@@ -9,14 +9,33 @@ import { connect } from 'react-redux';
 
 import _ from 'lodash';
 
-const heatmapInputGenerator = (adjustedData, width, map) => {
+const heatmapInputGenerator = (data, width, map) => {
     return `
+        function scaleAndExtrema(points, scalef, max, shift) {
+            const newPoints = points.map(p => ({
+                x: Math.floor(p.x * scalef),
+                y: Math.floor(p.y * scalef),
+                value: p.value + (shift || 0),
+            }));
+            const vals = points.map(p => p.value);
+            const localMax = Math.max.apply(null, vals);
+            return {
+                min: 0,
+                max: max || localMax,
+                data: newPoints,
+            }
+        }
+        var element = document.querySelector('.heatmap');
+        var positionInfo = element.getBoundingClientRect();
+        var width = positionInfo.width;
+
         document.querySelector('.map').src = 'maps/${map}';
         var heatmapInstance = h337.create({
             container: document.querySelector('.heatmap'),
-            radius: ${15 * (width / 600)}
+            radius: 15 * (width / 600)
         });
-        heatmapInstance.setData(${adjustedData});
+        
+        heatmapInstance.setData(scaleAndExtrema(${data}, width / 127, null, 25));
     `;
 }
 
@@ -46,28 +65,12 @@ class Heatmap extends Component {
         return dotaMaps[0].mapImage;
     }
 
-    scaleAndExtrema(points, scalef, max, shift) {
-        const newPoints = points.map(p => ({
-            x: Math.floor(p.x * scalef),
-            y: Math.floor(p.y * scalef),
-            value: p.value + (shift || 0),
-        }));
-        const vals = points.map(p => p.value);
-        const localMax = Math.max.apply(null, vals);
-        return {
-            min: 0,
-            max: max || localMax,
-            data: newPoints,
-        }
-    }
-
     render() {
         let webview = null;
         if(this.props.points) {
             uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
             const width = 285;
-            const adjustedData = this.scaleAndExtrema(this.props.points, width / 127, null, 25)
-            script = heatmapInputGenerator(JSON.stringify(adjustedData), width, this.getMap(this.props.startTime));
+            script = heatmapInputGenerator(JSON.stringify(this.props.points), width, this.getMap(this.props.startTime));
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
