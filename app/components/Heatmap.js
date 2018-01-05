@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 
 import _ from 'lodash';
 
-const heatmapInputGenerator = (data, width, map) => {
+const heatmapInputGenerator = (data, map) => {
     return `
         function scaleAndExtrema(points, scalef, max, shift) {
             const newPoints = points.map(p => ({
@@ -25,17 +25,17 @@ const heatmapInputGenerator = (data, width, map) => {
                 data: newPoints,
             }
         }
-        var element = document.querySelector('.heatmap');
-        var positionInfo = element.getBoundingClientRect();
-        var width = positionInfo.width;
-
         document.querySelector('.map').src = 'maps/${map}';
-        var heatmapInstance = h337.create({
-            container: document.querySelector('.heatmap'),
-            radius: 15 * (width / 600)
-        });
-        
-        heatmapInstance.setData(scaleAndExtrema(${data}, width / 127, null, 25));
+        setTimeout(() => {
+            var s = document.querySelector('.map').getBoundingClientRect();
+            var w = s.width;
+            var heatmapInstance = h337.create({
+                container: document.querySelector('.heatmap'),
+                radius: 15 * (w / 600)
+            });
+
+            heatmapInstance.setData(scaleAndExtrema(${data},w / 127, null, 25));
+        }, 100);
     `;
 }
 
@@ -70,7 +70,7 @@ class Heatmap extends Component {
         if(this.props.points) {
             uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
             const width = 285;
-            script = heatmapInputGenerator(JSON.stringify(this.props.points), width, this.getMap(this.props.startTime));
+            script = heatmapInputGenerator(JSON.stringify(this.props.points), this.getMap(this.props.startTime));
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
