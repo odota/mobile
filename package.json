@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "clear": "npm cache clean && watchman watch-del-all && rm -rf $TMPDIR/react-*"
+    "clear": "npm cache clean && watchman watch-del-all && rm -rf $TMPDIR/react-*",
+    "lint": "eslint app/*"
   },
   "dependencies": {
     "dotaconstants": "5.15.0",
@@ -34,6 +35,10 @@
     "redux-thunk": "2.2.0"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.13.1",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-react-native": "^3.2.0",
     "redux-logger": "3.0.6",
     "request": "2.83.0"
   }
