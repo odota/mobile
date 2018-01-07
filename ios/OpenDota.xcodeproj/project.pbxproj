@@ -5,7 +5,6 @@
 	};
 	objectVersion = 48;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -50,6 +49,12 @@
 		F57D4DEF1F0264380016A703 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		F57D4DF01F02643C0016A703 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		F90AFFD6B8074394AD1D723D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5026D8DCA13490CADB9969A /* MaterialCommunityIcons.ttf */; };
+		87035B022EEC480EAE04982C /* libAppCenterReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B8E767B3E37B4206A14FE096 /* libAppCenterReactNative.a */; };
+		93CB8BC40CE34E26B5F6BBC7 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9744CDAFF1344B28B9AB0088 /* AppCenter-Config.plist */; };
+		A95D9A0EE01B472AAD7D054A /* libAppCenterReactNativeAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F5948A6E354571954B5E1D /* libAppCenterReactNativeAnalytics.a */; };
+		D2716A654F3143C1A47DA241 /* libAppCenterReactNativeCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A95F9830B241A59BF7EEA2 /* libAppCenterReactNativeCrashes.a */; };
+		AFAADA0815C741BC8E4FB43A /* libAppCenterReactNativePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E238312A2254A4F98651D44 /* libAppCenterReactNativePush.a */; };
+		19C8D14A42454C079E98F69B /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B589E78F0EE44F6B2C2246D /* Feather.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -415,6 +420,16 @@
 		EF79FB0A5B1B41F09EE4B799 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		F285CA5FD0FA41FB9B7C1129 /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		FC6E1CA740D14BFF8A91349C /* libRNMobileCenter.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNMobileCenter.a; sourceTree = "<group>"; };
+		777AC4D599944015B04F9BCA /* AppCenterReactNative.xcodeproj */ = {isa = PBXFileReference; name = "AppCenterReactNative.xcodeproj"; path = "../node_modules/appcenter/ios/AppCenterReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B8E767B3E37B4206A14FE096 /* libAppCenterReactNative.a */ = {isa = PBXFileReference; name = "libAppCenterReactNative.a"; path = "libAppCenterReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9744CDAFF1344B28B9AB0088 /* AppCenter-Config.plist */ = {isa = PBXFileReference; name = "AppCenter-Config.plist"; path = "OpenDota/AppCenter-Config.plist"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = text.plist.xml; explicitFileType = undefined; includeInIndex = 0; };
+		2F481380BDB2435EBBD71EE0 /* AppCenterReactNativeAnalytics.xcodeproj */ = {isa = PBXFileReference; name = "AppCenterReactNativeAnalytics.xcodeproj"; path = "../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		B6F5948A6E354571954B5E1D /* libAppCenterReactNativeAnalytics.a */ = {isa = PBXFileReference; name = "libAppCenterReactNativeAnalytics.a"; path = "libAppCenterReactNativeAnalytics.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		480903ABEA66454A984A065A /* AppCenterReactNativeCrashes.xcodeproj */ = {isa = PBXFileReference; name = "AppCenterReactNativeCrashes.xcodeproj"; path = "../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A8A95F9830B241A59BF7EEA2 /* libAppCenterReactNativeCrashes.a */ = {isa = PBXFileReference; name = "libAppCenterReactNativeCrashes.a"; path = "libAppCenterReactNativeCrashes.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		A31E9DEA886641AB949FB725 /* AppCenterReactNativePush.xcodeproj */ = {isa = PBXFileReference; name = "AppCenterReactNativePush.xcodeproj"; path = "../node_modules/appcenter-push/ios/AppCenterReactNativePush.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		2E238312A2254A4F98651D44 /* libAppCenterReactNativePush.a */ = {isa = PBXFileReference; name = "libAppCenterReactNativePush.a"; path = "libAppCenterReactNativePush.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9B589E78F0EE44F6B2C2246D /* Feather.ttf */ = {isa = PBXFileReference; name = "Feather.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,6 +462,10 @@
 				3D747CEE5932421A8D9ACC16 /* libsqlite3.0.tbd in Frameworks */,
 				6F856ABAFAFB4B2596D5EE7B /* libRNSVG.a in Frameworks */,
 				78548113D1DF4DDA94EA5F71 /* libRNDeviceInfo.a in Frameworks */,
+				87035B022EEC480EAE04982C /* libAppCenterReactNative.a in Frameworks */,
+				A95D9A0EE01B472AAD7D054A /* libAppCenterReactNativeAnalytics.a in Frameworks */,
+				D2716A654F3143C1A47DA241 /* libAppCenterReactNativeCrashes.a in Frameworks */,
+				AFAADA0815C741BC8E4FB43A /* libAppCenterReactNativePush.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +528,7 @@
 				3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */,
 				C5026D8DCA13490CADB9969A /* MaterialCommunityIcons.ttf */,
 				610F2BD11B6140C99EB044C0 /* SimpleLineIcons.ttf */,
+				9B589E78F0EE44F6B2C2246D /* Feather.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -615,6 +635,10 @@
 				EF50FBD9687B40A3BF849CEF /* RCTGoogleAnalyticsBridge.xcodeproj */,
 				607D55913ECC420DBCECECFD /* RNSVG.xcodeproj */,
 				841170DF3A1247B0829D6288 /* RNDeviceInfo.xcodeproj */,
+				777AC4D599944015B04F9BCA /* AppCenterReactNative.xcodeproj */,
+				2F481380BDB2435EBBD71EE0 /* AppCenterReactNativeAnalytics.xcodeproj */,
+				480903ABEA66454A984A065A /* AppCenterReactNativeCrashes.xcodeproj */,
+				A31E9DEA886641AB949FB725 /* AppCenterReactNativePush.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -643,6 +667,7 @@
 				3F85B7CD8BA642687386FC54 /* Pods */,
 				192E71A6B1D9C3EDEB01E5DA /* Frameworks */,
 				AE1B8E2F1F7886D600370E42 /* Recovered References */,
+				9744CDAFF1344B28B9AB0088 /* AppCenter-Config.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1215,6 +1240,8 @@
 				A45DEDD7A5E24F959C58C549 /* SimpleLineIcons.ttf in Resources */,
 				5138F926DAD44427A83B67D9 /* MobileCenter-Config.plist in Resources */,
 				AE4E02761F7A0B490027A4BA /* heatmap.html in Resources */,
+				93CB8BC40CE34E26B5F6BBC7 /* AppCenter-Config.plist in Resources */,
+				19C8D14A42454C079E98F69B /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,11 +1353,19 @@
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
+					"$(SRCROOT)/../node_modules/appcenter-push/ios/AppCenterReactNativePush",
 				);
 				INFOPLIST_FILE = OpenDota/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",
@@ -1371,11 +1406,19 @@
 					"$(SRCROOT)/../node_modules/react-native-google-analytics-bridge/ios/RCTGoogleAnalyticsBridge/**",
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
+					"$(SRCROOT)/../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics",
+					"$(SRCROOT)/../node_modules/appcenter-crashes/ios/AppCenterReactNativeCrashes",
+					"$(SRCROOT)/../node_modules/appcenter-push/ios/AppCenterReactNativePush",
 				);
 				INFOPLIST_FILE = OpenDota/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
+					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",
 					"\"$(SRCROOT)/OpenDota\"",

@@ -140,12 +140,13 @@ android {
 }
 
 dependencies {
+    compile project(':appcenter-push')
+    compile project(':appcenter-crashes')
+    compile project(':appcenter-analytics')
+    compile project(':appcenter')
     compile project(':react-native-device-info')
     compile project(':react-native-svg')
     compile project(':react-native-google-analytics-bridge')
-    compile project(':mobile-center-crashes')
-    compile project(':mobile-center-analytics')
-    compile project(':mobile-center')
     compile project(':react-native-vector-icons')
     compile project(':react-native-spinkit')
     compile fileTree(dir: "libs", include: ["*.jar"])

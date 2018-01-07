@@ -8,9 +8,10 @@
  */
 
 #import "AppDelegate.h"
-#import <RNCrashes/RNCrashes.h>
-#import <RNAnalytics/RNAnalytics.h>
-#import <RNMobileCenter/RNMobileCenter.h>
+#import <AppCenterReactNativePush/AppCenterReactNativePush.h>
+#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
+#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNative/AppCenterReactNative.h>
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -21,11 +22,13 @@
 {
   NSURL *jsCodeLocation;
 
-  [RNCrashes registerWithCrashDelegate: [[RNCrashesDelegateAlwaysSend alloc] init]];  // Initialize Mobile Center crashes
+  [AppCenterReactNativePush register];  // Initialize AppCenter push
 
-  [RNAnalytics registerWithInitiallyEnabled:true];  // Initialize Mobile Center analytics
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
-  [RNMobileCenter register];  // Initialize Mobile Center 
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
+
+  [AppCenterReactNative register];  // Initialize AppCenter 
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
