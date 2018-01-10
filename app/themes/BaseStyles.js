@@ -178,6 +178,21 @@ const base = {
             alignSelf: 'center',
             marginTop: 10,
             marginBottom: 10
+        },
+        bigImageAvatar: {
+            width: 80,
+            height: 80,
+            borderRadius: 40
+        },
+        largerImageAvatar: {
+            width: 60,
+            height: 60,
+            borderRadius: 30
+        },
+        imageAvatar: {
+            width: 40,
+            height: 40,
+            borderRadius: 20
         }
     }
 }

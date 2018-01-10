@@ -8,8 +8,6 @@ import {
     TouchableOpacity
 } from 'react-native';
 
-import { Avatar } from 'react-native-material-design';
-
 import { connect } from 'react-redux';
 
 import Colors from '../themes/Colors';
@@ -96,7 +94,7 @@ class ProfileCard extends Component {
 
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.avatarContainer}>
-                            <Avatar image = {<Image source = {{uri: info.profile.avatarfull}} />} size = {80} borderRadius = {40}/>
+                            <Image style = {styles.bigImageAvatar} source = {{uri: info.profile.avatarfull}} />
                         </View>
                         <View style = {styles.info}>
                             <View style = {styles.nameContainer}>
