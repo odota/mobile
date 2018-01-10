@@ -5,7 +5,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     StatusBar,
-    Platform
+    Platform,
+    BackHandler
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -60,6 +61,26 @@ class DeepNavBar extends Component {
             this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-2]);
         }
         Actions.pop();
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            try {
+                if(this.props.parent == "Favourites") {
+                    this.props.navigationActions.popContextIdFavourite();
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-1]);
+                } else if (this.props.parent == "Search") {
+                    this.props.navigationActions.popContextIdSearch();
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-1]);
+                } else if (this.props.parent == "Home") {
+                    this.props.navigationActions.popContextIdHome();
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-1]);
+                }
+                return false;
+            } catch (err) {
+                return false;
+            }
+        });
     }
 
     render() {
