@@ -19,7 +19,6 @@ import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 import Heatmap from '../components/Heatmap';
 
-import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
@@ -140,7 +139,7 @@ class MatchLaning extends Component {
                     processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
                 }
             }
-            
+
             processedPlayer.unpackedPosition = unpackPositionData(currentUnprocessedPlayer.lane_pos);
 
             processedPlayer.slot = i;
@@ -220,10 +219,10 @@ class MatchLaning extends Component {
         if(toggled) {
             additionalInfo = (
                 <View style = {additionalRowContainer}>
-                    <Heatmap 
-                        points = {rowData.unpackedPosition} 
-                        background = {bgColor} 
-                        startTime={this.props.matchDetails.start_time} 
+                    <Heatmap
+                        points = {rowData.unpackedPosition}
+                        background = {bgColor}
+                        startTime={this.props.matchDetails.start_time}
                     />
                 </View>
             )
@@ -243,7 +242,7 @@ class MatchLaning extends Component {
                     <View style = {{flex: 2,
                         justifyContent: 'center',
                         alignItems: 'center'}}>
-                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                        <Image source = {staticUri} style = {styles.imageAvatar}/>
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lane}</Text>
