@@ -10,4 +10,6 @@ target 'OpenDota' do
   pod 'AppCenter/Crashes', '~> 1.1.0'
   pod 'AppCenterReactNativeShared', '~> 1.1.0'
   pod 'AppCenter/Analytics', '~> 1.1.0'
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
 end
