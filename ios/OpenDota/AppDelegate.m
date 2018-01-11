@@ -8,9 +8,10 @@
  */
 
 #import "AppDelegate.h"
-#import <RNCrashes/RNCrashes.h>
-#import <RNAnalytics/RNAnalytics.h>
-#import <RNMobileCenter/RNMobileCenter.h>
+#import <AppCenterReactNativePush/AppCenterReactNativePush.h>
+#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
+#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNative/AppCenterReactNative.h>
 
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
@@ -21,13 +22,15 @@
 {
   NSURL *jsCodeLocation;
 
-  [RNCrashes registerWithCrashDelegate: [[RNCrashesDelegateAlwaysSend alloc] init]];  // Initialize Mobile Center crashes
+  [AppCenterReactNative register];  // Initialize AppCenter 
 
-  [RNAnalytics registerWithInitiallyEnabled:true];  // Initialize Mobile Center analytics
+  [AppCenterReactNativePush register];  // Initialize AppCenter push
 
-  [RNMobileCenter register];  // Initialize Mobile Center 
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
+    
+  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"OpenDota"

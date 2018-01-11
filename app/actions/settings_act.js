@@ -67,6 +67,7 @@ export function changeTheme(themeSet) {
     }
     return {
         type: types.CHANGE_THEME,
+        themeSet,
         alpha,
         mod,
         legend,

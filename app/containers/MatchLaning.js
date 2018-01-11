@@ -19,7 +19,6 @@ import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 import Heatmap from '../components/Heatmap';
 
-import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
@@ -129,12 +128,16 @@ class MatchLaning extends Component {
             processedPlayer.isRoaming = currentUnprocessedPlayer.is_roaming;
             processedPlayer.efficiency = (currentUnprocessedPlayer.lane_efficiency * 100).toFixed(2);
 
-            if(currentUnprocessedPlayer.lh_t[10] != null) {
-                processedPlayer.lh = currentUnprocessedPlayer.lh_t[10];
+            if(currentUnprocessedPlayer.lh_t) {
+                if(currentUnprocessedPlayer.lh_t[10] != null) {
+                    processedPlayer.lh = currentUnprocessedPlayer.lh_t[10];
+                }
             }
 
-            if(currentUnprocessedPlayer.dn_t[10] != null) {
-                processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
+            if(currentUnprocessedPlayer.dn_t) {
+                if(currentUnprocessedPlayer.dn_t[10] != null) {
+                    processedPlayer.dn = currentUnprocessedPlayer.dn_t[10];
+                }
             }
 
             processedPlayer.unpackedPosition = unpackPositionData(currentUnprocessedPlayer.lane_pos);
@@ -213,11 +216,14 @@ class MatchLaning extends Component {
             toggled = this.state.nine;
         }
         var additionalInfo;
-        //<Heatmap points = {rowData.unpackedPosition} background = {bgColor}/>
         if(toggled) {
             additionalInfo = (
                 <View style = {additionalRowContainer}>
-
+                    <Heatmap
+                        points = {rowData.unpackedPosition}
+                        background = {bgColor}
+                        startTime={this.props.matchDetails.start_time}
+                    />
                 </View>
             )
         } else {
@@ -236,7 +242,7 @@ class MatchLaning extends Component {
                     <View style = {{flex: 2,
                         justifyContent: 'center',
                         alignItems: 'center'}}>
-                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                        <Image source = {staticUri} style = {styles.imageAvatar}/>
                     </View>
                     <View style = {styles.cell}>
                         <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{rowData.lane}</Text>

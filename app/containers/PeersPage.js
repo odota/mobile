@@ -44,7 +44,6 @@ export const mapDispatchToProps = (dispatch) => ({
 class PeersPage extends Component {
 
     constructor(props) {
-        console.log("CONSTRUCT");
         super(props);
         this.previousControl = (
             <TouchableOpacity onPress = {() => {this.props.actions.navigatePrevious()}}>
@@ -78,7 +77,6 @@ class PeersPage extends Component {
     }
 
     componentWillMount() {
-        console.log("WILL MOUNT");
         if(!this.props.isLoadingPeers) {
             this.props.actions.fetchPeers(this.props.contextId);
         }

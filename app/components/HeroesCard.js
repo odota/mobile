@@ -8,8 +8,6 @@ import {
     ListView
 } from 'react-native';
 
-import { Avatar } from 'react-native-material-design';
-
 import { connect } from 'react-redux';
 
 import Colors from '../themes/Colors';
@@ -156,7 +154,7 @@ class HeroesCard extends Component {
                     <View style = {styles.heroCell}>
                         <View style = {styles.heroValueTextWrapper}>
                             <View style = {styles.avatarContainer}>
-                                <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} style = {styles.heroIcon}/>
+                                <Image source = {staticUri} style = {styles.imageAvatar}/>
                             </View>
 
                         </View>

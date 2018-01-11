@@ -30,15 +30,16 @@ class DotaKeepApp extends Component {
     }
 
     componentDidMount() {
-      BackHandler.addEventListener('hardwareBackPress', () => {
-          try {
-              if (Actions.currentScene == 'home') BackHandler.exitApp();
-
-              return false;
-          } catch (err) {
-              return false;
-          }
-      });
+        BackHandler.addEventListener('hardwareBackPress', () => {
+            try {
+                if (Actions.currentScene == 'home') {
+                    BackHandler.exitApp();
+                }
+                return false;
+            } catch (err) {
+                return false;
+            }
+        });
     }
 
     render() {
