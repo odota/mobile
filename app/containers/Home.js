@@ -65,7 +65,7 @@ class Home extends Component {
     render() {
         var content;
         var profile = this.props.profile;
-        if(!(Object.keys(profile).length === 0 && profile.constructor === Object)) {
+        if(profile != "") {
             containerStyle = styles.localContainer;
             content = (
                 <PlayerProfile />
