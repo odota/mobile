@@ -103,7 +103,7 @@ class NavDrawer extends Component {
             paddingView = <View />
         }
         var logout = (<View />);
-        if(!(Object.keys(this.props.profile).length === 0 && this.props.profile.constructor === Object)) {
+        if(this.props.profile != "") {
             logout = (
                 <View>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
