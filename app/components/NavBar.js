@@ -97,7 +97,7 @@ class NavBar extends Component {
                     </TouchableOpacity>
                 </View>
             )
-        } else if (this.props.title == 'Home' && !(Object.keys(this.props.homeProfile).length === 0 && this.props.homeProfile.constructor === Object)) {
+        } else if (this.props.title == 'Home' && this.props.homeProfile != "") {
             rightElements = (
                 <View style = {styles.navItemView}>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
