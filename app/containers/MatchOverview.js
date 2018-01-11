@@ -19,7 +19,6 @@ import * as matchDetailsActions from '../actions/match_details_act';
 import * as navigationActions from '../actions/navigation_act';
 import { Actions } from 'react-native-router-flux';
 
-import { Avatar } from 'react-native-material-design';
 import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getItemImage } from '../utils/getItemImage';
@@ -93,7 +92,7 @@ class MatchOverview extends Component {
             skill: "",
             radiantGoldAdvantage: [],
             radiantXpAdvantage: [],
-            radiantSortField: "",            
+            radiantSortField: "",
             radiantSortDirection: "",
             direSortField: "",
             direSortDirection: ""
@@ -228,16 +227,16 @@ class MatchOverview extends Component {
 
         if (isRadiant) {
             obj.radiantSortField = sortField;
-            obj.radiantSortDirection = 
-                sortField === this.state.radiantSortField ? 
-                SORT_ENUM.next(SORT_ENUM[sortDirection]) : 
+            obj.radiantSortDirection =
+                sortField === this.state.radiantSortField ?
+                SORT_ENUM.next(SORT_ENUM[sortDirection]) :
                 SORT_ENUM[0]
             obj.radiantsPlayerList = defaultSort(array, sortField, obj.radiantSortDirection);
         } else {
             obj.direSortField = sortField;
-            obj.direSortDirection = 
-                sortField === this.state.direSortField ? 
-                SORT_ENUM.next(SORT_ENUM[sortDirection]) : 
+            obj.direSortDirection =
+                sortField === this.state.direSortField ?
+                SORT_ENUM.next(SORT_ENUM[sortDirection]) :
                 SORT_ENUM[0]
             obj.direPlayersList = defaultSort(array, sortField, obj.direSortDirection);
         }
@@ -588,7 +587,7 @@ class MatchOverview extends Component {
                     <View style = {{flex: 2,
                         justifyContent: 'center',
                         alignItems: 'center'}}>
-                        <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                        <Image source = {staticUri} style = {styles.imageAvatar}/>
                     </View>
                     <TouchableOpacity style = {styles.cell} onPress = {() => {this.onNamePressed(rowData.accountId)}}>
                         <View>

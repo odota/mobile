@@ -15,7 +15,6 @@ import * as navigationActions from '../actions/navigation_act';
 import * as favouritesActions from '../actions/favourites_act';
 import * as homeActions from '../actions/home_act';
 
-import { Avatar } from 'react-native-material-design';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-root-toast';
@@ -157,7 +156,7 @@ class PlayerCard extends Component {
             <TouchableOpacity onPress = {this.onPlayerPressed}>
                 <View style = {[styles.playerCardContainer, { backgroundColor: this.props.mod }]}>
                     <View style = {styles.avatarContainer}>
-                        <Avatar image = {<Image source = {{uri: info.avatarfull}} />} size = {60} borderRadius = {30}/>
+                        <Image source = {{uri: info.avatarfull}} style = {styles.largerImageAvatar}/>
                     </View>
                     <View style = {styles.dataContainer}>
                         <View style = {styles.nameContainer}>

@@ -9,7 +9,6 @@ import {
     AsyncStorage
 } from 'react-native';
 
-import { Avatar } from 'react-native-material-design';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
@@ -209,7 +208,7 @@ class PeersCard extends Component {
                         <View style = {styles.peerCell}>
                             <View style = {styles.peerValueTextWrapper}>
                                 <View style = {styles.avatarContainer}>
-                                    <Avatar image = {<Image source = {{uri: rowData.avatar}} />} size = {40} borderRadius = {20} style = {styles.peerIcon} />
+                                    <Image source = {{uri: rowData.avatar}} style = {styles.imageAvatar}/>
                                 </View>
                             </View>
                         </View>

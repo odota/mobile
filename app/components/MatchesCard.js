@@ -8,8 +8,6 @@ import {
     ListView
 } from 'react-native';
 
-import { Avatar } from 'react-native-material-design';
-
 import { connect } from 'react-redux';
 
 import Colors from '../themes/Colors';
@@ -253,7 +251,7 @@ class MatchesCard extends Component {
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginLeft: -5}}>
-                            <Avatar image = {<Image source = {staticUri} />} size = {40} borderRadius = {20} />
+                            <Image source = {staticUri} style = {styles.imageAvatar}/>
                         </View>
                         <View style = {styles.cell}>
                             <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{localizedGameMode}</Text>
