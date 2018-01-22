@@ -27,7 +27,7 @@ Mobile Center Download Instruction
 1. Open the invitation email from Mobile Center Team and click "See Details".
 <img src="https://i.imgur.com/WiUFiFA.png" height="640" width="360"/>
 
-2. Create a new account to Mobile Center or login using existing credentials.
+2. Create a new account to Mobile Center or login using existing credentials. **WARNING! Do not login using Google. There's a bug with AppCenter that hasn't been fixed by Microsoft.**
 <img src="https://i.imgur.com/xmFQtFf.png" height="640" width="360"/>
 
 3. Click Download. **WARNING! Do not click on "Latest version is available here" as it does not always get the latest available version.**
