@@ -1,9 +1,10 @@
 mobile
 ====
 
-Android Build status: [![Build status](https://build.appcenter.ms/v0.1/apps/1697c50c-370a-4ad1-94af-94ea7590dc93/branches/beta/badge)](https://appcenter.ms)
-
-iOS Build status: [![Build status](https://build.appcenter.ms/v0.1/apps/91f028a3-81af-4da3-9487-fc703912c911/branches/beta/badge)](https://appcenter.ms)
+Platform | Build status
+---|---
+Android | [![Build status](https://build.appcenter.ms/v0.1/apps/1697c50c-370a-4ad1-94af-94ea7590dc93/branches/beta/badge)](https://appcenter.ms)
+iOS | [![Build status](https://build.appcenter.ms/v0.1/apps/91f028a3-81af-4da3-9487-fc703912c911/branches/beta/badge)](https://appcenter.ms)
 
 Overview
 ----
