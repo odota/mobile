@@ -87,7 +87,7 @@ export default RankIcon = ({rankTier, leaderboardRank}) =>  {
                 {(star > 0) ? <Image style={styles.rankIcon} source={starIcons[star]}/> : null}
                 <Image style={styles.rankIcon} source={rankIcons[rank]}/>
             </View>
-            {leaderboardRank ? <Text style={styles.leaderboardRankText}>{leaderboardRank1}</Text> : null}
+            {leaderboardRank ? <Text style={styles.leaderboardRankText}>{leaderboardRank}</Text> : null}
         </View>
     );
 }
