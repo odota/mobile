@@ -10,6 +10,8 @@ import {
 
 import { connect } from 'react-redux';
 
+import RankIcon from './RankIcon';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -44,9 +46,9 @@ class ProfileCard extends Component {
     }
 
     render() {
-        var info = this.props.info;
-        var wl = this.props.wl;
-        if(info.profile) {
+        const { info, wl } = this.props;
+        const { profile, rank_tier: rankTier, leaderboard_rank: leaderboardRank } = info;
+        if (profile) {
             var soloMMR;
             var teamMMR;
             var name;
@@ -94,7 +96,8 @@ class ProfileCard extends Component {
 
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.avatarContainer}>
-                            <Image style = {styles.bigImageAvatar} source = {{uri: info.profile.avatarfull}} />
+                            <Image style = {[styles.bigImageAvatar, {marginTop: 4, marginBottom: 15}]} source = {{uri: info.profile.avatarfull}} />
+                            <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank}/>
                         </View>
                         <View style = {styles.info}>
                             <View style = {styles.nameContainer}>
@@ -236,7 +239,7 @@ const baseStyles = _.extend(base.general, {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: Fonts.base
-    }
+    },
 });
 
 const styles = StyleSheet.create(baseStyles);
