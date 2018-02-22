@@ -10,6 +10,8 @@ import {
 
 import { connect } from 'react-redux';
 
+import RankIcon from './RankIcon';
+
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
@@ -43,71 +45,10 @@ class ProfileCard extends Component {
         }).catch(err => console.error('An error occured ', err));
     }
 
-    getRankIcon(rankTier, leaderboardRank) {
-        const rankIcons = {
-            '0': require('../assets/rank_icons/rank_icon_0.png'),
-            '1': require('../assets/rank_icons/rank_icon_1.png'),
-            '2': require('../assets/rank_icons/rank_icon_2.png'),
-            '3': require('../assets/rank_icons/rank_icon_3.png'),
-            '4': require('../assets/rank_icons/rank_icon_4.png'),
-            '5': require('../assets/rank_icons/rank_icon_5.png'),
-            '6': require('../assets/rank_icons/rank_icon_6.png'),
-            '7a': require('../assets/rank_icons/rank_icon_7a.png'),
-            '7b': require('../assets/rank_icons/rank_icon_7b.png'),
-            '7c': require('../assets/rank_icons/rank_icon_7c.png'),
-        };
-
-        const starIcons = {
-            '1': require('../assets/rank_icons/rank_star_1.png'),
-            '2': require('../assets/rank_icons/rank_star_2.png'),
-            '3': require('../assets/rank_icons/rank_star_3.png'),
-            '4': require('../assets/rank_icons/rank_star_4.png'),
-            '5': require('../assets/rank_icons/rank_star_5.png'),
-        };
-
-        if (!rankTier) return null;
-        let rank, star;
-        if (rankTier > 9) {
-            if (leaderboardRank) {
-                if (leaderboardRank <= 10) {
-                    rank = '7c'; // Divine Top 10
-                } else if (leaderboardRank <= 100) {
-                    rank = '7b'; // Divine Top 100
-                }
-            }
-            if (rankTier === 76) {
-                rank = rank || '7a'; // Divine Elite
-            } else {
-                const intRankTier = parseInt(rankTier, 10);
-                const intStar = parseInt(intRankTier % 10, 10);
-                if (!rank) {
-                    if (intStar <= 0) {
-                        star = 0;
-                    } else if (intStar >= 5) {
-                        star = 5;
-                    } else {
-                        star = intStar;
-                    }
-                }
-                rank = rank || parseInt(intRankTier / 10, 10);
-            }
-        } else {
-            rank = '0';
-        }
-
-        return (
-            <View style = {styles.rankContainer}>
-                <Image style={styles.rankIcon} source={rankIcons[rank]}/>
-                {(star > 0) ? <Image style={styles.rankIcon} source={starIcons[star]}/> : null}
-            </View>
-        );
-    }
-
     render() {
-        var info = this.props.info;
-        var wl = this.props.wl;
-        if(info.profile) {
-            const { rank_tier: rankTier, leaderboard_rank: leaderboardRank } = info;
+        const { info, wl } = this.props;
+        const { profile, rank_tier: rankTier, leaderboard_rank: leaderboardRank } = info;
+        if (profile) {
             var soloMMR;
             var teamMMR;
             var name;
@@ -155,8 +96,8 @@ class ProfileCard extends Component {
 
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {styles.avatarContainer}>
-                            <Image style = {styles.bigImageAvatar} source = {{uri: info.profile.avatarfull}} />
-                            {this.getRankIcon(rankTier, leaderboardRank)}
+                            <Image style = {[styles.bigImageAvatar, {marginTop: 4, marginBottom: 15}]} source = {{uri: info.profile.avatarfull}} />
+                            <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank}/>
                         </View>
                         <View style = {styles.info}>
                             <View style = {styles.nameContainer}>
@@ -225,16 +166,6 @@ const baseStyles = _.extend(base.general, {
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
-    },
-    rankContainer: {
-        width: 50,
-        height: 100,
-        display: 'flex',
-        alignItems: 'center',
-    },
-    rankIcon: {
-        width: 64,
-        height: 64,
     },
     info: {
         flex: 2
@@ -308,7 +239,7 @@ const baseStyles = _.extend(base.general, {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: Fonts.base
-    }
+    },
 });
 
 const styles = StyleSheet.create(baseStyles);
