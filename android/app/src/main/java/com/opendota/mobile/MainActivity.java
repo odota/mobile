@@ -1,4 +1,4 @@
-package com.opendota;
+package com.opendota.mobile;
 
 import android.webkit.WebView;
 import com.facebook.react.ReactActivity;

@@ -91,7 +91,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.opendota"
+        applicationId "com.opendota.mobile"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 9

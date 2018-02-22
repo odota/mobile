@@ -1,4 +1,4 @@
-package com.opendota;
+package com.opendota.mobile;
 
 import android.app.Application;
 import android.util.Log;
