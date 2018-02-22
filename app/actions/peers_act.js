@@ -29,17 +29,14 @@ function receiveEmptyPeers() {
 
 export function fetchPeers(playerId) {
     var endpoint = "players/" + playerId + "/peers";
-    console.log(endpoint);
     return dispatch => {
         dispatch(requestPeers());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receivePeers(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH PEERS ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyPeers());
         });
     }

@@ -9,7 +9,7 @@ export default function favouritesState(state = initialState, action = {}) {
             return Object.assign({}, state, { favourites: [...state.favourites, action.info] });
         case types.REMOVE_FAVOURITES:
             var index;
-            for(i = 0; i < state.favourites.length; i++) {
+            for(let i = 0; i < state.favourites.length; i++) {
                 if(state.favourites[i].account_id == action.id) {
                     index = i;
                 }

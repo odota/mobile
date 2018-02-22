@@ -5,7 +5,12 @@
   "scripts": {
     "start": "react-native start",
     "clear": "npm cache verify && watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-*",
-    "lint": "eslint app/*"
+    "lint": "eslint app/*",
+    "actions-lint": "eslint app/actions",
+    "themes-lint": "eslint app/themes",
+    "stores-lint": "eslint app/stores",
+    "reducers-lint": "eslint app/reducers",
+    "json-lint": "eslint app/json"
   },
   "dependencies": {
     "appcenter": "^1.1.0",

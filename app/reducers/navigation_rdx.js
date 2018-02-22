@@ -9,6 +9,8 @@ export default function navigationState(state = initialState, action = {}) {
                     ...state,
                     homeTab: true
                 };
+            } else {
+                return state
             }
 
         case "REACT_NATIVE_ROUTER_FLUX_FOCUS":

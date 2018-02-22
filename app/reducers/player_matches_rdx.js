@@ -21,18 +21,20 @@ export default function playerMatchesState(state = initialState, action = {}) {
             return Object.assign({}, state, { sortField: action.sortField, sortDirection: sortDirection, matches });
         case types.SET_MAX_PAGES:
             return Object.assign({}, state, {maxPages: action.maxPages});
-        case types.NAVIGATE_NEXT_MATCHES:
-            newPage = state.page + action.amount;
+        case types.NAVIGATE_NEXT_MATCHES: {
+            let newPage = state.page + action.amount;
             if(newPage > state.maxPages) {
                 newPage = state.maxPages
             }
             return Object.assign({}, state, { page: newPage });
-        case types.NAVIGATE_PREVIOUS_MATCHES:
-            newPage = state.page - action.amount;
+        }
+        case types.NAVIGATE_PREVIOUS_MATCHES: {
+            let newPage = state.page - action.amount;
             if(newPage < 1) {
                 newPage = 1;
             }
             return Object.assign({}, state, { page: newPage });
+        }
         default:
             return state;
     }

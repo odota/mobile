@@ -27,19 +27,16 @@ function receiveEmptyHeroes() {
     };
 }
 
-export function fetchHeroes(playerId, limit) {
+export function fetchHeroes(playerId) {
     var endpoint = "players/" + playerId + "/heroes";
-    console.log(endpoint);
     return dispatch => {
         dispatch(requestHeroes());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveHeroes(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH MATCHES ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyHeroes());
         });
     }

@@ -71,7 +71,7 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, re
     var endpoint = "players/" + playerId + "/matches?limit=" + limit;
 
     if(projects){
-        for(i = 0; i < projects.length; i++) {
+        for(let i = 0; i < projects.length; i++) {
             endpoint += ("&project=" + projects[i]);
         }
     }
@@ -116,17 +116,14 @@ export function fetchMatches(playerId, limit, projects, sortCategory, heroId, re
         endpoint += ("&region=" + region);
     }
 
-    console.log(endpoint);
     return dispatch => {
         dispatch(requestMatches());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveMatches(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH MATCHES ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyMatches());
         })
     }

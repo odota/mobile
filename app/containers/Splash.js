@@ -44,9 +44,14 @@ class Splash extends Component {
         let tracker = new GoogleAnalyticsTracker('UA-107430194-1');
         this.props.actions.setGATracker(tracker);
         AsyncStorage.getItem("theme").then((value) => {
-            this.props.actions.changeTheme(value);
+            if(value) {
+                this.props.actions.changeTheme(value);
+            } else {
+                this.props.actions.changeTheme(1);
+            }
         })
         .catch((error) => {
+            console.log("NOT FOUND");
             this.props.actions.changeTheme(1);
         })
 

@@ -2,8 +2,6 @@ import Fonts from './Fonts';
 import Metrics from './Metrics';
 import Colors from './Colors';
 
-import { Platform } from 'react-native';
-
 const base = {
     navbar: {
         navBarContainer: {

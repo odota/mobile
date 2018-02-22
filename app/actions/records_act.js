@@ -3,7 +3,7 @@ import { fetchAPI } from '../utils/fetch';
 export const types = {
     REQUEST_RECORDS: 'REQUEST_RECORDS',
     RECEIVE_RECORDS: 'RECEIVE_RECORDS',
-    RECEIVE_EMPTY_RECORDS: RECEIVE_EMPTY_RECORDS
+    RECEIVE_EMPTY_RECORDS: 'RECEIVE_EMPTY_RECORDS'
 };
 
 function requestRecords() {
@@ -27,17 +27,14 @@ function receiveEmptyRecords() {
 
 export function fetchRecords(playerId) {
     var endpoint = "players/" + playerId + "/records";
-    console.log(endpoint);
     return dispatch => {
         dispatch(requestRecords());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveRecords(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH RECORDS ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyRecords());
         })
     }

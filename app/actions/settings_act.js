@@ -62,8 +62,6 @@ export function changeTheme(themeSet) {
         secondLegend = Colors.illusionSecondLegend;
         legendHex = Colors.illusionLegendHex;
         legendTranslucent = Colors.illusionLegendTranslucent;
-    } else {
-        console.log(value);
     }
     return {
         type: types.CHANGE_THEME,

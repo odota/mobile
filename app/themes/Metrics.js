@@ -1,4 +1,3 @@
-import React from 'react';
 import { Platform, Dimensions } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 

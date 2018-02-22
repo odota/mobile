@@ -30,13 +30,11 @@ export function fetchMatchDetails(matchId) {
     return dispatch => {
         dispatch(requestMatchDetails());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveMatchDetails(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH MATCH DETAILS ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyMatchDetails());
         });
     }

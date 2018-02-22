@@ -52,13 +52,11 @@ export function fetchWl(playerId) {
     return dispatch => {
         dispatch(requestWl());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveWl(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH WL ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyWl());
         })
     }
@@ -69,13 +67,11 @@ export function fetchOverview(playerId) {
     return dispatch => {
         dispatch(requestOverview());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             dispatch(receiveOverview(json));
         })
-        .catch((error) => {
-            console.log("Action - FETCH OVERVIEW ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyOverview());
         });
     }

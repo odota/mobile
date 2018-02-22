@@ -30,7 +30,6 @@ export function fetchPlayers(playerName) {
     return dispatch => {
         dispatch(requestPlayers());
 
-        var jsonData;
         return fetchAPI(endpoint)
         .then((json) => {
             if(json.length == 0) {
@@ -39,8 +38,7 @@ export function fetchPlayers(playerName) {
                 dispatch(receivePlayers(json));
             }
         })
-        .catch((error) => {
-            console.log("Action - FETCH PLAYERS ERROR - " + error);
+        .catch(() => {
             dispatch(receiveEmptyPlayers());
         })
     };
