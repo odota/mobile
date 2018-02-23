@@ -231,7 +231,7 @@ export function getItemImage(id) {
     } else if (id == 259) {
         staticImage = require('../assets/items/trident_lg.png');
     } else if (id == 260) {
-        staticImage = require('../assets/no-item.png');
+        staticImage = require('../assets/items/refresher_shard.png');
     } else if (id == 266) {
         staticImage = require('../assets/items/recipe_lg.png');
     } else if (id == 267) {
