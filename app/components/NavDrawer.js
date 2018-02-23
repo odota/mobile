@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -12,7 +12,6 @@ import {
 
 import { connect } from 'react-redux';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -87,8 +86,6 @@ class NavDrawer extends Component {
             Actions.searchTab();
         } else if(route == 'Settings') {
             Actions.settingsTab();
-        } else {
-            console.log('UNDEFINED');
         }
     }
 

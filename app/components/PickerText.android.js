@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
-  View,
-  Text,
   StyleSheet,
-  TouchableOpacity,
   TextInput,
-  Dimensions,
   Picker
 } from 'react-native';
 
@@ -13,10 +9,7 @@ import _ from 'lodash';
 
 import { connect } from 'react-redux';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export const mapStateToProps = state => ({
     contextId: state.navigationState.contextId,
@@ -50,7 +43,7 @@ class PickerText extends React.Component {
         this.props.onPickerDone(value, this.props.items[idx].localized_name);
     }
 
-  	render() {
+    render() {
         if (this.props.disabled) {
             return (
                 <TextInput

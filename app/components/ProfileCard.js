@@ -16,7 +16,6 @@ import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Slider from 'react-native-slider';
 
 import _ from 'lodash';
@@ -37,12 +36,10 @@ class ProfileCard extends Component {
 
     onURLPressed(url) {
         Linking.canOpenURL(url).then(supported => {
-            if(!supported) {
-                console.log('Can\'t handle url: ' + url);
-            } else {
+            if(supported) {
                 return Linking.openURL(url);
             }
-        }).catch(err => console.error('An error occured ', err));
+        }).catch();
     }
 
     render() {
@@ -73,7 +70,7 @@ class ProfileCard extends Component {
             if(wl.win && wl.lose) {
                 winrate = wl.win / (wl.win+wl.lose);
             }
-            winPercentage = Math.round(winrate * 10000)/100;
+            let winPercentage = Math.round(winrate * 10000)/100;
 
             if(info.mmr_estimate.estimate) {
                 estimateMMR = info.mmr_estimate.estimate;

@@ -4,18 +4,13 @@ import {
     Text,
     StyleSheet,
     Image,
-    TouchableOpacity,
     ListView
 } from 'react-native';
 
 import { connect } from 'react-redux';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Slider from 'react-native-slider';
 
 import heroes from 'dotaconstants/build/heroes.json';
 import { getHeroImage } from '../utils/getHeroImage';
@@ -67,7 +62,7 @@ class HeroesCard extends Component {
         var maxPlayed = unprocessedHeroList[0].games;
 
         //Possible to use array foreach?
-        for(j = 0; j < unprocessedHeroList.length; j++) {
+        for(let j = 0; j < unprocessedHeroList.length; j++) {
 
             var currentUnprocessedHero = unprocessedHeroList[j];
             // Process winrate %

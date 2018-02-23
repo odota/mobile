@@ -4,15 +4,12 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    Dimensions,
-    Picker
 } from 'react-native';
 
 import { connect } from 'react-redux';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 

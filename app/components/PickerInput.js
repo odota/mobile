@@ -10,9 +10,7 @@ import {
 
 import { connect } from 'react-redux';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 
 import _ from 'lodash';
 
@@ -45,7 +43,7 @@ class PickerInput extends Component {
     }
 
     onPickerDone(pickedValue, idx) {
-        item = this.props.items[idx];
+        let item = this.props.items[idx];
         this.setState({selectedValue: pickedValue, selectedLabel: item.localized_name});
     }
 

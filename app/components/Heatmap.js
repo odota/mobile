@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Platform, Text, TouchableOpacity, View, WebView, StyleSheet } from 'react-native';
+import { Platform, View, WebView, StyleSheet } from 'react-native';
 import patch from 'dotaconstants/build/patch.json';
 
-import heatmapUtils from '../utils/heatmapUtils';
 import base from '../themes/BaseStyles';
 
 import { connect } from 'react-redux';
@@ -67,10 +66,10 @@ class Heatmap extends Component {
 
     render() {
         let webview = null;
+        let heatmap = (el) => this.heatmap = el;
         if(this.props.points) {
-            uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
-            const width = 285;
-            script = heatmapInputGenerator(JSON.stringify(this.props.points), this.getMap(this.props.startTime));
+            let uri = Platform.OS === 'ios' ? 'heatmap.html' : 'file:///android_asset/heatmap.html';
+            let script = heatmapInputGenerator(JSON.stringify(this.props.points), this.getMap(this.props.startTime));
             webview = <WebView
                 source = {{uri: uri}}
                 scrollEnabled = {false}
@@ -82,7 +81,7 @@ class Heatmap extends Component {
 
         return (
             <View style = {styles.webviewContainer} >
-                <View style = {styles.webview} ref = 'heatmap'>
+                <View style = {styles.webview} ref = {heatmap}>
                     {webview}
                 </View>
             </View>

@@ -18,7 +18,6 @@ import * as navigationActions from '../actions/navigation_act';
 
 import NavigationBar from 'react-native-navbar';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -54,7 +53,7 @@ class MatchNavBar extends Component {
 
     render() {
 
-        title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+        let title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
 
         var leftElements = (
             <View style = {styles.navItemView}>

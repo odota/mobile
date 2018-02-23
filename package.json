@@ -10,7 +10,8 @@
     "themes-lint": "eslint app/themes",
     "stores-lint": "eslint app/stores",
     "reducers-lint": "eslint app/reducers",
-    "json-lint": "eslint app/json"
+    "json-lint": "eslint app/json",
+    "components-lint": "eslint app/components"
   },
   "dependencies": {
     "appcenter": "^1.1.0",

@@ -19,7 +19,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Toast from 'react-native-root-toast';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -83,6 +82,9 @@ class PlayerCard extends Component {
                     hideOnPress: true,
                     delay: 0
                 });
+                setTimeout(function () {
+                    Toast.hide(toast);
+                }, 2000);
             }
 
             setTimeout(() => {
@@ -91,7 +93,7 @@ class PlayerCard extends Component {
             }, 1000);
         } else {
             var index = -1;
-            for(i = 0; i < this.props.favourites.length; i++) {
+            for(let i = 0; i < this.props.favourites.length; i++) {
                 if(this.props.favourites[i].account_id == info.account_id) {
                     index = i;
                 }
@@ -107,6 +109,9 @@ class PlayerCard extends Component {
                     hideOnPress: true,
                     delay: 0
                 });
+                setTimeout(function () {
+                    Toast.hide(toast);
+                }, 2000);
             } else {
                 this.props.tracker.trackEvent('Favourites', 'Removed');
                 this.props.favouritesActions.removeFavourites(info.account_id);
@@ -118,6 +123,9 @@ class PlayerCard extends Component {
                     hideOnPress: true,
                     delay: 0
                 });
+                setTimeout(function () {
+                    Toast.hide(toast);
+                }, 2000);
             }
 
             setTimeout(() => {
@@ -130,17 +138,16 @@ class PlayerCard extends Component {
 
     render() {
         var info = this.props.info;
+        var iconName;
         if(this.props.parent == "Home") {
-            var iconName;
             if(this.props.homeProfile.account_id == info.account_id) {
                 iconName = <IonIcon name = "ios-home" size = {30} allowFontScaling = {false} color = {this.props.legend} />
             } else {
                 iconName = <IonIcon name = "ios-home-outline" size = {30} allowFontScaling = {false} color = {this.props.legend} />
             }
         } else {
-            var iconName;
             var index = -1;
-            for(i = 0; i < this.props.favourites.length; i++) {
+            for(let i = 0; i < this.props.favourites.length; i++) {
                 if(this.props.favourites[i].account_id == info.account_id) {
                     index = i;
                 }

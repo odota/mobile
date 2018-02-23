@@ -49,15 +49,10 @@ class PeersCard extends Component {
         this.peersDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
         this.generateProcessedPeers = this.generateProcessedPeers.bind(this);
-        this.onProfilePressed = this.onProfilePressed.bind(this);
         this.onPeerPressed = this.onPeerPressed.bind(this);
         this.state = {
             processedPeersList: []
         };
-    }
-
-    onProfilePressed(accountId) {
-        console.log(accountId);
     }
 
     onPeerPressed(accountId) {
@@ -79,7 +74,7 @@ class PeersCard extends Component {
 
     onFavouritePressed(accountId, personaName, avatar) {
         var index = -1;
-        for(i = 0; i < this.props.favourites.length; i++) {
+        for(let i = 0; i < this.props.favourites.length; i++) {
             if(this.props.favourites[i].account_id == accountId) {
                 index = i;
             }
@@ -98,6 +93,9 @@ class PeersCard extends Component {
                 hideOnPress: true,
                 delay: 0
             });
+            setTimeout(function () {
+                Toast.hide(toast);
+            }, 2000);
         } else {
             this.props.favouritesActions.removeFavourites(accountId);
             let toast = Toast.show('Removed from Favourites', {
@@ -108,6 +106,9 @@ class PeersCard extends Component {
                 hideOnPress: true,
                 delay: 0
             });
+            setTimeout(function () {
+                Toast.hide(toast);
+            }, 2000);
         }
 
         setTimeout(() => {
@@ -119,7 +120,7 @@ class PeersCard extends Component {
     generateProcessedPeers(unprocessedPeersList) {
         var processedPeersList = [];
         var maxPlayed = unprocessedPeersList[0].games;
-        for(j = 0; j < unprocessedPeersList.length; j++) {
+        for(let j = 0; j < unprocessedPeersList.length; j++) {
             var currentUnprocessedPeer = unprocessedPeersList[j];
 
             var winrate = currentUnprocessedPeer.with_win / currentUnprocessedPeer.with_games;

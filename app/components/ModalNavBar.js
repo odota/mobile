@@ -12,11 +12,9 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import NavigationBar from 'react-native-navbar';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -44,7 +42,7 @@ class ModalNavBar extends Component {
 
     render() {
 
-        title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+        let title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
 
         var leftElements = (
             <View style = {styles.navItemView}>

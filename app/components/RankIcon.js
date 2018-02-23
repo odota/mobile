@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     View,
     Image,
     Text,
     StyleSheet,
 } from 'react-native';
-
-import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
     rankContainer: {
@@ -29,7 +27,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RankIcon = ({rankTier, leaderboardRank}) =>  {
+var RankIcon = ({rankTier, leaderboardRank}) =>  {
     const rankIcons = {
         '0': require('../assets/rank_icons/rank_icon_0.png'),
         '1': require('../assets/rank_icons/rank_icon_1.png'),
@@ -91,3 +89,5 @@ export default RankIcon = ({rankTier, leaderboardRank}) =>  {
         </View>
     );
 }
+
+export default RankIcon;

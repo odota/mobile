@@ -225,6 +225,7 @@ class MatchesCard extends Component {
             } else {
                 result = 'L';
             }
+            let indicatorColor;
             if(result == 'W') {
                 indicatorColor = Colors.win;
             } else {
