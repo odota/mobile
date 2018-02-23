@@ -153,7 +153,7 @@ class MatchOverview extends Component {
         if(data.duration && data.start_time) {
             var endedTime = (data.start_time + data.duration) * 1000;
             var now = moment();
-            friendlyEndedTime = moment.duration(now.diff(endedTime)).humanize();
+            let friendlyEndedTime = moment.duration(now.diff(endedTime)).humanize();
             this.setState({endedTime: friendlyEndedTime.toUpperCase()});
         }
         if(data.game_mode) {
@@ -187,9 +187,9 @@ class MatchOverview extends Component {
         if(data.radiant_gold_adv) {
             let graphDataArray = [];
             let graphData = [];
-            for(var point in data.radiant_gold_adv) {
+            for(let point in data.radiant_gold_adv) {
                 if(data.radiant_gold_adv.hasOwnProperty(point)) {
-                    var newPoint = {x: parseInt(point), y: data.radiant_gold_adv[point]};
+                    let newPoint = {x: parseInt(point), y: data.radiant_gold_adv[point]};
                     graphData.push(newPoint);
                 }
             }
@@ -200,9 +200,9 @@ class MatchOverview extends Component {
         if(data.radiant_xp_adv) {
             let graphDataArray = [];
             let graphData = [];
-            for(var point in data.radiant_xp_adv) {
+            for(let point in data.radiant_xp_adv) {
                 if(data.radiant_xp_adv.hasOwnProperty(point)) {
-                    var newPoint = {x: parseInt(point), y: data.radiant_xp_adv[point]};
+                    let newPoint = {x: parseInt(point), y: data.radiant_xp_adv[point]};
                     graphData.push(newPoint);
                 }
             }
@@ -247,7 +247,7 @@ class MatchOverview extends Component {
     calculateAverageMMR(data) {
         var totalMMR = 0;
         var availablePlayers = 0;
-        for (i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             if(data[i].solo_competitive_rank) {
                 availablePlayers++;
                 totalMMR += data[i].solo_competitive_rank;
@@ -258,7 +258,7 @@ class MatchOverview extends Component {
     }
 
     getRegionIndex(regionId, regionsArray) {
-        for (i = 0; i < regionsArray.length; i++) {
+        for (let i = 0; i < regionsArray.length; i++) {
             if(regionId == regionsArray[i].id) {
                 return i;
             }
@@ -267,7 +267,7 @@ class MatchOverview extends Component {
 
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
-        for (i = 0; i < unprocessedPlayersList.length; i++) {
+        for (let i = 0; i < unprocessedPlayersList.length; i++) {
             var currentUnprocessedPlayer = unprocessedPlayersList[i];
 
             var processedPlayer = {};
@@ -294,7 +294,7 @@ class MatchOverview extends Component {
             processedPlayer.backpack_0 = currentUnprocessedPlayer.backpack_0;
             var backpack_0_name = this.getItemName(processedPlayer.backpack_0);
             if(backpack_0_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_0_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_0_name);
                 if(itemTiming) {
                     processedPlayer.backpack_0_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -302,7 +302,7 @@ class MatchOverview extends Component {
             processedPlayer.backpack_1 = currentUnprocessedPlayer.backpack_1;
             var backpack_1_name = this.getItemName(processedPlayer.backpack_1);
             if(backpack_1_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_1_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_1_name);
                 if(itemTiming) {
                     processedPlayer.backpack_1_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -310,7 +310,7 @@ class MatchOverview extends Component {
             processedPlayer.backpack_2 = currentUnprocessedPlayer.backpack_2;
             var backpack_2_name = this.getItemName(processedPlayer.backpack_2);
             if(backpack_2_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_2_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, backpack_2_name);
                 if(itemTiming) {
                     processedPlayer.backpack_2_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -318,7 +318,7 @@ class MatchOverview extends Component {
             processedPlayer.item_0 = currentUnprocessedPlayer.item_0;
             var item_0_name = this.getItemName(processedPlayer.item_0);
             if(item_0_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_0_name);
                 if(itemTiming) {
                     processedPlayer.item_0_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -326,7 +326,7 @@ class MatchOverview extends Component {
             processedPlayer.item_1 = currentUnprocessedPlayer.item_1;
             var item_1_name = this.getItemName(processedPlayer.item_1);
             if(item_1_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_1_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_1_name);
                 if(itemTiming) {
                     processedPlayer.item_1_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -334,7 +334,7 @@ class MatchOverview extends Component {
             processedPlayer.item_2 = currentUnprocessedPlayer.item_2;
             var item_2_name = this.getItemName(processedPlayer.item_2);
             if(item_2_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_2_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_2_name);
                 if(itemTiming) {
                     processedPlayer.item_2_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -342,7 +342,7 @@ class MatchOverview extends Component {
             processedPlayer.item_3 = currentUnprocessedPlayer.item_3;
             var item_3_name = this.getItemName(processedPlayer.item_3);
             if(item_3_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_3_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_3_name);
                 if(itemTiming) {
                     processedPlayer.item_3_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -350,7 +350,7 @@ class MatchOverview extends Component {
             processedPlayer.item_4 = currentUnprocessedPlayer.item_4;
             var item_4_name = this.getItemName(processedPlayer.item_4);
             if(item_4_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_4_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_4_name);
                 if(itemTiming) {
                     processedPlayer.item_4_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -358,7 +358,7 @@ class MatchOverview extends Component {
             processedPlayer.item_5 = currentUnprocessedPlayer.item_5;
             var item_5_name = this.getItemName(processedPlayer.item_5);
             if(item_5_name) {
-                var itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_5_name);
+                let itemTiming = this.findItemTiming(currentUnprocessedPlayer.purchase_log, item_5_name);
                 if(itemTiming) {
                     processedPlayer.item_5_timing = moment("1900-01-01 00:00:00").add(itemTiming, 'seconds').format("mm:ss");
                 }
@@ -452,6 +452,7 @@ class MatchOverview extends Component {
 
     renderRow(rowData, i, j) {
         var rowContainer;
+        var additionalRowContainer;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
             additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.mod, flex: 1, flexDirection: 'row'};
@@ -628,6 +629,8 @@ class MatchOverview extends Component {
             if(this.props.matchDetails) {
                 if(this.props.matchDetails.players.length > 0) {
                     var teamImage = (<View/>);
+                    var goldGraph;
+                    var xpGraph;
                     if(this.state.radiantWin) {
                         teamImage = (
                             <View style = {{alignItems: 'center', justifyContent: 'center'}}>

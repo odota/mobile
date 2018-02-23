@@ -13,17 +13,12 @@ import { bindActionCreators } from 'redux';
 import * as playerOverviewActions from '../actions/player_overview_act';
 import * as playerMatchesActions from '../actions/player_matches_act';
 import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
 
 import _ from 'lodash';
 
 import ProfileCard from '../components/ProfileCard';
-import HeroesCard from '../components/HeroesCard';
-import MatchesCard from '../components/MatchesCard';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 
 export const mapStateToProps = state => ({
     overview: state.playerOverviewState.overview,
@@ -96,7 +91,11 @@ class PlayerOverview extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
 });
 const styles = StyleSheet.create(baseStyles);
 

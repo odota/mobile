@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
     AsyncStorage,
     Image,
@@ -18,14 +17,8 @@ import { Actions } from 'react-native-router-flux';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 import Metrics from '../themes/Metrics';
-
-export const mapStateToProps = state => ({
-
-});
 
 export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators({...homeActions, ...favouritesActions, ...settingsActions, ...navigationActions}, dispatch)
@@ -50,8 +43,7 @@ class Splash extends Component {
                 this.props.actions.changeTheme(1);
             }
         })
-        .catch((error) => {
-            console.log("NOT FOUND");
+        .catch(() => {
             this.props.actions.changeTheme(1);
         })
 
@@ -60,13 +52,11 @@ class Splash extends Component {
                 this.props.actions.initializeFavourites(value);
             }
         })
-        .catch((error) => {
-            console.log(error);
-        })
+        .catch()
 
         AsyncStorage.getItem("homeProfile").then((value) => {
             if(value) {
-                parsedValue = JSON.parse(value);
+                let parsedValue = JSON.parse(value);
                 if(!(Object.keys(parsedValue).length === 0 && parsedValue.constructor === Object)) {
                     this.setState({'profileExist': true});
                 }
@@ -75,9 +65,7 @@ class Splash extends Component {
                 this.props.actions.setHomeProfile(parsedValue);
             }
         })
-        .catch((error) => {
-            console.log(error);
-        })
+        .catch()
     }
 
     componentDidMount() {
@@ -110,4 +98,4 @@ const baseStyles = _.extend(base.general, {
 
 const styles = StyleSheet.create(baseStyles);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Splash);
+export default connect(null, mapDispatchToProps)(Splash);

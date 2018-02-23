@@ -11,7 +11,8 @@
     "stores-lint": "eslint app/stores",
     "reducers-lint": "eslint app/reducers",
     "json-lint": "eslint app/json",
-    "components-lint": "eslint app/components"
+    "components-lint": "eslint app/components",
+    "containers-lint": "eslint app/containers"
   },
   "dependencies": {
     "appcenter": "^1.1.0",

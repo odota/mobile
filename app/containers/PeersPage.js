@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     ActivityIndicator,
     TouchableOpacity,
     RefreshControl
@@ -13,7 +12,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as peersActions from '../actions/peers_act';
 import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
 
 import PeersCard from '../components/PeersCard';
 
@@ -21,9 +19,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 
 export const mapStateToProps = state => ({
     peers: state.peersState.peers,
@@ -80,16 +76,6 @@ class PeersPage extends Component {
         if(!this.props.isLoadingPeers) {
             this.props.actions.fetchPeers(this.props.contextId);
         }
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        /*
-        console.log("COMPONENT WILL UPDATE");
-        if(this.props.justPopped) {
-            this.props.actions.togglePop();
-            this.props.actions.fetchPeers(this.props.contextId);
-        }
-        */
     }
 
     componentWillReceiveProps(nextProps) {
@@ -211,6 +197,11 @@ const baseStyles = _.extend(base.general, {
         alignSelf: 'center',
         justifyContent: 'center',
         marginBottom: 5
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

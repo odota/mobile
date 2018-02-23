@@ -15,10 +15,7 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
-import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
 
-import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
 import { getAbilityImage } from '../utils/getAbilityImage';
 import { getItemImage } from '../utils/getItemImage';
@@ -31,7 +28,6 @@ import moment from 'moment';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -113,7 +109,7 @@ class MatchPerformance extends Component {
 
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
-        for (i = 0; i < unprocessedPlayersList.length; i ++) {
+        for (let i = 0; i < unprocessedPlayersList.length; i ++) {
             var currentUnprocessedPlayer = unprocessedPlayersList[i];
 
             var processedPlayer = {};
@@ -189,7 +185,7 @@ class MatchPerformance extends Component {
                 if(inflictorID) {
                     processedPlayer.maxInflictorHit = getAbilityImage(inflictorID);
                 } else {
-                    var inflictorID = this.getItemId(inflictor);
+                    inflictorID = this.getItemId(inflictor);
                     processedPlayer.maxInflictorHit = getItemImage(inflictorID);
                 }
 
@@ -208,7 +204,6 @@ class MatchPerformance extends Component {
 
     getHeroId(heroName) {
         var heroesList = heroes;
-        var heroId = -1;
         for(var hero in heroesList) {
             if(heroesList.hasOwnProperty(hero)) {
                 if(heroesList[hero].name == heroName) {
@@ -271,6 +266,7 @@ class MatchPerformance extends Component {
 
     renderRow(rowData, i, j) {
         var rowContainer;
+        var additionalRowContainer;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
             additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.mod, flex: 1, flexDirection: 'row'};

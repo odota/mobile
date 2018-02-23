@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     ActivityIndicator,
     TouchableOpacity,
     RefreshControl
@@ -12,7 +11,6 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playerHeroesActions from '../actions/player_heroes_act';
-import { Actions } from 'react-native-router-flux';
 
 import HeroesCard from '../components/HeroesCard';
 
@@ -20,9 +18,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 
 export const mapStateToProps = state => ({
     heroes: state.playerHeroesState.heroes,
@@ -201,6 +197,11 @@ const baseStyles = _.extend(base.general, {
         alignSelf: 'center',
         justifyContent: 'center',
         marginBottom: 5
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

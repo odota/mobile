@@ -3,28 +3,21 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
-    ActivityIndicator,
-    TouchableOpacity,
-    RefreshControl
+    ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
-import { Actions } from 'react-native-router-flux';
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import _ from 'lodash';
 
-import ScrollableTabView, { DefaultTabBar, ScrollableTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 import MatchOverview from './MatchOverview';
 import MatchBenchmark from './MatchBenchmark';
 import MatchPerformance from './MatchPerformance';
 import MatchLaning from './MatchLaning';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -79,7 +72,6 @@ class MatchDetailsPage extends Component {
                 </View>
             );
         } else {
-            var tabs = (<View/>);
             if(this.props.matchDetails.radiant_gold_adv) {
                 content = (
                     <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}

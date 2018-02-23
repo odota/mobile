@@ -13,11 +13,12 @@ class Drawers extends Component {
     }
 
     render() {
+        let navigation = (el) => this.navigation = el;
         const state = this.props.navigationState;
         const children = state.children;
         return (
             <Drawer
-                ref = "navigation"
+                ref = {navigation}
                 open = {state.open}
                 onOpen = {() => Actions.refresh({key: state.key, open: true})}
                 onClose = {() => Actions.refresh({key: state.key, open: false})}

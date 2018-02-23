@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity
+    StyleSheet
 } from 'react-native';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 
 import { connect } from 'react-redux';
@@ -18,13 +14,12 @@ import * as navigationActions from '../actions/navigation_act';
 import * as peersActions from '../actions/peers_act';
 import * as playerHeroesActions from '../actions/player_heroes_act';
 
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView from 'react-native-scrollable-tab-view';
 import PlayerOverview from './PlayerOverview';
 import MatchesPage from './MatchesPage';
 import HeroesPage from './HeroesPage';
 import Peers from './PeersPage';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -55,7 +50,7 @@ class PlayerProfile extends Component {
         this.props.tracker.trackScreenView('Player Profile');
     }
 
-    handleChangeTab({i, ref, from}) {
+    handleChangeTab({i}) {
         if(this.props) {
             if (i == 0 && !this.props.isLoadingOverview) {
                 this.props.actions.fetchOverview(this.props.contextId);

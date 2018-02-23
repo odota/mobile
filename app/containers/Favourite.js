@@ -3,23 +3,15 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
-    ListView,
-    AsyncStorage,
-    Platform,
-    TouchableOpacity,
-    Alert
+    ListView
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as favouritesActions from '../actions/favourites_act';
-import { Actions } from 'react-native-router-flux';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -55,7 +47,7 @@ class Favourite extends Component {
     componentWillMount() {
     }
 
-    renderRow(rowData, i, j) {
+    renderRow(rowData) {
         if(rowData !== undefined) {
             return (
                 <PlayerCard info = {rowData}/>

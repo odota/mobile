@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     ActivityIndicator,
     TouchableOpacity,
     RefreshControl
@@ -20,7 +19,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -158,8 +156,6 @@ class MatchesPage extends Component {
                     </View>
                 );
             } else {
-                var previousTenControl = (<View style = {{width: 40}}/>);
-                var nextTenControl = (<View style = {{width: 40}}/>);
                 this.pageControl = (
                     <View style={styles.paginationContainer}>
                         <View style = {{flexDirection: 'row'}}>
@@ -300,8 +296,12 @@ const baseStyles = _.extend(base.general, {
         alignSelf: 'center',
         justifyContent: 'center',
         marginBottom: 5
+    },
+    contentContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
-
 });
 
 const styles = StyleSheet.create(baseStyles);

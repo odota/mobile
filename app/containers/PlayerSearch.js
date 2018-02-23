@@ -14,7 +14,6 @@ import { bindActionCreators } from 'redux';
 import * as playerSearchActions from '../actions/player_search_act';
 import * as settingsActions from '../actions/settings_act';
 import * as favouritesActions from '../actions/favourites_act';
-import { Actions } from 'react-native-router-flux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -66,7 +65,7 @@ class PlayerSearch extends Component {
     componentWillMount() {
     }
 
-    renderRow(rowData, i, j) {
+    renderRow(rowData) {
         return (
             <PlayerCard info = {rowData} />
         );
@@ -79,6 +78,7 @@ class PlayerSearch extends Component {
 
     render() {
         var contentBottom;
+        var containerStyle;
         if(this.props.isLoadingPlayers) {
             contentBottom = (
                 <View style = {styles.contentContainer}>

@@ -3,8 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
-    ListView,
     TouchableOpacity,
     TextInput
 } from 'react-native';
@@ -32,7 +30,6 @@ import PickerText from '../components/PickerText';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -179,7 +176,7 @@ class MatchesSearch extends Component {
 
     constructPatchesArray(patchesArray) {
         var constructedPatchesArray = [];
-        for(i = 0; i < patchesArray.length; i++) {
+        for(let i = 0; i < patchesArray.length; i++) {
             constructedPatchesArray.push({"id": i, "localized_name": patchesArray[i].name});
         }
         return constructedPatchesArray;

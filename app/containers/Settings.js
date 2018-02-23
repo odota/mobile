@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    ScrollView,
     AsyncStorage
 } from 'react-native';
 
@@ -11,7 +10,6 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as settingsActions from '../actions/settings_act';
-import { Actions } from 'react-native-router-flux';
 
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

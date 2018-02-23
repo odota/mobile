@@ -7,31 +7,22 @@ import {
     ActivityIndicator,
     Image,
     TouchableOpacity,
-    RefreshControl,
-    ImageBackground
+    RefreshControl
 } from 'react-native';
 
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
-import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
 import Heatmap from '../components/Heatmap';
 
-import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
-import { getAbilityImage } from '../utils/getAbilityImage';
 import { unpackPositionData } from '../utils/unpackPositionData';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import heroes from 'dotaconstants/build/heroes.json';
 import lanes from '../json/lane_role.json';
-
-import moment from 'moment';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -111,7 +102,7 @@ class MatchLaning extends Component {
 
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
-        for (i = 0; i < unprocessedPlayersList.length; i ++) {
+        for (let i = 0; i < unprocessedPlayersList.length; i ++) {
             var currentUnprocessedPlayer = unprocessedPlayersList[i];
 
             var processedPlayer = {};
@@ -183,6 +174,7 @@ class MatchLaning extends Component {
     renderRow(rowData, i, j) {
         var rowContainer;
         var bgColor;
+        var additionalRowContainer;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
             additionalRowContainer = {backgroundColor: this.props.mod, flex: 1};
@@ -230,7 +222,7 @@ class MatchLaning extends Component {
             additionalInfo = (<View/>);
         }
 
-        var mmr;
+        var isRoaming;
         if(rowData.isRoaming) {
             isRoaming = (<Text style = {{color: this.props.legend, fontSize: 12}}>Roaming</Text>);
         } else {

@@ -17,7 +17,7 @@ import MatchNavBar from '../components/MatchNavBar';
 
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import { BackHandler, Text } from 'react-native';
+import { BackHandler } from 'react-native';
 
 import Colors from '../themes/Colors';
 

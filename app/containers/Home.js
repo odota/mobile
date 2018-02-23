@@ -4,9 +4,6 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    ListView,
-    AsyncStorage,
-    Platform,
     TouchableOpacity,
     Image
 } from 'react-native';
@@ -16,7 +13,6 @@ import { bindActionCreators } from 'redux';
 import * as homeActions from '../actions/home_act';
 import * as navigationActions from '../actions/navigation_act';
 
-import PlayerSearch from './PlayerSearch';
 import PlayerProfile from './PlayerProfile';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -65,6 +61,7 @@ class Home extends Component {
     render() {
         var content;
         var profile = this.props.profile;
+        var containerStyle;
         if(profile != "") {
             containerStyle = styles.localContainer;
             content = (
@@ -95,20 +92,20 @@ class Home extends Component {
                     <View style = {{flexDirection: 'row'}}>
                         <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginLeft: 9, marginRight: 5, flex: 1}}>
                             <Image source={require('../assets/open_source.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
-                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                            <Text style = {{fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
                                 Open Source
                             </Text>
-                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                            <Text style = {{fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
                                 All project code is open source and available for contributors to improve and modify.
                             </Text>
                         </View>
 
                         <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginRight: 9, flex: 1}}>
                             <Image source={require('../assets/stats_bar.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
-                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                            <Text style = {{fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
                                 In-Depth Data
                             </Text>
-                            <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                            <Text style = {{fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
                                 Parsing replay files provides highly detailed match data.
                             </Text>
                         </View>
@@ -116,10 +113,10 @@ class Home extends Component {
 
                     <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 10, marginHorizontal: 9, marginTop: 5}}>
                         <Image source={require('../assets/wand.png')} style={{width: 50, height: 50, alignSelf: 'center'}}/>
-                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
+                        <Text style = {{fontFamily: Fonts.base, fontSize: 22, color: this.props.legend, fontWeight: 'bold', textAlign: 'center'}}>
                             Free of Charge
                         </Text>
-                        <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
+                        <Text style = {{fontFamily: Fonts.base, fontSize: 14, color: this.props.secondLegend, textAlign: 'center'}}>
                             Servers are funded by sponsors and volunteers maintain the code, so the service is offered free of charge.
                         </Text>
                     </View>

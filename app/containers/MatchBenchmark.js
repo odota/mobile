@@ -14,17 +14,12 @@ import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
-import * as navigationActions from '../actions/navigation_act';
-import { Actions } from 'react-native-router-flux';
 
-import { kFormatter } from '../utils/kFormatter';
 import { getHeroImage } from '../utils/getHeroImage';
-import { getAbilityImage } from '../utils/getAbilityImage';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import _ from 'lodash';
 
-import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
@@ -104,7 +99,7 @@ class MatchBenchmark extends Component {
 
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
-        for (i = 0; i < unprocessedPlayersList.length; i ++) {
+        for (let i = 0; i < unprocessedPlayersList.length; i ++) {
             var currentUnprocessedPlayer = unprocessedPlayersList[i];
 
             var processedPlayer = {};
@@ -177,6 +172,7 @@ class MatchBenchmark extends Component {
 
     renderRow(rowData, i, j) {
         var rowContainer;
+        var additionalRowContainer;
         if((parseInt(j)+1) % 2 == 0) {
             rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
             additionalRowContainer = {paddingTop: 10, paddingBottom: 10, backgroundColor: this.props.mod, flex: 1, flexDirection: 'row'};

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {
     View,
-    Text,
     StyleSheet,
-    ScrollView,
-    ListView,
     AsyncStorage,
-    Platform,
-    TouchableOpacity,
     WebView
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -22,7 +17,6 @@ import _ from 'lodash';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
 import Metrics from '../themes/Metrics';
 
 export const mapStateToProps = state => ({
@@ -73,8 +67,8 @@ class LoginPage extends Component {
     }
 
     render() {
-        containerStyle = styles.container;
-        content = (
+        let containerStyle = styles.container;
+        let content = (
             <View style = {styles.contentContainer}>
                 <WebView
                     source = {{uri: opendotaURL}}
