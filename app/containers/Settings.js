@@ -100,10 +100,10 @@ class Settings extends Component {
                                                 <RadioButtonInput
                                                     obj={obj}
                                                     index={i}
-                                                    isSelected={this.state.themeIndex === i}
+                                                    isSelected={this.state.theme === obj.value}
                                                     onPress={onPress}
                                                     buttonInnerColor={'#66BBFF'}
-                                                    buttonOuterColor={this.state.themeIndex === i ? '#66BBFF' : '#66BBFF'}
+                                                    buttonOuterColor={this.state.theme === obj.value ? '#66BBFF' : '#66BBFF'}
                                                     buttonSize={15}
                                                     buttonStyle={{}}
                                                     buttonWrapStyle={{marginBottom: 10}}
