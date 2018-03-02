@@ -814,7 +814,7 @@
 				ORGANIZATIONNAME = OpenDota;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1369,8 +1369,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NV343JBXJ7;
 				HEADER_SEARCH_PATHS = (
@@ -1398,8 +1398,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opendota.mobile;
 				PRODUCT_NAME = OpenDota;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "31e0eb66-aba1-4d4e-a0a0-a4d1be44f7e2";
+				PROVISIONING_PROFILE_SPECIFIER = "OpenDota Distribution";
 			};
 			name = Debug;
 		};
@@ -1409,8 +1409,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = NV343JBXJ7;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1437,8 +1437,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.opendota.mobile;
 				PRODUCT_NAME = OpenDota;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "31e0eb66-aba1-4d4e-a0a0-a4d1be44f7e2";
+				PROVISIONING_PROFILE_SPECIFIER = "OpenDota Distribution";
 			};
 			name = Release;
 		};
