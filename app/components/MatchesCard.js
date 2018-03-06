@@ -312,11 +312,15 @@ class MatchesCard extends Component {
                     </TouchableOpacity>
                 );
             }
+            var title = "MATCHES";
+            if(this.props.title) {
+                title = this.props.title;
+            }
 
             return (
                 <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
                     <View style = {styles.titleContainer}>
-                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>MATCHES</Text>
+                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>{title}</Text>
                     </View>
                     <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                     <View style = {styles.tableHeaderContainer}>

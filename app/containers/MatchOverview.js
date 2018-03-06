@@ -818,10 +818,6 @@ class MatchOverview extends Component {
                                             <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.region}</Text>
                                         </View>
                                         <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                            <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Average MMR: </Text>
-                                            <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.averageMMR}</Text>
-                                        </View>
-                                        <View style = {{flexDirection: 'row', alignItems: 'center'}}>
                                             <Text style = {{color: this.props.legend, fontSize: 14, fontWeight: 'bold'}}>Skill: </Text>
                                             <Text style = {{color: this.props.secondLegend, fontSize: 12, fontWeight: 'bold'}}>{this.state.skill}</Text>
                                         </View>

@@ -56,13 +56,9 @@ class Splash extends Component {
 
         AsyncStorage.getItem("homeProfile").then((value) => {
             if(value) {
-                let parsedValue = JSON.parse(value);
-                if(!(Object.keys(parsedValue).length === 0 && parsedValue.constructor === Object)) {
-                    this.setState({'profileExist': true});
-                }
-                this.props.actions.pushContextIdHome(parsedValue);
-                this.props.actions.changeContextId(parsedValue);
-                this.props.actions.setHomeProfile(parsedValue);
+                this.props.actions.pushContextIdHome(value);
+                this.props.actions.changeContextId(value);
+                this.props.actions.setHomeProfile(value);
             }
         })
         .catch()

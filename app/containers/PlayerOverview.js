@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
     View,
+    ScrollView,
     Text,
     StyleSheet,
     ListView,
@@ -16,6 +17,7 @@ import * as navigationActions from '../actions/navigation_act';
 
 import _ from 'lodash';
 
+import MatchesCard from '../components/MatchesCard';
 import ProfileCard from '../components/ProfileCard';
 
 import base from '../themes/BaseStyles';
@@ -29,7 +31,10 @@ export const mapStateToProps = state => ({
     wl: state.playerOverviewState.wl,
     legend: state.settingsState.legend,
     homeTab: state.navigationState.homeTab,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    matches: state.playerMatchesState.matches,
+    isLoadingMatches: state.playerMatchesState.isLoadingMatches,
+    isEmptyMatches: state.playerMatchesState.isEmptyMatches
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -41,6 +46,7 @@ class PlayerOverview extends Component {
     constructor(props) {
         super(props);
         this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.sortMatches = this.sortMatches.bind(this);
     }
 
     componentDidMount() {
@@ -51,6 +57,7 @@ class PlayerOverview extends Component {
         if(!this.props.isLoadingOverview) {
             this.props.actions.fetchOverview(this.props.contextId);
             this.props.actions.fetchWl(this.props.contextId);
+            this.props.actions.fetchMatches(this.props.contextId, 20);
         }
     }
 
@@ -59,12 +66,17 @@ class PlayerOverview extends Component {
             this.props.actions.consumeHomeTab();
             this.props.actions.fetchOverview(nextProps.contextId);
             this.props.actions.fetchWl(nextProps.contextId);
+            this.props.actions.fetchMatches(this.props.contextId, 20);
         }
+    }
+
+    sortMatches(sortField, sortDirection) {
+        this.props.actions.sortMatches(sortField, sortDirection);
     }
 
     render() {
         var content;
-        if(this.props.isLoadingOverview) {
+        if(this.props.isLoadingOverview || this.props.isLoadingMatches) {
             content = (
                 <View style = {styles.contentContainer}>
                     <ActivityIndicator size="large" color = {this.props.legend}/>
@@ -78,12 +90,15 @@ class PlayerOverview extends Component {
             )
         } else {
             content = (
-                <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
+                <ScrollView>
+                    <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
+                    <MatchesCard title = {"RECENT MATCHES"} matches = {this.props.matches} sortMatches = {this.sortMatches} default = {false} />
+                </ScrollView>
             )
         }
         return(
             <View style = {styles.container}>
-                {content}
+                    {content}
             </View>
         )
     }

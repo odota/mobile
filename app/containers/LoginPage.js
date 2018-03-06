@@ -59,7 +59,7 @@ class LoginPage extends Component {
             this.props.actions.changeContextId(splitted[4]);
             this.props.actions.setHomeProfile(splitted[4]);
             setTimeout(() => {
-                var homeProfileString = JSON.stringify(splitted[4]);
+                var homeProfileString = splitted[4];
                 AsyncStorage.setItem("homeProfile", homeProfileString);
                 Actions.home();
             }, 1000);

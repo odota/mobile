@@ -55,6 +55,7 @@ class PlayerProfile extends Component {
             if (i == 0 && !this.props.isLoadingOverview) {
                 this.props.actions.fetchOverview(this.props.contextId);
                 this.props.actions.fetchWl(this.props.contextId);
+                this.props.actions.fetchMatches(this.props.contextId, 20);
             } else if (i == 1 && !this.props.isLoadingMatches) {
                 this.props.actions.fetchMatches(this.props.contextId);
             } else if (i == 2 && !this.props.isLoadingHeroes) {
