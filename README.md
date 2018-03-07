@@ -24,7 +24,7 @@ The App is available now on iOS and Android:
 
 * Follow the official [React Native guide](https://facebook.github.io/react-native/docs/getting-started.html) to setup your environment.
 * Clone the repo
-* `cd` into local folder and do a `yarn install` to install dependencies (or use `npm install`)
+* `cd` into local folder and do a `npm install` to install dependencies
 * run `react-native run-ios` or `react-native run-android`
 
 ## Resources
