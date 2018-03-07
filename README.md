@@ -12,8 +12,9 @@
 
 The App is available now on iOS and Android:
 
-<a href="https://itunes.apple.com/us/app/opendota/id1354762555?mt=8"><img alt='Download on the App Store' src='https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg' width="135"/></a>
-<a href='https://play.google.com/store/apps/details?id=com.opendota.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' ><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="135"/></a>
+<a href="https://itunes.apple.com/us/app/opendota/id1354762555?mt=8"><img alt='Download on the App Store' src='https://linkmaker.itunes.apple.com/assets/shared/badges/en-us/appstore-lrg.svg' width="135" hspace="10"/></a>
+
+<a href='https://play.google.com/store/apps/details?id=com.opendota.mobile&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' ><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="145"/></a>
 
 ## Tech Stack
 
@@ -25,10 +26,6 @@ The App is available now on iOS and Android:
 * Clone the repo
 * `cd` into local folder and do a `yarn install` to install dependencies (or use `npm install`)
 * run `react-native run-ios` or `react-native run-android`
-
-## Notes
-
-* Still a work in progress
 
 ## Resources
 
