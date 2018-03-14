@@ -14,6 +14,7 @@ import * as playerMatchesActions from '../actions/player_matches_act';
 import { Actions } from 'react-native-router-flux';
 
 import MatchesCard from '../components/MatchesCard';
+import PageNavigationControl from '../components/PageNavigationControl';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -48,34 +49,6 @@ class MatchesPage extends Component {
     constructor(props) {
         super(props);
         this.onSearchPressed = this.onSearchPressed.bind(this);
-        this.previousControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches(1)}}>
-                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 0, paddingRight: 40}}>
-                    <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
-        this.previousTen = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigatePreviousMatches(10)}}>
-                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 0, paddingRight: 20}}>
-                    <FontAwesome name = "angle-double-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
-        this.nextControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches(1)}}>
-                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 40, paddingRight: 0}}>
-                    <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
-        this.nextTen = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigateNextMatches(10)}}>
-                <View style = {{alignItems: 'center', alignSelf: 'center', justifyContent: 'center', paddingLeft: 20, paddingRight: 0}}>
-                    <FontAwesome name = "angle-double-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
         this.pageControl = (<View/>);
         this.state = {
             refreshing: false
@@ -129,49 +102,35 @@ class MatchesPage extends Component {
             for(var i = this.initialValue - 1; i < this.endValue; i ++) {
                 this.matchesSubset.push(nextProps.matches[i]);
             }
-            if(this.initialValue == 1){
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        <View style = {{flexDirection: 'row'}}>
-                            {this.nextControl}
-                            {this.nextTen}
-                        </View>
-                    </View>
-                );
+            
+            let showPreviousPage;
+            let showNextPage;
+
+            if (this.initialValue == 1) {
+                showPreviousPage = false;
+                showNextPage = true;
             } else if (this.endValue == this.totalMatches) {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        <View style = {{flexDirection: 'row'}}>
-                            {this.previousTen}
-                            {this.previousControl}
-                        </View>
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-right" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                    </View>
-                );
+                showPreviousPage = true;
+                showNextPage = false;
             } else {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        <View style = {{flexDirection: 'row'}}>
-                            {this.previousTen}
-                            {this.previousControl}
-                        </View>
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        <View style = {{flexDirection: 'row'}}>
-                            {this.nextControl}
-                            {this.nextTen}
-                        </View>
-                    </View>
-                );
+                showPreviousPage = true;
+                showNextPage = true;
             }
+
+            this.pageControl = (<PageNavigationControl 
+                                  page = {nextProps.page}
+                                  buttonColor = {this.props.legend} 
+
+                                  previousDoubleEnabled = {showPreviousPage}
+                                  previousDoubleAction = {() => {this.props.actions.navigatePreviousMatches(10)}}
+                                  previousEnabled = {showPreviousPage} 
+                                  previousAction = {() => {this.props.actions.navigatePreviousMatches(1)}}
+
+                                  nextEnabled = {showNextPage} 
+                                  nextAction = {() => {this.props.actions.navigateNextMatches(1)}}
+                                  nextDoubleEnabled = {showNextPage}
+                                  nextDoubleAction = {() => {this.props.actions.navigateNextMatches(10)}} />);
+
         } else if (this.totalMatches == 0) {
             this.matchesSubset = new Array();
             this.pageControl = (
@@ -274,28 +233,6 @@ const baseStyles = _.extend(base.general, {
         paddingLeft: 10,
         paddingRight: 10,
         flex: 1
-    },
-    paginationContainer: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    individualPageControlView: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        paddingLeft: 40,
-        paddingRight: 40
-    },
-    individualPageControl: {
-        fontSize: 32
-    },
-    pageContainer: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        marginBottom: 5
     },
     contentContainer: {
         flex: 1,
