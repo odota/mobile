@@ -91,7 +91,15 @@ class PeersPage extends Component {
             for(var i = this.initialValue-1; i < this.endValue; i++) {
                 this.peersSubset.push(nextProps.peers[i]);
             }
-            if(this.initialValue == 1){
+            if (this.totalPeers <= 20) {
+                this.pageControl = (
+                    <View style={styles.paginationContainer}>
+                        <View style={styles.pageContainer}>
+                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
+                        </View>
+                    </View>
+                );
+            } else if (this.initialValue == 1) {
                 this.pageControl = (
                     <View style={styles.paginationContainer}>
                         <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
