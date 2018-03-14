@@ -39,10 +39,11 @@ class Settings extends Component {
         super(props);
         this.state = {
             themesArray: [
-                { value: 1, label: 'OpenDota' },
+                { value: 1, label: 'OpenDota ' },
                 { value: 2, label: 'Sky Dolch' },
                 { value: 3, label: 'Hyperfuse' },
-                { value: 5, label: 'Invisibility' }
+                { value: 5, label: 'Invisibility' },
+                { value: 9, label: 'NightDota'}
             ],
             theme: this.props.theme,
             themeIndex: this.props.theme
@@ -67,8 +68,10 @@ class Settings extends Component {
             this.props.tracker.trackEvent('Theme Selected', 'Sky Dolch');
         } else if (value === 3) {
             this.props.tracker.trackEvent('Theme Selected', 'Hyperfuse');
-        } else if (value === 4) {
+        } else if (value === 5) {
             this.props.tracker.trackEvent('Theme Selected', 'Invisibility');
+        } else if (value === 9) {
+            this.props.tracker.trackEvent('Theme Selected', 'Night');
         }
         this.props.actions.changeTheme(value);
     }

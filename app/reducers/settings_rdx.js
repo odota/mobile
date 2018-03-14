@@ -7,7 +7,9 @@ var initialState = {
     legend: Colors.openDotaLegend,
     secondLegend: Colors.openDotaSecondLegend,
     legendHex: Colors.openDotaLegendHex,
-    legendTranslucent: Colors.openDotaLegendTranslucent
+    legendTranslucent: Colors.openDotaLegendTranslucent,
+    background: Colors.openDotaBackground,
+    reverseBackground: Colors.openDotaReverseBackground
 };
 
 export default function settingsState(state = initialState, action = {}) {
@@ -22,7 +24,9 @@ export default function settingsState(state = initialState, action = {}) {
                     legend: action.legend,
                     secondLegend: action.secondLegend,
                     legendHex: action.legendHex,
-                    legendTranslucent: action.legendTranslucent
+                    legendTranslucent: action.legendTranslucent,
+                    background: action.background,
+                    reverseBackground: action.reverseBackground
                 }
             );
         default:
