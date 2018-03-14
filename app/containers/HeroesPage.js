@@ -4,7 +4,6 @@ import {
     Text,
     StyleSheet,
     ActivityIndicator,
-    TouchableOpacity,
     RefreshControl
 } from 'react-native';
 
@@ -13,8 +12,8 @@ import { bindActionCreators } from 'redux';
 import * as playerHeroesActions from '../actions/player_heroes_act';
 
 import HeroesCard from '../components/HeroesCard';
+import PageNavigationControl from '../components/PageNavigationControl';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -39,20 +38,6 @@ class HeroesPage extends Component {
 
     constructor(props) {
         super(props);
-        this.previousControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigatePrevious()}}>
-                <View style = {styles.individualPageControlView}>
-                    <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
-        this.nextControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigateNext()}}>
-                <View style = {styles.individualPageControlView}>
-                    <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
         this.pageControl = (<View/>);
         this.state = {
             refreshing: false
@@ -90,37 +75,18 @@ class HeroesPage extends Component {
                 this.heroesSubset.push(nextProps.heroes[i]);
             }
 
-            if(this.initialValue == 1) {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        {this.nextControl}
-                    </View>
-                );
-            } else if (this.endValue == this.totalHeroes) {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        {this.previousControl}
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-right" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                    </View>
-                );
-            } else {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        {this.previousControl}
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        {this.nextControl}
-                    </View>
-                );
-            }
+            let showPreviousPage = this.initialValue != 1;
+            let showNextPage = this.endValue != this.totalHeroes;
+
+            this.pageControl = (<PageNavigationControl 
+                                  page = {nextProps.page}
+                                  buttonColor = {this.props.legend} 
+                                  
+                                  previousEnabled = {showPreviousPage} 
+                                  previousAction = {() => {this.props.actions.navigatePrevious()}}
+
+                                  nextEnabled = {showNextPage} 
+                                  nextAction = {() => {this.props.actions.navigateNext()}} />);
         }
     }
 
@@ -176,28 +142,6 @@ class HeroesPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-    paginationContainer: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    individualPageControlView: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        paddingLeft: 40,
-        paddingRight: 40
-    },
-    individualPageControl: {
-        fontSize: 32
-    },
-    pageContainer: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        marginBottom: 5
-    },
     contentContainer: {
         flex: 1,
         alignItems: 'center',
