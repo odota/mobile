@@ -36,7 +36,7 @@ export function fetchAPI(endpoint, method = 'get', data) {
                     let errStr = '';
                     let errors = _.omit(error, ['column', 'line', 'sourceURL'])
 
-                    _.forEach(errors, function (value, key) {
+                    _.forEach(errors, function (value) {
                         errStr += value + '.\n';
                     });
 
