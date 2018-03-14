@@ -102,11 +102,14 @@ class MatchesPage extends Component {
             for(var i = this.initialValue - 1; i < this.endValue; i ++) {
                 this.matchesSubset.push(nextProps.matches[i]);
             }
-            
+
             let showPreviousPage;
             let showNextPage;
 
-            if (this.initialValue == 1) {
+            if (this.totalMatches <= 20) {
+                showPreviousPage = false;
+                showNextPage = false;
+            } else if (this.initialValue == 1) {
                 showPreviousPage = false;
                 showNextPage = true;
             } else if (this.endValue == this.totalMatches) {
