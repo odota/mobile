@@ -1,4 +1,4 @@
-# mobile
+# mobile  [![Build Status](https://travis-ci.org/odota/mobile.svg?branch=master)](https://travis-ci.org/odota/mobile)
 
 ## Overview
 

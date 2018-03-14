@@ -11,7 +11,8 @@
   },
   "env": {
     "amd": true,
-    "node": true
+    "node": true,
+    "browser": true
   },
   "plugins": [
     "react",
@@ -22,6 +23,7 @@
     "plugin:react/recommended"
   ],
   "rules": {
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-console": 1
   }
 }
