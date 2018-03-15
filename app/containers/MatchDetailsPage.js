@@ -32,7 +32,9 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     alpha: state.settingsState.alpha,
     parent: state.navigationState.parent,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    theme: state.settingsState.theme,
+    background: state.settingsState.background,
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -77,7 +79,7 @@ class MatchDetailsPage extends Component {
                     <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}
                         tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend}
                         tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                        renderTabBar = {() => <ScrollableTabBar />}locked = {true} >
+                        renderTabBar = {() => <ScrollableTabBar />}locked = {true}>
                         <MatchOverview tabLabel = "Overview" />
                         <MatchBenchmark tabLabel = "Benchmarks" />
                         <MatchPerformance tabLabel = "Performances" />
@@ -89,7 +91,7 @@ class MatchDetailsPage extends Component {
                     <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}
                         tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend}
                         tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                        renderTabBar = {() => <ScrollableTabBar />}locked = {true} >
+                        renderTabBar = {() => <ScrollableTabBar />}locked = {true}>
                         <MatchOverview tabLabel = "Overview" />
                         <MatchBenchmark tabLabel = "Benchmarks" />
                     </ScrollableTabView>
@@ -97,7 +99,7 @@ class MatchDetailsPage extends Component {
             }
         }
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )

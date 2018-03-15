@@ -30,7 +30,8 @@ export const mapStateToProps = state => ({
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
     profile: state.homeState.profile,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -63,13 +64,13 @@ class Home extends Component {
         var profile = this.props.profile;
         var containerStyle;
         if(profile != "") {
-            containerStyle = styles.localContainer;
+            containerStyle = [styles.localContainer, {backgroundColor: this.props.background}];
             content = (
                 <PlayerProfile />
             )
 
         } else {
-            containerStyle = styles.container;
+            containerStyle = [styles.container, {backgroundColor: this.props.background}];
             content = (
                 <ScrollView style = {styles.contentContainer}>
                     <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 9, marginVertical: 5}}>

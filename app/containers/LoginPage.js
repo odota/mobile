@@ -25,7 +25,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     legendHex: state.settingsState.legendHex,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -67,7 +68,6 @@ class LoginPage extends Component {
     }
 
     render() {
-        let containerStyle = styles.container;
         let content = (
             <View style = {styles.contentContainer}>
                 <WebView
@@ -82,7 +82,7 @@ class LoginPage extends Component {
             </View>
         )
         return (
-            <View style = {containerStyle}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )

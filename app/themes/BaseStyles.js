@@ -41,9 +41,7 @@ const base = {
             marginLeft: 8,
         },
         navBar:{
-            backgroundColor:'#FFFFFF',
-            borderBottomWidth: 0.9,
-            borderBottomColor: '#A5A5A5',
+            backgroundColor:'#FFFFFF'
         },
         leftNavButtonView: {
             paddingRight: 5,

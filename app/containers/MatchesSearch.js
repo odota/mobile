@@ -40,7 +40,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     alpha: state.settingsState.alpha,
     secondLegend: state.settingsState.secondLegend,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -302,7 +303,7 @@ class MatchesSearch extends Component {
         }
 
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 <KeyboardAwareScrollView>
 
                         <View style = {[styles.formContainer, {backgroundColor: this.props.mod}]}>

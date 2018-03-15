@@ -25,7 +25,8 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     legendTranslucent: state.settingsState.legendTranslucent,
     favouritesList: state.favouritesState.favourites,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +83,7 @@ class Favourite extends Component {
             )
         }
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )

@@ -1,7 +1,3 @@
-const degToRad = (deg) => {
-    return deg * Math.PI / 180;
-};
-
 const values = (obj) => {
     const array = [];
     for (const key in obj) {

@@ -4,7 +4,6 @@ import {
     Text,
     StyleSheet,
     ActivityIndicator,
-    TouchableOpacity,
     RefreshControl
 } from 'react-native';
 
@@ -14,8 +13,8 @@ import * as peersActions from '../actions/peers_act';
 import * as navigationActions from '../actions/navigation_act';
 
 import PeersCard from '../components/PeersCard';
+import PageNavigationControl from '../components/PageNavigationControl';
 
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import _ from 'lodash';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -30,7 +29,9 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
     justPopped: state.navigationState.justPopped,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background,
+    reverseBackground: state.settingsState.reverseBackground
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -41,20 +42,6 @@ class PeersPage extends Component {
 
     constructor(props) {
         super(props);
-        this.previousControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigatePrevious()}}>
-                <View style = {styles.individualPageControlView}>
-                    <FontAwesome name = "chevron-left" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
-        this.nextControl = (
-            <TouchableOpacity onPress = {() => {this.props.actions.navigateNext()}}>
-                <View style = {styles.individualPageControlView}>
-                    <FontAwesome name = "chevron-right" size = {40} allowFontScaling = {false} color = {this.props.legend}/>
-                </View>
-            </TouchableOpacity>
-        );
         this.pageControl = (<View/>);
         this.state = {
             refreshing: false
@@ -91,37 +78,34 @@ class PeersPage extends Component {
             for(var i = this.initialValue-1; i < this.endValue; i++) {
                 this.peersSubset.push(nextProps.peers[i]);
             }
-            if(this.initialValue == 1){
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-left" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        {this.nextControl}
-                    </View>
-                );
+
+            let showPreviousPage;
+            let showNextPage;
+
+            if (this.totalPeers <= 20) {
+                showPreviousPage = false;
+                showNextPage = false;
+            } else if (this.initialValue == 1) {
+                showPreviousPage = false;
+                showNextPage = true;
             } else if (this.endValue == this.totalPeers) {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        {this.previousControl}
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        <FontAwesome style={styles.individualPageControlView} name = "chevron-right" size = {40} allowFontScaling = {false} color = "#00000000"/>
-                    </View>
-                );
+                showPreviousPage = true;
+                showNextPage = false;
             } else {
-                this.pageControl = (
-                    <View style={styles.paginationContainer}>
-                        {this.previousControl}
-                        <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{nextProps.page}</Text>
-                        </View>
-                        {this.nextControl}
-                    </View>
-                );
+                showPreviousPage = true;
+                showNextPage = true;
             }
+
+            this.pageControl = (<PageNavigationControl
+                                  page = {nextProps.page}
+                                  buttonColor = {this.props.legend}
+                                  textColor = {this.props.reverseBackground}
+
+                                  previousEnabled = {showPreviousPage}
+                                  previousAction = {() => {this.props.actions.navigatePrevious()}}
+
+                                  nextEnabled = {showNextPage}
+                                  nextAction = {() => {this.props.actions.navigateNext()}} />);
         }
     }
 
@@ -154,12 +138,12 @@ class PeersPage extends Component {
                             progressBackgroundColor="#ffffffff"
                         />
                     }>
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalPeers} peers
                     </Text>
                     <PeersCard peers = {this.peersSubset} />
                     {this.pageControl}
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalPeers} peers
                     </Text>
                 </KeyboardAwareScrollView>
@@ -167,7 +151,7 @@ class PeersPage extends Component {
         }
 
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )
@@ -176,28 +160,6 @@ class PeersPage extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-    paginationContainer: {
-        alignItems: 'center',
-        flexDirection: 'row',
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    individualPageControlView: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        paddingLeft: 40,
-        paddingRight: 40
-    },
-    individualPageControl: {
-        fontSize: 32
-    },
-    pageContainer: {
-        alignItems: 'center',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        marginBottom: 5
-    },
     contentContainer: {
         flex: 1,
         alignItems: 'center',

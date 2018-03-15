@@ -34,7 +34,8 @@ export const mapStateToProps = state => ({
     tracker: state.navigationState.tracker,
     matches: state.playerMatchesState.matches,
     isLoadingMatches: state.playerMatchesState.isLoadingMatches,
-    isEmptyMatches: state.playerMatchesState.isEmptyMatches
+    isEmptyMatches: state.playerMatchesState.isEmptyMatches,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -97,12 +98,11 @@ class PlayerOverview extends Component {
             )
         }
         return(
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                     {content}
             </View>
         )
     }
-
 }
 
 const baseStyles = _.extend(base.general, {

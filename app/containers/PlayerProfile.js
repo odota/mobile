@@ -33,7 +33,8 @@ export const mapStateToProps = state => ({
     isLoadingMatches: state.peersState.isLoadingMatches,
     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
     contextId: state.navigationState.contextId,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    theme: state.settingsState.theme
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -68,9 +69,13 @@ class PlayerProfile extends Component {
     }
 
     render() {
+        var withoutAnimation = false;
+        if(this.props.theme == 9) {
+            withoutAnimation = true;
+        }
         return(
             <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                locked = {true} onChangeTab={this.handleChangeTab.bind(this)}>
+                locked = {true} onChangeTab={this.handleChangeTab.bind(this)} scrollWithoutAnimation = {withoutAnimation}>
                 <PlayerOverview tabLabel = "Overview" />
                 <MatchesPage tabLabel = "Matches" />
                 <HeroesPage tabLabel = "Heroes" />

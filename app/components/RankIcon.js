@@ -36,6 +36,7 @@ var RankIcon = ({rankTier, leaderboardRank}) =>  {
         '4': require('../assets/rank_icons/rank_icon_4.png'),
         '5': require('../assets/rank_icons/rank_icon_5.png'),
         '6': require('../assets/rank_icons/rank_icon_6.png'),
+        '7': require('../assets/rank_icons/rank_icon_7.png'),
         '7a': require('../assets/rank_icons/rank_icon_7a.png'),
         '7b': require('../assets/rank_icons/rank_icon_7b.png'),
         '7c': require('../assets/rank_icons/rank_icon_7c.png'),
