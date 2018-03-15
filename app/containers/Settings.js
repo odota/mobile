@@ -26,7 +26,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     theme: state.settingsState.theme,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -39,10 +40,11 @@ class Settings extends Component {
         super(props);
         this.state = {
             themesArray: [
-                { value: 1, label: 'OpenDota' },
+                { value: 1, label: 'OpenDota ' },
                 { value: 2, label: 'Sky Dolch' },
                 { value: 3, label: 'Hyperfuse' },
-                { value: 5, label: 'Invisibility' }
+                { value: 5, label: 'Invisibility' },
+                { value: 9, label: 'NightDota'}
             ],
             theme: this.props.theme,
             themeIndex: this.props.theme
@@ -67,8 +69,10 @@ class Settings extends Component {
             this.props.tracker.trackEvent('Theme Selected', 'Sky Dolch');
         } else if (value === 3) {
             this.props.tracker.trackEvent('Theme Selected', 'Hyperfuse');
-        } else if (value === 4) {
+        } else if (value === 5) {
             this.props.tracker.trackEvent('Theme Selected', 'Invisibility');
+        } else if (value === 9) {
+            this.props.tracker.trackEvent('Theme Selected', 'Night');
         }
         this.props.actions.changeTheme(value);
     }
@@ -79,7 +83,7 @@ class Settings extends Component {
 
     render() {
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 <KeyboardAwareScrollView>
                     <View style = {[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
                         <View style = {styles.settingsTitle}>

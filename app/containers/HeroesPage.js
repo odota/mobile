@@ -27,7 +27,9 @@ export const mapStateToProps = state => ({
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background,
+    reverseBackground: state.settingsState.reverseBackground
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -78,14 +80,15 @@ class HeroesPage extends Component {
             let showPreviousPage = this.initialValue != 1;
             let showNextPage = this.endValue != this.totalHeroes;
 
-            this.pageControl = (<PageNavigationControl 
+            this.pageControl = (<PageNavigationControl
                                   page = {nextProps.page}
-                                  buttonColor = {this.props.legend} 
-                                  
-                                  previousEnabled = {showPreviousPage} 
+                                  buttonColor = {this.props.legend}
+                                  textColor = {this.props.reverseBackground}
+
+                                  previousEnabled = {showPreviousPage}
                                   previousAction = {() => {this.props.actions.navigatePrevious()}}
 
-                                  nextEnabled = {showNextPage} 
+                                  nextEnabled = {showNextPage}
                                   nextAction = {() => {this.props.actions.navigateNext()}} />);
         }
     }
@@ -120,12 +123,12 @@ class HeroesPage extends Component {
                         />
                     }
                     >
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
                     </Text>
                     <HeroesCard heroes = {this.heroesSubset} />
                     {this.pageControl}
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
                     </Text>
                 </KeyboardAwareScrollView>
@@ -133,7 +136,7 @@ class HeroesPage extends Component {
         }
 
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )

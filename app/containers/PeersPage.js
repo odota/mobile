@@ -29,7 +29,9 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
     justPopped: state.navigationState.justPopped,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background,
+    reverseBackground: state.settingsState.reverseBackground
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -76,7 +78,7 @@ class PeersPage extends Component {
             for(var i = this.initialValue-1; i < this.endValue; i++) {
                 this.peersSubset.push(nextProps.peers[i]);
             }
-            
+
             let showPreviousPage;
             let showNextPage;
 
@@ -94,14 +96,15 @@ class PeersPage extends Component {
                 showNextPage = true;
             }
 
-            this.pageControl = (<PageNavigationControl 
+            this.pageControl = (<PageNavigationControl
                                   page = {nextProps.page}
-                                  buttonColor = {this.props.legend} 
-                                  
-                                  previousEnabled = {showPreviousPage} 
+                                  buttonColor = {this.props.legend}
+                                  textColor = {this.props.reverseBackground}
+
+                                  previousEnabled = {showPreviousPage}
                                   previousAction = {() => {this.props.actions.navigatePrevious()}}
 
-                                  nextEnabled = {showNextPage} 
+                                  nextEnabled = {showNextPage}
                                   nextAction = {() => {this.props.actions.navigateNext()}} />);
         }
     }
@@ -135,12 +138,12 @@ class PeersPage extends Component {
                             progressBackgroundColor="#ffffffff"
                         />
                     }>
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalPeers} peers
                     </Text>
                     <PeersCard peers = {this.peersSubset} />
                     {this.pageControl}
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalPeers} peers
                     </Text>
                 </KeyboardAwareScrollView>
@@ -148,7 +151,7 @@ class PeersPage extends Component {
         }
 
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )

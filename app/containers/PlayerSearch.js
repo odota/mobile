@@ -37,7 +37,8 @@ export const mapStateToProps = state => ({
     legendHex: state.settingsState.legendHex,
     legendTranslucent: state.settingsState.legendTranslucent,
     parent: state.navigationState.parent,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -104,9 +105,9 @@ class PlayerSearch extends Component {
         }
 
         if(this.props.parent == "Home") {
-            containerStyle = styles.noMarginContainer;
+            containerStyle = [styles.noMarginContainer, {backgroundColor: this.props.background}];
         } else {
-            containerStyle = styles.container;
+            containerStyle = [styles.container, {backgroundColor: this.props.background}];
         }
 
         return (
