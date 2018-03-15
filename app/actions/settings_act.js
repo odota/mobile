@@ -5,7 +5,7 @@ export const types = {
 }
 
 export function changeTheme(themeSet) {
-    var alpha, mod, legend, secondLegend, legendHex, legendTranslucent;
+    var alpha, mod, legend, secondLegend, legendHex, legendTranslucent, background, reverseBackground;
     if(themeSet == 1) {
         alpha = Colors.openDotaAlpha;
         mod = Colors.openDotaMod;

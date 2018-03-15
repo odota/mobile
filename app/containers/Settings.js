@@ -26,7 +26,8 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     secondLegend: state.settingsState.secondLegend,
     theme: state.settingsState.theme,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +83,7 @@ class Settings extends Component {
 
     render() {
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 <KeyboardAwareScrollView>
                     <View style = {[styles.settingsItemContainer, {backgroundColor: this.props.mod}]}>
                         <View style = {styles.settingsTitle}>

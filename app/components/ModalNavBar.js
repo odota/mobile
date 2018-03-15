@@ -108,8 +108,6 @@ const baseStyles = _.extend(base.general, {
         flex: 1
     },
     navBar: {
-        borderBottomWidth: 1,
-        borderBottomColor: '#A5A5A5',
         paddingLeft: 30,
         paddingRight: 30
     },

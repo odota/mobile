@@ -14,10 +14,10 @@ class NavigationButton extends Component {
         return (
             <TouchableOpacity onPress = {this.props.show ? this.props.action : undefined}>
                 <View style = {styles.individualPageControlView}>
-                    <FontAwesome 
-                      name = {this.props.name} 
-                      size = {40} 
-                      allowFontScaling = {false} 
+                    <FontAwesome
+                      name = {this.props.name}
+                      size = {40}
+                      allowFontScaling = {false}
                       color = {this.props.show ? this.props.fontColor : '#00000000'}/>
                 </View>
             </TouchableOpacity>
@@ -26,24 +26,24 @@ class NavigationButton extends Component {
 }
 
 export default class PageNavigationControl extends Component {
-    render() {      
-        const previousDoubleButton = (<NavigationButton 
+    render() {
+        const previousDoubleButton = (<NavigationButton
                                         name = "angle-double-left"
                                         action = {this.props.previousDoubleAction}
                                         show = {this.props.previousDoubleEnabled}
                                         fontColor = {this.props.buttonColor} />);
-        const previousButton = (<NavigationButton 
-                                  name="chevron-left" 
+        const previousButton = (<NavigationButton
+                                  name="chevron-left"
                                   action = {this.props.previousAction}
                                   show = {this.props.previousEnabled}
                                   fontColor = {this.props.buttonColor} />);
-        const nextButton = (<NavigationButton 
+        const nextButton = (<NavigationButton
                               name = "chevron-right"
                               action = {this.props.nextAction}
                               show = {this.props.nextEnabled}
                               fontColor = {this.props.buttonColor} />);
-        const nextDoubleButton = (<NavigationButton 
-                                    name = "angle-double-right" 
+        const nextDoubleButton = (<NavigationButton
+                                    name = "angle-double-right"
                                     action = {this.props.nextDoubleAction}
                                     show = {this.props.nextDoubleEnabled}
                                     fontColor = {this.props.buttonColor} />);
@@ -55,7 +55,7 @@ export default class PageNavigationControl extends Component {
                             {previousButton}
                         </View>
                         <View style={styles.pageContainer}>
-                            <Text style={styles.individualPageControl}>{this.props.page}</Text>
+                            <Text style={[styles.individualPageControl, {color: this.props.textColor}]}>{this.props.page}</Text>
                         </View>
                         <View style = {{flexDirection: 'row'}}>
                             {nextButton}

@@ -37,7 +37,9 @@ export const mapStateToProps = state => ({
     mod: state.settingsState.mod,
     alpha: state.settingsState.alpha,
     parent: state.navigationState.parent,
-    tracker: state.navigationState.tracker
+    tracker: state.navigationState.tracker,
+    background: state.settingsState.background,
+    reverseBackground: state.settingsState.reverseBackground
 });
 
 export const mapDispatchToProps = (dispatch) => ({
@@ -120,16 +122,17 @@ class MatchesPage extends Component {
                 showNextPage = true;
             }
 
-            this.pageControl = (<PageNavigationControl 
+            this.pageControl = (<PageNavigationControl
                                   page = {nextProps.page}
-                                  buttonColor = {this.props.legend} 
+                                  buttonColor = {this.props.legend}
+                                  textColor = {this.props.reverseBackground}
 
                                   previousDoubleEnabled = {showPreviousPage}
                                   previousDoubleAction = {() => {this.props.actions.navigatePreviousMatches(10)}}
-                                  previousEnabled = {showPreviousPage} 
+                                  previousEnabled = {showPreviousPage}
                                   previousAction = {() => {this.props.actions.navigatePreviousMatches(1)}}
 
-                                  nextEnabled = {showNextPage} 
+                                  nextEnabled = {showNextPage}
                                   nextAction = {() => {this.props.actions.navigateNextMatches(1)}}
                                   nextDoubleEnabled = {showNextPage}
                                   nextDoubleAction = {() => {this.props.actions.navigateNextMatches(10)}} />);
@@ -181,12 +184,12 @@ class MatchesPage extends Component {
                                 <Text style = {[styles.searchButtonText, {color: this.props.secondLegend}]}>Search Matches</Text>
                             </View>
                         </TouchableOpacity>
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalMatches} matches
                     </Text>
                     <MatchesCard matches = {this.matchesSubset} sortMatches = {this.sortMatches} default = {false} />
                     {this.pageControl}
-                    <Text style = {styles.filterText}>
+                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
                         {this.initialValue} - {this.endValue} of {this.totalMatches} matches
                     </Text>
                 </KeyboardAwareScrollView>
@@ -194,7 +197,7 @@ class MatchesPage extends Component {
         }
 
         return (
-            <View style = {styles.container}>
+            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
                 {content}
             </View>
         )
