@@ -35,6 +35,10 @@ export default function playerMatchesState(state = initialState, action = {}) {
             }
             return Object.assign({}, state, { page: newPage });
         }
+        case types.RESET_PAGE: {
+            return Object.assign({}, state, { page: 1 });
+        }
+
         default:
             return state;
     }

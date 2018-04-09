@@ -8,7 +8,8 @@ export const types = {
     SORT_MATCHES: 'SORT_MATCHES',
     SET_MAX_PAGES: 'SET_MAX_PAGES',
     NAVIGATE_NEXT_MATCHES: 'NAVIGATE_NEXT_MATCHES',
-    NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES'
+    NAVIGATE_PREVIOUS_MATCHES: 'NAVIGATE_PREVIOUS_MATCHES',
+    RESET_PAGE: 'RESET_PAGE'
 }
 
 export function navigateNextMatches(amount) {
@@ -63,6 +64,12 @@ export function sortMatches(sortField, sortDirection) {
         type: types.SORT_MATCHES,
         sortField,
         sortDirection
+    }
+}
+
+export function resetMatchesPage() {
+    return {
+        type: types.RESET_PAGE
     }
 }
 

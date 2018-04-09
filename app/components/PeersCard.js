@@ -14,6 +14,9 @@ import { Actions } from 'react-native-router-flux';
 import { bindActionCreators } from 'redux';
 import * as favouritesActions from '../actions/favourites_act';
 import * as navigationActions from '../actions/navigation_act';
+import * as playerMatchesActions from '../actions/player_matches_act';
+import * as playerHeroesActions from '../actions/player_heroes_act';
+import * as peersActions from '../actions/peers_act';
 
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
@@ -39,7 +42,10 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = (dispatch) => ({
     favouritesActions: bindActionCreators(favouritesActions, dispatch),
-    navigationActions: bindActionCreators(navigationActions, dispatch)
+    navigationActions: bindActionCreators(navigationActions, dispatch),
+    playerMatchesActions: bindActionCreators(playerMatchesActions, dispatch),
+    playerHeroesActions: bindActionCreators(playerHeroesActions, dispatch),
+    peersActions: bindActionCreators(peersActions, dispatch)
 });
 
 class PeersCard extends Component {
@@ -60,14 +66,23 @@ class PeersCard extends Component {
         if(this.props.parent == "Favourites") {
             this.props.navigationActions.pushContextIdFavourite(accountId);
             this.props.navigationActions.changeContextId(accountId);
+            this.props.playerMatchesActions.resetMatchesPage();
+            this.props.playerHeroesActions.resetHeroesPage();
+            this.props.peersActions.resetPeersPage();
             Actions.playerProfileFavourite();
         } else if (this.props.parent == "Search") {
             this.props.navigationActions.pushContextIdSearch(accountId);
             this.props.navigationActions.changeContextId(accountId);
+            this.props.playerMatchesActions.resetMatchesPage();
+            this.props.playerHeroesActions.resetHeroesPage();
+            this.props.peersActions.resetPeersPage();
             Actions.playerProfileSearch();
         } else if (this.props.parent == "Home") {
             this.props.navigationActions.pushContextIdHome(accountId);
             this.props.navigationActions.changeContextId(accountId);
+            this.props.playerMatchesActions.resetMatchesPage();
+            this.props.playerHeroesActions.resetHeroesPage();
+            this.props.peersActions.resetPeersPage();
             Actions.playerProfileHome();
         }
     }

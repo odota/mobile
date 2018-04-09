@@ -17,6 +17,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as matchDetailsActions from '../actions/match_details_act';
 import * as navigationActions from '../actions/navigation_act';
+import * as playerMatchesActions from '../actions/player_matches_act';
+import * as playerHeroesActions from '../actions/player_heroes_act';
+import * as peersActions from '../actions/peers_act';
 import { Actions } from 'react-native-router-flux';
 
 import { kFormatter } from '../utils/kFormatter';
@@ -56,7 +59,10 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = (dispatch) => ({
     actions: bindActionCreators(matchDetailsActions, dispatch),
-    navigationActions: bindActionCreators(navigationActions, dispatch)
+    navigationActions: bindActionCreators(navigationActions, dispatch),
+    playerMatchesActions: bindActionCreators(playerMatchesActions, dispatch),
+    playerHeroesActions: bindActionCreators(playerHeroesActions, dispatch),
+    peersActions: bindActionCreators(peersActions, dispatch)
 });
 
 class MatchOverview extends Component {
@@ -437,14 +443,23 @@ class MatchOverview extends Component {
             if(this.props.parent == "Favourites") {
                 this.props.navigationActions.pushContextIdFavourite(id);
                 this.props.navigationActions.changeContextId(id);
+                this.props.playerMatchesActions.resetMatchesPage();
+                this.props.playerHeroesActions.resetHeroesPage();
+                this.props.peersActions.resetPeersPage();
                 Actions.playerProfileFavourite();
             } else if (this.props.parent == "Search") {
                 this.props.navigationActions.pushContextIdSearch(id);
                 this.props.navigationActions.changeContextId(id);
+                this.props.playerMatchesActions.resetMatchesPage();
+                this.props.playerHeroesActions.resetHeroesPage();
+                this.props.peersActions.resetPeersPage();
                 Actions.playerProfileSearch();
             } else if (this.props.parent == "Home") {
                 this.props.navigationActions.pushContextIdHome(id);
                 this.props.navigationActions.changeContextId(id);
+                this.props.playerMatchesActions.resetMatchesPage();
+                this.props.playerHeroesActions.resetHeroesPage();
+                this.props.peersActions.resetPeersPage();
                 Actions.playerProfileHome();
             }
         }

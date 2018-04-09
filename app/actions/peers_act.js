@@ -5,7 +5,8 @@ export const types = {
     RECEIVE_PEERS: 'RECEIVE_PEERS',
     RECEIVE_EMPTY_PEERS: 'RECEIVE_EMPTY_PEERS',
     NAVIGATE_NEXT_PEERS: 'NAVIGATE_NEXT_PEERS',
-    NAVIGATE_PREVIOUS_PEERS: 'NAVIGATE_PREVIOUS_PEERS'
+    NAVIGATE_PREVIOUS_PEERS: 'NAVIGATE_PREVIOUS_PEERS',
+    RESET_PAGE: 'RESET_PAGE'
 }
 
 function requestPeers() {
@@ -51,5 +52,11 @@ export function navigateNext() {
 export function navigatePrevious() {
     return {
         type: types.NAVIGATE_PREVIOUS_PEERS
+    }
+}
+
+export function resetPeersPage() {
+    return {
+        type: types.RESET_PAGE
     }
 }

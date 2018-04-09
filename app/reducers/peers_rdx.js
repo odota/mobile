@@ -13,6 +13,8 @@ export default function peersState(state = initialState, action = {}) {
             return Object.assign({}, state, { page: state.page + 1 });
         case types.NAVIGATE_PREVIOUS_PEERS:
             return Object.assign({}, state, { page: state.page - 1 });
+        case types.RESET_PAGE:
+            return Object.assign({}, state, { page: 1 });
         default:
             return state;
     }

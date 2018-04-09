@@ -5,7 +5,8 @@ export const types = {
     RECEIVE_HEROES: 'RECEIVE_HEROES',
     RECEIVE_EMPTY_HEROES: 'RECEIVE_EMPTY_HEROES',
     NAVIGATE_NEXT_HEROES: 'NAVIGATE_NEXT_HEROES',
-    NAVIGATE_PREVIOUS_HEROES: 'NAVIGATE_PREVIOUS_HEROES'
+    NAVIGATE_PREVIOUS_HEROES: 'NAVIGATE_PREVIOUS_HEROES',
+    RESET_PAGE: 'RESET_PAGE'
 };
 
 function requestHeroes() {
@@ -51,5 +52,11 @@ export function navigateNext() {
 export function navigatePrevious() {
     return {
         type: types.NAVIGATE_PREVIOUS_HEROES
+    }
+}
+
+export function resetHeroesPage() {
+    return {
+        type: types.RESET_PAGE
     }
 }

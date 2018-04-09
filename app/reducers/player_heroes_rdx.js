@@ -13,6 +13,8 @@ export default function playerHeroesState(state = initialState, action = {}) {
             return Object.assign({}, state, { page: state.page + 1 });
         case types.NAVIGATE_PREVIOUS_HEROES:
             return Object.assign({}, state, { page: state.page - 1 });
+        case types.RESET_PAGE:
+            return Object.assign({}, state, { page: 1 });
         default:
             return state;
     }

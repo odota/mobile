@@ -16,6 +16,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import * as navigationActions from '../actions/navigation_act';
+import * as playerMatchesActions from '../actions/player_matches_act';
+import * as playerHeroesActions from '../actions/player_heroes_act';
+import * as peersActions from '../actions/peers_act';
 
 import NavigationBar from 'react-native-navbar';
 
@@ -38,7 +41,10 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    navigationActions: bindActionCreators(navigationActions, dispatch)
+    navigationActions: bindActionCreators(navigationActions, dispatch),
+    playerMatchesActions: bindActionCreators(playerMatchesActions, dispatch),
+    playerHeroesActions: bindActionCreators(playerHeroesActions, dispatch),
+    peersActions: bindActionCreators(peersActions, dispatch)
 });
 
 class DeepNavBar extends Component {
@@ -59,6 +65,9 @@ class DeepNavBar extends Component {
             this.props.navigationActions.popContextIdHome();
             this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-2]);
         }
+        this.props.playerMatchesActions.resetMatchesPage();
+        this.props.playerHeroesActions.resetHeroesPage();
+        this.props.peersActions.resetPeersPage();
         Actions.pop();
     }
 
