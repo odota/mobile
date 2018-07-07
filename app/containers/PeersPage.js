@@ -46,6 +46,7 @@ class PeersPage extends Component {
         this.state = {
             refreshing: false
         };
+        this.scrollToTop = this.scrollToTop.bind(this);
     }
 
     componentDidMount() {
@@ -102,11 +103,22 @@ class PeersPage extends Component {
                                   textColor = {this.props.reverseBackground}
 
                                   previousEnabled = {showPreviousPage}
-                                  previousAction = {() => {this.props.actions.navigatePrevious()}}
+                                  previousAction = {() => {
+                                  this.props.actions.navigatePrevious();
+                                  this.scrollToTop();
+                                  }}
 
                                   nextEnabled = {showNextPage}
-                                  nextAction = {() => {this.props.actions.navigateNext()}} />);
+                                  nextAction = {() => {
+                                  this.props.actions.navigateNext();
+                                  this.scrollToTop();
+                                  }} />
+                                  );
         }
+    }
+    
+    scrollToTop(){
+        this.scrollViewRef.scrollTo({x:0,y:0,animated:true});
     }
 
     render() {
@@ -127,6 +139,9 @@ class PeersPage extends Component {
             var refreshColor = this.props.legendHex
             content = (
                 <KeyboardAwareScrollView style = {{marginTop: 5}}
+                     innerRef={ref => {
+                        this.scrollViewRef = ref;
+                        }}  
                     refreshControl={
                         <RefreshControl
                             refreshing = {this.state.refreshing}
