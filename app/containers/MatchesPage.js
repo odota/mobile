@@ -57,6 +57,7 @@ class MatchesPage extends Component {
         };
 
         this.sortMatches = this.sortMatches.bind(this);
+        this.scrollToTop = this.scrollToTop.bind(this); 
     }
 
     componentDidMount() {
@@ -82,6 +83,10 @@ class MatchesPage extends Component {
 
     sortMatches(sortField, sortDirection) {
         this.props.actions.sortMatches(sortField, sortDirection);
+    }
+
+    scrollToTop(){
+        this.scrollViewRef.scrollTo({x:0,y:0,animated:true})
     }
 
     componentWillMount() {
@@ -128,14 +133,26 @@ class MatchesPage extends Component {
                                   textColor = {this.props.reverseBackground}
 
                                   previousDoubleEnabled = {showPreviousPage}
-                                  previousDoubleAction = {() => {this.props.actions.navigatePreviousMatches(10)}}
+                                  previousDoubleAction = {() => {
+                                  this.props.actions.navigatePreviousMatches(10);
+                                  this.scrollToTop();
+                                  }}
                                   previousEnabled = {showPreviousPage}
-                                  previousAction = {() => {this.props.actions.navigatePreviousMatches(1)}}
+                                  previousAction = {() => {
+                                  this.props.actions.navigatePreviousMatches(1);
+                                  this.scrollToTop();
+                                  }}
 
                                   nextEnabled = {showNextPage}
-                                  nextAction = {() => {this.props.actions.navigateNextMatches(1)}}
+                                  nextAction = {() => {
+                                  this.props.actions.navigateNextMatches(1);
+                                  this.scrollToTop();
+                                  }}
                                   nextDoubleEnabled = {showNextPage}
-                                  nextDoubleAction = {() => {this.props.actions.navigateNextMatches(10)}} />);
+                                  nextDoubleAction = {() => {
+                                  this.props.actions.navigateNextMatches(10);
+                                  this.scrollToTop();
+                                  }} />);
 
         } else if (this.totalMatches == 0) {
             this.matchesSubset = new Array();
@@ -165,6 +182,9 @@ class MatchesPage extends Component {
             var refreshColor = this.props.legendHex;
             content = (
                 <KeyboardAwareScrollView style = {{marginTop: 5}}
+                    innerRef={ref => {
+                    this.scrollViewRef = ref;
+                    }}
                     refreshControl={
                         <RefreshControl
                             refreshing = {this.state.refreshing}
@@ -175,6 +195,7 @@ class MatchesPage extends Component {
                             colors = {[refreshColor]}
                             progressBackgroundColor="#ffffffff"
                         />
+                        
                     }>
                         <TouchableOpacity  onPress = {this.onSearchPressed} style = {styles.searchContainer}>
                             <View style = {[styles.searchIconContainer, {backgroundColor: this.props.alpha}]}>
