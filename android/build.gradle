@@ -1,7 +1,21 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        googlePlayServicesVersion = "16.0.3"
+    }
     repositories {
+        configurations.all {
+            resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+                def requested = details.requested
+                if (requested.group == 'com.google.android.gms') {
+                    details.useVersion '16.0.3'
+                }
+                if (requested.group == 'com.google.firebase') {
+                    details.useVersion '16.0.3'
+                }
+            }
+        }
         google()
         jcenter()
     }
@@ -25,4 +39,12 @@ allprojects {
             url "$rootDir/../node_modules/react-native/android"
         }
     }
+}
+
+ext {
+    buildToolsVersion = "27.0.3"
+    minSdkVersion = 16
+    compileSdkVersion = 27
+    targetSdkVersion = 26
+    supportLibVersion = "27.0.3"
 }

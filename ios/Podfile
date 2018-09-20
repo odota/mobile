@@ -6,10 +6,30 @@ target 'OpenDota' do
   # use_frameworks!
 
   # Pods for OpenDota
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTBlob',
+    'RCTCameraRoll',
+    'RCTImage',
+    'RCTNetwork',
+    'RCTPushNotification',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket',
+    'RCTLinkingIOS'
+  ]
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
   pod 'AppCenter/Push', '~> 1.1.0'
   pod 'AppCenter/Crashes', '~> 1.1.0'
   pod 'AppCenterReactNativeShared', '~> 1.1.0'
   pod 'AppCenter/Analytics', '~> 1.1.0'
   pod 'RNSVG', :path => '../node_modules/react-native-svg'
-
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 end

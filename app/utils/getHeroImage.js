@@ -230,6 +230,8 @@ export function getHeroImage(id) {
         staticImage = require('../assets/heroes/dark_willow_full.png');
     } else if (id == 120) {
         staticImage = require('../assets/heroes/pangolier_full.png');
+    } else if (id == 121) {
+        staticImage = require('../assets/heroes/grimstroke_full.png');
     } else {
         staticImage = require('../assets/no-item.png');
     }

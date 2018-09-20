@@ -1592,9 +1592,9 @@ dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
 
-dotaconstants@5.24.0:
-  version "5.24.0"
-  resolved "https://registry.yarnpkg.com/dotaconstants/-/dotaconstants-5.24.0.tgz#1e2057198268acefe5ef9973f69949d890cd0913"
+dotaconstants@6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/dotaconstants/-/dotaconstants-6.1.1.tgz#96211529bcb660b16f393bcd418fe94213e69e62"
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"
@@ -3757,9 +3757,9 @@ react-native-drawer-layout@1.3.2:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-google-analytics-bridge@5.4.1:
-  version "5.4.1"
-  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-5.4.1.tgz#fd5dacb86436b7e08f1972a8205229ada2ea2abf"
+react-native-google-analytics-bridge@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-google-analytics-bridge/-/react-native-google-analytics-bridge-6.1.0.tgz#61bb1161c775dc8be9f1c5e386867c19b0cdde27"
 
 react-native-iphone-x-helper@^1.0.1:
   version "1.0.3"

@@ -40,6 +40,7 @@ var RankIcon = ({rankTier, leaderboardRank}) =>  {
         '7a': require('../assets/rank_icons/rank_icon_7a.png'),
         '7b': require('../assets/rank_icons/rank_icon_7b.png'),
         '7c': require('../assets/rank_icons/rank_icon_7c.png'),
+        '8': require('../assets/rank_icons/rank_icon_8.png')
     };
 
     const starIcons = {

@@ -992,6 +992,14 @@ export function getAbilityHigh(id) {
 		staticImage = require('../assets/abilities/tiny_toss_tree_lg.png');
 	} else if (id == 8340) {
 		staticImage = require('../assets/abilities/dark_willow_terrorize_lg.png');
+	} else if (id == 6491) {
+		staticImage = require('../assets/abilities/grimstroke_soul_chain_lg.png');
+	} else if (id == 8000) {
+		staticImage = require('../assets/abilities/grimstroke_dark_artistry_lg.png');
+	} else if (id == 8006) {
+		staticImage = require('../assets/abilities/grimstroke_ink_creature_lg.png');
+	} else if (id == 8007) {
+		staticImage = require('../assets/abilities/grimstroke_spirit_walk_lg.png');
 	} else {
 		staticImage = require('../assets/talent_tree.png');
 	}
