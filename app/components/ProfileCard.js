@@ -92,11 +92,11 @@ class ProfileCard extends Component {
                 <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
 
                     <View style = {{flexDirection: 'row'}}>
-                        <View style = {styles.avatarContainer}>
+                        <View style = {styles.profileAvatarContainer}>
                             <Image style = {[styles.bigImageAvatar, {marginTop: 4, marginBottom: 15}]} source = {{uri: info.profile.avatarfull}} />
                             <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank}/>
                         </View>
-                        <View style = {styles.info}>
+                        <View style = {styles.profileInfoContainer}>
                             <View style = {styles.nameContainer}>
                                 {name}
                             </View>
@@ -159,12 +159,12 @@ const baseStyles = _.extend(base.general, {
     topContainer: {
         flexDirection: 'row'
     },
-    avatarContainer: {
+    profileAvatarContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         flex: 1
     },
-    info: {
+    profileInfoContainer: {
         flex: 2
     },
     dataContainer: {

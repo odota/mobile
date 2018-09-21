@@ -145,10 +145,6 @@ android {
 
 dependencies {
     implementation project(':react-native-svg')
-    implementation project(':appcenter-push')
-    implementation project(':appcenter-crashes')
-    implementation project(':appcenter-analytics')
-    implementation project(':appcenter')
     implementation project(':react-native-device-info')
     implementation project(':react-native-google-analytics-bridge')
     implementation project(':react-native-vector-icons')

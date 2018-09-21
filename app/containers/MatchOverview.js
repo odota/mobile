@@ -718,7 +718,6 @@ class MatchOverview extends Component {
                                 <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                                 <ScrollView horizontal showsHorizontalScrollIndicator = {true}>
                                     <View style = {{flexDirection: 'row'}}>
-                                        <StockLine data={this.state.radiantGoldAdvantage} options={options} xKey='x' yKey='y' />
                                     </View>
                                 </ScrollView>
                             </View>
@@ -793,7 +792,6 @@ class MatchOverview extends Component {
                                 <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
                                 <ScrollView horizontal showsHorizontalScrollIndicator = {true}>
                                     <View style = {{flexDirection: 'row'}}>
-                                        <StockLine data={this.state.radiantXpAdvantage} options={options} xKey='x' yKey='y' />
                                     </View>
                                 </ScrollView>
                             </View>

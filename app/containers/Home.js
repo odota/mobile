@@ -72,7 +72,7 @@ class Home extends Component {
         } else {
             containerStyle = [styles.container, {backgroundColor: this.props.background}];
             content = (
-                <ScrollView style = {styles.contentContainer}>
+                <ScrollView style = {styles.homeContentContainer}>
                     <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 9, marginVertical: 5}}>
                         <Text style = {{color: this.props.secondLegend, fontFamily: Fonts.base, fontSize: 36, textAlign: 'center'}}>
                             OPENDOTA
@@ -134,7 +134,7 @@ class Home extends Component {
 }
 
 const baseStyles = _.extend(base.general, {
-    contentContainer: {
+    homeContentContainer: {
         flex: 1,
         marginTop: 10
     },
