@@ -38,7 +38,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({...playerOverviewActions, ...playerMatchesActions, ...navigationActions, ...playerHeroesActions, ...peersActions}, dispatch)
+    actions: bindActionCreators({ ...playerOverviewActions, ...playerMatchesActions, ...navigationActions, ...playerHeroesActions, ...peersActions }, dispatch)
 });
 
 class PlayerProfile extends Component {
@@ -51,8 +51,8 @@ class PlayerProfile extends Component {
         this.props.tracker.trackScreenView('Player Profile');
     }
 
-    handleChangeTab({i}) {
-        if(this.props) {
+    handleChangeTab({ i }) {
+        if (this.props) {
             if (i == 0 && !this.props.isLoadingOverview) {
                 this.props.actions.fetchOverview(this.props.contextId);
                 this.props.actions.fetchWl(this.props.contextId);
@@ -70,16 +70,16 @@ class PlayerProfile extends Component {
 
     render() {
         var withoutAnimation = false;
-        if(this.props.theme == 9) {
+        if (this.props.theme == 9) {
             withoutAnimation = true;
         }
-        return(
-            <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText} tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend} tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                locked = {true} onChangeTab={this.handleChangeTab.bind(this)} scrollWithoutAnimation = {withoutAnimation}>
-                <PlayerOverview tabLabel = "Overview" />
-                <MatchesPage tabLabel = "Matches" />
-                <HeroesPage tabLabel = "Heroes" />
-                <Peers tabLabel = "Peers" />
+        return (
+            <ScrollableTabView tabBarPosition="bottom" tabBarTextStyle={styles.tabBarText} tabBarBackgroundColor={this.props.alpha} tabBarActiveTextColor={this.props.legend} tabBarInactiveTextColor={this.props.secondLegend} tabBarUnderlineStyle={[styles.tabBarUnderlineStyle, { backgroundColor: this.props.legend }]}
+                locked={true} onChangeTab={this.handleChangeTab.bind(this)} scrollWithoutAnimation={withoutAnimation}>
+                <PlayerOverview tabLabel="Overview" />
+                <MatchesPage tabLabel="Matches" />
+                <HeroesPage tabLabel="Heroes" />
+                <Peers tabLabel="Peers" />
             </ScrollableTabView>
         )
     }

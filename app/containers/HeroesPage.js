@@ -24,6 +24,12 @@ export const mapStateToProps = state => ({
     page: state.playerHeroesState.page,
     isLoadingHeroes: state.playerHeroesState.isLoadingHeroes,
     isEmptyHeroes: state.playerHeroesState.isEmptyHeroes,
+    heroesSubset: state.playerHeroesState.heroesSubset,
+    showPreviousPage: state.playerHeroesState.showPreviousPage,
+    showNextPage: state.playerHeroesState.showNextPage,
+    initialValue: state.playerHeroesState.initialValue,
+    endValue: state.playerHeroesState.endValue,
+    totalHeroes: state.playerHeroesState.totalHeroes,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
@@ -49,6 +55,9 @@ class HeroesPage extends Component {
 
     componentDidMount() {
         this.props.tracker.trackScreenView('Heroes');
+        if(!this.props.isLoadingHeroes) {
+            this.props.actions.fetchHeroes(this.props.contextId, 30);
+        }
     }
 
     onRefresh() {
@@ -58,51 +67,10 @@ class HeroesPage extends Component {
         });
     }
 
-    componentWillMount() {
-        if(!this.props.isLoadingHeroes) {
-            this.props.actions.fetchHeroes(this.props.contextId, 30);
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.initialValue = 1 + ((nextProps.page - 1) * 20);
-        this.endValue = nextProps.page * 20;
-        this.totalHeroes = nextProps.heroes.length;
-
-        if(this.totalHeroes > 0){
-            if(this.endValue > this.totalHeroes) {
-                this.endValue = this.totalHeroes;
-            }
-            this.heroesSubset = new Array();
-            for(var i = this.initialValue-1; i < this.endValue; i++) {
-                this.heroesSubset.push(nextProps.heroes[i]);
-            }
-
-            let showPreviousPage = this.initialValue != 1;
-            let showNextPage = this.endValue != this.totalHeroes;
-
-            this.pageControl = (<PageNavigationControl
-                                  page = {nextProps.page}
-                                  buttonColor = {this.props.legend}
-                                  textColor = {this.props.reverseBackground}
-
-                                  previousEnabled = {showPreviousPage}
-                                  previousAction = {() => {
-                                  this.props.actions.navigatePrevious();
-                                  this.scrollToTop()
-                                  }}
-
-                                  nextEnabled = {showNextPage}
-                                  nextAction = {() => {
-                                  this.props.actions.navigateNext();
-                                  this.scrollToTop()
-                                  }} />);
-        }
-    }
-
     scrollToTop(){
         this.scrollViewRef.scrollTo({x:0,y:0,animated:true})
     }
+
     render() {
         var content = (<View/>);
         if(this.props.isLoadingHeroes) {
@@ -117,8 +85,24 @@ class HeroesPage extends Component {
                     <Text style = {styles.noDataText}>No data found</Text>
                 </View>
             )
-        } else if (this.heroesSubset != null){
+        } else if (this.props.heroesSubset != null){
             var refreshColor = this.props.legendHex;
+            this.pageControl = (<PageNavigationControl
+                page = {this.props.page}
+                buttonColor = {this.props.legend}
+                textColor = {this.props.reverseBackground}
+
+                previousEnabled = {this.props.showPreviousPage}
+                previousAction = {() => {
+                this.props.actions.navigatePrevious();
+                this.scrollToTop()
+                }}
+
+                nextEnabled = {this.props.showNextPage}
+                nextAction = {() => {
+                this.props.actions.navigateNext();
+                this.scrollToTop()
+                }} />);
             content = (
                 <KeyboardAwareScrollView style = {{marginTop: 5}}
                     innerRef={ref => {
@@ -137,12 +121,12 @@ class HeroesPage extends Component {
                     }
                     >
                     <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
-                        {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
+                        {this.props.initialValue} - {this.props.endValue} of {this.props.totalHeroes} heroes
                     </Text>
-                    <HeroesCard heroes = {this.heroesSubset} />
+                    <HeroesCard heroes = {this.props.heroesSubset} />
                     {this.pageControl}
                     <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
-                        {this.initialValue} - {this.endValue} of {this.totalHeroes} heroes
+                        {this.props.initialValue} - {this.props.endValue} of {this.props.totalHeroes} heroes
                     </Text>
                 </KeyboardAwareScrollView>
             )
