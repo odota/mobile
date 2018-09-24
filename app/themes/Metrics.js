@@ -1,17 +1,26 @@
 import { Platform, Dimensions } from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 
-let width, height;
+let width, height, deviceOS;
 
 width = Dimensions.get('window').width;
 height = Dimensions.get('window').height;
 
-const navBarHeight = (DeviceInfo.getModel() == "iPhone X") ? 84 :(Platform.OS === 'ios') ? 60 : 40;
+if(Platform.OS == "ios") {
+  deviceOS = "ios"
+} else {
+  deviceOS = "android"
+}
+
+const navBarHeight = (DeviceInfo.getModel() == "iPhone X") ? 44 : (Platform.OS === 'ios') ? 44 : 56;
+const statusBarHeight = (DeviceInfo.getModel() == "iPhone X") ? 44 : (Platform.OS === 'ios') ? 20 : 0;
 
 const metrics = {
     navBarHeight: navBarHeight,
+    statusBarHeight: statusBarHeight,
     screenWidth: width,
     screenHeight: height,
+    deviceOS: deviceOS,
 
     fonts: {
       loginTitle: 18,

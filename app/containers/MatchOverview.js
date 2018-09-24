@@ -31,8 +31,6 @@ import items from 'dotaconstants/build/item_ids.json';
 import regionsArray from '../json/regions_list.json';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-import { StockLine } from 'react-native-pathjs-charts';
-
 import moment from 'moment';
 
 import _ from 'lodash';

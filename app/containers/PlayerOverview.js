@@ -39,14 +39,14 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({...playerOverviewActions, ...playerMatchesActions, ...navigationActions}, dispatch)
+    actions: bindActionCreators({ ...playerOverviewActions, ...playerMatchesActions, ...navigationActions }, dispatch)
 });
 
 class PlayerOverview extends Component {
 
     constructor(props) {
         super(props);
-        this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.matchesDS = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.sortMatches = this.sortMatches.bind(this);
     }
 
@@ -55,7 +55,7 @@ class PlayerOverview extends Component {
     }
 
     componentWillMount() {
-        if(!this.props.isLoadingOverview) {
+        if (!this.props.isLoadingOverview) {
             this.props.actions.fetchOverview(this.props.contextId);
             this.props.actions.fetchWl(this.props.contextId);
             this.props.actions.fetchMatches(this.props.contextId, 20);
@@ -63,7 +63,7 @@ class PlayerOverview extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if(nextProps.homeTab) {
+        if (nextProps.homeTab) {
             this.props.actions.consumeHomeTab();
             this.props.actions.fetchOverview(nextProps.contextId);
             this.props.actions.fetchWl(nextProps.contextId);
@@ -77,29 +77,29 @@ class PlayerOverview extends Component {
 
     render() {
         var content;
-        if(this.props.isLoadingOverview || this.props.isLoadingMatches) {
+        if (this.props.isLoadingOverview || this.props.isLoadingMatches) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <ActivityIndicator size="large" color = {this.props.legend}/>
+                <View style={styles.contentContainer}>
+                    <ActivityIndicator size="large" color={this.props.legend} />
                 </View>
             )
-        } else if(this.props.isEmptyOverview) {
+        } else if (this.props.isEmptyOverview) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>No data found</Text>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.noDataText}>No data found</Text>
                 </View>
             )
         } else {
             content = (
                 <ScrollView>
-                    <ProfileCard info = {this.props.overview} wl = {this.props.wl}/>
-                    <MatchesCard title = {"RECENT MATCHES"} matches = {this.props.matches} sortMatches = {this.sortMatches} default = {false} />
+                    <ProfileCard info={this.props.overview} wl={this.props.wl} />
+                    <MatchesCard title={"RECENT MATCHES"} matches={this.props.matches} sortMatches={this.sortMatches} default={false} />
                 </ScrollView>
             )
         }
-        return(
-            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
-                    {content}
+        return (
+            <View style={[styles.container, { backgroundColor: this.props.background }]}>
+                {content}
             </View>
         )
     }

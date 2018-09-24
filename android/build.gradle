@@ -2,7 +2,7 @@
 
 buildscript {
     ext {
-        googlePlayServicesVersion = "16.0.3"
+        googlePlayServicesVersion = "+"
     }
     repositories {
         configurations.all {

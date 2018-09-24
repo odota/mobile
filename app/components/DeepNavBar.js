@@ -5,7 +5,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     StatusBar,
-    Platform,
     BackHandler
 } from 'react-native';
 
@@ -20,12 +19,8 @@ import * as playerMatchesActions from '../actions/player_matches_act';
 import * as playerHeroesActions from '../actions/player_heroes_act';
 import * as peersActions from '../actions/peers_act';
 
-import NavigationBar from 'react-native-navbar';
-
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
-
-import DeviceInfo from 'react-native-device-info';
+import metrics from '../themes/Metrics';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -55,15 +50,15 @@ class DeepNavBar extends Component {
     }
 
     backPressed() {
-        if(this.props.parent == "Favourites") {
+        if (this.props.parent == "Favourites") {
             this.props.navigationActions.popContextIdFavourite();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-2]);
+            this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length - 2]);
         } else if (this.props.parent == "Search") {
             this.props.navigationActions.popContextIdSearch();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-2]);
+            this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length - 2]);
         } else if (this.props.parent == "Home") {
             this.props.navigationActions.popContextIdHome();
-            this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-2]);
+            this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length - 2]);
         }
         this.props.playerMatchesActions.resetMatchesPage();
         this.props.playerHeroesActions.resetHeroesPage();
@@ -74,15 +69,15 @@ class DeepNavBar extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', () => {
             try {
-                if(this.props.parent == "Favourites") {
+                if (this.props.parent == "Favourites") {
                     this.props.navigationActions.popContextIdFavourite();
-                    this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-1]);
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length - 1]);
                 } else if (this.props.parent == "Search") {
                     this.props.navigationActions.popContextIdSearch();
-                    this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-1]);
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length - 1]);
                 } else if (this.props.parent == "Home") {
                     this.props.navigationActions.popContextIdHome();
-                    this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-1]);
+                    this.props.navigationActions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length - 1]);
                 }
                 return false;
             } catch (err) {
@@ -92,13 +87,13 @@ class DeepNavBar extends Component {
     }
 
     render() {
-        let title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+        let title = <Text style={[styles.title, { color: this.props.secondLegend }]}>{this.props.title}</Text>
 
         var leftElements = (
-            <View style = {styles.navItemView}>
-                <TouchableOpacity onPress = {() => {this.backPressed()}}>
-                    <View style = {styles.leftNavButtonView}>
-                        <FontAwesome name = "chevron-left" size = {20} allowFontScaling = {false} color = {this.props.legend}/>
+            <View style={styles.navItemView}>
+                <TouchableOpacity onPress={() => { this.backPressed() }}>
+                    <View style={styles.leftNavButtonView}>
+                        <FontAwesome name="chevron-left" size={20} allowFontScaling={false} color={this.props.legend} />
                     </View>
                 </TouchableOpacity>
                 {title}
@@ -109,79 +104,28 @@ class DeepNavBar extends Component {
             <View />
         )
 
-        var statusBarPadding;
-        var navBarMargin;
-        if(Platform.OS == "ios") {
-            if(DeviceInfo.getModel() == "iPhone X") {
-                statusBarPadding = <View style = {[styles.iPhoneXPadding, { backgroundColor: this.props.mod}]} />;
-            } else {
-                statusBarPadding = <View style={[styles.statusBarPadding, {backgroundColor: this.props.mod}]}/>;
-            }
-            navBarMargin = -20;
-        } else {
-            statusBarPadding = <View />;
-            navBarMargin = 0;
-        }
-
         return (
-            <View style = {styles.navBarContainer}>
+            <View>
                 <StatusBar
-                    backgroundColor = {this.props.mod}
-                    barStyle = "light-content"
-                    />
-                {statusBarPadding}
-                <NavigationBar
-                    style = {[styles.navBar, {backgroundColor: this.props.mod, marginTop: navBarMargin}]}
-                    leftButton = {leftElements}
-                    rightButton = {rightElements}
-                    />
+                    backgroundColor={this.props.mod}
+                    barStyle="light-content"
+                />
+                <View style={{ height: metrics.statusBarHeight, backgroundColor: this.props.mod }} />
+                <View style={[styles.navBarContainer, { height: metrics.navBarHeight, backgroundColor: this.props.mod, flexDirection: 'row' }]}>
+                    <View style={styles.leftItemView}>
+                        {leftElements}
+                    </View>
+                    <View style={styles.rightItemView}>
+                        {rightElements}
+                    </View>
+                </View>
             </View>
         )
     }
 
 }
 
-const baseStyles = _.extend(base.general, {
-    statusBarPadding: {
-        height: 20
-    },
-    iPhoneXPadding: {
-        height: 44
-    },
-    navBarContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 50,
-        alignSelf: 'stretch',
-        flex: 1
-    },
-    navBar: {
-        paddingLeft: 15,
-        paddingRight: 15
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        fontFamily: Fonts.base,
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    navItemView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    leftNavButtonView: {
-        paddingRight: 20,
-        paddingTop: 8,
-        paddingBottom: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flex: 1
-    }
+const baseStyles = _.extend(base.navbar, {
 });
 
 const styles = StyleSheet.create(baseStyles);

@@ -19,10 +19,9 @@ import { bindActionCreators } from 'redux';
 import * as favouritesActions from '../actions/favourites_act';
 import * as homeActions from '../actions/home_act';
 
-import NavigationBar from 'react-native-navbar';
-
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
+import metrics from '../themes/Metrics';
 
 import DeviceInfo from 'react-native-device-info';
 
@@ -39,7 +38,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({...favouritesActions, ...homeActions}, dispatch)
+    actions: bindActionCreators({ ...favouritesActions, ...homeActions }, dispatch)
 });
 
 class NavBar extends Component {
@@ -57,51 +56,57 @@ class NavBar extends Component {
 
     onPurgeFavouritesPressed() {
         Alert.alert('Delete All Favourites',
-                    'Are you sure that you want to delete all profiles from favourites?',
-                    [
-                        {text: 'Cancel', style: 'cancel'},
-                        {text: 'OK', onPress: () => {
-                            this.props.tracker.trackEvent('Favourites', 'Purged');
-                            this.props.actions.purgeFavourites();
-                            setTimeout(() => {
-                                AsyncStorage.setItem("favourites", "");
-                            }, 1000);}},
-                    ])
+            'Are you sure that you want to delete all profiles from favourites?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        this.props.tracker.trackEvent('Favourites', 'Purged');
+                        this.props.actions.purgeFavourites();
+                        setTimeout(() => {
+                            AsyncStorage.setItem("favourites", "");
+                        }, 1000);
+                    }
+                },
+            ])
     }
 
     onResetHomeProfilePressed() {
         Alert.alert('Logout',
-                    'Are you sure that you want to logout?',
-                    [
-                        {text: 'Cancel', style: 'cancel'},
-                        {text: 'OK', onPress: () => {
-                            this.props.tracker.trackEvent('Logout', 'Success');
-                            this.props.actions.resetHomeProfile();
-                            setTimeout(() => {
-                                AsyncStorage.setItem("homeProfile", "");
-                            }, 1000);}},
-                    ])
+            'Are you sure that you want to logout?',
+            [
+                { text: 'Cancel', style: 'cancel' },
+                {
+                    text: 'OK', onPress: () => {
+                        this.props.tracker.trackEvent('Logout', 'Success');
+                        this.props.actions.resetHomeProfile();
+                        setTimeout(() => {
+                            AsyncStorage.setItem("homeProfile", "");
+                        }, 1000);
+                    }
+                },
+            ])
     }
 
     render() {
-        let title = <Text style = {[styles.title, {color: this.props.secondLegend}]}>{this.props.title}</Text>
+        let title = <Text style={[styles.title, { color: this.props.secondLegend }]}>{this.props.title}</Text>
         var rightElements;
-        if(this.props.title == 'Favourites' && this.props.favouritesList.length > 0) {
+        if (this.props.title == 'Favourites' && this.props.favouritesList.length > 0) {
             rightElements = (
-                <View style = {styles.navItemView}>
-                    <TouchableOpacity onPress = {() => {this.onPurgeFavouritesPressed()}}>
-                        <View style = {styles.rightNavButtonView}>
-                            <FontAwesome name = "trash-o" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                <View style={styles.navItemView}>
+                    <TouchableOpacity onPress={() => { this.onPurgeFavouritesPressed() }}>
+                        <View style={styles.rightNavButtonView}>
+                            <FontAwesome name="trash-o" size={26} allowFontScaling={false} color={this.props.legend} />
                         </View>
                     </TouchableOpacity>
                 </View>
             )
         } else if (this.props.title == 'Home' && this.props.homeProfile != "") {
             rightElements = (
-                <View style = {styles.navItemView}>
-                    <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
-                        <View style = {styles.rightNavButtonView}>
-                            <FontAwesome name = "power-off" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                <View style={styles.navItemView}>
+                    <TouchableOpacity onPress={() => { this.onResetHomeProfilePressed() }}>
+                        <View style={styles.rightNavButtonView}>
+                            <FontAwesome name="power-off" size={26} allowFontScaling={false} color={this.props.legend} />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -111,68 +116,38 @@ class NavBar extends Component {
         }
 
         var leftElements = (
-            <View style = {styles.navItemView}>
-                <TouchableOpacity onPress = {() => {this.openDrawer()}}>
-                    <View style = {styles.leftNavButtonView}>
-                        <FontAwesome name = "bars" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+            <View style={styles.navItemView}>
+                <TouchableOpacity onPress={() => { this.openDrawer() }}>
+                    <View style={styles.leftNavButtonView}>
+                        <FontAwesome name="bars" size={26} allowFontScaling={false} color={this.props.legend} />
                     </View>
                 </TouchableOpacity>
                 {title}
             </View>
         )
 
-        var statusBarPadding;
-        var navBarMargin;
-        if(Platform.OS == "ios") {
-            if(DeviceInfo.getModel() == "iPhone X") {
-                statusBarPadding = <View style = {[styles.iPhoneXPadding, { backgroundColor: this.props.mod}]} />;
-            } else {
-                statusBarPadding = <View style = {[styles.statusBarPadding, { backgroundColor: this.props.mod}]} />;
-            }
-            navBarMargin = -20;
-        } else {
-            statusBarPadding = <View />;
-            navBarMargin = 0;
-        }
-
         return (
-            <View style = {styles.navBarContainer}>
+            <View>
                 <StatusBar
-                    backgroundColor = {this.props.mod}
-                    barStyle = "light-content"
-                    />
-                {statusBarPadding}
-                <NavigationBar
-                    style = {[styles.navBar, {backgroundColor: this.props.mod, marginTop: navBarMargin}]}
-                    leftButton = {leftElements}
-                    rightButton = {rightElements}
-                    />
-            </View>
+                    backgroundColor={this.props.mod}
+                    barStyle="light-content"
+                />
+                <View style={{ height: metrics.statusBarHeight, backgroundColor: this.props.mod }} />
+                <View style={[styles.navBarContainer, { height: metrics.navBarHeight, backgroundColor: this.props.mod, flexDirection: 'row' }]}>
+                    <View style={styles.leftItemView}>
+                        {leftElements}
+                    </View>
+                    <View style={styles.rightItemView}>
+                        {rightElements}
+                    </View>
+                </View>
+            </View >
         )
     }
 
 }
 
-const baseStyles = _.extend(base.general, {
-    statusBarPadding: {
-        height: 20
-    },
-    iPhoneXPadding: {
-        height: 44
-    },
-    navBarContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 50,
-        alignSelf: 'stretch',
-        flex: 1
-    },
-    navBar: {
-        paddingLeft: 15,
-        paddingRight: 15
-    },
+const baseStyles = _.extend(base.navbar, {
     title: {
         fontSize: 20,
         fontWeight: 'bold',

@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    StatusBar,
-    Platform
+    StatusBar
 } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -16,12 +15,8 @@ import { bindActionCreators } from 'redux';
 
 import * as navigationActions from '../actions/navigation_act';
 
-import NavigationBar from 'react-native-navbar';
-
 import base from '../themes/BaseStyles';
-import Fonts from '../themes/Fonts';
-
-import DeviceInfo from 'react-native-device-info';
+import metrics from '../themes/Metrics';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -70,79 +65,28 @@ class MatchNavBar extends Component {
             <View />
         )
 
-        var statusBarPadding;
-        var navBarMargin;
-        if(Platform.OS == "ios") {
-            if(DeviceInfo.getModel() == "iPhone X") {
-                statusBarPadding = <View style = {[styles.iPhoneXPadding, { backgroundColor: this.props.mod}]} />;
-            } else {
-                statusBarPadding = <View style={[styles.statusBarPadding, {backgroundColor: this.props.mod}]}/>;
-            }
-            navBarMargin = -20;
-        } else {
-            statusBarPadding = <View />;
-            navBarMargin = 0;
-        }
-
         return (
-            <View style = {styles.navBarContainer}>
+            <View>
                 <StatusBar
                     backgroundColor = {this.props.mod}
                     barStyle = "light-content"
                     />
-                {statusBarPadding}
-                <NavigationBar
-                    style = {[styles.navBar, {backgroundColor: this.props.mod, marginTop: navBarMargin}]}
-                    leftButton = {leftElements}
-                    rightButton = {rightElements}
-                    />
+                <View style={{ height: metrics.statusBarHeight, backgroundColor: this.props.mod }} />
+                <View style={[styles.navBarContainer, { height: metrics.navBarHeight, backgroundColor: this.props.mod, flexDirection: 'row' }]}>
+                    <View style={styles.leftItemView}>
+                        {leftElements}
+                    </View>
+                    <View style={styles.rightItemView}>
+                        {rightElements}
+                    </View>
+                </View>
             </View>
         )
     }
 
 }
 
-const baseStyles = _.extend(base.general, {
-    statusBarPadding: {
-        height: 20
-    },
-    iPhoneXPadding: {
-        height: 44
-    },
-    navBarContainer: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 50,
-        alignSelf: 'stretch',
-        flex: 1
-    },
-    navBar: {
-        paddingLeft: 15,
-        paddingRight: 15
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        fontFamily: Fonts.base,
-        alignSelf: 'center',
-        justifyContent: 'center'
-    },
-    navItemView: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    leftNavButtonView: {
-        paddingRight: 20,
-        paddingTop: 8,
-        paddingBottom: 8,
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'row',
-        flex: 1
-    }
+const baseStyles = _.extend(base.navbar, {
 });
 
 const styles = StyleSheet.create(baseStyles);
