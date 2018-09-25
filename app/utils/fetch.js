@@ -42,7 +42,7 @@ export function fetchAPI(endpoint, method = 'get', data) {
 
                     throw (errStr);
                 } else {
-                    console.log(error);
+                    // console.log(error);
                     throw('unknown error');
                 }
             });

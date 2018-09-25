@@ -63,9 +63,6 @@ class PlayerSearch extends Component {
         this.props.tracker.trackScreenView('Player Search');
     }
 
-    componentWillMount() {
-    }
-
     renderRow(rowData) {
         return (
             <PlayerCard info = {rowData} />

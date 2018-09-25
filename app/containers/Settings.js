@@ -77,10 +77,6 @@ class Settings extends Component {
         this.props.actions.changeTheme(value);
     }
 
-    componentWillMount() {
-
-    }
-
     render() {
         return (
             <View style = {[styles.container, {backgroundColor: this.props.background}]}>

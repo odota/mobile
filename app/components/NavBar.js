@@ -5,7 +5,6 @@ import {
     StyleSheet,
     TouchableOpacity,
     StatusBar,
-    Platform,
     Alert,
     AsyncStorage
 } from 'react-native';
@@ -22,8 +21,6 @@ import * as homeActions from '../actions/home_act';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 import metrics from '../themes/Metrics';
-
-import DeviceInfo from 'react-native-device-info';
 
 import { Actions } from 'react-native-router-flux';
 

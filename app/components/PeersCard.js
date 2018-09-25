@@ -172,17 +172,9 @@ class PeersCard extends Component {
         return processedPeersList;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if(this.props.peers && this.props.peers.length > 0) {
             var peersList = this.props.peers;
-            var processedPeersList = this.generateProcessedPeers(peersList);
-            this.setState({processedPeersList: processedPeersList});
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.peers && nextProps.peers.length > 0) {
-            var peersList = nextProps.peers;
             var processedPeersList = this.generateProcessedPeers(peersList);
             this.setState({processedPeersList: processedPeersList});
         }

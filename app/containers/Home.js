@@ -52,9 +52,6 @@ class Home extends Component {
         Actions.login();
     }
 
-    componentWillMount() {
-    }
-
     componentDidMount() {
         this.props.tracker.trackScreenView('Home');
     }

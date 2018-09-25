@@ -55,9 +55,6 @@ class HeroesPage extends Component {
 
     componentDidMount() {
         this.props.tracker.trackScreenView('Heroes');
-        if(!this.props.isLoadingHeroes) {
-            this.props.actions.fetchHeroes(this.props.contextId, 30);
-        }
     }
 
     onRefresh() {

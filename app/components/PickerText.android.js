@@ -34,7 +34,7 @@ class PickerText extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.setState({items: this.props.items})
     }
 

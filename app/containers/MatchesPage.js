@@ -30,6 +30,13 @@ export const mapStateToProps = state => ({
     page: state.playerMatchesState.page,
     sortField: state.playerMatchesState.sortField,
     sortDirection: state.playerMatchesState.sortDirection,
+    matchesSubset: state.playerMatchesState.matchesSubset,
+    showPreviousPage: state.playerMatchesState.showPreviousPage,
+    showNextPage: state.playerMatchesState.showNextPage,
+    initialValue: state.playerMatchesState.initialValue,
+    endValue: state.playerMatchesState.endValue,
+    totalMatches: state.playerMatchesState.totalMatches,
+    totalPages: state.playerMatchesState.totalPages,
     contextId: state.navigationState.contextId,
     legendHex: state.settingsState.legendHex,
     legend: state.settingsState.legend,
@@ -51,7 +58,7 @@ class MatchesPage extends Component {
     constructor(props) {
         super(props);
         this.onSearchPressed = this.onSearchPressed.bind(this);
-        this.pageControl = (<View/>);
+        this.pageControl = (<View />);
         this.state = {
             refreshing: false
         };
@@ -65,14 +72,14 @@ class MatchesPage extends Component {
     }
 
     onRefresh() {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         this.props.actions.fetchMatches(this.props.contextId).then(() => {
-            this.setState({refreshing: false});
+            this.setState({ refreshing: false });
         });
     }
 
     onSearchPressed() {
-        if(this.props.parent == "Favourites") {
+        if (this.props.parent == "Favourites") {
             Actions.matchesSearchFavourite();
         } else if (this.props.parent == "Search") {
             Actions.matchesSearchSearch();
@@ -85,141 +92,92 @@ class MatchesPage extends Component {
         this.props.actions.sortMatches(sortField, sortDirection);
     }
 
-    scrollToTop(){
-        this.scrollViewRef.scrollTo({x:0,y:0,animated:true})
-    }
-
-    componentWillMount() {
-        if(!this.props.isLoadingMatches) {
-            this.props.actions.fetchMatches(this.props.contextId, 30);
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.initialValue = 1 + ((nextProps.page - 1) * 20);
-        this.endValue = nextProps.page * 20;
-        this.totalMatches = nextProps.matches.length;
-        let totalPages = Math.ceil(this.totalMatches/20);
-        this.props.actions.setMaxPages(totalPages);
-        if(this.totalMatches > 0) {
-            if(this.endValue > this.totalMatches) {
-                this.endValue = this.totalMatches;
-            }
-            this.matchesSubset = new Array();
-            for(var i = this.initialValue - 1; i < this.endValue; i ++) {
-                this.matchesSubset.push(nextProps.matches[i]);
-            }
-
-            let showPreviousPage;
-            let showNextPage;
-
-            if (this.totalMatches <= 20) {
-                showPreviousPage = false;
-                showNextPage = false;
-            } else if (this.initialValue == 1) {
-                showPreviousPage = false;
-                showNextPage = true;
-            } else if (this.endValue == this.totalMatches) {
-                showPreviousPage = true;
-                showNextPage = false;
-            } else {
-                showPreviousPage = true;
-                showNextPage = true;
-            }
-
-            this.pageControl = (<PageNavigationControl
-                                  page = {nextProps.page}
-                                  buttonColor = {this.props.legend}
-                                  textColor = {this.props.reverseBackground}
-
-                                  previousDoubleEnabled = {showPreviousPage}
-                                  previousDoubleAction = {() => {
-                                  this.props.actions.navigatePreviousMatches(10);
-                                  this.scrollToTop();
-                                  }}
-                                  previousEnabled = {showPreviousPage}
-                                  previousAction = {() => {
-                                  this.props.actions.navigatePreviousMatches(1);
-                                  this.scrollToTop();
-                                  }}
-
-                                  nextEnabled = {showNextPage}
-                                  nextAction = {() => {
-                                  this.props.actions.navigateNextMatches(1);
-                                  this.scrollToTop();
-                                  }}
-                                  nextDoubleEnabled = {showNextPage}
-                                  nextDoubleAction = {() => {
-                                  this.props.actions.navigateNextMatches(10)
-                                  this.scrollToTop();
-                                  }} 
-                                  />
-                                  );
-
-        } else if (this.totalMatches == 0) {
-            this.matchesSubset = new Array();
-            this.pageControl = (
-                <View/>
-            )
-            this.initialValue = 0;
-            this.endValue = 0;
-        }
+    scrollToTop() {
+        this.scrollViewRef.scrollTo({ x: 0, y: 0, animated: true })
     }
 
     render() {
         var content = (<View />);
-        if(this.props.isLoadingMatches) {
+        if (this.props.isLoadingMatches) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <ActivityIndicator size="large" color = {this.props.legend}/>
+                <View style={styles.contentContainer}>
+                    <ActivityIndicator size="large" color={this.props.legend} />
                 </View>
             )
         } else if (this.props.isEmptyMatches) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>No data found</Text>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.noDataText}>No data found</Text>
                 </View>
             )
-        } else if (this.matchesSubset != null){
+        } else if (this.props.matchesSubset != null) {
             var refreshColor = this.props.legendHex;
+            this.pageControl = (<PageNavigationControl
+                page={this.props.page}
+                buttonColor={this.props.legend}
+                textColor={this.props.reverseBackground}
+
+                previousDoubleEnabled={this.props.showPreviousPage}
+                previousDoubleAction={() => {
+                    this.props.actions.navigatePreviousMatches(10);
+                    this.scrollToTop();
+                }}
+                previousEnabled={this.props.showPreviousPage}
+                previousAction={() => {
+                    this.props.actions.navigatePreviousMatches(1);
+                    this.scrollToTop();
+                }}
+
+                nextEnabled={this.props.showNextPage}
+                nextAction={() => {
+                    this.props.actions.navigateNextMatches(1);
+                    this.scrollToTop();
+                }}
+                nextDoubleEnabled={this.props.showNextPage}
+                nextDoubleAction={() => {
+                    this.props.actions.navigateNextMatches(10)
+                    this.scrollToTop();
+                }}
+            />
+            );
             content = (
-                <KeyboardAwareScrollView style = {{marginTop: 5}}
-                        innerRef={ref => {
-                            this.scrollViewRef = ref;
-                            }}  
-                        refreshControl={
+                <KeyboardAwareScrollView style={{ marginTop: 5 }}
+                    innerRef={ref => {
+                        this.scrollViewRef = ref;
+                    }}
+                    refreshControl={
                         <RefreshControl
-                            refreshing = {this.state.refreshing}
-                            onRefresh = {this.onRefresh.bind(this)}
-                            tintColor = {refreshColor}
-                            title = 'Refreshing'
-                            titleColor = {refreshColor}
-                            colors = {[refreshColor]}
+                            refreshing={this.state.refreshing}
+                            onRefresh={this.onRefresh.bind(this)}
+                            tintColor={refreshColor}
+                            title='Refreshing'
+                            titleColor={refreshColor}
+                            colors={[refreshColor]}
                             progressBackgroundColor="#ffffffff"
                         />
                     }>
-                        <TouchableOpacity  onPress = {this.onSearchPressed} style = {styles.searchContainer}>
-                            <View style = {[styles.searchIconContainer, {backgroundColor: this.props.alpha}]}>
-                                <FontAwesome name = "search" size = {20} allowFontScaling = {false} color = {this.props.secondLegend}/>
-                            </View>
-                            <View style = {[styles.searchButton, {backgroundColor: this.props.alpha}]}>
-                                <Text style = {[styles.searchButtonText, {color: this.props.secondLegend}]}>Search Matches</Text>
-                            </View>
-                        </TouchableOpacity>
-                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
-                        {this.initialValue} - {this.endValue} of {this.totalMatches} matches
+                    <TouchableOpacity onPress={this.onSearchPressed} style={styles.searchContainer}>
+                        <View style={[styles.searchIconContainer, { backgroundColor: this.props.alpha }]}>
+                            <FontAwesome name="search" size={20} allowFontScaling={false} color={this.props.secondLegend} />
+                        </View>
+                        <View style={[styles.searchButton, { backgroundColor: this.props.alpha }]}>
+                            <Text style={[styles.searchButtonText, { color: this.props.secondLegend }]}>Search Matches</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <Text style={[styles.filterText, { color: this.props.reverseBackground }]}>
+                        {this.props.initialValue} - {this.props.endValue} of {this.props.totalMatches} matches
                     </Text>
-                    <MatchesCard matches = {this.matchesSubset} sortMatches = {this.sortMatches} default = {false} />
+                    <MatchesCard matches={this.props.matchesSubset} sortMatches={this.sortMatches} default={false} />
                     {this.pageControl}
-                    <Text style = {[styles.filterText, {color: this.props.reverseBackground}]}>
-                        {this.initialValue} - {this.endValue} of {this.totalMatches} matches
+                    <Text style={[styles.filterText, { color: this.props.reverseBackground }]}>
+                        {this.props.initialValue} - {this.props.endValue} of {this.props.totalMatches} matches
                     </Text>
                 </KeyboardAwareScrollView>
             )
         }
 
         return (
-            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
+            <View style={[styles.container, { backgroundColor: this.props.background }]}>
                 {content}
             </View>
         )

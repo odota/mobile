@@ -43,8 +43,9 @@ export const mapDispatchToProps = (dispatch) => ({
 
 class MatchDetailsPage extends Component {
 
-    componentWillMount() {
-        if(!this.props.isLoadingMatchDetails) {
+    constructor(props) {
+        super(props);
+        if (!this.props.isLoadingMatchDetails) {
             this.props.actions.fetchMatchDetails(this.props.data)
         }
     }
@@ -53,53 +54,49 @@ class MatchDetailsPage extends Component {
         this.props.tracker.trackScreenView('Match Details');
     }
 
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.matchDetails) {
-            this.content = nextProps.matchDetails;
-        }
-    }
-
     render() {
         var content = (<View />);
-        if(this.props.isLoadingMatchDetails) {
+        if (this.props.isLoadingMatchDetails) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <ActivityIndicator size="large" color = {this.props.legend}/>
+                <View style={styles.contentContainer}>
+                    <ActivityIndicator size="large" color={this.props.legend} />
                 </View>
             );
         } else if (this.props.isEmptyMatchDetails) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <Text style = {styles.noDataText}>No data found</Text>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.noDataText}>No data found</Text>
                 </View>
             );
-        } else {
-            if(this.props.matchDetails.radiant_gold_adv) {
+        } else if (!_.isEmpty(this.props.matchDetails)) {
+            if (this.props.matchDetails.radiant_gold_adv) {
                 content = (
-                    <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}
-                        tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend}
-                        tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                        renderTabBar = {() => <ScrollableTabBar />}locked = {true}>
-                        <MatchOverview tabLabel = "Overview" />
-                        <MatchBenchmark tabLabel = "Benchmarks" />
-                        <MatchPerformance tabLabel = "Performances" />
-                        <MatchLaning tabLabel = "Laning" />
+                    <ScrollableTabView tabBarPosition="bottom" tabBarTextStyle={styles.tabBarText}
+                        tabBarBackgroundColor={this.props.alpha} tabBarActiveTextColor={this.props.legend} tabBarInactiveTextColor={this.props.secondLegend}
+                        tabBarUnderlineStyle={[styles.tabBarUnderlineStyle, { backgroundColor: this.props.legend }]}
+                        renderTabBar={() => <ScrollableTabBar />} locked={true}>
+                        <MatchOverview tabLabel="Overview" />
+                        <MatchBenchmark tabLabel="Benchmarks" />
+                        <MatchPerformance tabLabel="Performances" />
+                        <MatchLaning tabLabel="Laning" />
                     </ScrollableTabView>
                 );
             } else {
                 content = (
-                    <ScrollableTabView tabBarPosition = "bottom" tabBarTextStyle = {styles.tabBarText}
-                        tabBarBackgroundColor = {this.props.alpha} tabBarActiveTextColor = {this.props.legend} tabBarInactiveTextColor = {this.props.secondLegend}
-                        tabBarUnderlineStyle = {[styles.tabBarUnderlineStyle, {backgroundColor: this.props.legend}]}
-                        renderTabBar = {() => <ScrollableTabBar />}locked = {true}>
-                        <MatchOverview tabLabel = "Overview" />
-                        <MatchBenchmark tabLabel = "Benchmarks" />
+                    <ScrollableTabView tabBarPosition="bottom" tabBarTextStyle={styles.tabBarText}
+                        tabBarBackgroundColor={this.props.alpha} tabBarActiveTextColor={this.props.legend} tabBarInactiveTextColor={this.props.secondLegend}
+                        tabBarUnderlineStyle={[styles.tabBarUnderlineStyle, { backgroundColor: this.props.legend }]}
+                        renderTabBar={() => <ScrollableTabBar />} locked={true}>
+                        <MatchOverview tabLabel="Overview" />
+                        <MatchBenchmark tabLabel="Benchmarks" />
                     </ScrollableTabView>
                 );
             }
+        } else {
+            return (<View />);
         }
         return (
-            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
+            <View style={[styles.container, { backgroundColor: this.props.background }]}>
                 {content}
             </View>
         )

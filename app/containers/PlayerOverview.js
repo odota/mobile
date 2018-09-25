@@ -52,21 +52,9 @@ class PlayerOverview extends Component {
 
     componentDidMount() {
         this.props.tracker.trackScreenView('Player Overview');
-    }
-
-    componentWillMount() {
         if (!this.props.isLoadingOverview) {
             this.props.actions.fetchOverview(this.props.contextId);
             this.props.actions.fetchWl(this.props.contextId);
-            this.props.actions.fetchMatches(this.props.contextId, 20);
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.homeTab) {
-            this.props.actions.consumeHomeTab();
-            this.props.actions.fetchOverview(nextProps.contextId);
-            this.props.actions.fetchWl(nextProps.contextId);
             this.props.actions.fetchMatches(this.props.contextId, 20);
         }
     }

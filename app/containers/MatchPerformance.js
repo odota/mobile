@@ -79,9 +79,6 @@ class MatchPerformance extends Component {
 
     componentDidMount() {
         this.props.tracker.trackScreenView('Match Performance');
-    }
-
-    componentWillMount() {
         if(this.props.matchDetails) {
             if(this.props.matchDetails.players) {
                 if(this.props.matchDetails.players.length > 0) {
@@ -93,17 +90,6 @@ class MatchPerformance extends Component {
                     this.setState({direPlayersList: direPlayersList});
                 }
             }
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if(nextProps.matchDetails && nextProps.matchDetails.players.length > 0) {
-            var players = nextProps.matchDetails.players;
-            var processedPlayersList = this.generateProcessedPlayers(players);
-            var radiantPlayersList = processedPlayersList.slice(0, 5);
-            var direPlayersList = processedPlayersList.slice(5, 10);
-            this.setState({radiantPlayersList: radiantPlayersList});
-            this.setState({direPlayersList: direPlayersList});
         }
     }
 

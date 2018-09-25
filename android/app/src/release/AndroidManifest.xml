@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.opendota.mobile"
-    android:versionCode="12"
-    android:versionName="1.0.2">
+    android:versionCode="13"
+    android:versionName="1.1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission
@@ -11,7 +11,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="25" />
+        android:targetSdkVersion="26" />
 
     <application
         android:name=".MainApplication"

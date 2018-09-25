@@ -45,9 +45,6 @@ class Favourite extends Component {
         this.props.tracker.trackScreenView('Favourite');
     }
 
-    componentWillMount() {
-    }
-
     renderRow(rowData) {
         if(rowData !== undefined) {
             return (
@@ -64,7 +61,7 @@ class Favourite extends Component {
         if(this.props.favouritesList.length < 1) {
             content = (
                 <View style = {styles.contentContainer}>
-                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5}}>
+                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 20}}>
                         <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>Looks like you have not added anyone as favourite.
                         Add them from search tab!</Text>
                     </View>

@@ -48,9 +48,6 @@ class LoginPage extends Component {
         this.props.tracker.trackScreenView('Login');
     }
 
-    componentWillMount() {
-    }
-
     onNavigationStateChange(navState) {
         var splitted = navState.url.split("/");
         if(splitted[2] == "www.opendota.com" && !this.state.redirecting) {

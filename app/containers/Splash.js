@@ -32,7 +32,7 @@ class Splash extends Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         GoogleAnalyticsSettings.setDispatchInterval(30);
         let tracker = new GoogleAnalyticsTracker('UA-107430194-1');
         this.props.actions.setGATracker(tracker);
@@ -62,9 +62,6 @@ class Splash extends Component {
             }
         })
         .catch()
-    }
-
-    componentDidMount() {
         setTimeout(() => {
             Actions.navDrawer();
         }, 2000);
