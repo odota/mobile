@@ -41,6 +41,9 @@ import Fonts from '../themes/Fonts';
 
 import { defaultSort, SORT_ENUM } from '../utils/sorting';
 
+import { AreaChart, Grid, YAxis, XAxis } from 'react-native-svg-charts'
+import * as shape from 'd3-shape'
+
 export const mapStateToProps = state => ({
     matchDetails: state.matchDetailsState.matchDetails,
     isLoadingMatchDetails: state.matchDetailsState.isLoadingMatchDetails,
@@ -646,18 +649,52 @@ class MatchOverview extends Component {
                     var parsedWarning = (<View />);
                     if (this.props.matchDetails.radiant_gold_adv) {
                         parsedWarning = (<View />);
-                        
+                        let graphWidth = 0;
+                        let graphHeight = 0;
+                        if (this.state.radiantGoldAdvantage[0]) {
+                            graphWidth = this.state.radiantGoldAdvantage[0].length * 10;
+                            graphHeight = 380;
+                        }
                         goldGraph = (
                             <View style={[styles.profileCardContainer, { backgroundColor: this.props.mod }]}>
                                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginHorizontal: 10 }}>
                                     <Text style={[styles.titleText, { color: this.props.secondLegend }]}>Radiant Gold Advantage</Text>
                                 </View>
                                 <View style={[styles.separator, { backgroundColor: this.props.legend }]} />
-                                <ScrollView horizontal showsHorizontalScrollIndicator={true}>
-                                    <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flexDirection: 'row', marginHorizontal: 15 }}>
+                                    <YAxis
+                                        data={this.props.matchDetails.radiant_gold_adv}
+                                        svg={{
+                                            fill: 'white',
+                                            fontSize: 10,
+                                        }}
+                                        numberOfTicks={5}
+                                        contentInset={{ top: 30, bottom: 42 }}
+                                        style={{marginRight: 5}}
+                                    />
+                                    <View style={{ flexDirection: 'column' }}>
+                                        <ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={{ flexDirection: 'column' }}>
+                                            <AreaChart
+                                                style={{ height: graphHeight, width: graphWidth }}
+                                                data={this.props.matchDetails.radiant_gold_adv}
+                                                curve={shape.curveNatural}
+                                                svg={{ fill: 'rgba(253,127,40, 0.8)' }}
+                                                contentInset={{ top: 30, bottom: 30, left: 30, right: 30 }}
+                                                numberOfTicks={5}
+                                                showGrid={true}
+                                            >
+                                            <Grid direction={Grid.Direction.HORIZONTAL}/>
+                                            </AreaChart>
+                                            <XAxis
+                                                data={this.props.matchDetails.radiant_gold_adv}
+                                                svg={{ fontSize: 10, fill: 'white' }}
+                                                numberOfTicks={5}
+                                                contentInset={{ left: 30, right: 30 }}
+                                            />
+                                        </ScrollView>
                                     </View>
-                                </ScrollView>
-                            </View>
+                                </View>
+                            </View >
 
                         );
                     } else {
@@ -675,17 +712,51 @@ class MatchOverview extends Component {
                     }
 
                     if (this.props.matchDetails.radiant_xp_adv) {
-                        
+                        let graphWidth = 0;
+                        let graphHeight = 0;
+                        if (this.state.radiantGoldAdvantage[0]) {
+                            graphWidth = this.state.radiantGoldAdvantage[0].length * 10;
+                            graphHeight = 380;
+                        }
                         xpGraph = (
                             <View style={[styles.profileCardContainer, { backgroundColor: this.props.mod }]}>
                                 <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 10, marginHorizontal: 10 }}>
                                     <Text style={[styles.titleText, { color: this.props.secondLegend }]}>Radiant XP Advantage</Text>
                                 </View>
                                 <View style={[styles.separator, { backgroundColor: this.props.legend }]} />
-                                <ScrollView horizontal showsHorizontalScrollIndicator={true}>
-                                    <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flexDirection: 'row', marginHorizontal: 15 }}>
+                                    <YAxis
+                                        data={this.props.matchDetails.radiant_xp_adv}
+                                        svg={{
+                                            fill: 'white',
+                                            fontSize: 10,
+                                        }}
+                                        numberOfTicks={10}
+                                        contentInset={{ top: 30, bottom: 42 }}
+                                        style={{marginRight: 5}}
+                                    />
+                                    <View style={{ flexDirection: 'column' }}>
+                                        <ScrollView horizontal showsHorizontalScrollIndicator={true} contentContainerStyle={{ flexDirection: 'column' }}>
+                                            <AreaChart
+                                                style={{ height: graphHeight, width: graphWidth }}
+                                                data={this.props.matchDetails.radiant_xp_adv}
+                                                curve={shape.curveNatural}
+                                                svg={{ fill: 'rgba(37, 118, 176, 0.8)' }}
+                                                contentInset={{ top: 30, bottom: 30, left: 30, right: 30 }}
+                                                numberOfTicks={10}
+                                                showGrid={true}
+                                            >
+                                            <Grid direction={Grid.Direction.HORIZONTAL}/>
+                                            </AreaChart>
+                                            <XAxis
+                                                data={this.props.matchDetails.radiant_gold_adv}
+                                                svg={{ fontSize: 10, fill: 'white' }}
+                                                numberOfTicks={10}
+                                                contentInset={{ left: 30, right: 30 }}
+                                            />
+                                        </ScrollView>
                                     </View>
-                                </ScrollView>
+                                </View>
                             </View>
 
                         );
