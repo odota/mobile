@@ -75,6 +75,7 @@ class Heatmap extends Component {
                 scrollEnabled = {false}
                 injectedJavaScript = {script}
                 javaScriptEnabled
+                originWhitelist={['*']}
                 style = {{width: 300, height: 300, backgroundColor: this.props.background}}
             />;
         }

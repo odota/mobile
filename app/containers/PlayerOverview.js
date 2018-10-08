@@ -5,7 +5,8 @@ import {
     Text,
     StyleSheet,
     ListView,
-    ActivityIndicator
+    ActivityIndicator,
+    RefreshControl
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -32,9 +33,9 @@ export const mapStateToProps = state => ({
     legend: state.settingsState.legend,
     homeTab: state.navigationState.homeTab,
     tracker: state.navigationState.tracker,
-    matches: state.playerMatchesState.matches,
-    isLoadingMatches: state.playerMatchesState.isLoadingMatches,
-    isEmptyMatches: state.playerMatchesState.isEmptyMatches,
+    recentMatches: state.playerMatchesState.recentMatches,
+    isLoadingRecentMatches: state.playerMatchesState.isLoadingRecentMatches,
+    isEmptyRecentMatches: state.playerMatchesState.isEmptyRecentMatches,
     background: state.settingsState.background
 });
 
@@ -48,14 +49,24 @@ class PlayerOverview extends Component {
         super(props);
         this.matchesDS = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.sortMatches = this.sortMatches.bind(this);
+        this.initiateOverview = this.initiateOverview.bind(this);
+        this.onRefresh = this.onRefresh.bind(this);
     }
 
     componentDidMount() {
         this.props.tracker.trackScreenView('Player Overview');
+        this.initiateOverview();
+    }
+
+    onRefresh() {
+        this.initiateOverview();
+    }
+
+    initiateOverview() {
         if (!this.props.isLoadingOverview) {
             this.props.actions.fetchOverview(this.props.contextId);
             this.props.actions.fetchWl(this.props.contextId);
-            this.props.actions.fetchMatches(this.props.contextId, 20);
+            this.props.actions.fetchRecentMatches(this.props.contextId, 20);
         }
     }
 
@@ -65,7 +76,7 @@ class PlayerOverview extends Component {
 
     render() {
         var content;
-        if (this.props.isLoadingOverview || this.props.isLoadingMatches) {
+        if (this.props.isLoadingOverview || this.props.isLoadingRecentMatches) {
             content = (
                 <View style={styles.contentContainer}>
                     <ActivityIndicator size="large" color={this.props.legend} />
@@ -79,9 +90,18 @@ class PlayerOverview extends Component {
             )
         } else {
             content = (
-                <ScrollView>
+                <ScrollView refreshControl={
+                    <RefreshControl
+                        refreshing={this.props.isLoadingOverview}
+                        onRefresh={this.onRefresh}
+                        tintColor={this.props.legendHex}
+                        title='Refreshing'
+                        titleColor={this.props.legendHex}
+                        colors={[this.props.legendHex]}
+                        progressBackgroundColor="#ffffffff"
+                    />}>
                     <ProfileCard info={this.props.overview} wl={this.props.wl} />
-                    <MatchesCard title={"RECENT MATCHES"} matches={this.props.matches} sortMatches={this.sortMatches} default={false} />
+                    <MatchesCard title={"RECENT MATCHES"} matches={this.props.recentMatches} sortMatches={this.sortMatches} default={false} />
                 </ScrollView>
             )
         }

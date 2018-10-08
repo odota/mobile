@@ -3,7 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
-    ListView
+    FlatList
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -37,7 +37,6 @@ class Favourite extends Component {
 
     constructor(props) {
         super(props);
-        this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
     }
 
@@ -45,10 +44,11 @@ class Favourite extends Component {
         this.props.tracker.trackScreenView('Favourite');
     }
 
-    renderRow(rowData) {
-        if(rowData !== undefined) {
+    renderRow(item) {
+        let rowData = item.item
+        if (rowData !== undefined) {
             return (
-                <PlayerCard info = {rowData}/>
+                <PlayerCard info={rowData} />
             );
         } else {
             return <View />
@@ -58,29 +58,31 @@ class Favourite extends Component {
     render() {
         var content;
 
-        if(this.props.favouritesList.length < 1) {
+        if (this.props.favouritesList.length < 1) {
             content = (
-                <View style = {styles.contentContainer}>
-                    <View style = {{backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 20}}>
-                        <Text style = {[styles.noDataText, {color: this.props.secondLegend}]}>Looks like you have not added anyone as favourite.
+                <View style={styles.contentContainer}>
+                    <View style={{ backgroundColor: this.props.mod, borderRadius: 5, borderWidth: 1, borderColor: this.props.mod, paddingHorizontal: 10, paddingVertical: 5, marginHorizontal: 20 }}>
+                        <Text style={[styles.noDataText, { color: this.props.secondLegend }]}>Looks like you have not added anyone as favourite.
                         Add them from search tab!</Text>
                     </View>
                 </View>
             )
         } else {
             content = (
-                <View style = {{flex: 1}}>
-                    <ListView
-                        dataSource = {this.ds.cloneWithRows(this.props.favouritesList)}
-                        renderRow = {this.renderRow}
-                        style = {styles.listView}
-                        enableEmptySections = {true} />
+                <View style={{ flex: 1 }}>
+                    <FlatList
+                        data={this.props.favouritesList}
+                        renderItem={this.renderRow}
+                        style={styles.listView}
+                        enableEmptySections={true}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
                 </View>
 
             )
         }
         return (
-            <View style = {[styles.container, {backgroundColor: this.props.background}]}>
+            <View style={[styles.container, { backgroundColor: this.props.background }]}>
                 {content}
             </View>
         )

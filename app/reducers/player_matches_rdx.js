@@ -1,7 +1,7 @@
 import { types } from '../actions/player_matches_act';
 import { defaultSort, SORT_ENUM } from '../utils/sorting';
 
-var initialState = { isLoadingMatches: false, isEmptyMatches: false, matches: {}, sortedBy: "match_id", page: 1, maxPages: 0, sortField: "", sortDirection: "", matchesSubset: [], showPreviousPage: false, showNextPage: true, initialValue: 1, endValue: 20, totalMatches: 100};
+var initialState = { isLoadingMatches: false, isEmptyMatches: false, matches: {}, sortedBy: "match_id", page: 1, maxPages: 0, sortField: "", sortDirection: "", matchesSubset: [], showPreviousPage: false, showNextPage: true, initialValue: 1, endValue: 20, totalMatches: 100, isLoadingRecentMatches: false, isEmptyRecentMatches: false, recentMatches: [] };
 
 export default function playerMatchesState(state = initialState, action = {}) {
     switch (action.type) {
@@ -40,6 +40,13 @@ export default function playerMatchesState(state = initialState, action = {}) {
         }
         case types.RECEIVE_EMPTY_MATCHES:
             return Object.assign({}, state, { isLoadingMatches: false, isEmptyMatches: true, matches: {} });
+        case types.REQUEST_RECENT_MATCHES:
+            return Object.assign({}, state, { isLoadingRecentMatches: true, isEmptyRecentMatches: false, recentMatches: [] });
+        case types.RECEIVE_RECENT_MATCHES: {
+            return Object.assign({}, state, { isLoadingRecentMatches: false, isEmptyRecentMatches: false, recentMatches: action.recentMatches });
+        }
+        case types.RECEIVE_EMPTY_RECENT_MATCHES:
+            return Object.assign({}, state, { isLoadingRecentMatches: false, isEmptyRecentMatches: true, recentMatches: [] });
         case types.CHANGE_SORTED_BY:
             return Object.assign({}, state, { sortedBy: action.sortedBy });
         case types.SORT_MATCHES:
@@ -55,7 +62,7 @@ export default function playerMatchesState(state = initialState, action = {}) {
             if (newPage > state.maxPages) {
                 newPage = state.maxPages
             }
-            
+
             let initialValue = 1 + ((newPage - 1) * 20);
             let endValue = newPage * 20;
             let totalMatches = state.matches.length;

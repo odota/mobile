@@ -34,10 +34,10 @@
 		AE219CAC2006CF9500DE2BCD /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA54D481F833DBC005C63DA /* libRCTGoogleAnalyticsBridge.a */; };
 		AE4034A521587C1100DB48B4 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE4034A221587C0300DB48B4 /* libRNDeviceInfo.a */; };
 		AE4E022A1F78CBD50027A4BA /* heatmap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = AE4E02041F78CBD50027A4BA /* heatmap.min.js */; };
-		AE4E02761F7A0B490027A4BA /* heatmap.html in Resources */ = {isa = PBXBuildFile; fileRef = AE4E02291F78CBD50027A4BA /* heatmap.html */; };
 		AEB7AB0A21548961008E49A0 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB7AB0621548936008E49A0 /* libRNSVG.a */; };
 		AEBC999C2005CA87004C3C11 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE679DA31EF24B06004858EF /* libRCTAnimation.a */; };
 		AEDA7ECB1D8FBD9400A0E502 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */; };
+		AEE8ABE4216B0FFE00BB24A3 /* heatmap.html in Resources */ = {isa = PBXBuildFile; fileRef = AEE8ABE3216B0FFE00BB24A3 /* heatmap.html */; };
 		B678D4564D884C8893CE2359 /* libRCTGoogleAnalyticsBridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2F2ADBC17964463A5C3A8B6 /* libRCTGoogleAnalyticsBridge.a */; };
 		BC0620DA502442A8975DC30C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */; };
 		BF83E837509F4765841E9892 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF3FC8F429BB45C2AC333D51 /* Octicons.ttf */; };
@@ -402,10 +402,10 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		AE40349C21587C0300DB48B4 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		AE4E02041F78CBD50027A4BA /* heatmap.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = heatmap.min.js; path = assets/heatmap.min.js; sourceTree = "<group>"; };
-		AE4E02291F78CBD50027A4BA /* heatmap.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = heatmap.html; path = assets/heatmap.html; sourceTree = "<group>"; };
 		AE679D9C1EF24B06004858EF /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		AEB7AAD421548936008E49A0 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		AEDA7ECA1D8FBD9400A0E502 /* Roboto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Roboto.ttf; sourceTree = "<group>"; };
+		AEE8ABE3216B0FFE00BB24A3 /* heatmap.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = heatmap.html; path = assets/heatmap.html; sourceTree = "<group>"; };
 		B2F2ADBC17964463A5C3A8B6 /* libRCTGoogleAnalyticsBridge.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTGoogleAnalyticsBridge.a; sourceTree = "<group>"; };
 		B614ECCC3133BB5F2D51BF98 /* libPods-OpenDota.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenDota.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF88A2AC1FFCD82600755366 /* maps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = maps; path = assets/maps; sourceTree = "<group>"; };
@@ -616,8 +616,8 @@
 			isa = PBXGroup;
 			children = (
 				BF88A2AC1FFCD82600755366 /* maps */,
-				AE4E02291F78CBD50027A4BA /* heatmap.html */,
 				AE4E02041F78CBD50027A4BA /* heatmap.min.js */,
+				AEE8ABE3216B0FFE00BB24A3 /* heatmap.html */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				13B07FAE1A68108700A75B9A /* OpenDota */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -1176,8 +1176,8 @@
 				BC0620DA502442A8975DC30C /* Zocial.ttf in Resources */,
 				F90AFFD6B8074394AD1D723D /* MaterialCommunityIcons.ttf in Resources */,
 				A45DEDD7A5E24F959C58C549 /* SimpleLineIcons.ttf in Resources */,
-				AE4E02761F7A0B490027A4BA /* heatmap.html in Resources */,
 				19C8D14A42454C079E98F69B /* Feather.ttf in Resources */,
+				AEE8ABE4216B0FFE00BB24A3 /* heatmap.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1196,7 +1196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		D6EA4547F7A313A5A475066B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

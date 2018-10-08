@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet,
     Image,
-    ListView
+    FlatList
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -30,7 +30,6 @@ class HeroesCard extends Component {
 
     constructor(props) {
         super(props);
-        this.heroesDS = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         this.renderRow = this.renderRow.bind(this);
         this.getIndex = this.getIndex.bind(this);
         this.sortByKey = this.sortByKey.bind(this);
@@ -115,16 +114,17 @@ class HeroesCard extends Component {
         return processedHeroList;
     }
 
-    renderRow(rowData, i, j) {
+    renderRow(item) {
+        let rowData = item.item;
         var rowContainer;
-        if ((parseInt(j) + 1) % 2 == 0) {
+        if ((parseInt(item.index) + 1) % 2 == 0) {
             rowContainer = { backgroundColor: this.props.mod, marginTop: 10, paddingVertical: 5, borderRadius: 3 };
         } else {
             rowContainer = { backgroundColor: this.props.alpha, marginTop: 10, paddingVertical: 5, borderRadius: 3 };
         }
         var staticUri = getHeroImage(rowData.heroId);
         return (
-            <View style={rowContainer}>
+            <View style={rowContainer} >
                 <Text style={[styles.heroValueText, { color: this.props.secondLegend }]} numberOfLines={1}>{rowData.localizedName}</Text>
                 <View style={[styles.inRowSeparator, { backgroundColor: this.props.legend }]} />
 
@@ -179,11 +179,12 @@ class HeroesCard extends Component {
                             </View>
                         </View>
                     </View>
-                    <ListView
-                        dataSource={this.heroesDS.cloneWithRows(processedHeroList)}
-                        renderRow={this.renderRow}
+                    <FlatList
+                        data={processedHeroList}
+                        renderItem={this.renderRow}
                         enableEmptySections={true}
                         initialListSize={120}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
             )

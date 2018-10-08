@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Image,
     TouchableOpacity,
-    ListView
+    FlatList
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -37,7 +37,6 @@ class MatchesCard extends Component {
 
     constructor(props) {
         super(props);
-        this.matchesDS = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.renderRow = this.renderRow.bind(this);
         this.getHeader = this.getHeader.bind(this);
         this.getValue = this.getValue.bind(this);
@@ -49,7 +48,7 @@ class MatchesCard extends Component {
 
     matchPressed(data) {
         var matchId = data.match_id;
-        if(this.props.parent == "Favourites") {
+        if (this.props.parent == "Favourites") {
             Actions.matchDetailsFavourite(matchId);
         } else if (this.props.parent == "Search") {
             Actions.matchDetailsSearch(matchId);
@@ -60,10 +59,10 @@ class MatchesCard extends Component {
 
     getHeader() {
         var dynamicHeader;
-        if(this.props.default) {
+        if (this.props.default) {
             dynamicHeader = "K/D/A"
         } else {
-            if(this.props.sortedBy == "match_id") {
+            if (this.props.sortedBy == "match_id") {
                 dynamicHeader = "K/D/A";
             } else if (this.props.sortedBy == "kills") {
                 dynamicHeader = "Kills";
@@ -130,10 +129,10 @@ class MatchesCard extends Component {
 
     getValue(rowData) {
         var dynamicValue;
-        if(this.props.default) {
+        if (this.props.default) {
             dynamicValue = rowData.kills + "/" + rowData.deaths + "/" + rowData.assists;
-         } else {
-            if(this.props.sortedBy == "match_id") {
+        } else {
+            if (this.props.sortedBy == "match_id") {
                 dynamicValue = rowData.kills + "/" + rowData.deaths + "/" + rowData.assists;
             } else if (this.props.sortedBy == "kills") {
                 dynamicValue = rowData.kills;
@@ -199,42 +198,44 @@ class MatchesCard extends Component {
     }
 
     getFriendlyDuration(duration) {
-        var minutes = Math.floor(duration/60);
+        var minutes = Math.floor(duration / 60);
         var seconds = duration - (minutes * 60);
-        if(seconds < 10) {
+        if (seconds < 10) {
             seconds = '0' + seconds;
         }
         var friendlyDuration = minutes + ":" + seconds;
         return friendlyDuration;
     }
 
-    renderRow(rowData, i , j) {
-        if(rowData) {
+    renderRow(item) {
+        let rowData = item.item;
+        
+        if (rowData) {
             var rowContainer;
             var team;
             var result;
-            if(rowData.player_slot > 127) {
+            if (rowData.player_slot > 127) {
                 team = 'Dire';
             } else {
                 team = 'Radiant';
             }
-            if(team == 'Radiant' && rowData.radiant_win == true) {
+            if (team == 'Radiant' && rowData.radiant_win == true) {
                 result = 'W';
-            } else if (team == 'Dire' && rowData.radiant_win == false){
+            } else if (team == 'Dire' && rowData.radiant_win == false) {
                 result = 'W';
             } else {
                 result = 'L';
             }
             let indicatorColor;
-            if(result == 'W') {
+            if (result == 'W') {
                 indicatorColor = Colors.win;
             } else {
                 indicatorColor = Colors.lose;
             }
-            if((parseInt(j)+1) % 2 == 0) {
-                rowContainer = [styles.rowContainerEven, {backgroundColor: this.props.mod}];
+            if ((parseInt(item.index) + 1) % 2 == 0) {
+                rowContainer = [styles.rowContainerEven, { backgroundColor: this.props.mod }];
             } else {
-                rowContainer = [styles.rowContainerOdd, {backgroundColor: this.props.alpha}];
+                rowContainer = [styles.rowContainerOdd, { backgroundColor: this.props.alpha }];
             }
             var staticUri = getHeroImage(rowData.hero_id);
             var friendlyDuration = this.getFriendlyDuration(rowData.duration);
@@ -243,33 +244,36 @@ class MatchesCard extends Component {
             var now = moment();
             var friendlyEndTime = moment.duration(now.diff(unixEndTime)).humanize();
             var dynamicValue = this.getValue(rowData);
+
             var localizedGameMode = this.normalizeGameMode(gameMode[rowData.game_mode].name);
             var localizedLobbyType = this.normalizeLobbyType(lobbyType[rowData.lobby_type].name);
             return (
-                <TouchableOpacity style = {{flexDirection: 'row', flex: 1}} onPress = {() => {this.matchPressed(rowData)}}>
-                    <View style = {rowContainer}>
-                        <View style = {{flex: 2,
+                <TouchableOpacity style={{ flexDirection: 'row', flex: 1 }} onPress={() => { this.matchPressed(rowData) }}>
+                    <View style={rowContainer}>
+                        <View style={{
+                            flex: 2,
                             justifyContent: 'center',
                             alignItems: 'center',
-                            marginLeft: -5}}>
-                            <Image source = {staticUri} style = {styles.imageAvatar}/>
+                            marginLeft: -5
+                        }}>
+                            <Image source={staticUri} style={styles.imageAvatar} />
                         </View>
-                        <View style = {styles.cell}>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{localizedGameMode}</Text>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend, fontSize: 12}]}>{localizedLobbyType}</Text>
+                        <View style={styles.cell}>
+                            <Text style={[styles.tableValueText, { color: this.props.secondLegend }]}>{localizedGameMode}</Text>
+                            <Text style={[styles.tableValueText, { color: this.props.secondLegend, fontSize: 12 }]}>{localizedLobbyType}</Text>
                         </View>
-                        <View style = {styles.cell}>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyEndTime}</Text>
+                        <View style={styles.cell}>
+                            <Text style={[styles.tableValueText, { color: this.props.secondLegend }]}>{friendlyEndTime}</Text>
                         </View>
-                        <View style = {styles.cell}>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{friendlyDuration}</Text>
+                        <View style={styles.cell}>
+                            <Text style={[styles.tableValueText, { color: this.props.secondLegend }]}>{friendlyDuration}</Text>
                         </View>
-                        <View style = {styles.doubleCell}>
-                            <Text style = {[styles.tableValueText, {color: this.props.secondLegend}]}>{dynamicValue}</Text>
+                        <View style={styles.doubleCell}>
+                            <Text style={[styles.tableValueText, { color: this.props.secondLegend }]}>{dynamicValue}</Text>
                         </View>
 
                     </View>
-                    <View style = {{width: 5, backgroundColor: indicatorColor}} />
+                    <View style={{ width: 5, backgroundColor: indicatorColor }} />
                 </TouchableOpacity>
             )
         } else {
@@ -282,7 +286,7 @@ class MatchesCard extends Component {
         var trimmed = gameMode.replace('game_mode_', '');
         var split = trimmed.split("_");
         var normalized = "";
-        for(var i = 0; i < split.length; i++) {
+        for (var i = 0; i < split.length; i++) {
             normalized += split[i].charAt(0).toUpperCase() + split[i].slice(1) + " ";
         }
         return normalized;
@@ -292,7 +296,7 @@ class MatchesCard extends Component {
         var trimmed = lobbyType.replace('lobby_type_', '');
         var split = trimmed.split("_");
         var normalized = "";
-        for(var i = 0; i < split.length; i++) {
+        for (var i = 0; i < split.length; i++) {
             split[i][0].toUpperCase();
             normalized += split[i].charAt(0).toUpperCase() + split[i].slice(1) + " ";
         }
@@ -300,61 +304,64 @@ class MatchesCard extends Component {
     }
 
     render() {
-        if(this.props.matches) {
+        if (this.props.matches) {
 
             var dynamicHeader = this.getHeader();
-            var dynamicText = <Text numberOfLines = {1} style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>{dynamicHeader}</Text>;
+            var dynamicText = <Text numberOfLines={1} style={[styles.tableHeaderText, { color: this.props.secondLegend }]}>{dynamicHeader}</Text>;
 
             if (dynamicHeader === 'K/D/A') {
                 dynamicText = (
-                    <TouchableOpacity onPress = {() => {this.props.sortMatches("kda", this.props.sortDirection)}}>
+                    <TouchableOpacity onPress={() => { this.props.sortMatches("kda", this.props.sortDirection) }}>
                         {dynamicText}
                     </TouchableOpacity>
                 );
             }
             var title = "MATCHES";
-            if(this.props.title) {
+            if (this.props.title) {
                 title = this.props.title;
             }
 
             return (
-                <View style = {[styles.matchesCardContainer, {backgroundColor: this.props.mod}]}>
-                    <View style = {styles.titleContainer}>
-                        <Text style = {[styles.titleText, {color: this.props.secondLegend}]}>{title}</Text>
+                <View style={[styles.matchesCardContainer, { backgroundColor: this.props.mod }]}>
+                    <View style={styles.titleContainer}>
+                        <Text style={[styles.titleText, { color: this.props.secondLegend }]}>{title}</Text>
                     </View>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-                    <View style = {styles.tableHeaderContainer}>
-                        <View style = {{flex: 2,
+                    <View style={[styles.separator, { backgroundColor: this.props.legend }]} />
+                    <View style={styles.tableHeaderContainer}>
+                        <View style={{
+                            flex: 2,
                             justifyContent: 'center',
                             alignItems: 'center',
                             marginTop: 10,
                             marginBottom: 10,
-                            marginLeft: -5}}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Hero</Text>
+                            marginLeft: -5
+                        }}>
+                            <Text style={[styles.tableHeaderText, { color: this.props.secondLegend }]}>Hero</Text>
                         </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Mode</Text>
+                        <View style={styles.tableHeaderCell}>
+                            <Text style={[styles.tableHeaderText, { color: this.props.secondLegend }]}>Mode</Text>
                         </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <TouchableOpacity onPress = {() => {this.props.sortMatches("ended", this.props.sortDirection)}}>
-                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Ended</Text>
+                        <View style={styles.tableHeaderCell}>
+                            <TouchableOpacity onPress={() => { this.props.sortMatches("ended", this.props.sortDirection) }}>
+                                <Text style={[styles.tableHeaderText, { color: this.props.secondLegend }]}>Ended</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style = {styles.tableHeaderCell}>
-                            <TouchableOpacity onPress = {() => {this.props.sortMatches("duration", this.props.sortDirection)}}>
-                                <Text style = {[styles.tableHeaderText, {color: this.props.secondLegend}]}>Length</Text>
+                        <View style={styles.tableHeaderCell}>
+                            <TouchableOpacity onPress={() => { this.props.sortMatches("duration", this.props.sortDirection) }}>
+                                <Text style={[styles.tableHeaderText, { color: this.props.secondLegend }]}>Length</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style = {styles.doubleTableHeaderCell}>
+                        <View style={styles.doubleTableHeaderCell}>
                             {dynamicText}
                         </View>
-                        <View style = {{width: 5}} />
+                        <View style={{ width: 5 }} />
                     </View>
-                    <ListView style = {styles.matchesListView}
-                        dataSource = {this.matchesDS.cloneWithRows(this.props.matches)}
-                        renderRow = {this.renderRow}
-                        enableEmptySections = {true}
-                        initialListSize = {120}
+                    <FlatList style={styles.matchesListView}
+                        data={this.props.matches}
+                        renderItem={this.renderRow}
+                        enableEmptySections={true}
+                        initialListSize={120}
+                        keyExtractor={(item, index) => index.toString()}
                     />
                 </View>
             )
