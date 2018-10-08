@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "clear": "npm cache verify && watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf $TMPDIR/react-native-packager-cache-* && rm -rf $TMPDIR/metro-bundler-cache-*",
     "lint": "eslint app/*",
     "actions-lint": "eslint app/actions",
@@ -12,7 +13,8 @@
     "reducers-lint": "eslint app/reducers",
     "json-lint": "eslint app/json",
     "components-lint": "eslint app/components",
-    "containers-lint": "eslint app/containers"
+    "containers-lint": "eslint app/containers",
+    "postinstall": "sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/DrawerNavigator.js && sed -i '' 's/ StackRouter/ stackRouter/g' ./node_modules/react-navigation/src/navigators/StackNavigator.js && sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/TabNavigator.js && sed -i '' 's/ SwitchRouter/ switchRouter/g' ./node_modules/react-navigation/src/navigators/SwitchNavigator.js"
   },
   "dependencies": {
     "dotaconstants": "6.1.1",
@@ -24,7 +26,7 @@
     "react-native-device-info": "0.22.5",
     "react-native-google-analytics-bridge": "6.1.0",
     "react-native-keyboard-aware-scroll-view": "0.7.2",
-    "react-native-root-toast": "3.0.1",
+    "react-native-root-toast": "git+https://github.com/magicismight/react-native-root-siblings.git",
     "react-native-router-flux": "4.0.0-beta.31",
     "react-native-scrollable-tab-view": "git+https://github.com/happypancake/react-native-scrollable-tab-view.git",
     "react-native-simple-radio-button": "^2.7.1",

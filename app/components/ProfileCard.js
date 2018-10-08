@@ -1,4 +1,4 @@
-import  React, { Component } from 'react';
+import React, { Component } from 'react';
 import {
     View,
     Text,
@@ -36,7 +36,7 @@ class ProfileCard extends Component {
 
     onURLPressed(url) {
         Linking.canOpenURL(url).then(supported => {
-            if(supported) {
+            if (supported) {
                 return Linking.openURL(url);
             }
         }).catch();
@@ -46,42 +46,23 @@ class ProfileCard extends Component {
         const { info, wl } = this.props;
         const { profile, rank_tier: rankTier, leaderboard_rank: leaderboardRank } = info;
         if (profile) {
-            var soloMMR;
-            var teamMMR;
             var name;
             var winrate = 0;
-            var estimateMMR;
             var url;
-            if(info.solo_competitive_rank) {
-                soloMMR = info.solo_competitive_rank;
+            if (info.profile.loccountrycode) {
+                name = <Text style={[styles.name, { color: this.props.secondLegend }]}>{info.profile.personaname} ({info.profile.loccountrycode})</Text>;
             } else {
-                soloMMR = "N/A";
+                name = <Text style={[styles.name, { color: this.props.secondLegend }]}>{info.profile.personaname}</Text>;
             }
-            if(info.competitive_rank) {
-                teamMMR = info.competitive_rank
-            } else {
-                teamMMR = "N/A"
+            if (wl.win && wl.lose) {
+                winrate = wl.win / (wl.win + wl.lose);
             }
-            if(info.profile.loccountrycode) {
-                name = <Text style = {[styles.name, {color: this.props.secondLegend}]}>{info.profile.personaname} ({info.profile.loccountrycode})</Text>;
-            } else {
-                name = <Text style = {[styles.name, {color: this.props.secondLegend}]}>{info.profile.personaname}</Text>;
-            }
-            if(wl.win && wl.lose) {
-                winrate = wl.win / (wl.win+wl.lose);
-            }
-            let winPercentage = Math.round(winrate * 10000)/100;
+            let winPercentage = Math.round(winrate * 10000) / 100;
 
-            if(info.mmr_estimate.estimate) {
-                estimateMMR = info.mmr_estimate.estimate;
-            } else {
-                estimateMMR = "N/A";
-            }
-
-            if(info.profile.profileurl) {
+            if (info.profile.profileurl) {
                 url = (
-                    <TouchableOpacity style = {styles.urlContainer} onPress = {() => this.onURLPressed(info.profile.profileurl)}>
-                        <Text style = {{color: this.props.secondLegend, textDecorationLine: 'underline', fontFamily: Fonts.base}}>{info.profile.profileurl}</Text>
+                    <TouchableOpacity style={styles.urlContainer} onPress={() => this.onURLPressed(info.profile.profileurl)}>
+                        <Text style={{ color: this.props.secondLegend, textDecorationLine: 'underline', fontFamily: Fonts.base }}>{info.profile.profileurl}</Text>
                     </TouchableOpacity>
                 )
             } else {
@@ -89,50 +70,38 @@ class ProfileCard extends Component {
             }
 
             return (
-                <View style = {[styles.profileCardContainer, {backgroundColor: this.props.mod}]}>
+                <View style={[styles.profileCardContainer, { backgroundColor: this.props.mod }]}>
 
-                    <View style = {{flexDirection: 'row'}}>
-                        <View style = {styles.profileAvatarContainer}>
-                            <Image style = {[styles.bigImageAvatar, {marginTop: 4, marginBottom: 15}]} source = {{uri: info.profile.avatarfull}} />
-                            <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank}/>
-                        </View>
-                        <View style = {styles.profileInfoContainer}>
-                            <View style = {styles.nameContainer}>
+                    <View style={{ flexDirection: 'column' }}>
+                        <View style={[styles.profileAvatarContainer]}>
+                            <Image style={[styles.bigImageAvatar, { marginTop: 4 }]} source={{ uri: info.profile.avatarfull }} />
+                            <View style={styles.nameContainer}>
                                 {name}
                             </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>WINS: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{wl.win}</Text>
+                            <View style={{ flexDirection: 'row', marginBottom: 5 }}>
+                                <View style={{ alignItems: 'center', flex: 1 }}>
+                                    <Text style={[styles.captionText, { color: this.props.legend }]}>WINS</Text>
+                                    <Text style={[styles.contentText, { color: this.props.secondLegend }]}>{wl.win}</Text>
+                                </View>
+                                <View style={{ alignItems: 'center', flex: 1 }}>
+                                    <Text style={[styles.captionText, { color: this.props.legend }]}>LOSSES</Text>
+                                    <Text style={[styles.contentText, { color: this.props.secondLegend }]}>{wl.lose}</Text>
+                                </View>
+                                <View style={{ alignItems: 'center', flex: 1 }}>
+                                    <Text style={[styles.captionText, { color: this.props.legend }]}>WINRATE</Text>
+                                    <Text style={[styles.contentText, { color: this.props.secondLegend }]}>{winPercentage}%</Text>
+                                </View>
                             </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>LOSSES: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{wl.lose}</Text>
-                            </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>WINRATE: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{winPercentage}%</Text>
-                            </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>SOLO MMR: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{soloMMR}</Text>
-                            </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>PARTY MMR: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{teamMMR}</Text>
-                            </View>
-                            <View style = {{flexDirection: 'row', alignItems: 'center'}}>
-                                <Text style = {[styles.captionText, {color: this.props.legend}]}>ESTIMATED MMR: </Text>
-                                <Text style = {[styles.contentText, {color: this.props.secondLegend}]}>{estimateMMR}</Text>
-                            </View>
+                            <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank} />
                         </View>
                     </View>
 
-                    <Slider disabled = {true}
-                            value = {winrate}
-                            minimumTrackTintColor = {Colors.win}
-                            maximumTrackTintColor = {Colors.lose}
-                            thumbStyle = {styles.hiddenThumb}/>
-                        <View style = {{marginHorizontal: 15, marginBottom: 10, flexDirection: 'row', alignItems: 'center'}}>
+                    <Slider disabled={true}
+                        value={winrate}
+                        minimumTrackTintColor={Colors.win}
+                        maximumTrackTintColor={Colors.lose}
+                        thumbStyle={styles.hiddenThumb} />
+                    <View style={{ marginHorizontal: 15, marginBottom: 10, flexDirection: 'row', alignItems: 'center' }}>
                         {url}
                     </View>
                 </View>
@@ -165,7 +134,7 @@ const baseStyles = _.extend(base.general, {
         flex: 1
     },
     profileInfoContainer: {
-        flex: 2
+        flex: 1,
     },
     dataContainer: {
         flex: 4,
