@@ -29,26 +29,26 @@ const styles = StyleSheet.create({
 
 var RankIcon = ({rankTier, leaderboardRank}) =>  {
     const rankIcons = {
-        '0': require('../assets/rank_icons/rank_icon_0.png'),
-        '1': require('../assets/rank_icons/rank_icon_1.png'),
-        '2': require('../assets/rank_icons/rank_icon_2.png'),
-        '3': require('../assets/rank_icons/rank_icon_3.png'),
-        '4': require('../assets/rank_icons/rank_icon_4.png'),
-        '5': require('../assets/rank_icons/rank_icon_5.png'),
-        '6': require('../assets/rank_icons/rank_icon_6.png'),
-        '7': require('../assets/rank_icons/rank_icon_7.png'),
-        '7a': require('../assets/rank_icons/rank_icon_7a.png'),
-        '7b': require('../assets/rank_icons/rank_icon_7b.png'),
-        '7c': require('../assets/rank_icons/rank_icon_7c.png'),
-        '8': require('../assets/rank_icons/rank_icon_8.png')
+        '0': require('../../assets/rank_icons/rank_icon_0.png'),
+        '1': require('../../assets/rank_icons/rank_icon_1.png'),
+        '2': require('../../assets/rank_icons/rank_icon_2.png'),
+        '3': require('../../assets/rank_icons/rank_icon_3.png'),
+        '4': require('../../assets/rank_icons/rank_icon_4.png'),
+        '5': require('../../assets/rank_icons/rank_icon_5.png'),
+        '6': require('../../assets/rank_icons/rank_icon_6.png'),
+        '7': require('../../assets/rank_icons/rank_icon_7.png'),
+        '7a': require('../../assets/rank_icons/rank_icon_7a.png'),
+        '7b': require('../../assets/rank_icons/rank_icon_7b.png'),
+        '7c': require('../../assets/rank_icons/rank_icon_7c.png'),
+        '8': require('../../assets/rank_icons/rank_icon_8.png')
     };
 
     const starIcons = {
-        '1': require('../assets/rank_icons/rank_star_1.png'),
-        '2': require('../assets/rank_icons/rank_star_2.png'),
-        '3': require('../assets/rank_icons/rank_star_3.png'),
-        '4': require('../assets/rank_icons/rank_star_4.png'),
-        '5': require('../assets/rank_icons/rank_star_5.png'),
+        '1': require('../../assets/rank_icons/rank_star_1.png'),
+        '2': require('../../assets/rank_icons/rank_star_2.png'),
+        '3': require('../../assets/rank_icons/rank_star_3.png'),
+        '4': require('../../assets/rank_icons/rank_star_4.png'),
+        '5': require('../../assets/rank_icons/rank_star_5.png'),
     };
 
     if (!rankTier) return null;
