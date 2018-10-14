@@ -10,13 +10,13 @@ import {
 
 import { connect } from 'react-redux';
 
-import RankIcon from './RankIcon';
-
 import Colors from '../themes/Colors';
 import base from '../themes/BaseStyles';
 import Fonts from '../themes/Fonts';
 
 import Slider from 'react-native-slider';
+
+import { IconCheese, IconContributor, RankIcon } from './Icons'
 
 import _ from 'lodash';
 
@@ -78,6 +78,10 @@ class ProfileCard extends Component {
                             <View style={styles.nameContainer}>
                                 {name}
                             </View>
+                            <View style={baseStyles.profileIcons}>
+                                {profile.is_contributor && <IconContributor style={baseStyles.contributorIcon}/>}
+                                {profile.cheese > 0 && <IconCheese fill="#fff" style={baseStyles.cheeseIcon}/>}
+                            </View>
                             <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                                 <View style={{ alignItems: 'center', flex: 1 }}>
                                     <Text style={[styles.captionText, { color: this.props.legend }]}>WINS</Text>
@@ -92,7 +96,8 @@ class ProfileCard extends Component {
                                     <Text style={[styles.contentText, { color: this.props.secondLegend }]}>{winPercentage}%</Text>
                                 </View>
                             </View>
-                            <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank} />
+                                <RankIcon rankTier={rankTier} leaderboardRank={leaderboardRank} />
+
                         </View>
                     </View>
 
@@ -206,6 +211,29 @@ const baseStyles = _.extend(base.general, {
         fontWeight: 'bold',
         fontFamily: Fonts.base
     },
+    profileIcons: {
+        flexDirection: 'row'
+    },
+    contributorIcon: {
+        width: 24,
+        height: 24,
+        marginLeft: 5,
+        marginRight: 5,
+        shadowColor: "rgb(102,187,255)",
+        shadowOffset: {width: 0, height: 0},
+        shadowRadius: 6,
+        shadowOpacity: 1
+    },
+    cheeseIcon: {
+        width: 24,
+        height: 24,
+        marginLeft: 5,
+        marginRight: 5,
+        shadowColor: "rgb(255,255,0)",
+        shadowOffset: {width: 0, height: 0},
+        shadowRadius: 6,
+        shadowOpacity: 0.6,
+    }
 });
 
 const styles = StyleSheet.create(baseStyles);
