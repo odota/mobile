@@ -221,7 +221,7 @@ const baseStyles = _.extend(base.general, {
         marginRight: 5,
         shadowColor: "rgb(102,187,255)",
         shadowOffset: {width: 0, height: 0},
-        shadowRadius: 6,
+        shadowRadius: 8,
         shadowOpacity: 1
     },
     cheeseIcon: {
