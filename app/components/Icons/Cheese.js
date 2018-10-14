@@ -1,5 +1,9 @@
 import React from 'react'
 import Svg, { Path } from 'react-native-svg'
+import {Platform} from "react-native";
+import RadialGradient from "react-native-svg/elements/RadialGradient";
+import Stop from "react-native-svg/elements/Stop";
+import Circle from "react-native-svg/elements/Circle";
 
 const Cheese = ({style = {height: 24, width: 24}, fill = "#f5f5f5", strokeColor="#b3b3b3", strokeWidth = 14, ...props} = {}) => (
     <Svg
@@ -11,6 +15,18 @@ const Cheese = ({style = {height: 24, width: 24}, fill = "#f5f5f5", strokeColor=
             ...style
         }}
     >
+
+        {Platform.OS === "android" &&
+        <RadialGradient id="dropshadow" r="100%" cx="50%" cy="50%" rx="50%" ry="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
+            <Stop offset="40%" stopColor={style.shadowColor} stopOpacity="1"/>
+            <Stop offset="100%" stopColor={style.shadowColor} stopOpacity="0"/>
+        </RadialGradient>
+        }
+
+        {Platform.OS === "android" &&
+            <Circle fill="url(#dropshadow)" cx="50%" cy="50%" r="100%" />
+        }
+
         <Path
             d="M141.4,234.6c0,0,17.4-7.3,39-10s38.7,0.7,38.7,0.7"
             fill={fill}

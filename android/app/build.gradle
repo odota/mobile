@@ -144,7 +144,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-svg')
     implementation project(':react-native-svg')
     implementation project(':react-native-device-info')
     implementation project(':react-native-google-analytics-bridge')
