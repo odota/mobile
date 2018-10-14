@@ -16,7 +16,7 @@ import Fonts from '../themes/Fonts';
 
 import Slider from 'react-native-slider';
 
-import { IconCheese, IconContributor, RankIcon } from './Icons'
+import { IconCheese, IconContributor, RankIcon, ShadowHelper } from './Icons'
 
 import _ from 'lodash';
 
@@ -79,8 +79,8 @@ class ProfileCard extends Component {
                                 {name}
                             </View>
                             <View style={baseStyles.profileIcons}>
-                                {profile.is_contributor && <IconContributor style={baseStyles.contributorIcon}/>}
-                                {profile.cheese > 0 && <IconCheese fill="#fff" style={baseStyles.cheeseIcon}/>}
+                                {profile.is_contributor && <ShadowHelper style={baseStyles.contributorIcon}><IconContributor style={baseStyles.contributorIcon}/></ShadowHelper>}
+                                {profile.cheese > 0 && <ShadowHelper style={baseStyles.cheeseIcon}><IconCheese style={baseStyles.cheeseIcon}/></ShadowHelper>}
                             </View>
                             <View style={{ flexDirection: 'row', marginBottom: 5 }}>
                                 <View style={{ alignItems: 'center', flex: 1 }}>
@@ -218,7 +218,7 @@ const baseStyles = _.extend(base.general, {
         width: 24,
         height: 24,
         marginLeft: 5,
-        marginRight: 5,
+        marginRight:5,
         shadowColor: "rgb(102,187,255)",
         shadowOffset: {width: 0, height: 0},
         shadowRadius: 8,
@@ -228,7 +228,7 @@ const baseStyles = _.extend(base.general, {
         width: 24,
         height: 24,
         marginLeft: 5,
-        marginRight: 5,
+        marginRight:5,
         shadowColor: "rgb(255,255,0)",
         shadowOffset: {width: 0, height: 0},
         shadowRadius: 6,

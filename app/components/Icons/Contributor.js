@@ -1,18 +1,7 @@
 import React from 'react'
-import {Platform} from 'react-native'
-import Svg, { Path, RadialGradient, Stop, Circle } from 'react-native-svg'
+import Svg, { Path } from 'react-native-svg'
 const Contributor = ({dColor = "#21be93" , oColor = "#212121", style = {height: 24, width: 24}, ...props} = {})=> (
     <Svg version={1} viewBox="0 0 1138 1138" width={style.width} height={style.height} style={style} {...props}>
-        {Platform.OS === "android" &&
-            <RadialGradient id="dropshadow" r="100%" cx="50%" cy="50%" rx="50%" ry="50%" fx="50%" fy="50%" gradientUnits="userSpaceOnUse">
-                <Stop offset="40%" stopColor={style.shadowColor} stopOpacity="1"/>
-                <Stop offset="100%" stopColor={style.shadowColor} stopOpacity="0"/>
-            </RadialGradient>
-        }
-
-        {Platform.OS === "android" &&
-            <Circle fill="url(#dropshadow)" cx="50%" cy="50%" r="100%" />
-        }
 
         <Path
             fill={dColor}
