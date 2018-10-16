@@ -14,7 +14,7 @@
     "json-lint": "eslint app/json",
     "components-lint": "eslint app/components",
     "containers-lint": "eslint app/containers",
-    "postinstall": "sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/DrawerNavigator.js && sed -i '' 's/ StackRouter/ stackRouter/g' ./node_modules/react-navigation/src/navigators/StackNavigator.js && sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/TabNavigator.js && sed -i '' 's/ SwitchRouter/ switchRouter/g' ./node_modules/react-navigation/src/navigators/SwitchNavigator.js"
+    "xx-postinstall": "sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/DrawerNavigator.js && sed -i '' 's/ StackRouter/ stackRouter/g' ./node_modules/react-navigation/src/navigators/StackNavigator.js && sed -i '' 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/TabNavigator.js && sed -i '' 's/ SwitchRouter/ switchRouter/g' ./node_modules/react-navigation/src/navigators/SwitchNavigator.js"
   },
   "dependencies": {
     "dotaconstants": "6.1.1",
