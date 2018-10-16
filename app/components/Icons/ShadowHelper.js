@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import Svg, { Path, RadialGradient, Stop, Circle } from 'react-native-svg'
+import Svg, {RadialGradient, Stop, Circle } from 'react-native-svg'
 import {Platform} from "react-native";
 
 const Shadow = (props) => {
@@ -8,7 +8,7 @@ const Shadow = (props) => {
         return React.cloneElement(props.children, props);
     }
 
-    const {style: {shadowColor, shadowSpread, shadowRadius, shadowOpacity, height, width, margin, marginLeft, marginRight, marginBottom = 0, marginTop = 0}} = props
+    const {style: {shadowColor, shadowRadius, height, width, margin, marginLeft, marginRight, marginBottom = 0, marginTop = 0}} = props
     const container = {
         width: width + (shadowRadius * 2),
         height: height + (shadowRadius * 2),
@@ -20,6 +20,7 @@ const Shadow = (props) => {
         marginTop: -shadowRadius + marginTop,
         height: container.height,
         width: container.width,
+        margin: -shadowRadius + margin,
         marginLeft: -shadowRadius + marginLeft,
         marginRight: -shadowRadius + marginRight,
     }
