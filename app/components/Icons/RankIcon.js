@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     leaderboardRankText: {
         color: 'white',
-        marginTop: -10,
+        marginTop: -8,
     },
 });
 
@@ -49,6 +49,8 @@ var RankIcon = ({rankTier, leaderboardRank}) =>  {
         '3': require('../../assets/rank_icons/rank_star_3.png'),
         '4': require('../../assets/rank_icons/rank_star_4.png'),
         '5': require('../../assets/rank_icons/rank_star_5.png'),
+        '6': require('../../assets/rank_icons/rank_star_6.png'),
+        '7': require('../../assets/rank_icons/rank_star_7.png')
     };
 
     if (!rankTier) return null;
@@ -56,21 +58,20 @@ var RankIcon = ({rankTier, leaderboardRank}) =>  {
     if (rankTier > 9) {
         if (leaderboardRank) {
             if (leaderboardRank <= 10) {
-                rank = '7c'; // Divine Top 10
+                rank = '8c'; // Divine Top 10
             } else if (leaderboardRank <= 100) {
-                rank = '7b'; // Divine Top 100
+                rank = '8b'; // Divine Top 100
+            } else {
+                rank = '8';
             }
-        }
-        if (rankTier === 76 || (rankTier === 75 && leaderboardRank !== null)) {
-            rank = rank || '7a'; // Divine Elite
         } else {
             const intRankTier = parseInt(rankTier, 10);
             const intStar = parseInt(intRankTier % 10, 10);
             if (!rank) {
                 if (intStar <= 0) {
                     star = 0;
-                } else if (intStar >= 5) {
-                    star = 5;
+                } else if (intStar >= 7) {
+                    star = 7;
                 } else {
                     star = intStar;
                 }

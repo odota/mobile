@@ -1,6 +1,6 @@
 {
   "name": "OpenDota",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "start": "react-native start",
@@ -17,10 +17,10 @@
     "postinstall": "sed -i.bak 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/DrawerNavigator.js && sed -i.bak 's/ StackRouter/ stackRouter/g' ./node_modules/react-navigation/src/navigators/StackNavigator.js && sed -i.bak 's/ TabRouter/ tabRouter/g' ./node_modules/react-navigation/src/navigators/TabNavigator.js && sed -i.bak 's/ SwitchRouter/ switchRouter/g' ./node_modules/react-navigation/src/navigators/SwitchNavigator.js"
   },
   "dependencies": {
-    "dotaconstants": "6.1.1",
+    "dotaconstants": "6.15.0",
     "heatmap.js": "2.0.5",
     "lodash": "4.17.11",
-    "moment": "2.22.2",
+    "moment": "2.24.0",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-device-info": "0.22.5",

@@ -8,7 +8,7 @@ const colors = {
     openDotaLegendTranslucent: 'rgba(102, 187, 255, 0.8)',
     openDotaSecondLegend: 'rgb(255, 255, 255)',
     openDotaBackground: 'rgb(18, 19, 37)',
-    openDotaReverseBackground: 'rgb(0, 0, 0)',
+    openDotaReverseBackground: 'rgb(255, 255, 255)',
     nightAlpha: 'rgb(48, 49, 67)',
     nightMod: 'rgb(38, 39, 57)',
     nightLegend: 'rgb(102, 187, 255)',
