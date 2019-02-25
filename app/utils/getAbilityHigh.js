@@ -990,6 +990,48 @@ export function getAbilityHigh(id) {
 		staticImage = require('../assets/abilities/pangolier_shield_crash_lg.png');
 	} else if (id == 6937) {
 		staticImage = require('../assets/abilities/tiny_toss_tree_lg.png');
+	} else if (id == 7000) {
+		staticImage = require('../assets/abilities/morphling_adaptive_strike_str_lg.png');
+	} else if (id == 7116) {
+		staticImage = require('../assets/abilities/visage_summon_familiars_stone_form_lg.png');
+	} else if (id == 7230) {
+		staticImage = require('../assets/abilities/beastmaster_call_of_the_wild_boar_lg.png');
+	} else if (id == 7231) {
+		staticImage = require('../assets/abilities/beastmaster_call_of_the_wild_hawk_lg.png');
+	} else if (id == 7300) {
+		staticImage = require('../assets/abilities/huskar_inner_fire_lg.png');
+	} else if (id == 7301) {
+		staticImage = require('../assets/abilities/spirit_breaker_bulldoze_lg.png');
+	} else if (id == 7304) {
+		staticImage = require('../assets/abilities/dazzle_bad_juju_lg.png');
+	} else if (id == 7306) {
+		staticImage = require('../assets/abilities/chen_divine_favor_lg.png');
+	} else if (id == 7307) {
+		staticImage = require('../assets/abilities/pangolier_lucky_shot_lg.png');
+	} else if (id == 7308) {
+		staticImage = require('../assets/abilities/lone_druid_spirit_bear_defender_lg.png');
+	} else if (id == 7309) {
+		staticImage = require('../assets/abilities/lone_druid_spirit_link_lg.png');
+	} else if (id == 7310) {
+		staticImage = require('../assets/abilities/brewmaster_cinder_brew_lg.png');
+	} else if (id == 7312) {
+		staticImage = require('../assets/abilities/lich_frost_shield_lg.png');
+	} else if (id == 7314) {
+		staticImage = require('../assets/abilities/antimage_counterspell_lg.png');
+	} else if (id == 7316) {
+		staticImage = require('../assets/abilities/keeper_of_the_light_will_o_wisp_lg.png');
+	} else if (id == 7318) {
+		staticImage = require('../assets/abilities/meepo_ransack_lg.png');
+	} else if (id == 7319) {
+		staticImage = require('../assets/abilities/clinkz_burning_army_lg.png');
+	} else if (id == 7320) {
+		staticImage = require('../assets/abilities/rubick_arcane_supremacy_lg.png');
+	} else if (id == 7322) {
+		staticImage = require('../assets/abilities/tusk_tag_team_lg.png');
+	} else if (id == 7323) {
+		staticImage = require('../assets/abilities/omniknight_repel_lg.png');
+	} else if (id == 7325) {
+		staticImage = require('../assets/abilities/lich_sinister_gaze_lg.png');
 	} else if (id == 8340) {
 		staticImage = require('../assets/abilities/dark_willow_terrorize_lg.png');
 	} else if (id == 6491) {
