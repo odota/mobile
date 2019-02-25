@@ -327,7 +327,7 @@ export function getItemImage(id) {
     } else if (id == 239) {
         staticImage = require('../assets/items/iron_talon_lg.png');
     } else if (id == 208) {
-        staticImage = require('../assets/items/iron_talon_lg.png');
+        staticImage = require('../assets/items/abyssal_blade_lg.png');
     } else if (id == 210) {
         staticImage = require('../assets/items/heavens_halberd_lg.png');
     } else if (id == 212) {
@@ -336,8 +336,50 @@ export function getItemImage(id) {
         staticImage = require('../assets/items/tranquil_boots_lg.png');
     } else if (id == 215) {
         staticImage = require('../assets/items/shadow_amulet_lg.png');
+    } else if (id == 243) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 245) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 246) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 248) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 251) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 253) {
+        staticImage = require('../assets/items/recipe_lg.png');
     } else if (id == 254) {
         staticImage = require('../assets/items/glimmer_cape_lg.png');
+    } else if (id == 255) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 256) {
+        staticImage = require('../assets/items/aeon_disk_lg.png');
+    } else if (id == 258) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 259) {
+        staticImage = require('../assets/items/kaya_lg.png');
+    } else if (id == 260) {
+        staticImage = require('../assets/items/refresher_shard_lg.png');
+    } else if (id == 261) {
+        staticImage = require('../assets/items/crown_lg.png');
+    } else if (id == 262) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 268) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 272) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 273) {
+        staticImage = require('../assets/items/kaya_and_sange_lg.png');
+    } else if (id == 274) {
+        staticImage = require('../assets/items/recipe_lg.png');
+    } else if (id == 275) {
+        staticImage = require('../assets/items/trident_lg.png');
+    } else if (id == 276) {
+        staticImage = require('../assets/items/combo_breaker_lg.png');
+    } else if (id == 277) {
+        staticImage = require('../assets/items/yasha_and_kaya_lg.png');
+    } else if (id == 279) {
+        staticImage = require('../assets/items/ring_of_tarrasque_lg.png');
     } else if (id == 1000) {
         staticImage = require('../assets/items/halloween_candy_corn_lg.png');
     } else if (id == 1001) {
