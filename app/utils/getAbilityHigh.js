@@ -856,6 +856,22 @@ export function getAbilityHigh(id) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6449) {
 		staticImage = require('../assets/talent_tree.png');
+	} else if (id == 6495) {
+		staticImage = require('../assets/abilities/mars_gods_rebuke_lg.png');
+	} else if (id == 6582) {
+		staticImage = require('../assets/abilities/mars_bulwark_lg.png');
+	} else if (id == 6583) {
+		staticImage = require('../assets/abilities/mars_spear_lg.png');
+	} else if (id == 6598) {
+		staticImage = require('../assets/abilities/mars_arena_of_blood_lg.png');
+	} else if (id == 6584) {
+		staticImage = require('../assets/talent_tree.png');
+	} else if (id == 6756) {
+		staticImage = require('../assets/talent_tree.png');
+	} else if (id == 6759) {
+		staticImage = require('../assets/talent_tree.png');
+	} else if (id == 6766) {
+		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6500) {
 		staticImage = require('../assets/talent_tree.png');
 	} else if (id == 6501) {

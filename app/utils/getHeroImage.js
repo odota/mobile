@@ -232,6 +232,8 @@ export function getHeroImage(id) {
         staticImage = require('../assets/heroes/pangolier_full.png');
     } else if (id == 121) {
         staticImage = require('../assets/heroes/grimstroke_full.png');
+    } else if (id == 129) {
+        staticImage = require('../assets/heroes/mars_full.png');
     } else {
         staticImage = require('../assets/no-item.png');
     }

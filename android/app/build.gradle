@@ -94,8 +94,8 @@ android {
         applicationId "com.opendota.mobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15
-        versionName "1.2.0"
+        versionCode 16
+        versionName "1.2.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

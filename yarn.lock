@@ -2092,10 +2092,10 @@ dom-walk@^0.1.0:
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
   integrity sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
 
-dotaconstants@6.15.0:
-  version "6.15.0"
-  resolved "https://registry.yarnpkg.com/dotaconstants/-/dotaconstants-6.15.0.tgz#13ade75078f5877d786b1bf1d1be8ed9a8ed3e5c"
-  integrity sha512-yVftPIGcgcFZu6OkSRSbObYIRu4QEIsiCErw79nexsxHQvnF1cpIOepgjCmIDvrxJnjyC5d6UflVWgQwbQh2zg==
+dotaconstants@6.16.0:
+  version "6.16.0"
+  resolved "https://registry.yarnpkg.com/dotaconstants/-/dotaconstants-6.16.0.tgz#6d71b535eebd6b0726a99a86362baceb8fa129b0"
+  integrity sha512-Ln05TzqyK//1a7cPcI6D7gw+rF6EoabEhQxE7v/Au2NEUDk4VFAFi45ToYi3Ye86IVUW7wmQc5QNyaiV+AZAUA==
 
 ecc-jsbn@~0.1.1:
   version "0.1.2"

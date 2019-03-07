@@ -95,7 +95,7 @@ class MatchPerformance extends Component {
 
     generateProcessedPlayers(unprocessedPlayersList) {
         var processedPlayersList = [];
-        for (let i = 0; i < unprocessedPlayersList.length; i ++) {
+        for (let i = 0; i < 10; i ++) {
             var currentUnprocessedPlayer = unprocessedPlayersList[i];
 
             var processedPlayer = {};
