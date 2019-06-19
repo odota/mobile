@@ -2,7 +2,8 @@
 
 buildscript {
     ext {
-        googlePlayServicesVersion = "+"
+        googlePlayServicesVersion = "16.+"
+        firebaseVersion = "17.3.4"
     }
     repositories {
         configurations.all {
