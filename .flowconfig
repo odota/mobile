@@ -64,4 +64,4 @@ esproposal.optional_chaining=enable
 esproposal.nullish_coalescing=enable
 
 [version]
-^0.78.0
+^0.92.0
