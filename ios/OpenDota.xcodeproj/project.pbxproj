@@ -24,6 +24,7 @@
 		3D747CEE5932421A8D9ACC16 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = EF79FB0A5B1B41F09EE4B799 /* libsqlite3.0.tbd */; };
 		4F5EE8A0F8BB4D88923AB888 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CECAB5473DA4C0B8A19B8C4 /* SystemConfiguration.framework */; };
 		4FC0DE16A18747298F36E66A /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2D18788765464A5E8B212364 /* MaterialIcons.ttf */; };
+		50CB54C122EA752600DB2341 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CB549522EA752600DB2341 /* JavaScriptCore.framework */; };
 		5BE68A0ED0A447FAA5713319 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A70F801B64964A848EDA1739 /* Ionicons.ttf */; };
 		64BCED6DB173487CB2F61557 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2500EAD136CE40C1B631179A /* CoreData.framework */; };
 		662A27EC6F814244A7083D6F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E43EE54948849A9BBC6D14C /* libz.tbd */; };
@@ -387,6 +388,7 @@
 		2CECAB5473DA4C0B8A19B8C4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		2D18788765464A5E8B212364 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		3B7E1B538B9347A5B235E1E9 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		50CB549522EA752600DB2341 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		56D7808EC69E6BA093CAE772 /* Pods-OpenDota.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenDota.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenDota/Pods-OpenDota.debug.xcconfig"; sourceTree = "<group>"; };
 		5D402B17CF7041A1830A560E /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		610F2BD11B6140C99EB044C0 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50CB54C122EA752600DB2341 /* JavaScriptCore.framework in Frameworks */,
 				AE4034A521587C1100DB48B4 /* libRNDeviceInfo.a in Frameworks */,
 				AEB7AB0A21548961008E49A0 /* libRNSVG.a in Frameworks */,
 				AE219CAC2006CF9500DE2BCD /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
@@ -566,6 +569,7 @@
 		2919E02A19533B0748CC1324 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				50CB549522EA752600DB2341 /* JavaScriptCore.framework */,
 				B614ECCC3133BB5F2D51BF98 /* libPods-OpenDota.a */,
 			);
 			name = Frameworks;
@@ -763,6 +767,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
