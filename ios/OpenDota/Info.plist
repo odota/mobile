@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>This permission stems from a library we use and will never be called. If you see this, deny access.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto.ttf</string>
@@ -64,5 +64,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This permission stems from a library we use and will never be called. If you see this, deny access.</string>
 </dict>
 </plist>
