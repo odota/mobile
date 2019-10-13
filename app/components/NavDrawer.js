@@ -106,9 +106,9 @@ class NavDrawer extends Component {
 
     getLogoutView = () => {
         const { profile, mod, legend, secondLegend } = this.props;
-
+        
         return (profile != "") ?
-                <View>
+        <View>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
                         <View style = {[styles.navItem, {backgroundColor: mod}]}>
                             <View style = {styles.navIconContainer}>
@@ -123,68 +123,42 @@ class NavDrawer extends Component {
                 </View>
             : 
             <View />;
+        }
+        
+    getMenuItem = (itemName, fontName) => {
+        const { mod, legend, secondLegend } = this.props;
+
+        return <TouchableOpacity onPress = {() => {this.goto(itemName)}}>
+            <View style = {[styles.navItem, {backgroundColor: mod}]}>
+                <View style = {styles.navIconContainer}>
+                    <FontAwesome name = {fontName} size = {26} allowFontScaling = {false} color = {legend}/>
+                </View>
+                <View style = {styles.navTextContainer}>
+                    <Text style = {[styles.navText, {color: secondLegend}]}>{itemName}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>;
     }
 
     render() {
-        const { mod, legend, secondLegend } = this.props;
+        const { mod, legend } = this.props;
         
         const paddingView = this.getPaddingView();
         const logoutView = this.getLogoutView();
-       
+
         return (
             <View style = {[styles.drawerContainer, {backgroundColor: mod}]}>
                 {paddingView}
                 <ScrollView style = {styles.navScroll}>
-                    <TouchableOpacity onPress = {() => {this.goto('Home')}}>
-                        <View style = {[styles.navItem, {backgroundColor: mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "home" size = {26} allowFontScaling = {false} color = {legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: secondLegend}]}>Home</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    {this.getMenuItem("Home", "home")}
                     <View style = {[styles.separator, {backgroundColor: legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Favourites')}}>
-                        <View style = {[styles.navItem, {backgroundColor: mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "star" size = {26} allowFontScaling = {false} color = {legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: secondLegend}]}>Favourites</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    {this.getMenuItem("Favourites", "star")}
                     <View style = {[styles.separator, {backgroundColor: legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Search')}}>
-                        <View style = {[styles.navItem, {backgroundColor: mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "search" size = {26} allowFontScaling = {false} color = {legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: secondLegend}]}>Search</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    {this.getMenuItem("Search", "search")}
                     <View style = {[styles.separator, {backgroundColor: legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Settings')}}>
-                        <View style = {[styles.navItem, {backgroundColor: mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "cog" size = {26} allowFontScaling = {false} color = {legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: secondLegend}]}>Settings</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
+                    {this.getMenuItem("Settings", "cog")}
                     <View style = {[styles.separator, {backgroundColor: legend}]} />
-
                     {logoutView}
-
                 </ScrollView>
             </View>
         )
