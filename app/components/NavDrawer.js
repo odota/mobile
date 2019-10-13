@@ -52,13 +52,15 @@ class NavDrawer extends Component {
     }
 
     onResetHomeProfilePressed() {
+        const {tracker, actions} = this.props;
+
         Alert.alert('Logout',
                     'Are you sure that you want to logout?',
                     [
                         {text: 'Cancel', style: 'cancel'},
                         {text: 'OK', onPress: () => {
-                            this.props.tracker.trackEvent('Logout', 'Success');
-                            this.props.actions.resetHomeProfile();
+                            tracker.trackEvent('Logout', 'Success');
+                            actions.resetHomeProfile();
                             setTimeout(() => {
                                 AsyncStorage.setItem("homeProfile", "");
                             }, 1000);
@@ -67,21 +69,23 @@ class NavDrawer extends Component {
     }
 
     goto(route) {
+        const {actions, contextIdStackFavourite, contextIdStackHome, contextIdStackSearch} = this.props;
+
         Actions.drawerClose();
-        this.props.actions.changeParent(route);
+        actions.changeParent(route);
         if(route == 'Home') {
-            if(this.props.contextIdStackHome.length > 0) {
-                this.props.actions.changeContextId(this.props.contextIdStackHome[this.props.contextIdStackHome.length-1]);
+            if(contextIdStackHome.length > 0) {
+                actions.changeContextId(contextIdStackHome[contextIdStackHome.length-1]);
             }
             Actions.homeTab();
         } else if(route == 'Favourites') {
-            if(this.props.contextIdStackFavourite.length > 0) {
-                this.props.actions.changeContextId(this.props.contextIdStackFavourite[this.props.contextIdStackFavourite.length-1]);
+            if(contextIdStackFavourite.length > 0) {
+                actions.changeContextId(contextIdStackFavourite[contextIdStackFavourite.length-1]);
             }
             Actions.favouriteTab();
         } else if(route == 'Search') {
-            if(this.props.contextIdStackSearch.length > 0) {
-                this.props.actions.changeContextId(this.props.contextIdStackSearch[this.props.contextIdStackSearch.length-1]);
+            if(contextIdStackSearch.length > 0) {
+                actions.changeContextId(contextIdStackSearch[contextIdStackSearch.length-1]);
             }
             Actions.searchTab();
         } else if(route == 'Settings') {
@@ -89,88 +93,72 @@ class NavDrawer extends Component {
         }
     }
 
-    render() {
-        var paddingView;
+    getPaddingView = () => {
         if(Platform.OS === 'ios') {
             if(DeviceInfo.getModel() == "iPhone X")
-                paddingView = <View style = {{marginTop: 44}} />
+                return <View style = {{marginTop: 44}} />;
             else
-                paddingView = <View style = {{marginTop: 15}} />
+                return <View style = {{marginTop: 15}} />;
         } else {
-            paddingView = <View />
+            return <View />;
         }
-        var logout = (<View />);
-        if(this.props.profile != "") {
-            logout = (
-                <View>
+    }
+
+    getLogoutView = () => {
+        const { profile, mod, legend, secondLegend } = this.props;
+        
+        return (profile != "") ?
+        <View>
                     <TouchableOpacity onPress = {() => {this.onResetHomeProfilePressed()}}>
-                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
+                        <View style = {[styles.navItem, {backgroundColor: mod}]}>
                             <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "power-off" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
+                                <FontAwesome name = "power-off" size = {26} allowFontScaling = {false} color = {legend}/>
                             </View>
                             <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Logout</Text>
+                                <Text style = {[styles.navText, {color: secondLegend}]}>Logout</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
+                    <View style = {[styles.separator, {backgroundColor: legend}]} />
                 </View>
-            );
+            : 
+            <View />;
         }
+        
+    getMenuItem = (itemName, fontName) => {
+        const { mod, legend, secondLegend } = this.props;
+
+        return <TouchableOpacity onPress = {() => {this.goto(itemName)}}>
+            <View style = {[styles.navItem, {backgroundColor: mod}]}>
+                <View style = {styles.navIconContainer}>
+                    <FontAwesome name = {fontName} size = {26} allowFontScaling = {false} color = {legend}/>
+                </View>
+                <View style = {styles.navTextContainer}>
+                    <Text style = {[styles.navText, {color: secondLegend}]}>{itemName}</Text>
+                </View>
+            </View>
+        </TouchableOpacity>;
+    }
+
+    render() {
+        const { mod, legend } = this.props;
+        
+        const paddingView = this.getPaddingView();
+        const logoutView = this.getLogoutView();
+
         return (
-            <View style = {[styles.drawerContainer, {backgroundColor: this.props.mod}]}>
+            <View style = {[styles.drawerContainer, {backgroundColor: mod}]}>
                 {paddingView}
                 <ScrollView style = {styles.navScroll}>
-                    <TouchableOpacity onPress = {() => {this.goto('Home')}}>
-                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "home" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Home</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Favourites')}}>
-                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "star" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Favourites</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Search')}}>
-                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "search" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Search</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-
-                    <TouchableOpacity onPress = {() => {this.goto('Settings')}}>
-                        <View style = {[styles.navItem, {backgroundColor: this.props.mod}]}>
-                            <View style = {styles.navIconContainer}>
-                                <FontAwesome name = "cog" size = {26} allowFontScaling = {false} color = {this.props.legend}/>
-                            </View>
-                            <View style = {styles.navTextContainer}>
-                                <Text style = {[styles.navText, {color: this.props.secondLegend}]}>Settings</Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                    <View style = {[styles.separator, {backgroundColor: this.props.legend}]} />
-
-                    {logout}
-
+                    {this.getMenuItem("Home", "home")}
+                    <View style = {[styles.separator, {backgroundColor: legend}]} />
+                    {this.getMenuItem("Favourites", "star")}
+                    <View style = {[styles.separator, {backgroundColor: legend}]} />
+                    {this.getMenuItem("Search", "search")}
+                    <View style = {[styles.separator, {backgroundColor: legend}]} />
+                    {this.getMenuItem("Settings", "cog")}
+                    <View style = {[styles.separator, {backgroundColor: legend}]} />
+                    {logoutView}
                 </ScrollView>
             </View>
         )
